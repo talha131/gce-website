@@ -2,7 +2,7 @@
   --g: 6px; /* the gap */
   
   display: grid;
-  width: 450px; /* the size */
+  /* width: 450px; /1* the size *1/ */
   aspect-ratio: 1;
   grid: auto-flow 1fr/repeat(3,1fr);
   gap: var(--g);
