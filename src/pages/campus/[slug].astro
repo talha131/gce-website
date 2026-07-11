@@ -1,0 +1,68 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import Section from '@/components/Section.astro';
+import Gallery from '@/components/Gallery.astro';
+import { facilities, facilityBySlug } from '@/data/facilities';
+import { getGallery } from '@/lib/images';
+
+export const getStaticPaths = (() =>
+  facilities.map((f) => ({ params: { slug: f.slug } }))) satisfies GetStaticPaths;
+
+const { slug } = Astro.params;
+const facility = facilityBySlug(slug!)!;
+const images = getGallery('facilities', facility.slug);
+const related = facilities.filter((f) => f.category === facility.category && f.slug !== facility.slug).slice(0, 3);
+---
+
+<Layout
+  title={facility.name}
+  description={facility.blurb}
+>
+  <PageHero kicker={facility.category} title={facility.name} lead={facility.blurb}>
+    {facility.badge && (
+      <span class="mt-6 inline-block text-sm font-semibold px-3 py-1.5 rounded-full bg-gold text-brand-950">{facility.badge}</span>
+    )}
+  </PageHero>
+
+  <Section space="md">
+    <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-12">
+      <div class="space-y-5 text-lg text-ink leading-relaxed" data-reveal>
+        {facility.body.map((p) => <p>{p}</p>)}
+        {facility.isFiller && (
+          <p class="text-xs text-ink-soft/80 pt-2">Note: placeholder description pending final content from the college.</p>
+        )}
+      </div>
+      <aside class="h-fit" data-reveal>
+        <div class="card p-6 bg-brand-tint border-0">
+          <p class="text-xs uppercase tracking-wider text-brand font-semibold">Facility</p>
+          <p class="mt-2 font-display text-xl text-brand-deep">{facility.name}</p>
+          <p class="mt-1 text-sm text-ink-soft">{facility.category}</p>
+          {facility.note && <p class="mt-4 pt-4 border-t border-line text-sm text-ink-soft">{facility.note}</p>}
+        </div>
+        <a href="/campus" class="mt-4 btn btn-ghost w-full">← All facilities</a>
+      </aside>
+    </div>
+
+    {images.length > 0 && (
+      <div class="mt-14">
+        <h2 class="!text-2xl mb-6" data-reveal>Gallery</h2>
+        <Gallery images={images} altBase={facility.name} columns={3} />
+      </div>
+    )}
+  </Section>
+
+  {related.length > 0 && (
+    <Section tone="tint" kicker="Nearby" title="More in this category" space="md">
+      <div class="grid gap-4 sm:grid-cols-3">
+        {related.map((f, i) => (
+          <a href={`/campus/${f.slug}`} class="card card-hover p-5 block" data-reveal style={`--reveal-delay:${i * 70}ms`}>
+            <p class="font-display font-semibold text-brand-deep">{f.name}</p>
+            <p class="mt-1 text-sm text-ink-soft line-clamp-2">{f.blurb}</p>
+          </a>
+        ))}
+      </div>
+    </Section>
+  )}
+</Layout>

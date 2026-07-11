@@ -19,11 +19,15 @@ for (const [path, mod] of Object.entries(modules)) {
 
 const BASE = '/src/assets/content';
 
-/** All images inside a gallery folder (e.g. "facilities", "library"), sorted by filename. */
-export function getGallery(category: string, slug: string): ImageMetadata[] {
-  const prefix = `${BASE}/${category}/${slug}/`;
+/**
+ * All images inside a gallery folder, sorted by filename.
+ * Pass a slug for nested folders ("facilities", "library"), or omit it to read
+ * images sitting directly under a category folder ("conference").
+ */
+export function getGallery(category: string, slug?: string): ImageMetadata[] {
+  const prefix = slug ? `${BASE}/${category}/${slug}/` : `${BASE}/${category}/`;
   return Object.keys(modules)
-    .filter((p) => p.startsWith(prefix))
+    .filter((p) => p.startsWith(prefix) && !p.slice(prefix.length).includes('/'))
     .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
     .map((p) => byPath.get(p)!)
     .filter(Boolean);
