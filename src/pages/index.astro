@@ -1,0 +1,263 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '@/layouts/Layout.astro';
+import Section from '@/components/Section.astro';
+import Reveal from '@/components/Reveal.astro';
+import StatCounter from '@/components/StatCounter.astro';
+import ProgramCard from '@/components/ProgramCard.astro';
+import FacilityCard from '@/components/FacilityCard.astro';
+import { site } from '@/data/site';
+import { programs } from '@/data/programs';
+import { facilities } from '@/data/facilities';
+import { principal, testimonials } from '@/data/about';
+import { conference } from '@/data/achievements';
+import { getCover, getSingle } from '@/lib/images';
+
+const heroImages = [
+  { img: getCover('facilities', 'it-zone'), alt: 'The IT Zone events hall at GCE' },
+  { img: getCover('events', 'orientation-day'), alt: 'Students on Orientation Day' },
+  { img: getCover('facilities', 'library'), alt: 'The GCE library' },
+].filter((h) => h.img);
+
+const principalPhoto = getSingle('principal', 'principal');
+const featuredFacilities = ['it-zone', 'library', 'counseling-centre', 'micro-teaching-lab', 'ict-lab', 'sports']
+  .map((s) => facilities.find((f) => f.slug === s)!)
+  .filter(Boolean);
+---
+
+<Layout
+  title="Home"
+  isHome
+  description={site.description}
+>
+  <!-- ============================================================ HERO -->
+  <section class="relative overflow-hidden bg-brand-950 text-white">
+    <div class="hero-mesh" aria-hidden="true"></div>
+    <div class="hero-grain" aria-hidden="true"></div>
+
+    <div class="container-site relative pt-32 pb-20 md:pt-40 md:pb-28">
+      <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center">
+        <div class="hero-copy">
+          <p class="kicker !text-gold-bright">Government College of Education · Karachi</p>
+          <h1 class="mt-5 text-white text-[2.6rem] leading-[1.05] sm:text-5xl lg:text-6xl xl:text-[4.2rem]">
+            Striving hard to <span class="accent-italic !text-gold-bright">educate</span> the nation.
+          </h1>
+          <p class="mt-6 max-w-xl text-lg md:text-xl text-white/75 leading-relaxed">
+            Since 1953, GCE has prepared the teachers who shape Pakistan's classrooms — over
+            50,000 competent, committed educators, and counting. Affiliated with the {site.affiliation}.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="/admissions" class="btn btn-gold">Admissions open every November</a>
+            <a href="/programs" class="btn btn-ghost !text-white !border-white/30 hover:!bg-white/10">Explore programs</a>
+          </div>
+        </div>
+
+        <!-- Photo collage with gentle parallax -->
+        {heroImages.length === 3 && (
+          <div class="hero-collage relative hidden sm:grid grid-cols-2 gap-4" data-parallax-group>
+            <div class="rounded-[var(--radius-lg)] overflow-hidden shadow-lift row-span-2 aspect-[3/4] ring-1 ring-white/10" data-parallax="0.04">
+              <Image src={heroImages[0].img!} alt={heroImages[0].alt} widths={[400, 700]} sizes="40vw" class="h-full w-full object-cover" loading="eager" />
+            </div>
+            <div class="rounded-[var(--radius-lg)] overflow-hidden shadow-lift aspect-[4/3] ring-1 ring-white/10" data-parallax="0.09">
+              <Image src={heroImages[1].img!} alt={heroImages[1].alt} widths={[400, 600]} sizes="40vw" class="h-full w-full object-cover" loading="eager" />
+            </div>
+            <div class="rounded-[var(--radius-lg)] overflow-hidden shadow-lift aspect-[4/3] ring-1 ring-white/10" data-parallax="0.06">
+              <Image src={heroImages[2].img!} alt={heroImages[2].alt} widths={[400, 600]} sizes="40vw" class="h-full w-full object-cover" loading="lazy" />
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+
+    <!-- Stat band -->
+    <div class="relative border-t border-white/12 bg-brand-950/60">
+      <div class="container-site py-10 md:py-12">
+        <dl class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <StatCounter value={1953} label="Founded" tone="dark" />
+          <StatCounter value={50000} suffix="+" label="Teachers trained" tone="dark" delay={100} />
+          <StatCounter value={4} label="Degree programs" tone="dark" delay={200} />
+          <StatCounter value={20} suffix="+" label="Campus facilities" tone="dark" delay={300} />
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================= ADMISSIONS BANNER -->
+  <div class="bg-gold text-brand-950">
+    <div class="container-site py-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center">
+      <span class="font-semibold">Admissions open every November.</span>
+      <span class="text-brand-950/80">Applications for the upcoming session —</span>
+      <a href="/admissions" class="font-semibold underline underline-offset-2 hover:opacity-80">see the procedure &amp; documents →</a>
+    </div>
+  </div>
+
+  <!-- ========================================================== PROGRAMS -->
+  <Section
+    kicker="Academic Programs"
+    title="Four routes into the <span class='accent-italic'>teaching profession</span>"
+    lead="Professional, University of Karachi–affiliated degrees that bridge sound theory with confident classroom practice."
+  >
+    <div class="grid gap-6 md:grid-cols-2">
+      {programs.map((p, i) => <ProgramCard program={p} delay={i * 80} />)}
+    </div>
+  </Section>
+
+  <!-- ============================================================ WHY GCE -->
+  <Section tone="tint" kicker="Why GCE" title="A legacy you can feel on campus" center>
+    <div class="grid gap-6 md:grid-cols-3">
+      {[
+        { t: '70+ years of teacher education', d: 'From a 1953 training programme to a permanent home at Federal B Area, GCE has shaped generations of educators.' },
+        { t: 'Practice, not just theory', d: 'A dedicated Micro-Teaching Lab, Teachers’ Resource Centre and real school practicums build confident teachers.' },
+        { t: 'Care for the whole student', d: 'Sindh’s first college Psychological Guidance & Counseling Centre supports students beyond the classroom.' },
+      ].map((f, i) => (
+        <Reveal delay={i * 90} class="card p-7 text-left h-full">
+          <div class="h-11 w-11 rounded-xl bg-brand text-gold-bright grid place-items-center font-display text-xl font-semibold">{i + 1}</div>
+          <h3 class="mt-5 !text-xl">{f.t}</h3>
+          <p class="mt-2 text-ink-soft leading-relaxed">{f.d}</p>
+        </Reveal>
+      ))}
+    </div>
+  </Section>
+
+  <!-- ================================================= PRINCIPAL TRIBUTE -->
+  <Section tone="brand" space="lg">
+    <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-14 items-center">
+      <Reveal class="relative">
+        <div class="rounded-[var(--radius-lg)] overflow-hidden ring-1 ring-white/15 shadow-lift max-w-sm mx-auto">
+          {principalPhoto ? (
+            <Image src={principalPhoto} alt={`${principal.name}, Principal of GCE`} widths={[400, 640]} sizes="(min-width:1024px) 30vw, 80vw" class="w-full object-cover aspect-[4/5]" loading="lazy" />
+          ) : (
+            <div class="aspect-[4/5] bg-brand grid place-items-center text-gold">Portrait</div>
+          )}
+        </div>
+      </Reveal>
+      <Reveal delay={120}>
+        <p class="kicker !text-gold-bright">From the Principal's Desk</p>
+        <blockquote class="mt-5 font-display text-2xl md:text-3xl leading-snug text-white">
+          &ldquo;{principal.message[0]}&rdquo;
+        </blockquote>
+        <p class="mt-6 text-white/75 leading-relaxed">{principal.intro}</p>
+        <div class="mt-6">
+          <p class="font-display text-lg text-white">{principal.name}</p>
+          <p class="text-sm text-gold-bright">{principal.title} · {principal.tenure}</p>
+        </div>
+        <a href="/about#principal" class="mt-7 btn btn-gold">Read the full message</a>
+      </Reveal>
+    </div>
+  </Section>
+
+  <!-- ========================================================== CAMPUS -->
+  <Section
+    kicker="Campus & Facilities"
+    title="Spaces built for <span class='accent-italic'>learning</span>"
+    lead="From labs and libraries to a 300-seat events hall and a podcast studio — explore the campus."
+  >
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {featuredFacilities.map((f, i) => <FacilityCard facility={f} delay={(i % 3) * 80} />)}
+    </div>
+    <div class="mt-10 text-center" data-reveal>
+      <a href="/campus" class="btn btn-primary">See all facilities</a>
+    </div>
+  </Section>
+
+  <!-- ====================================================== CONFERENCE -->
+  <Section tone="tint">
+    <div class="card overflow-hidden grid lg:grid-cols-2" data-reveal>
+      <div class="p-8 md:p-12">
+        <p class="kicker">Flagship Event</p>
+        <h2 class="mt-4 !text-3xl md:!text-4xl">{conference.name}</h2>
+        <p class="mt-2 text-gold-deep font-semibold">{conference.fullName}</p>
+        <p class="mt-4 text-ink-soft leading-relaxed">{conference.summary}</p>
+        <a href="/achievements#conference" class="mt-6 btn btn-primary">Explore the conference</a>
+      </div>
+      <div class="bg-brand-950 text-white p-8 md:p-12 flex flex-col justify-center">
+        <dl class="grid grid-cols-3 gap-6">
+          {conference.stats.map((s) => (
+            <div>
+              <dt class="sr-only">{s.label}</dt>
+              <dd class="font-display text-4xl font-semibold text-gold">{s.value}</dd>
+              <p class="mt-2 text-sm text-white/70">{s.label}</p>
+            </div>
+          ))}
+        </dl>
+        <p class="mt-8 text-sm text-white/60 leading-relaxed border-t border-white/15 pt-5">{conference.note}</p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- ===================================================== TESTIMONIALS -->
+  <Section kicker="Voices" title="What our community says" center>
+    <div class="grid gap-6 md:grid-cols-3">
+      {testimonials.items.map((t, i) => (
+        <Reveal delay={i * 90} as="figure" class="card p-7 text-left flex flex-col h-full">
+          <svg width="34" height="34" viewBox="0 0 24 24" class="text-gold" fill="currentColor" aria-hidden="true"><path d="M9.5 8C7 8 5 10 5 12.5V18h5v-5H7.8c0-1.6 1-2.7 2.7-2.7V8Zm9 0c-2.5 0-4.5 2-4.5 4.5V18h5v-5h-2.2c0-1.6 1-2.7 2.7-2.7V8Z"/></svg>
+          <blockquote class="mt-4 text-ink leading-relaxed flex-1">&ldquo;{t.quote}&rdquo;</blockquote>
+          <figcaption class="mt-5 text-sm font-semibold text-brand-deep">— {t.author}</figcaption>
+        </Reveal>
+      ))}
+    </div>
+  </Section>
+
+  <!-- =========================================================== CTA -->
+  <section class="bg-brand-950 text-white">
+    <div class="container-site py-16 md:py-20 text-center" data-reveal>
+      <h2 class="text-white text-3xl md:text-4xl">Become part of a legacy that began in 1953.</h2>
+      <p class="mt-4 text-white/75 max-w-xl mx-auto text-lg">Admissions open every November. Take the first step toward a career in teaching.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="/admissions" class="btn btn-gold">Apply Now</a>
+        <a href="/contact" class="btn btn-ghost !text-white !border-white/30 hover:!bg-white/10">Contact us</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero-mesh {
+    position: absolute;
+    inset: -20%;
+    background:
+      radial-gradient(40% 55% at 15% 20%, color-mix(in srgb, var(--brand) 90%, #fff 10%) 0%, transparent 60%),
+      radial-gradient(35% 45% at 85% 15%, color-mix(in srgb, var(--gold) 60%, transparent) 0%, transparent 55%),
+      radial-gradient(55% 60% at 75% 90%, color-mix(in srgb, var(--brand-deep) 95%, #000) 0%, transparent 60%);
+    filter: blur(10px);
+    animation: float-blob 20s ease-in-out infinite;
+  }
+  .hero-grain {
+    position: absolute; inset: 0; opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .hero-copy > * { animation: rise-in 0.8s cubic-bezier(.2,.7,.2,1) both; }
+  .hero-copy > :nth-child(2) { animation-delay: .08s; }
+  .hero-copy > :nth-child(3) { animation-delay: .16s; }
+  .hero-copy > :nth-child(4) { animation-delay: .24s; }
+  .hero-collage { animation: rise-in 1s cubic-bezier(.2,.7,.2,1) .2s both; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-mesh { animation: none; }
+    .hero-copy > *, .hero-collage { animation: none; }
+  }
+</style>
+
+<script>
+  // Subtle mouse/scroll parallax on the hero collage (reduced-motion safe).
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    const items = document.querySelectorAll<HTMLElement>('[data-parallax]');
+    if (items.length) {
+      let ticking = false;
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const y = window.scrollY;
+          items.forEach((el) => {
+            const f = parseFloat(el.dataset.parallax ?? '0');
+            el.style.transform = `transl3d(0, ${(-y * f).toFixed(1)}px, 0)`.replace('transl3d', 'translate3d');
+          });
+          ticking = false;
+        });
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
+  }
+</script>
