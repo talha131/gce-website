@@ -19,7 +19,8 @@ clean:          ## Remove build output and caches
 install:        ## Install dependencies
 	npm install
 
-# Build locally, then push dist/ straight to production (gce.edu.pk).
+# Clean, build fresh, then push dist/ straight to production (gce.edu.pk).
+# clean runs first so a deploy can never ship stale/orphaned pages or assets.
 # First-time: run `netlify link` once to connect this repo to the Netlify site.
-deploy: build
+deploy: clean build
 	netlify deploy --prod --dir=dist

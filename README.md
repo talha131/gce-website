@@ -26,8 +26,10 @@ locally-built `dist/` (not Netlify's CI):
 
 ```bash
 netlify link      # one-time: connect this repo to the Netlify site
-make deploy       # builds locally, then `netlify deploy --prod --dir=dist`
+make deploy       # clean → build → `netlify deploy --prod --dir=dist`
 ```
+
+`make deploy` cleans first so a deploy can never ship stale or orphaned pages.
 
 Because the deploy uses the local build, **build-time env vars (see Analytics)
 must be set locally** — Netlify's own environment variables do not apply to a

@@ -16,7 +16,7 @@ npm run preview   # serve the built dist/ locally (use this for Lighthouse, not 
 
 Or the `Makefile`: `make dev|build|preview|clean|deploy`. There is no test suite and no separate lint step — `npm run build` is the gate (it type-checks `.astro`/`.ts` and fails on broken image references or bad `getStaticPaths`). Run a build before considering a change done.
 
-`make deploy` builds locally and pushes `dist/` to production (gce.edu.pk) via `netlify deploy --prod --dir=dist` — it does **not** use Netlify's CI. Consequence: **build-time env vars must be set locally**, not just in the Netlify dashboard.
+`make deploy` runs `clean → build` then pushes `dist/` to production (gce.edu.pk) via `netlify deploy --prod --dir=dist` — it does **not** use Netlify's CI (the clean guards against shipping stale/orphaned pages, though Astro already empties `dist/` per build and Netlify deploys are atomic snapshots). Consequence: **build-time env vars must be set locally**, not just in the Netlify dashboard.
 
 ## Critical constraint — do not deploy
 
