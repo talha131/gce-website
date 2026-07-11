@@ -1,6 +1,7 @@
 ---
 import '@/styles/global.css';
 import SEO from '@/components/SEO.astro';
+import Analytics from '@/components/Analytics.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 
@@ -25,6 +26,7 @@ const { title, description, image, isHome } = Astro.props;
     <meta name="theme-color" content="#2504B1" />
     <meta name="generator" content={Astro.generator} />
     <SEO title={title} description={description} image={image} isHome={isHome} />
+    <Analytics />
   </head>
   <body>
     <a
