@@ -1,0 +1,126 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import Section from '@/components/Section.astro';
+import Reveal from '@/components/Reveal.astro';
+import UrduBlock from '@/components/UrduBlock.astro';
+import { site } from '@/data/site';
+import { history, mission, vision, principal, anthemAndDua } from '@/data/about';
+import { getSingle } from '@/lib/images';
+
+const principalPhoto = getSingle('principal', 'principal');
+const { collegeAnthem, dua, nationalAnthem } = anthemAndDua;
+---
+
+<Layout
+  title="About"
+  description="The history, mission, vision and leadership of Government College of Education, Karachi — training teachers since 1953, affiliated with the University of Karachi."
+>
+  <PageHero
+    kicker="About GCE"
+    title="Seven decades of <span class='accent-italic !text-gold-bright'>educating the nation</span>"
+    lead="From a 1953 training programme to a permanent home in Federal B Area, Government College of Education has produced more than 50,000 teachers."
+  />
+
+  <!-- ========================================================= HISTORY -->
+  <Section kicker="Our Story" title="A history rooted in service">
+    <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-12">
+      <div class="space-y-5 text-lg text-ink-soft leading-relaxed" data-reveal>
+        {history.paragraphs.map((p) => <p>{p}</p>)}
+        <div class="inline-flex items-center gap-3 mt-2 rounded-full bg-brand-tint px-4 py-2 text-sm font-semibold text-brand">
+          <span class="h-2 w-2 rounded-full bg-gold"></span>
+          Affiliated with the {site.affiliation}
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <ol class="relative border-l-2 border-line pl-6 space-y-8">
+        {history.milestones.map((m, i) => (
+          <li class="relative" data-reveal style={`--reveal-delay:${i * 90}ms`}>
+            <span class="absolute -left-[1.95rem] top-1 h-4 w-4 rounded-full bg-gold ring-4 ring-cream"></span>
+            <p class="font-display text-2xl font-semibold text-brand">{m.year}</p>
+            <p class="mt-1 text-ink-soft">{m.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </Section>
+
+  <!-- =================================================== MISSION & VISION -->
+  <Section tone="tint" kicker="Purpose" title="Mission &amp; Vision" center>
+    <div class="grid lg:grid-cols-2 gap-6">
+      <Reveal class="card p-8 h-full">
+        <h3 class="!text-2xl">Mission</h3>
+        <p class="mt-4 text-ink-soft leading-relaxed">{mission.en}</p>
+        <div lang="ur" dir="rtl" class="mt-6 pt-6 border-t border-line text-xl text-ink !leading-[2.4]">
+          <p class="text-gold-deep text-lg mb-2">مقصد</p>
+          {mission.ur}
+        </div>
+      </Reveal>
+      <Reveal delay={120} class="card p-8 h-full">
+        <h3 class="!text-2xl">Vision</h3>
+        <div class="mt-4 space-y-3 text-ink-soft leading-relaxed">
+          {vision.en.map((p) => <p>{p}</p>)}
+        </div>
+        <div lang="ur" dir="rtl" class="mt-6 pt-6 border-t border-line text-xl text-ink !leading-[2.4]">
+          <p class="text-gold-deep text-lg mb-2">نقطۂ نظر</p>
+          {vision.ur}
+        </div>
+      </Reveal>
+    </div>
+  </Section>
+
+  <!-- ================================================ PRINCIPAL TRIBUTE -->
+  <Section id="principal" kicker="From the Principal's Desk" title="A message from our Principal">
+    <div class="grid lg:grid-cols-[0.75fr_1.25fr] gap-10 lg:gap-14 items-start">
+      <Reveal>
+        <div class="card overflow-hidden">
+          {principalPhoto ? (
+            <Image src={principalPhoto} alt={`${principal.name}, Principal of GCE`} widths={[400, 640]} sizes="(min-width:1024px) 30vw, 80vw" class="w-full object-cover aspect-[4/5]" loading="lazy" />
+          ) : (
+            <div class="aspect-[4/5] bg-brand-tint grid place-items-center text-brand">Portrait</div>
+          )}
+          <div class="p-5 text-center">
+            <p class="font-display text-xl text-brand-deep">{principal.name}</p>
+            <p class="text-sm text-gold-deep font-semibold">{principal.title}</p>
+            <p class="mt-1 text-xs text-ink-soft">{principal.tenure}</p>
+          </div>
+        </div>
+      </Reveal>
+
+      <Reveal delay={120}>
+        <div class="space-y-5 text-lg text-ink leading-relaxed">
+          {principal.message.map((p) => <p>{p}</p>)}
+        </div>
+        <p class="mt-6 font-display text-xl text-brand-deep">— {principal.name}, Principal</p>
+        <p class="mt-8 text-sm text-ink-soft italic border-l-2 border-gold pl-4">
+          {principal.intro}
+        </p>
+        {principal.isFiller && (
+          <p class="mt-4 text-xs text-ink-soft/80">
+            Note: this message is a placeholder draft; the college will supply the final text.
+          </p>
+        )}
+      </Reveal>
+    </div>
+  </Section>
+
+  <!-- ===================================================== ANTHEM & DUA -->
+  <Section tone="brand" kicker="Heritage" title="Anthem &amp; Dua" center>
+    <p class="text-center text-white/70 max-w-2xl mx-auto -mt-6 mb-12" data-reveal>
+      Rendered in Nastaliq. Our college anthem by Safdar Abbas, the Dua of Allama Iqbal,
+      and the National Anthem of Pakistan.
+    </p>
+    <div class="grid lg:grid-cols-2 gap-6">
+      <div class="lg:col-span-2">
+        <UrduBlock {...collegeAnthem} />
+      </div>
+      <UrduBlock {...dua} />
+      <UrduBlock {...nationalAnthem} />
+    </div>
+    <div class="mt-8 text-center" data-reveal>
+      <p class="text-white/60 text-sm">The recorded college anthem is available from the college on request.</p>
+    </div>
+  </Section>
+</Layout>
