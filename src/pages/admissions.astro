@@ -1,0 +1,90 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import Section from '@/components/Section.astro';
+import Reveal from '@/components/Reveal.astro';
+import { programs } from '@/data/programs';
+import { site } from '@/data/site';
+
+const steps = [
+  'Visit the college and collect your admission form from the admin office, where staff will guide you through the programs and semesters.',
+  'A date is set for the entry test or interview.',
+  'After the test/interview, you receive a fee voucher from the college.',
+  'Submit the fee at the selected bank.',
+  'Return with the fee receipt, collect your roll number, and your admission is finalised on confirmation.',
+  'Attend Orientation Day — an introduction and tour of the college — before regular classes begin.',
+];
+
+const documents = [
+  '4–5 passport-size photographs',
+  'One copy of your Matric marksheet',
+  'One copy of your Intermediate marksheet',
+  'One copy of your Intermediate provisional certificate',
+  'One copy of your CNIC',
+  'One copy of Form-B (if CNIC is not yet issued)',
+];
+---
+
+<Layout
+  title="Admissions"
+  description="Admissions to Government College of Education open every November. See the admission procedure and the documents required to apply."
+>
+  <PageHero
+    kicker="Admissions"
+    title="Your journey into <span class='accent-italic !text-gold-bright'>teaching</span> starts here"
+    lead="An annual intake for all four programs. Simple, guided, and open to aspiring educators."
+  />
+
+  <!-- Prominent November callout -->
+  <div class="bg-gold text-brand-950">
+    <div class="container-site py-8 text-center" data-reveal>
+      <p class="font-display text-2xl md:text-3xl font-semibold">Admissions open every November</p>
+      <p class="mt-2 text-brand-950/80 max-w-2xl mx-auto">
+        Applications are invited each November for the upcoming session. Visit the college during
+        the admission window to collect your form and begin the process.
+      </p>
+    </div>
+  </div>
+
+  <!-- Procedure -->
+  <Section kicker="How to apply" title="The admission procedure">
+    <ol class="grid gap-5 md:grid-cols-2">
+      {steps.map((step, i) => (
+        <li class="card p-6 flex gap-4" data-reveal style={`--reveal-delay:${(i % 2) * 80}ms`}>
+          <span class="shrink-0 h-10 w-10 rounded-full bg-brand text-gold-bright grid place-items-center font-display font-semibold">{i + 1}</span>
+          <p class="text-ink-soft leading-relaxed">{step}</p>
+        </li>
+      ))}
+    </ol>
+  </Section>
+
+  <!-- Documents -->
+  <Section tone="tint" kicker="Checklist" title="Documents required" space="md">
+    <div class="grid lg:grid-cols-2 gap-10 items-start">
+      <ul class="space-y-3" data-reveal>
+        {documents.map((doc) => (
+          <li class="flex items-start gap-3 card p-4">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" class="text-gold-deep mt-0.5 shrink-0" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="text-ink">{doc}</span>
+          </li>
+        ))}
+      </ul>
+
+      <Reveal class="card p-7 bg-brand-950 text-white">
+        <h3 class="!text-white !text-xl">Choose your program</h3>
+        <p class="mt-2 text-white/70">Explore what each degree offers before you apply.</p>
+        <ul class="mt-5 space-y-2">
+          {programs.map((p) => (
+            <li>
+              <a href={`/programs/${p.slug}`} class="flex items-center justify-between gap-3 rounded-[var(--radius-sm)] px-4 py-3 bg-white/5 hover:bg-white/10 transition-colors">
+                <span class="font-medium">{p.name}</span>
+                <span class="text-sm text-gold-bright">{p.duration}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-6 text-sm text-white/60">Questions? <a href="/contact" class="text-gold-bright underline underline-offset-2">Contact the college</a>.</p>
+      </Reveal>
+    </div>
+  </Section>
+</Layout>

@@ -1,0 +1,30 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import Section from '@/components/Section.astro';
+import FacultyCard from '@/components/FacultyCard.astro';
+import { educationDept, adminStaff } from '@/data/faculty';
+---
+
+<Layout
+  title="Faculty & Staff"
+  description="Meet the teaching faculty of the Education Department and the administrative staff of Government College of Education, Karachi."
+>
+  <PageHero
+    kicker="Faculty & Staff"
+    title="The people who <span class='accent-italic !text-gold-bright'>shape teachers</span>"
+    lead="A dedicated Education Department and administrative team — qualified, experienced, and committed to every student."
+  />
+
+  <Section kicker="Education Department" title="Teaching faculty" space="md">
+    <div class="grid gap-6 grid-cols-2 lg:grid-cols-4">
+      {educationDept.map((p) => <FacultyCard person={p} />)}
+    </div>
+  </Section>
+
+  <Section tone="tint" kicker="Administrative & Support" title="Administrative staff" space="md">
+    <div class="grid gap-6 grid-cols-2 lg:grid-cols-4">
+      {adminStaff.map((p) => <FacultyCard person={p} />)}
+    </div>
+  </Section>
+</Layout>
