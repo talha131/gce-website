@@ -28,8 +28,8 @@ const isActive = (href: string) =>
           loading="eager"
         />
         <span class="leading-tight hidden sm:block">
-          <span class="block font-display font-semibold text-[0.98rem] text-brand-deep [.header-solid_&]:text-brand-deep">{site.shortName}</span>
-          <span class="block text-[0.66rem] uppercase tracking-[0.14em] text-ink-soft">Since {site.founded}</span>
+          <span class="block font-display font-semibold text-[0.98rem] text-[var(--hdr-fg)] transition-colors">{site.shortName}</span>
+          <span class="block text-[0.66rem] uppercase tracking-[0.14em] text-[var(--hdr-fg-soft)] transition-colors">Since {site.founded}</span>
         </span>
       </a>
 
@@ -42,8 +42,8 @@ const isActive = (href: string) =>
             class:list={[
               'px-3 py-2 rounded-full text-[0.9rem] font-medium transition-colors',
               isActive(item.href)
-                ? 'text-brand bg-brand-tint'
-                : 'text-ink hover:text-brand hover:bg-brand-tint/60',
+                ? 'text-[var(--hdr-active)] bg-[var(--hdr-active-bg)]'
+                : 'text-[var(--hdr-fg-soft)] hover:text-[var(--hdr-fg)] hover:bg-[var(--hdr-hover-bg)]',
             ]}
           >
             {item.label}
@@ -58,7 +58,7 @@ const isActive = (href: string) =>
       <!-- Mobile toggle -->
       <button
         type="button"
-        class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-full text-brand-deep hover:bg-brand-tint"
+        class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-full text-[var(--hdr-fg)] hover:bg-[var(--hdr-hover-bg)]"
         aria-label="Open menu"
         aria-expanded="false"
         aria-controls="mobile-menu"
@@ -126,10 +126,24 @@ const isActive = (href: string) =>
 </script>
 
 <style>
-  /* Frosted, solid header once scrolled. */
+  /* Transparent header (over the dark hero): light foreground. */
+  [data-header] {
+    --hdr-fg: #ffffff;
+    --hdr-fg-soft: rgba(255, 255, 255, 0.82);
+    --hdr-hover-bg: rgba(255, 255, 255, 0.12);
+    --hdr-active: #ffffff;
+    --hdr-active-bg: rgba(255, 255, 255, 0.18);
+  }
+
+  /* Frosted, solid header once scrolled: dark foreground on light. */
   [data-header].header-solid {
     background-color: color-mix(in srgb, var(--cream) 88%, transparent);
     backdrop-filter: saturate(1.4) blur(12px);
     box-shadow: 0 1px 0 var(--line), var(--shadow-soft);
+    --hdr-fg: var(--brand-deep);
+    --hdr-fg-soft: var(--ink);
+    --hdr-hover-bg: color-mix(in srgb, var(--brand-tint) 70%, transparent);
+    --hdr-active: var(--brand);
+    --hdr-active-bg: var(--brand-tint);
   }
 </style>
