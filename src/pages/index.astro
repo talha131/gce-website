@@ -72,12 +72,12 @@ const featuredFacilities = ['it-zone', 'library', 'counseling-centre', 'micro-te
     <!-- Stat band -->
     <div class="relative border-t border-white/12 bg-brand-950/60">
       <div class="container-site py-10 md:py-12">
-        <dl class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
           <StatCounter value={1953} label="Founded" tone="dark" />
           <StatCounter value={50000} suffix="+" label="Teachers trained" tone="dark" delay={100} />
           <StatCounter value={4} label="Degree programs" tone="dark" delay={200} />
           <StatCounter value={20} suffix="+" label="Campus facilities" tone="dark" delay={300} />
-        </dl>
+        </div>
       </div>
     </div>
   </section>
@@ -171,15 +171,14 @@ const featuredFacilities = ['it-zone', 'library', 'counseling-centre', 'micro-te
         <a href="/achievements#conference" class="mt-6 btn btn-primary">Explore the conference</a>
       </div>
       <div class="bg-brand-950 text-white p-8 md:p-12 flex flex-col justify-center">
-        <dl class="grid grid-cols-3 gap-6">
+        <div class="grid grid-cols-3 gap-6">
           {conference.stats.map((s) => (
             <div>
-              <dt class="sr-only">{s.label}</dt>
-              <dd class="font-display text-4xl font-semibold text-gold">{s.value}</dd>
+              <p class="font-display text-4xl font-semibold text-gold">{s.value}</p>
               <p class="mt-2 text-sm text-white/70">{s.label}</p>
             </div>
           ))}
-        </dl>
+        </div>
         <p class="mt-8 text-sm text-white/60 leading-relaxed border-t border-white/15 pt-5">{conference.note}</p>
       </div>
     </div>
@@ -252,7 +251,7 @@ const featuredFacilities = ['it-zone', 'library', 'counseling-centre', 'micro-te
           const y = window.scrollY;
           items.forEach((el) => {
             const f = parseFloat(el.dataset.parallax ?? '0');
-            el.style.transform = `transl3d(0, ${(-y * f).toFixed(1)}px, 0)`.replace('transl3d', 'translate3d');
+            el.style.transform = `translate3d(0, ${(-y * f).toFixed(1)}px, 0)`;
           });
           ticking = false;
         });

@@ -84,11 +84,11 @@ const conferenceImages = getGallery('conference');
           <p class="mt-6 text-lg text-white/80 leading-relaxed">{conference.summary}</p>
         </div>
 
-        <dl class="mt-12 grid grid-cols-3 gap-6 max-w-xl">
+        <div class="mt-12 grid grid-cols-3 gap-6 max-w-xl">
           {conference.stats.map((s, i) => (
             <StatCounter value={parseInt(s.value)} label={s.label} tone="dark" delay={i * 100} />
           ))}
-        </dl>
+        </div>
 
         <!-- Keynotes -->
         <div class="mt-16">
