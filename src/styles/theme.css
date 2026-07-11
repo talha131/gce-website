@@ -1,0 +1,66 @@
+/*
+ * ============================================================================
+ *  GCE THEME TOKENS — the single source of truth for the site's look.
+ *  Edit this file to re-skin the entire website. Every color, font, radius
+ *  and shadow used across components resolves back to a variable defined here.
+ * ============================================================================
+ *  Direction: "Warm Scholarly" — deep indigo brand (#2504B1) + gold accent
+ *  on a warm, readable light canvas.
+ */
+
+:root {
+  /* Brand — indigo (official theme color) */
+  --brand:        #2504B1;
+  --brand-deep:   #180275;   /* hovers, depth */
+  --brand-950:    #0F0248;   /* footer, deepest */
+  --brand-tint:   #F1EEFC;   /* light indigo wash sections */
+  --brand-tint-2: #E7E1FA;
+
+  /* Accent — gold */
+  --gold:         #D4AF37;
+  --gold-bright:  #E9C245;
+  --gold-deep:    #A9821F;   /* gold text on light for AA contrast */
+
+  /* Neutrals / surfaces */
+  --cream:        #F8F4EC;   /* page background */
+  --surface:      #FFFFFF;   /* cards */
+  --ink:          #1A1830;   /* body text */
+  --ink-soft:     #5C5678;   /* muted text */
+  --line:         rgba(37, 4, 177, .12);
+
+  /* Rare functional accents (from the college crest) — use sparingly */
+  --accent-cyan:  #2BB8C4;
+  --accent-red:   #C0392B;
+
+  /* Type */
+  --font-display: "Fraunces Variable", "Fraunces", Georgia, serif;
+  --font-body:    "Inter Variable", "Inter", system-ui, sans-serif;
+  --font-urdu:    "Noto Nastaliq Urdu", serif;
+
+  /* Shape & depth */
+  --radius:       16px;
+  --radius-sm:    10px;
+  --radius-lg:    24px;
+  --shadow-card:  0 18px 40px -26px rgba(37, 4, 177, .5);
+  --shadow-lift:  0 28px 60px -28px rgba(37, 4, 177, .55);
+  --shadow-soft:  0 8px 24px -18px rgba(26, 24, 48, .4);
+
+  /* Layout */
+  --container:    76rem;   /* max content width */
+  --header-h:     4.5rem;
+}
+
+/*
+ * Dark-mode-ready scaffold. The site ships light-first; these overrides keep
+ * the token structure intact so a full dark theme can be finished later by
+ * editing only this block.
+ */
+:root[data-theme="dark"] {
+  --cream:     #100C22;
+  --surface:   #191533;
+  --ink:       #ECEAF6;
+  --ink-soft:  #A9A3C4;
+  --line:      rgba(233, 194, 69, .14);
+  --brand-tint:   #1B1440;
+  --brand-tint-2: #241A54;
+}
