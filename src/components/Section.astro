@@ -1,0 +1,64 @@
+---
+interface Props {
+  id?: string;
+  /** Background tone. */
+  tone?: 'cream' | 'surface' | 'tint' | 'brand';
+  /** Vertical padding size. */
+  space?: 'sm' | 'md' | 'lg';
+  class?: string;
+  /** Optional heading block. */
+  kicker?: string;
+  title?: string;
+  lead?: string;
+  /** Center the heading block. */
+  center?: boolean;
+}
+
+const {
+  id,
+  tone = 'cream',
+  space = 'lg',
+  class: className = '',
+  kicker,
+  title,
+  lead,
+  center = false,
+} = Astro.props;
+
+const toneClass = {
+  cream: 'bg-cream text-ink',
+  surface: 'bg-surface text-ink',
+  tint: 'bg-brand-tint text-ink',
+  brand: 'bg-brand-950 text-white',
+}[tone];
+
+const spaceClass = { sm: 'py-12 md:py-16', md: 'py-16 md:py-24', lg: 'py-20 md:py-28' }[space];
+const hasHeading = kicker || title || lead;
+---
+
+<section id={id} class:list={[toneClass, spaceClass, className]}>
+  <div class="container-site">
+    {hasHeading && (
+      <div class:list={['max-w-2xl', center && 'mx-auto text-center']} data-reveal>
+        {kicker && <p class="kicker">{kicker}</p>}
+        {title && (
+          <h2
+            class:list={[
+              'mt-4 text-3xl md:text-4xl lg:text-[2.75rem]',
+              tone === 'brand' && 'text-white',
+            ]}
+            set:html={title}
+          />
+        )}
+        {lead && (
+          <p class:list={['mt-4 text-lg leading-relaxed', tone === 'brand' ? 'text-white/75' : 'text-ink-soft']}>
+            {lead}
+          </p>
+        )}
+      </div>
+    )}
+    <div class:list={[hasHeading && 'mt-12 md:mt-16']}>
+      <slot />
+    </div>
+  </div>
+</section>

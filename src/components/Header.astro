@@ -1,0 +1,135 @@
+---
+import { Image } from 'astro:assets';
+import logo from '@/assets/brand/logo.png';
+import { nav, site } from '@/data/site';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 inset-x-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-300"
+  data-header
+>
+  <div class="container-site">
+    <div
+      class="flex items-center justify-between gap-4"
+      style="height: var(--header-h)"
+    >
+      <a href="/" class="flex items-center gap-3 group shrink-0" aria-label={`${site.name} — home`}>
+        <Image
+          src={logo}
+          alt=""
+          width={44}
+          height={44}
+          class="h-11 w-11 object-contain drop-shadow-sm"
+          loading="eager"
+        />
+        <span class="leading-tight hidden sm:block">
+          <span class="block font-display font-semibold text-[0.98rem] text-brand-deep [.header-solid_&]:text-brand-deep">{site.shortName}</span>
+          <span class="block text-[0.66rem] uppercase tracking-[0.14em] text-ink-soft">Since {site.founded}</span>
+        </span>
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden lg:flex items-center gap-1" aria-label="Primary">
+        {nav.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            class:list={[
+              'px-3 py-2 rounded-full text-[0.9rem] font-medium transition-colors',
+              isActive(item.href)
+                ? 'text-brand bg-brand-tint'
+                : 'text-ink hover:text-brand hover:bg-brand-tint/60',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      <a href="/admissions" class="btn btn-gold hidden lg:inline-flex !py-2.5 !px-5 text-sm">
+        Apply Now
+      </a>
+
+      <!-- Mobile toggle -->
+      <button
+        type="button"
+        class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-full text-brand-deep hover:bg-brand-tint"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-toggle
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" data-icon-open>
+          <path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round" />
+        </svg>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" class="hidden" data-icon-close>
+          <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav
+    id="mobile-menu"
+    class="lg:hidden hidden bg-surface border-t border-line shadow-lift"
+    aria-label="Mobile"
+    data-mobile-menu
+  >
+    <div class="container-site py-4 flex flex-col gap-1">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          aria-current={isActive(item.href) ? 'page' : undefined}
+          class:list={[
+            'px-4 py-3 rounded-[var(--radius-sm)] font-medium transition-colors',
+            isActive(item.href) ? 'text-brand bg-brand-tint' : 'text-ink hover:bg-brand-tint/60',
+          ]}
+        >
+          {item.label}
+        </a>
+      ))}
+      <a href="/admissions" class="btn btn-gold mt-2">Apply Now</a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.querySelector<HTMLElement>('[data-mobile-menu]');
+  const iconOpen = document.querySelector<SVGElement>('[data-icon-open]');
+  const iconClose = document.querySelector<SVGElement>('[data-icon-close]');
+
+  // Solid header after scrolling past the top.
+  const onScroll = () => {
+    if (!header) return;
+    header.classList.toggle('header-solid', window.scrollY > 24);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Mobile menu open/close.
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    toggle.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+    menu?.classList.toggle('hidden', open);
+    iconOpen?.classList.toggle('hidden', !open);
+    iconClose?.classList.toggle('hidden', open);
+  });
+</script>
+
+<style>
+  /* Frosted, solid header once scrolled. */
+  [data-header].header-solid {
+    background-color: color-mix(in srgb, var(--cream) 88%, transparent);
+    backdrop-filter: saturate(1.4) blur(12px);
+    box-shadow: 0 1px 0 var(--line), var(--shadow-soft);
+  }
+</style>

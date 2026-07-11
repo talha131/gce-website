@@ -1,0 +1,49 @@
+---
+import '@/styles/global.css';
+import SEO from '@/components/SEO.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  isHome?: boolean;
+}
+
+const { title, description, image, isHome } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/logo.png" sizes="any" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <meta name="theme-color" content="#2504B1" />
+    <meta name="generator" content={Astro.generator} />
+    <SEO title={title} description={description} image={image} isHome={isHome} />
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-full focus:bg-brand focus:text-white focus:font-medium"
+    >
+      Skip to content
+    </a>
+
+    <Header />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <script>
+      import '@/scripts/motion.ts';
+    </script>
+  </body>
+</html>

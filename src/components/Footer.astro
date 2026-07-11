@@ -1,0 +1,73 @@
+---
+import { Image } from 'astro:assets';
+import logo from '@/assets/brand/logo.png';
+import { site, socials, nav } from '@/data/site';
+---
+
+<footer class="bg-brand-950 text-white/85 mt-24">
+  <div class="container-site py-16">
+    <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
+      <!-- Identity -->
+      <div>
+        <div class="flex items-center gap-3">
+          <span class="bg-white/95 rounded-xl p-1.5 inline-flex">
+            <Image src={logo} alt="" width={44} height={44} class="h-11 w-11 object-contain" />
+          </span>
+          <span class="font-display text-lg font-semibold text-white leading-tight">
+            {site.name}
+          </span>
+        </div>
+        <p class="mt-4 max-w-sm text-sm text-white/70 leading-relaxed">
+          {site.taglineShort} A government teacher-education college in Karachi,
+          affiliated with the {site.affiliation}, training teachers since {site.founded}.
+        </p>
+        <div class="mt-5 flex flex-wrap gap-2">
+          {socials.map((s) => (
+            <a
+              href={s.href}
+              target="_blank"
+              rel="me noopener"
+              class="text-xs font-medium px-3 py-1.5 rounded-full border border-white/20 hover:border-gold hover:text-gold transition-colors"
+            >
+              {s.name}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Explore -->
+      <nav aria-label="Footer">
+        <h2 class="text-xs uppercase tracking-[0.16em] text-gold font-semibold">Explore</h2>
+        <ul class="mt-4 space-y-2.5 text-sm">
+          {nav.map((item) => (
+            <li>
+              <a href={item.href} class="text-white/75 hover:text-white transition-colors">{item.label}</a>
+            </li>
+          ))}
+          <li><a href="/colophon" class="text-white/75 hover:text-white transition-colors">Colophon</a></li>
+        </ul>
+      </nav>
+
+      <!-- Contact -->
+      <div>
+        <h2 class="text-xs uppercase tracking-[0.16em] text-gold font-semibold">Visit &amp; Contact</h2>
+        <address class="mt-4 not-italic text-sm text-white/75 space-y-3 leading-relaxed">
+          <p>{site.address.line}</p>
+          <p><a href={`mailto:${site.email}`} class="hover:text-white">{site.email}</a></p>
+          <p><a href={`tel:${site.phoneHref}`} class="hover:text-white">{site.phone}</a></p>
+        </address>
+        <p class="mt-4 text-sm text-white/75">
+          <span class="text-white/55">Affiliated with</span><br />{site.affiliation}
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-14 pt-6 border-t border-white/12 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/55">
+      <p>&copy; {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+      <p>
+        Designed &amp; developed by
+        <a href="https://talhamansoor.com" class="text-white/85 hover:text-gold font-medium underline decoration-white/25 underline-offset-2">Talha Mansoor</a>.
+      </p>
+    </div>
+  </div>
+</footer>

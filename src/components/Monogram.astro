@@ -1,0 +1,25 @@
+---
+/* Elegant branded avatar used where a photo is missing. Shows initials. */
+interface Props {
+  name: string;
+  class?: string;
+}
+const { name, class: className = '' } = Astro.props;
+const initials = name
+  .replace(/^(Prof\.|Dr\.|Mr\.|Ms\.|Mrs\.)\s*/gi, '')
+  .split(/\s+/)
+  .filter(Boolean)
+  .slice(0, 2)
+  .map((w) => w[0]?.toUpperCase())
+  .join('');
+---
+
+<div
+  class:list={[
+    'flex items-center justify-center bg-gradient-to-br from-brand to-brand-deep text-gold-bright font-display font-semibold select-none',
+    className,
+  ]}
+  aria-hidden="true"
+>
+  <span class="text-[1.6em]">{initials}</span>
+</div>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Government College of Education">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#180275"/>
+      <stop offset="0.55" stop-color="#2504B1"/>
+      <stop offset="1" stop-color="#0F0248"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.8" cy="0.2" r="0.7">
+      <stop offset="0" stop-color="#D4AF37" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#D4AF37" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <text x="80" y="250" font-family="Georgia, serif" font-size="34" fill="#E9C245" letter-spacing="6">SINCE 1953</text>
+  <text x="80" y="340" font-family="Georgia, serif" font-size="76" font-weight="700" fill="#ffffff">Government College</text>
+  <text x="80" y="420" font-family="Georgia, serif" font-size="76" font-weight="700" fill="#ffffff">of Education</text>
+  <text x="80" y="500" font-family="Georgia, serif" font-size="32" font-style="italic" fill="#D4AF37">Striving hard to educate the nation.</text>
+  <rect x="80" y="540" width="120" height="5" rx="2.5" fill="#D4AF37"/>
+  <text x="80" y="588" font-family="Arial, sans-serif" font-size="26" fill="#ffffff" opacity="0.8">Karachi · Affiliated with the University of Karachi</text>
+</svg>

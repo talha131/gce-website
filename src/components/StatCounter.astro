@@ -1,0 +1,30 @@
+---
+/* Animated count-up statistic. The JS in scripts/motion.ts drives [data-count]. */
+interface Props {
+  value: number;
+  label: string;
+  prefix?: string;
+  suffix?: string;
+  delay?: number;
+  tone?: 'light' | 'dark';
+}
+const { value, label, prefix = '', suffix = '', delay = 0, tone = 'light' } = Astro.props;
+const fallback = prefix + value.toLocaleString('en-US') + suffix;
+---
+
+<div data-reveal style={delay ? `--reveal-delay:${delay}ms` : undefined} class="text-center">
+  <div
+    class:list={[
+      'font-display font-semibold tabular-nums text-4xl md:text-5xl lg:text-[3.5rem] leading-none',
+      tone === 'dark' ? 'text-gold' : 'text-brand',
+    ]}
+    data-count={value}
+    data-prefix={prefix}
+    data-suffix={suffix}
+  >
+    {fallback}
+  </div>
+  <p class:list={['mt-3 text-sm font-medium', tone === 'dark' ? 'text-white/70' : 'text-ink-soft']}>
+    {label}
+  </p>
+</div>

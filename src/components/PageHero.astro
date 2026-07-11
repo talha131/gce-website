@@ -1,0 +1,45 @@
+---
+/* Inner-page hero: indigo gradient band with kicker, title and lead. */
+interface Props {
+  kicker?: string;
+  title: string;
+  lead?: string;
+  align?: 'left' | 'center';
+}
+const { kicker, title, lead, align = 'left' } = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-brand-950 text-white">
+  <div class="hero-mesh" aria-hidden="true"></div>
+  <div class="hero-grain" aria-hidden="true"></div>
+  <div class="container-site relative pt-32 pb-16 md:pt-40 md:pb-24">
+    <div class:list={['max-w-3xl', align === 'center' && 'mx-auto text-center']}>
+      {kicker && <p class="kicker !text-gold-bright">{kicker}</p>}
+      <h1 class="mt-4 text-white text-4xl md:text-5xl lg:text-6xl" set:html={title} />
+      {lead && <p class="mt-5 text-lg md:text-xl text-white/75 leading-relaxed">{lead}</p>}
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-mesh {
+    position: absolute;
+    inset: -20%;
+    background:
+      radial-gradient(42% 55% at 18% 22%, color-mix(in srgb, var(--brand) 92%, #fff 8%) 0%, transparent 60%),
+      radial-gradient(38% 50% at 82% 18%, color-mix(in srgb, var(--gold) 55%, transparent) 0%, transparent 55%),
+      radial-gradient(50% 60% at 70% 88%, color-mix(in srgb, var(--brand-deep) 92%, #000) 0%, transparent 60%);
+    filter: blur(8px);
+    animation: float-blob 18s ease-in-out infinite;
+  }
+  .hero-grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-mesh { animation: none; }
+  }
+</style>

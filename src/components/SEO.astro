@@ -1,0 +1,62 @@
+---
+import { site, socials } from '@/data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Path to an OG image in /public, or omit for the default. */
+  image?: string;
+  /** Set true on the homepage to use the site name as the full title. */
+  isHome?: boolean;
+}
+
+const { title, description, image = '/og-default.svg', isHome = false } = Astro.props;
+
+const fullTitle = isHome
+  ? `${site.name} — ${site.shortName}, Karachi`
+  : `${title} · ${site.shortName}`;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(image, Astro.site).href;
+
+// EducationalOrganization structured data (site-wide).
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollegeOrUniversity',
+  name: site.name,
+  alternateName: site.shortName,
+  url: site.url,
+  logo: new URL('/logo.png', Astro.site).href,
+  foundingDate: String(site.founded),
+  description: site.description,
+  email: site.email,
+  telephone: site.phone,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Block 15, Federal B Area',
+    addressLocality: site.address.locality,
+    addressRegion: site.address.region,
+    addressCountry: site.address.country,
+  },
+  sameAs: socials.map((s) => s.href),
+};
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:locale" content="en_PK" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
