@@ -1,0 +1,24 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { nav } from '@/data/site';
+---
+
+<Layout title="Page not found" description="The page you are looking for could not be found.">
+  <section class="relative overflow-hidden bg-brand-950 text-white min-h-[70vh] grid place-items-center">
+    <div class="container-site text-center py-24">
+      <p class="font-display text-7xl md:text-8xl font-semibold text-gold">404</p>
+      <h1 class="mt-4 text-white text-3xl md:text-4xl">This page has wandered off.</h1>
+      <p class="mt-4 text-white/70 max-w-md mx-auto">
+        The page you're looking for doesn't exist or may have moved. Let's get you back on track.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-2">
+        {nav.slice(0, 6).map((item) => (
+          <a href={item.href} class="text-sm font-medium px-4 py-2 rounded-full border border-white/20 hover:border-gold hover:text-gold transition-colors">
+            {item.label}
+          </a>
+        ))}
+      </div>
+      <a href="/" class="mt-8 inline-flex btn btn-gold">Back to home</a>
+    </div>
+  </section>
+</Layout>

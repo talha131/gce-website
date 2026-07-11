@@ -1,0 +1,81 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import Section from '@/components/Section.astro';
+import Reveal from '@/components/Reveal.astro';
+import Monogram from '@/components/Monogram.astro';
+import { contributors } from '@/data/contributors';
+import { getSingle } from '@/lib/images';
+---
+
+<Layout
+  title="Colophon"
+  description="Credits for the GCE website — the student contributors and the developer, Talha Mansoor."
+>
+  <PageHero
+    kicker="Colophon"
+    title="Made with <span class='accent-italic !text-gold-bright'>care</span>, by our community"
+    lead="This website was built by students and faculty of Government College of Education. Here's who made it happen."
+  />
+
+  <!-- Student contributors -->
+  <Section kicker="Student Contributors" title="The student team">
+    <div class="grid gap-6 grid-cols-2 lg:grid-cols-5">
+      {contributors.map((c, i) => {
+        const photo = getSingle('contributors', c.folder);
+        return (
+          <article class="card card-hover overflow-hidden flex flex-col text-center" data-reveal style={`--reveal-delay:${i * 70}ms`}>
+            <div class="aspect-square bg-brand-tint overflow-hidden">
+              {photo ? (
+                <Image src={photo} alt={`Portrait of ${c.name}`} widths={[200, 320]} sizes="(min-width:1024px) 18vw, 45vw" class="h-full w-full object-cover" loading="lazy" />
+              ) : (
+                <Monogram name={c.name} class="h-full w-full text-3xl" />
+              )}
+            </div>
+            <div class="p-4 flex-1 flex flex-col">
+              <h3 class="!text-base !leading-snug">{c.name}</h3>
+              <p class="mt-1 text-xs text-ink-soft">{c.batch}</p>
+              <a href={c.linktree} target="_blank" rel="noopener" class="mt-3 text-sm font-semibold text-brand hover:text-brand-deep">
+                LinkTree ↗
+              </a>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </Section>
+
+  <!-- Developer -->
+  <Section tone="tint" kicker="Development" title="Built &amp; led by Talha Mansoor" space="md">
+    <div class="grid lg:grid-cols-2 gap-8 items-start">
+      <Reveal class="space-y-4 text-lg text-ink-soft leading-relaxed">
+        <p>
+          This website was designed, developed and led by
+          <a href="https://talhamansoor.com" class="text-brand font-semibold underline underline-offset-2 hover:text-brand-deep">Talha Mansoor</a>,
+          a faculty member at GCE and a software developer, working alongside the student
+          contributors above.
+        </p>
+        <p>
+          Talha also builds <a href="https://ustadji.app" class="text-brand font-semibold underline underline-offset-2 hover:text-brand-deep">ustadji.app</a>,
+          an education platform — part of an ongoing commitment to using technology in the
+          service of teaching and learning.
+        </p>
+      </Reveal>
+
+      <Reveal delay={120} class="card p-7">
+        <h3 class="!text-xl">Built with</h3>
+        <ul class="mt-4 space-y-2.5 text-ink-soft">
+          <li class="flex items-center gap-2.5"><span class="h-1.5 w-1.5 rounded-full bg-gold"></span> Astro — fast, content-driven static site</li>
+          <li class="flex items-center gap-2.5"><span class="h-1.5 w-1.5 rounded-full bg-gold"></span> Tailwind CSS — with a single-file theme</li>
+          <li class="flex items-center gap-2.5"><span class="h-1.5 w-1.5 rounded-full bg-gold"></span> Self-hosted Fraunces, Inter &amp; Noto Nastaliq Urdu</li>
+          <li class="flex items-center gap-2.5"><span class="h-1.5 w-1.5 rounded-full bg-gold"></span> Deployed as static output on Netlify</li>
+        </ul>
+        <div class="mt-6 pt-5 border-t border-line flex gap-3">
+          <a href="https://talhamansoor.com" class="btn btn-primary !py-2.5 !px-5 text-sm">talhamansoor.com</a>
+          <a href="https://ustadji.app" class="btn btn-ghost !py-2.5 !px-5 text-sm">ustadji.app</a>
+        </div>
+      </Reveal>
+    </div>
+  </Section>
+</Layout>
