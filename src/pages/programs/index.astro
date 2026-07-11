@@ -1,0 +1,58 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import Section from '@/components/Section.astro';
+import ProgramCard from '@/components/ProgramCard.astro';
+import { programs } from '@/data/programs';
+import { site } from '@/data/site';
+---
+
+<Layout
+  title="Programs"
+  description="Four teacher-education degrees at GCE: B.Ed (Hons) 4-Year, B.Ed 2.5-Year (Morning & Evening) and BS Education — affiliated with the University of Karachi."
+>
+  <PageHero
+    kicker="Academic Programs"
+    title="Degrees that build <span class='accent-italic !text-gold-bright'>confident teachers</span>"
+    lead="Professional, University of Karachi–affiliated programs combining subject content, modern pedagogy and real classroom practicum."
+  />
+
+  <Section space="md">
+    <div class="grid gap-6 md:grid-cols-2">
+      {programs.map((p, i) => <ProgramCard program={p} delay={(i % 2) * 80} />)}
+    </div>
+  </Section>
+
+  <!-- Comparison table -->
+  <Section tone="tint" kicker="At a glance" title="Compare the programs" space="md">
+    <div class="overflow-x-auto -mx-5 px-5" data-reveal>
+      <table class="w-full min-w-[640px] border-collapse text-left">
+        <thead>
+          <tr class="text-sm text-ink-soft">
+            <th class="py-3 pr-4 font-semibold">Program</th>
+            <th class="py-3 px-4 font-semibold">Shift</th>
+            <th class="py-3 px-4 font-semibold">Duration</th>
+            <th class="py-3 px-4 font-semibold">Semesters</th>
+            <th class="py-3 pl-4 font-semibold">Entry</th>
+          </tr>
+        </thead>
+        <tbody class="align-top">
+          {programs.map((p) => (
+            <tr class="border-t border-line bg-surface">
+              <td class="py-4 pr-4">
+                <a href={`/programs/${p.slug}`} class="font-display font-semibold text-brand-deep hover:text-brand">{p.name}</a>
+              </td>
+              <td class="py-4 px-4 text-ink-soft">{p.shift}</td>
+              <td class="py-4 px-4 text-ink-soft">{p.duration}</td>
+              <td class="py-4 px-4 text-ink-soft">{p.semesters}</td>
+              <td class="py-4 pl-4 text-ink-soft">{p.entry}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-6 text-sm text-ink-soft" data-reveal>
+      All programs are affiliated with the {site.affiliation}. Admissions open every November.
+    </p>
+  </Section>
+</Layout>
