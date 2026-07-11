@@ -1,0 +1,56 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import Section from '@/components/Section.astro';
+import Gallery from '@/components/Gallery.astro';
+import { events, eventBySlug } from '@/data/events';
+import { getGallery } from '@/lib/images';
+
+export const getStaticPaths = (() =>
+  events.map((e) => ({ params: { slug: e.slug } }))) satisfies GetStaticPaths;
+
+const { slug } = Astro.params;
+const event = eventBySlug(slug!)!;
+const images = getGallery('events', event.slug);
+const related = events.filter((e) => e.group === event.group && e.slug !== event.slug).slice(0, 4);
+---
+
+<Layout title={event.name} description={event.blurb}>
+  <PageHero kicker={event.group} title={event.name} lead={event.blurb}>
+    {event.date && <span class="mt-6 inline-block text-sm font-semibold px-3 py-1.5 rounded-full bg-white/10 text-gold-bright">{event.date}</span>}
+  </PageHero>
+
+  <Section space="md">
+    <div class="max-w-3xl space-y-5 text-lg text-ink leading-relaxed" data-reveal>
+      {event.body.map((p) => <p>{p}</p>)}
+      {event.isFiller && (
+        <p class="text-xs text-ink-soft/80 pt-2">Note: placeholder description pending final content from the college.</p>
+      )}
+    </div>
+
+    {images.length > 0 && (
+      <div class="mt-14">
+        <h2 class="!text-2xl mb-6" data-reveal>Gallery</h2>
+        <Gallery images={images} altBase={event.name} columns={3} />
+      </div>
+    )}
+
+    <div class="mt-12" data-reveal>
+      <a href="/student-life" class="btn btn-ghost">← All student life</a>
+    </div>
+  </Section>
+
+  {related.length > 0 && (
+    <Section tone="tint" kicker="Related" title={`More in ${event.group}`} space="md">
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {related.map((e, i) => (
+          <a href={`/student-life/${e.slug}`} class="card card-hover p-5 block" data-reveal style={`--reveal-delay:${i * 60}ms`}>
+            <p class="font-display font-semibold text-brand-deep leading-snug">{e.name}</p>
+            {e.date && <p class="mt-1 text-xs text-gold-deep font-semibold">{e.date}</p>}
+          </a>
+        ))}
+      </div>
+    </Section>
+  )}
+</Layout>

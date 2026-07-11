@@ -1,0 +1,29 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import Section from '@/components/Section.astro';
+import EventCard from '@/components/EventCard.astro';
+import { events, eventGroups } from '@/data/events';
+---
+
+<Layout
+  title="Student Life"
+  description="Celebrations, national days, workshops, seminars, competitions and quizzes — the vibrant student life at Government College of Education."
+>
+  <PageHero
+    kicker="Student Life"
+    title="More than a <span class='accent-italic !text-gold-bright'>classroom</span>"
+    lead="Celebrations, national days, workshops, seminars, competitions and quizzes — GCE's calendar is alive with events that build confidence, character and community."
+  />
+
+  {eventGroups.map((group, gi) => {
+    const items = events.filter((e) => e.group === group);
+    return (
+      <Section tone={gi % 2 === 0 ? 'cream' : 'tint'} kicker={group} title={group} space="md">
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {items.map((e, i) => <EventCard event={e} delay={(i % 3) * 70} />)}
+        </div>
+      </Section>
+    );
+  })}
+</Layout>
