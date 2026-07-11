@@ -14,7 +14,9 @@ npm run build     # production build → dist/ (also validates all pages/types)
 npm run preview   # serve the built dist/ locally (use this for Lighthouse, not dev)
 ```
 
-There is no test suite and no separate lint step — `npm run build` is the gate (it type-checks `.astro`/`.ts` and fails on broken image references or bad `getStaticPaths`). Run a build before considering a change done.
+Or the `Makefile`: `make dev|build|preview|clean|deploy`. There is no test suite and no separate lint step — `npm run build` is the gate (it type-checks `.astro`/`.ts` and fails on broken image references or bad `getStaticPaths`). Run a build before considering a change done.
+
+`make deploy` builds locally and pushes `dist/` to production (gce.edu.pk) via `netlify deploy --prod --dir=dist` — it does **not** use Netlify's CI. Consequence: **build-time env vars must be set locally**, not just in the Netlify dashboard.
 
 ## Critical constraint — do not deploy
 
@@ -53,6 +55,10 @@ Add `data-reveal` (optionally `style="--reveal-delay:Nms"`) to any element for s
 `src/layouts/Layout.astro` is the shell for every page (SEO head, skip link, sticky `Header`, `Footer`, motion script). Pass `title`/`description` (and `isHome` on the homepage). `Header.astro` is transparent over the dark hero at page top and switches to a solid light state on scroll — its foreground colors are driven by CSS vars (`--hdr-fg` etc.) that flip on the `.header-solid` class; every page therefore starts with a dark hero (`PageHero.astro` or the home hero) so the transparent nav stays legible.
 
 Detail pages are generated with `getStaticPaths` from the data arrays: `programs/[slug]`, `campus/[slug]` (facilities), `student-life/[slug]` (events). Adding an item to the data array + a matching image folder automatically creates its detail page and gallery.
+
+### Analytics
+
+`Analytics.astro` (in `Layout` head) injects GA4 **only when `import.meta.env.PROD` and `PUBLIC_GA_ID` is set** — so dev builds and un-configured builds emit nothing. The id comes from a git-ignored `.env` (`PUBLIC_GA_ID=G-…`, see `.env.example`); it must be present locally at `make deploy` time to reach the deployed site.
 
 ### SEO
 

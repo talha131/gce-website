@@ -16,12 +16,39 @@ npm run build     # production build → dist/
 npm run preview   # serve the production build locally
 ```
 
-Node 22+ is recommended (see `netlify.toml`).
+Or use the `Makefile` shortcuts: `make dev`, `make build`, `make preview`,
+`make clean`, `make deploy`. Node 22+ is recommended (see `netlify.toml`).
 
-> ### ⚠️ Deployment
-> Pushing to `master` triggers a Netlify build. **Do not `git push`** unless you
-> intend to deploy. Commit locally as you work; the repo owner pushes when ready.
-> GPG signing is enabled and must stay on.
+## Deployment
+
+The site is deployed to **gce.edu.pk** via the Netlify CLI, pushing a
+locally-built `dist/` (not Netlify's CI):
+
+```bash
+netlify link      # one-time: connect this repo to the Netlify site
+make deploy       # builds locally, then `netlify deploy --prod --dir=dist`
+```
+
+Because the deploy uses the local build, **build-time env vars (see Analytics)
+must be set locally** — Netlify's own environment variables do not apply to a
+CLI artifact deploy.
+
+> ### ⚠️ `git push` also deploys
+> Pushing to `master` triggers a Netlify CI build. Only push when you intend to
+> deploy. GPG signing is enabled and must stay on.
+
+## Analytics
+
+Google Analytics 4 (`src/components/Analytics.astro`) loads **only in production
+builds and only when `PUBLIC_GA_ID` is set**, so dev never pollutes analytics.
+To enable it, copy `.env.example` to `.env` and set the measurement id:
+
+```
+PUBLIC_GA_ID=G-XXXXXXXXXX
+```
+
+`.env` is git-ignored. Since we deploy a local build, the id must be present in
+`.env` when you run `make deploy` for it to be baked into the deployed site.
 
 ---
 
