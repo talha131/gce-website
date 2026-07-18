@@ -40,7 +40,7 @@ const hasHeading = kicker || title || lead;
   <div class="container-site">
     {hasHeading && (
       <div class:list={['max-w-2xl', center && 'mx-auto text-center']} data-reveal>
-        {kicker && <p class="kicker">{kicker}</p>}
+        {kicker && <p class:list={['kicker', tone === 'brand' && '!text-gold-bright']}>{kicker}</p>}
         {title && (
           <h2
             class:list={[
