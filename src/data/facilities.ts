@@ -193,7 +193,7 @@ export const facilities: Facility[] = [
     body: [
       'The IT Zone is a large, spacious hall with room for about 250 to 300 people, and is the main venue for the college\'s events, programmes and functions.',
       'It has a proper stage set up for seminars, ceremonies and competitions, with microphones, a projector for videos and slides, and a sound system with large speakers so everyone can hear clearly.',
-      'Comfortable seating — sofas and chairs — accommodates students, teachers and guests through long events, and a water cooler is on hand. It is central to college life.',
+      "Comfortable seating, sofas' and chairs, accommodates students, teachers and guests through long events, and a water cooler is on hand. It is central to college life.",
     ],
   },
   {
@@ -204,8 +204,8 @@ export const facilities: Facility[] = [
     blurb: 'A well-kept memorial garden dedicated to the late Prof. Muneer, ringed by fruit trees and flowers.',
     body: [
       'Bagh-e-Muneer is a well-managed garden dedicated to the memory of Muneer, who served GCE for many years with great dedication in the administration office. His sudden passing was a profound loss, and the garden honours his service.',
-      'With nine to ten benches, surrounded by fruit trees and flowers of many kinds, it sits under the watch of the teachers\' rooms whose windows open onto it.',
-      'A sign board reads "پھول توڑنا منع ہے" (picking flowers is forbidden), and dustbins keep the garden clean.',
+      'With nine to ten benches, surrounded by fruit trees and flowers of many kinds, it is located beside the teachers\' rooms, whose windows overlook the garden.',
+      'A signboard reads "پھول توڑنا منع ہے" (picking flowers is forbidden), and dustbins are provided throughout the area to help maintain cleanliness.',
     ],
   },
   {
@@ -214,9 +214,9 @@ export const facilities: Facility[] = [
     category: 'Grounds & Amenities',
     blurb: 'Green, shaded lawns across the campus — spaces to relax, study and take a breath.',
     body: [
-      'Three to four lawns are spread across the college. One large, open lawn faces the sports ground; another, a little ahead, has a shady tree with seating beneath it; and one more sits near the photocopy shop.',
-      'All the lawns have green grass and plants that keep the environment fresh, with comfortable seating for relaxing, studying or short breaks. Students also gather here for games.',
-      'A relaxation area has small rocks, benches and tree seating, and fruit trees grow throughout — guava, lemon, mulberry, fig, plum, berries and even coconut — making the campus green, peaceful and calm.',
+      'The college has three to four well-maintained lawns spread across the campus. One large, open lawn faces the sports ground; another has a shady tree with seating beneath it; and one more sits near the photocopy shop.',
+      'All the lawns have green grass and plants, creating a fresh and pleasant environment, with comfortable seating for relaxing, studying or short breaks. The lawns also serve as gathering spaces for recreational activities.',
+      'A relaxation area has small rocks, benches and tree seating, and fruit trees grow throughout, including guava, lemon, mulberry, fig, plum, berries and even coconut, making the campus green, peaceful and calm.',
     ],
   },
   {
@@ -225,8 +225,8 @@ export const facilities: Facility[] = [
     category: 'Grounds & Amenities',
     blurb: 'An open sports ground, an outdoor area and an indoor arena for a full range of games.',
     body: [
-      'GCE\'s sports ground is a large open space with green grass, basketball and football nets, shaded seating for rest and spectators, and equipment provided for student use — ideal for physical-education classes, training and matches.',
-      'A separate outdoor sports area, wide enough for three or four teams to play at once, hosts volleyball and other games where students practise during their sports units.',
+      'GCE\'s sports ground is a large open space with green grass, basketball and football nets, shaded seating for rest and spectators, and sports equipment for student use — ideal for physical-education classes, training and matches.',
+      'A separate outdoor sports area, wide enough for three or four teams to play at once, is commonly used for volleyball and other outdoor games where students practise during their sports units.',
       'Indoors, the Sports Arena Room supports table tennis and board games, with cupboards for equipment, proper lighting, ventilation and a clean, calm environment for indoor practice.',
     ],
   },
