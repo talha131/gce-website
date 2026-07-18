@@ -51,8 +51,8 @@ const documents = [
   <Section kicker="How to apply" title="The admission procedure">
     <ol class="grid gap-5 md:grid-cols-2">
       {steps.map((step, i) => (
-        <li class="card p-6 flex gap-4" data-reveal style={`--reveal-delay:${(i % 2) * 80}ms`}>
-          <span class="shrink-0 h-10 w-10 rounded-full bg-brand text-gold-bright grid place-items-center font-display font-semibold">{i + 1}</span>
+        <li class="card p-6 flex gap-4 items-center" data-reveal style={`--reveal-delay:${(i % 2) * 80}ms`}>
+          <span class="shrink-0 h-10 w-10 rounded-full bg-gold text-brand-950 grid place-items-center font-display font-bold">{i + 1}</span>
           <p class="text-ink-soft leading-relaxed">{step}</p>
         </li>
       ))}
@@ -72,7 +72,9 @@ const documents = [
       </ul>
 
       <Reveal class="card p-7 bg-brand-950 text-white">
-        <h3 class="!text-white !text-xl">Choose your program</h3>
+        <h3 class="!text-gold-bright !text-xl flex items-center gap-3">
+          <span class="h-5 w-1.5 rounded-full bg-gold"></span> Choose your program
+        </h3>
         <p class="mt-2 text-white/70">Explore what each degree offers before you apply.</p>
         <ul class="mt-5 space-y-2">
           {programs.map((p) => (
