@@ -59,7 +59,7 @@ export const facilities: Facility[] = [
     category: 'Academic',
     blurb: 'Spacious, well-lit rooms with audio systems and a presentation dais in every class.',
     body: [
-      'Our classrooms comfortably accommodate 80 to 90 students and are equipped with microphones for clear communication.',
+      'Our classrooms comfortably accommodate up to 100 students and are equipped with microphones for clear communication.',
       'Walls are decorated with educational charts, and rooms are well-lit and airy with excellent natural ventilation.',
       'Every classroom has a dais, so teachers and students can practise presentations and build the confidence they will need in their teaching careers.',
     ],
