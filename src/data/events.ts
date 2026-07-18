@@ -28,9 +28,9 @@ export const events: CollegeEvent[] = [
     group: 'Celebrations & National Days',
     blurb: 'A warm welcome for every new batch — introductions, guidance and a tour of the campus.',
     body: [
-      'Orientation Day is held before the start of every new batch to welcome new students. The programme opens with Tilawat by a student, followed by a full session with the faculty.',
-      'Students are given a proper introduction to the college — its vision, mission and history — and the Principal and all faculty members are introduced one by one, with students told which teacher will teach which subject.',
-      'Three or four senior students share their experiences to motivate and guide the newcomers, then take them on a tour of the classrooms and facilities so they feel confident and comfortable at the college.',
+      'Orientation Day is held before the beginning of every new batch to welcome new students. The programme commences with Quranic recitation by a student, followed by an interactive session with the faculty.',
+      'Students are given a proper introduction to the college. The vision, mission and the history of the college are explained. The Principal and all faculty members are introduced one by one, with students told which teacher will teach which subject.',
+      'Three, four senior students share their experiences, motivate and guide the newcomers. At last, they take them on a tour of the classrooms and facilities so they feel confident and comfortable at the college.',
     ],
   },
   {
@@ -39,8 +39,8 @@ export const events: CollegeEvent[] = [
     group: 'Celebrations & National Days',
     blurb: 'A heartfelt send-off for graduating students, celebrated across the 2024 and 2025 cohorts.',
     body: [
-      'The Farewell is a warm, memorable send-off for graduating students, bringing juniors, seniors and faculty together to celebrate the outgoing batch.',
-      'Held for both the 2024 and 2025 cohorts, the day is filled with performances, speeches, tributes and photographs — a fitting close to the students\' journey at GCE and an emotional thank-you to the teachers who shaped it.',
+      'The Farewell is a warm and memorable send-off for graduating students, bringing juniors, seniors and faculty together to celebrate the outgoing batch.',
+      "Organized for students from both the 2024 and 2025 cohorts. The day is filled with performances, speeches, tributes and photographs. It's a memorable finale to our students' journey at GCE and an emotional thank you to the teachers who shaped it.",
     ],
     isFiller: true,
   },
@@ -53,7 +53,7 @@ export const events: CollegeEvent[] = [
     body: [
       "Teachers' Day is celebrated on 5 October in the IT Zone. Each semester is given 20 minutes to perform for their teachers in their own creative way.",
       'Students perform mimicry, poetry, speeches and songs to show their respect, and every semester takes part enthusiastically.',
-      'At the end of the programme, students present gifts to their teachers — a fun, respectful and memorable celebration for everyone.',
+      "At the end of the programme, students present gifts to their teachers. Teachers' Day brings a fun, respectful, and memorable celebration for our teachers and students.",
     ],
   },
   {
@@ -63,9 +63,9 @@ export const events: CollegeEvent[] = [
     date: '14 August',
     blurb: 'A lively, patriotic celebration in the IT Zone with performances, speeches and refreshments.',
     body: [
-      'Independence Day is celebrated on 14 August in the IT Zone, decorated with flags, balloons and banners. All college staff and students take part, and guests from other schools are invited.',
-      'Every semester performs in its own way — national songs, cultural performances promoting tradition, and speeches on independence and patriotism.',
-      'Student volunteers manage the event and are later awarded certificates, and the college arranges food and refreshments. A lively, educational day that shows respect for the country.',
+      'Independence Day is celebrated on 14th August in the IT Zone, decorated with flags, balloons and banners. All college staff and students take part, and guests from other schools are invited.',
+      'Every semester performs in its own way. The event featured national songs, cultural performances and patriotic speeches by both students and teachers.',
+      'Student volunteers manage the event and are later awarded certificates. Food and refreshments are also catered by the college. A lively, educational day that shows respect for the country.',
     ],
   },
   {
@@ -110,9 +110,9 @@ export const events: CollegeEvent[] = [
     date: '8 August',
     blurb: 'Celebrating the life, poetry and message of the great Sindhi Sufi poet.',
     body: [
-      'Shah Abdul Latif Bhitai Day is celebrated on 8 August in the IT Zone, opening with Tilawat. Sindhi professors of the college formally inaugurate the event.',
+      'Shah Abdul Latif Bhitai Day is celebrated on 8th August in the IT Zone, opening with Tilawat. Sindhi professors of the college formally inaugurate the event.',
       'Speeches explore Bhitai\'s life and work, staff perform songs in his honour, and interesting stories about him are shared.',
-      'Lasting about an hour and a half, the celebration — attended by the whole college — helps students appreciate their cultural heritage.',
+      'Lasting about an hour and a half, the celebration, attended by the whole college, helps students appreciate their cultural heritage.',
     ],
   },
   {
@@ -135,7 +135,7 @@ export const events: CollegeEvent[] = [
     body: [
       'The college arranged a picnic on 25 February 2025, with students from different programmes and semesters taking part alongside most staff members and the Principal.',
       'Reporting time was 8:00 am, the menu included BBQ provided by the college, and transport was arranged by the college.',
-      'Conducted with good safety and care, everyone returned safely — a fun and enjoyable experience for all.',
+      'Conducted with good safety and care, everyone returned safely. It was a fun and enjoyable experience for all.',
     ],
   },
 
@@ -147,8 +147,8 @@ export const events: CollegeEvent[] = [
     blurb: 'The heart of teacher training — students teach real classes in schools under supervision.',
     body: [
       'Teaching practice is a central part of teacher education at GCE. Students are placed in government and private schools where they teach real classes and gain practical experience.',
-      'In the 4-year programme, students go on practicum in the second year (3rd & 4th semesters, 15 days) and the fourth year (7th & 8th semesters). They deliver 12 lessons in the 3rd semester, 20 in the 4th, and 24 across the 7th and 8th — each block including criticism and final lessons. In the 2.5-year programme, practicum runs for a month in the fifth semester.',
-      'Students use charts, models, visual and audio aids and real objects, prepare growth and professional portfolios, and are observed and guided by faculty — building lesson-planning, classroom-management and confidence skills that shape effective future teachers.',
+      'In the 4-year programme, students go on practicum in the second year (3rd & 4th semesters, 15 days) and the fourth year (7th & 8th semesters). They deliver 12 lessons in the 3rd semester, 20 in the 4th, and 24 across the 7th and 8th. Each block including criticism and final lessons. In the 2.5-year programme, practicum runs for a month in the fifth semester.',
+      'Students use charts, models, visual and audio aids and real objects, prepare growth and professional portfolios, and are observed and guided by faculty. Building lesson-planning, classroom-management and confidence skills that shape effective future teachers.',
     ],
   },
   {
@@ -157,9 +157,9 @@ export const events: CollegeEvent[] = [
     group: 'Academics & Practicum',
     blurb: 'End-of-semester assessments that prepare students thoroughly for external examinations.',
     body: [
-      'GCE holds internal exams at the end of every semester, with a full schedule planned for each programme and its semesters and conducted by the whole college staff.',
+      "GCE holds internal exams at the end of every semester, with a full schedule planned for each programme and it's semesters and conducted by the whole college staff.",
       'These exams check students\' preparation and readiness for external examinations, and internal grading feeds into the external grading system.',
-      'Internal marks combine attendance, portfolio, assignment and presentation marks — reflecting the college\'s commitment to assessing students properly, not just teaching them.',
+      "Internal marks combine attendance, portfolio, assignment and presentation marks. Reflecting the college's commitment to assessing students properly, not just teaching them.",
     ],
   },
   {
@@ -170,7 +170,7 @@ export const events: CollegeEvent[] = [
     body: [
       'CR elections are held every semester, following a college policy that class representatives change each term so every student has a chance to lead.',
       'Elections are run professionally: ballot papers are printed with nominees\' names, students select two candidates, and votes are counted openly in front of everyone.',
-      'Results are announced on the ground once counting is complete — helping students learn about responsibility, leadership and fair process.',
+      'Results are announced on the ground once counting is complete. This event helps students learn about responsibility, leadership and fair process.',
     ],
   },
   {
@@ -180,8 +180,8 @@ export const events: CollegeEvent[] = [
     blurb: 'The college’s own magazine, written and made with students, capturing GCE’s story.',
     body: [
       'GCE publishes its own magazine, "Mashal-e-Ilm", produced with an editor and sub-editors.',
-      'It carries full information about the college — its vision, mission and history — along with photographs of events kept as memories.',
-      'Students take part in making the magazine, contributing articles, stories and poetry; selected work is published under the student\'s name.',
+      "It carries full information about the college. It's vision, mission and history — along with photographs of events kept as memories.",
+      "Students take part in making the magazine, contributing articles, stories and poetry. Selected work is published under the student's name.",
     ],
   },
 
@@ -193,8 +193,8 @@ export const events: CollegeEvent[] = [
     blurb: 'A one-day seminar guiding B.Ed students through careers in education, at home and abroad.',
     body: [
       'A one-day seminar on Career Counseling was held in the IT Zone, organised specially for B.Ed. students. The guest speaker was certified trainer Muhammad Humail Ashrafi.',
-      'He guided students through career options in education — teaching, training and leadership — and shared job opportunities in Pakistan as well as international options such as global teaching programmes.',
-      'The speaker offered tips on skill-building, communication and confidence, and students asked questions and engaged throughout — a genuinely helpful session for thinking clearly about the future.',
+      'He guided students through career options in education. Students learned about teaching, training and leadership — and shared job opportunities in Pakistan as well as international options such as global teaching programmes.',
+      'The speaker offered tips on skill-building, communication and confidence, and students asked questions and engaged throughout. It was a genuinely helpful session for thinking clearly about the future.',
     ],
   },
   {
@@ -264,7 +264,7 @@ export const events: CollegeEvent[] = [
     body: [
       'The Ilm-e-Tajweed workshop is planned and conducted by Prof. Habib-un-Nabi as resource person, held in the CPD Hall with a projector used to explain topics clearly.',
       'Organised for B.Ed. (Hons) second-semester students, it teaches the importance and rules of Tajweed in Qur\'an recitation, with active student participation.',
-      'Certificates are awarded to all students at the end — helping them recite the Qur\'an correctly and motivating daily practice.',
+      "Certificates are awarded to all students at the end of the workshop. It helps them recite the Qur'an correctly and motivates daily practice.",
     ],
   },
   {
@@ -286,9 +286,9 @@ export const events: CollegeEvent[] = [
     date: '28 January 2026',
     blurb: 'A professional-development session on the micro-teaching method for B.Ed students.',
     body: [
-      'A session on Micro-Teaching was held on 28 January 2026 in the IT Zone — a professional-development session for B.Ed. students with resource person Prof. Sharjeel Ahmed.',
+      'A session on Micro-Teaching was held on 28 January 2026 in the IT Zone. It was a professional-development session for B.Ed. students with resource person Prof. Sharjeel Ahmed.',
       'Held under the supervision of Principal Prof. Zahoor Ahmed, it explained what micro-teaching is and how to use it in the classroom.',
-      'Students from different semesters attended and learned to teach in a more confident, effective way.',
+      'Students from different semesters attended and learned to teach in a more confident and effective way.',
     ],
   },
   {
@@ -322,7 +322,7 @@ export const events: CollegeEvent[] = [
     blurb: 'Ten-plus stalls of student artwork, judged for creativity in the IT Zone.',
     body: [
       'The Art Exhibition, organised by students with focal person Prof. Syeda Saeed Fatima, was held in the IT Zone with all teachers, staff and students invited.',
-      'The hall was decorated with about 10 to 11 stalls, each displaying different student artwork — creative projects and designs that teachers and the Principal visited and appreciated with comments on each.',
+      'The hall was decorated with about 10 to 11 stalls, each displaying different student artwork. Students presented their creative projects and designs that teachers and the Principal visited and appreciated with comments on each.',
       'Three judges evaluated the work and awarded first, second and third positions, creating a positive and inspiring environment that motivated students to show their creativity.',
     ],
   },
@@ -334,7 +334,7 @@ export const events: CollegeEvent[] = [
     body: [
       'The Flower Exhibition saw every semester take part, each given a separate space to decorate around a chosen theme, with flowers labelled and named and every student bringing a creatively decorated flower pot.',
       'The Principal of another college was invited alongside GCE\'s Principal, and teachers and staff visited each semester\'s space in turn.',
-      'Judges scored each semester\'s work and three winners were selected and awarded prizes, with results announced in front of the students — a fresh, positive event teaching creativity and decoration skills.',
+      "Judges scored each semester's work and three winners were selected and awarded prizes, with results announced in front of the students. The event created a fresh and positive environment in the college.",
     ],
   },
   {
@@ -378,7 +378,7 @@ export const events: CollegeEvent[] = [
     body: [
       'The Caliphs Quiz was organised in the IT Zone, focused on the Rightly Guided Caliphs of Islam, with questions on their leadership and history.',
       'Students took part freely, the quiz was hosted by two students, and each participant answered five questions under a time limit.',
-      'Winners, participants and volunteers received certificates — deepening interest in Islamic history and values.',
+      'Winners, participants and volunteers received certificates, deepening interest in Islamic history and values.',
     ],
   },
   {
