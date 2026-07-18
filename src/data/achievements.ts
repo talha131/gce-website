@@ -30,14 +30,14 @@ export interface Honour {
 export const honours: Honour[] = [
   {
     slug: 'maleeha-khan',
-    title: 'Maleeha Khan — 4th International Conference on Education 2025',
+    title: 'Maleeha Khan, 4th International Conference on Education 2025',
     rank: '1st Position',
     detail:
       'GCE student Maleeha Khan won first position at the 4th International Conference on Education 2025, organised by IOBM. Her research on water conservation in schools studied how awareness campaigns help save water, supervised by Prof. Shagufta Khokhar.',
   },
   {
     slug: 'fatima-siddiqui',
-    title: 'Fatima Siddiqui — 4th International Conference on Education 2025',
+    title: 'Fatima Siddiqui, 4th International Conference on Education 2025',
     rank: '2nd Position',
     detail:
       'GCE student Fatima Siddiqui secured second position at the 4th International Conference on Education 2025 (IOBM), a proud reflection of the college\'s research culture.',
@@ -45,9 +45,9 @@ export const honours: Honour[] = [
   {
     slug: 'pakistan-day-quiz',
     title: 'Pakistan Day Quiz 2025',
-    rank: '1st — beating 19 teams',
+    rank: '1st, beating 19 teams',
     detail:
-      'GCE won first place in the Pakistan Day Quiz 2025, outperforming 19 other teams — a standout display of knowledge and teamwork.',
+      'GCE won first place in the Pakistan Day Quiz 2025, outperforming 19 other teams, a standout display of knowledge and teamwork.',
   },
   {
     slug: 'basketball',
@@ -63,7 +63,7 @@ export const honours: Honour[] = [
   },
   {
     slug: 'tug-of-war',
-    title: 'Tug of War — 6th Sindh Games 2024',
+    title: 'Tug of War, 6th Sindh Games 2024',
     rank: '3rd Position',
     detail: 'GCE secured third position in Tug of War at the 6th Sindh Games 2024, contested at district Central level.',
   },
@@ -83,7 +83,7 @@ export const conference = {
   theme: 'Embracing Educational Change',
   venue: 'IT Zone, GCE',
   summary:
-    "GCE hosted its first-ever International Conference — ICEEC 2025 — on 5 January 2025, organised by the DG Colleges Sindh in collaboration with Government College of Education. Themed \"Embracing Educational Change\", the conference focused on integrating emerging technologies into teaching and learning, and brought together teachers, students and guests, with a Zoom link for online participants.",
+    "GCE hosted its first-ever International Conference, ICEEC 2025, on 5 January 2025, organised by the DG Colleges Sindh in collaboration with Government College of Education. Themed \"Embracing Educational Change\", the conference focused on integrating emerging technologies into teaching and learning, and brought together teachers, students and guests, with a Zoom link for online participants.",
   keynotes: [
     { name: 'Prof. Dr. Navaid Rab Siddiqui', role: 'Director General, Colleges Sindh', topic: 'Embracing Educational Change: What? Why? and How?' },
     { name: 'Dr. Naim Syed', role: 'Founder & President, iQera (USA)', topic: 'AI in Education' },
@@ -93,11 +93,11 @@ export const conference = {
   panel: {
     topic: 'The Future of College Education: Empowering Learners through AI and Emerging Technologies',
     panelists: [
-      'Mr. Asif Ikram — Secretary, College Education Department, Govt. of Sindh',
-      'Dr. Fauzia Shamim — Chief Academic Officer, Durbeen',
-      'Dr. Sajid Ali — Director, Research & Policy Studies, AKU-IED',
+      'Mr. Asif Ikram, Secretary, College Education Department, Govt. of Sindh',
+      'Dr. Fauzia Shamim, Chief Academic Officer, Durbeen',
+      'Dr. Sajid Ali, Director, Research & Policy Studies, AKU-IED',
     ],
-    moderator: 'Dr. Sarwat Nauman — CEO, Formative Academy for Higher Education and Management',
+    moderator: 'Dr. Sarwat Nauman, CEO, Formative Academy for Higher Education and Management',
   },
   stats: [
     { value: '3', label: 'Oral presentation rounds' },
