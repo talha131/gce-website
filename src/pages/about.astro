@@ -8,6 +8,7 @@ import UrduBlock from '@/components/UrduBlock.astro';
 import { site } from '@/data/site';
 import { history, mission, vision, principal, anthemAndDua } from '@/data/about';
 import { getSingle } from '@/lib/images';
+import uokLogo from '@/assets/brand/uok-logo.png';
 
 const principalPhoto = getSingle('principal', 'principal');
 const { collegeAnthem, dua, nationalAnthem } = anthemAndDua;
@@ -44,6 +45,22 @@ const { collegeAnthem, dua, nationalAnthem } = anthemAndDua;
           </li>
         ))}
       </ol>
+    </div>
+  </Section>
+
+  <!-- ======================================================= AFFILIATION -->
+  <Section kicker="Affiliation" title="Affiliated with the University of Karachi">
+    <div class="card p-8 grid gap-8 sm:grid-cols-[auto_1fr] items-center" data-reveal>
+      <a href="https://uok.edu.pk" target="_blank" rel="noopener" class="shrink-0 mx-auto">
+        <Image src={uokLogo} alt="University of Karachi logo" width={140} height={140} class="h-28 w-28 object-contain" />
+      </a>
+      <div>
+        <p class="text-ink-soft leading-relaxed">
+          Government College of Education is officially affiliated with the
+          <a href="https://uok.edu.pk" target="_blank" rel="noopener" class="font-semibold text-brand underline underline-offset-2 hover:text-brand-deep">University of Karachi</a>,
+          and follows its academic standards, curriculum and examination regulations. Our degrees are awarded under the University's charter.
+        </p>
+      </div>
     </div>
   </Section>
 
