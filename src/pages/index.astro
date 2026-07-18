@@ -11,14 +11,9 @@ import { programs } from '@/data/programs';
 import { facilities } from '@/data/facilities';
 import { principal, testimonials } from '@/data/about';
 import { conference } from '@/data/achievements';
-import { getCover, getSingle } from '@/lib/images';
+import { getSingle } from '@/lib/images';
 
-const heroImages = [
-  { img: getCover('facilities', 'it-zone'), alt: 'The IT Zone events hall at GCE' },
-  { img: getCover('events', 'orientation-day'), alt: 'Students on Orientation Day' },
-  { img: getCover('facilities', 'library'), alt: 'The GCE library' },
-].filter((h) => h.img);
-
+const homeHero = getSingle('heroes', 'home');
 const principalPhoto = getSingle('principal', 'principal');
 const featuredFacilities = ['it-zone', 'library', 'counseling-centre', 'micro-teaching-lab', 'ict-lab', 'sports']
   .map((s) => facilities.find((f) => f.slug === s)!)
@@ -52,17 +47,11 @@ const featuredFacilities = ['it-zone', 'library', 'counseling-centre', 'micro-te
           </div>
         </div>
 
-        <!-- Photo collage with gentle parallax -->
-        {heroImages.length === 3 && (
-          <div class="hero-collage relative hidden sm:grid grid-cols-2 gap-4" data-parallax-group>
-            <div class="rounded-[var(--radius-lg)] overflow-hidden shadow-lift row-span-2 aspect-[3/4] ring-1 ring-white/10" data-parallax="0.04">
-              <Image src={heroImages[0].img!} alt={heroImages[0].alt} widths={[400, 700]} sizes="40vw" class="h-full w-full object-cover" loading="eager" />
-            </div>
-            <div class="rounded-[var(--radius-lg)] overflow-hidden shadow-lift aspect-[4/3] ring-1 ring-white/10" data-parallax="0.09">
-              <Image src={heroImages[1].img!} alt={heroImages[1].alt} widths={[400, 600]} sizes="40vw" class="h-full w-full object-cover" loading="eager" />
-            </div>
-            <div class="rounded-[var(--radius-lg)] overflow-hidden shadow-lift aspect-[4/3] ring-1 ring-white/10" data-parallax="0.06">
-              <Image src={heroImages[2].img!} alt={heroImages[2].alt} widths={[400, 600]} sizes="40vw" class="h-full w-full object-cover" loading="lazy" />
+        <!-- Single hero image -->
+        {homeHero && (
+          <div class="hero-collage relative hidden sm:block">
+            <div class="rounded-[var(--radius-lg)] overflow-hidden shadow-lift ring-1 ring-white/10 aspect-[4/3]">
+              <Image src={homeHero} alt="Government College of Education, Karachi" widths={[600, 900, 1280]} sizes="45vw" class="h-full w-full object-cover" loading="eager" />
             </div>
           </div>
         )}
