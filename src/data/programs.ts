@@ -37,6 +37,26 @@ export const programs: Program[] = [
       'Students go on Teaching Practicum twice — in the second year (3rd & 4th semesters) and the fourth year (7th & 8th semesters). In the 3rd semester they deliver 12 lessons and in the 4th, 20 lessons; the 7th and 8th semesters require 24 lessons. Second-year students prepare a growth portfolio and final-year students a professional portfolio.',
   },
   {
+    slug: 'bs-education',
+    name: 'BS Education',
+    shortName: 'BS Education',
+    shift: 'Morning',
+    duration: '4 Years',
+    semesters: 8,
+    entry: 'At least 45% marks in Intermediate',
+    tagline: 'A four-year Bachelor of Studies in Education grounding future educators in theory and practice.',
+    overview: [
+      'A four-year degree programme spread across eight semesters.',
+      'Open to students with at least 45% marks at Intermediate level.',
+      'Combines a broad education foundation with professional teaching preparation.',
+      'Students engage with both subject content and modern pedagogy.',
+      'Prepares graduates for teaching careers and further study in education.',
+    ],
+    practicum:
+      'Students undertake supervised teaching practice in schools during the programme, applying classroom methods learned at the college.',
+    isFiller: true,
+  },
+  {
     slug: 'bed-2-5-year-morning',
     name: 'B.Ed 2.5-Year (Morning)',
     shortName: 'B.Ed 2.5-Year',
@@ -75,26 +95,6 @@ export const programs: Program[] = [
     ],
     practicum:
       'Students go on Teaching Practicum in the fifth semester for one month and prepare a professional portfolio.',
-  },
-  {
-    slug: 'bs-education',
-    name: 'BS Education',
-    shortName: 'BS Education',
-    shift: 'Morning',
-    duration: '4 Years',
-    semesters: 8,
-    entry: 'At least 45% marks in Intermediate',
-    tagline: 'A four-year Bachelor of Studies in Education grounding future educators in theory and practice.',
-    overview: [
-      'A four-year degree programme spread across eight semesters.',
-      'Open to students with at least 45% marks at Intermediate level.',
-      'Combines a broad education foundation with professional teaching preparation.',
-      'Students engage with both subject content and modern pedagogy.',
-      'Prepares graduates for teaching careers and further study in education.',
-    ],
-    practicum:
-      'Students undertake supervised teaching practice in schools during the programme, applying classroom methods learned at the college.',
-    isFiller: true,
   },
 ];
 
