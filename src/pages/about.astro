@@ -49,25 +49,35 @@ const { collegeAnthem, dua, nationalAnthem } = anthemAndDua;
 
   <!-- =================================================== MISSION & VISION -->
   <Section tone="tint" kicker="Purpose" title="Mission &amp; Vision" center>
-    <div class="grid lg:grid-cols-2 gap-6">
-      <Reveal class="card p-8 h-full">
-        <h3 class="!text-2xl">Mission</h3>
-        <p class="mt-4 text-ink-soft leading-relaxed">{mission.en}</p>
-        <div lang="ur" dir="rtl" class="mt-6 pt-6 border-t border-line text-xl text-ink !leading-[2.4]">
-          <p class="text-gold-deep text-lg mb-2">مقصد</p>
-          {mission.ur}
-        </div>
-      </Reveal>
-      <Reveal delay={120} class="card p-8 h-full">
-        <h3 class="!text-2xl">Vision</h3>
-        <div class="mt-4 space-y-3 text-ink-soft leading-relaxed">
-          {vision.en.map((p) => <p>{p}</p>)}
-        </div>
-        <div lang="ur" dir="rtl" class="mt-6 pt-6 border-t border-line text-xl text-ink !leading-[2.4]">
-          <p class="text-gold-deep text-lg mb-2">نقطۂ نظر</p>
-          {vision.ur}
-        </div>
-      </Reveal>
+    <div class="grid lg:grid-cols-2 gap-6 items-start">
+      <!-- Mission -->
+      <div class="flex flex-col gap-4">
+        <Reveal class="card p-8">
+          <h3 class="!text-2xl">Mission</h3>
+          <p class="mt-4 text-ink-soft leading-relaxed">{mission.en}</p>
+        </Reveal>
+        <Reveal delay={80} class="card p-8">
+          <div lang="ur" dir="rtl">
+            <p class="text-gold-deep text-lg mb-2">مقصد</p>
+            <p class="text-xl text-ink !leading-[2.4]">{mission.ur}</p>
+          </div>
+        </Reveal>
+      </div>
+      <!-- Vision -->
+      <div class="flex flex-col gap-4">
+        <Reveal delay={120} class="card p-8">
+          <h3 class="!text-2xl">Vision</h3>
+          <div class="mt-4 space-y-3 text-ink-soft leading-relaxed">
+            {vision.en.map((p) => <p>{p}</p>)}
+          </div>
+        </Reveal>
+        <Reveal delay={200} class="card p-8">
+          <div lang="ur" dir="rtl">
+            <p class="text-gold-deep text-lg mb-2">نقطۂ نظر</p>
+            <p class="text-xl text-ink !leading-[2.4]">{vision.ur}</p>
+          </div>
+        </Reveal>
+      </div>
     </div>
   </Section>
 
