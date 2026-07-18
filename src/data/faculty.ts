@@ -9,6 +9,8 @@ export interface Person {
   folder: string;
   title?: string;
   quals: string[];
+  /** CSS object-position for the card photo, e.g. 'top' or 'center 25%'. Set only where the default centre crop clips the face. */
+  focus?: string;
 }
 
 /** Teaching faculty, Education Department. */

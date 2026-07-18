@@ -20,6 +20,7 @@ const photo = getSingle('faculty', person.folder);
         widths={[240, 380]}
         sizes="(min-width:1024px) 22vw, (min-width:640px) 45vw, 90vw"
         class="h-full w-full object-cover"
+        style={person.focus ? `object-position:${person.focus}` : undefined}
         loading="lazy"
       />
     ) : (
