@@ -5,7 +5,7 @@ import PageHero from '@/components/PageHero.astro';
 import Section from '@/components/Section.astro';
 import Gallery from '@/components/Gallery.astro';
 import { events, eventBySlug } from '@/data/events';
-import { getGallery } from '@/lib/images';
+import { getGallery, getSingle } from '@/lib/images';
 
 export const getStaticPaths = (() =>
   events.map((e) => ({ params: { slug: e.slug } }))) satisfies GetStaticPaths;
@@ -13,11 +13,12 @@ export const getStaticPaths = (() =>
 const { slug } = Astro.params;
 const event = eventBySlug(slug!)!;
 const images = getGallery('events', event.slug);
+const hero = getSingle('heroes', event.slug);
 const related = events.filter((e) => e.group === event.group && e.slug !== event.slug).slice(0, 4);
 ---
 
 <Layout title={event.name} description={event.blurb}>
-  <PageHero kicker={event.group} title={event.name} lead={event.blurb}>
+  <PageHero kicker={event.group} title={event.name} lead={event.blurb} image={hero} imageAlt={event.name}>
     {event.date && <span class="mt-6 inline-block text-sm font-semibold px-3 py-1.5 rounded-full bg-white/10 text-gold-bright">{event.date}</span>}
   </PageHero>
 
