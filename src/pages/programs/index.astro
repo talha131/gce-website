@@ -29,7 +29,7 @@ import { site } from '@/data/site';
       <table class="w-full min-w-[640px] border-collapse text-left">
         <thead>
           <tr class="text-sm text-ink-soft">
-            <th class="py-3 pr-4 font-semibold">Program</th>
+            <th class="py-3 pl-4 pr-4 font-semibold">Program</th>
             <th class="py-3 px-4 font-semibold">Shift</th>
             <th class="py-3 px-4 font-semibold">Duration</th>
             <th class="py-3 px-4 font-semibold">Semesters</th>
@@ -39,7 +39,7 @@ import { site } from '@/data/site';
         <tbody class="align-top">
           {programs.map((p) => (
             <tr class="border-t border-line bg-surface">
-              <td class="py-4 pr-4">
+              <td class="py-4 pl-4 pr-4">
                 <a href={`/programs/${p.slug}`} class="font-display font-semibold text-brand-deep hover:text-brand">{p.name}</a>
               </td>
               <td class="py-4 px-4 text-ink-soft">{p.shift}</td>
@@ -51,7 +51,7 @@ import { site } from '@/data/site';
         </tbody>
       </table>
     </div>
-    <p class="mt-6 text-sm text-ink-soft" data-reveal>
+    <p class="mt-6 inline-block rounded-[var(--radius-sm)] bg-gold/15 px-4 py-3 text-sm font-semibold text-brand-deep" data-reveal>
       All programs are affiliated with the {site.affiliation}. Admissions open every November.
     </p>
   </Section>
