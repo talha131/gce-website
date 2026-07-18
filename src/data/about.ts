@@ -36,7 +36,7 @@ export const principal = {
   // NOTE: Placeholder draft — the college will supply the final message later.
   isFiller: true,
   message: [
-    "For over seven decades, Government College of Education has carried a singular responsibility — to prepare the teachers who shape our nation's future. It is a duty we hold with both pride and humility.",
+    "For over seven decades, Government College of Education has carried a singular responsibility: to prepare the teachers who shape our nation's future. It is a duty we hold with both pride and humility.",
     'When a student joins us, we do not merely train them to teach; we nurture educators who are competent, compassionate, and committed to the communities they will serve. Our classrooms, laboratories, and resource centres exist for one purpose: to bridge sound theory with confident practice.',
     'I warmly invite you to become part of a legacy that began in 1953 and continues, stronger than ever, today. Together, let us keep striving hard to educate the nation.',
   ],
