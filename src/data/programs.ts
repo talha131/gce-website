@@ -74,7 +74,7 @@ export const programs: Program[] = [
       'GCE faculty teach so thoroughly that extra tuition is not required.',
     ],
     practicum:
-      'Students go on Teaching Practicum in the fifth semester for one month and prepare a professional portfolio.',
+      'Students go on Teaching Practicum in the fifth semester for one month, delivering 40 lessons in secondary sections, and prepare a professional portfolio.',
   },
   {
     slug: 'bed-2-5-year-evening',
@@ -94,7 +94,7 @@ export const programs: Program[] = [
       'GCE faculty teach so thoroughly that extra tuition is not required.',
     ],
     practicum:
-      'Students go on Teaching Practicum in the fifth semester for one month and prepare a professional portfolio.',
+      'Students go on Teaching Practicum in the fifth semester for one month, delivering 40 lessons in secondary sections, and prepare a professional portfolio.',
   },
 ];
 
