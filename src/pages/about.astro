@@ -9,6 +9,7 @@ import { site } from '@/data/site';
 import { history, mission, vision, principal, anthemAndDua } from '@/data/about';
 import { getSingle } from '@/lib/images';
 import uokLogo from '@/assets/brand/uok-logo.png';
+import collage from '@/assets/leadership-collage.jpg';
 
 const principalPhoto = getSingle('principal', 'principal');
 const { collegeAnthem, dua, nationalAnthem } = anthemAndDua;
@@ -131,6 +132,25 @@ const { collegeAnthem, dua, nationalAnthem } = anthemAndDua;
         )}
       </Reveal>
     </div>
+  </Section>
+
+  <!-- ============================================ LEADERSHIP THROUGH YEARS -->
+  <Section
+    tone="tint"
+    kicker="Our Principals"
+    title="Leadership Through the Years"
+    lead="Celebrating the distinguished principals whose vision and dedication have shaped the legacy of Government College of Education."
+  >
+    <figure class="card overflow-hidden p-4 md:p-6" data-reveal>
+      <Image
+        src={collage}
+        alt="The principals of Government College of Education from 1952 to the present, with their names and years of service."
+        widths={[640, 960, 1280, 1500]}
+        sizes="(min-width:1024px) 60vw, 100vw"
+        class="mx-auto w-full max-w-3xl h-auto rounded-[var(--radius-sm)]"
+        loading="lazy"
+      />
+    </figure>
   </Section>
 
   <!-- ===================================================== ANTHEM & DUA -->
