@@ -45,6 +45,7 @@ export const facilities: Facility[] = [
     slug: 'teachers-resource-centre',
     name: "Teachers' Resource Centre",
     category: 'Academic',
+    badge: 'Modern Pedagogy',
     blurb: 'A collaborative space for designing, adapting and sharing high-quality teaching aids and learning resources.',
     body: [
       "The Teachers' Resource Centre enhances teaching effectiveness through the development, use and sharing of high-quality teaching and learning resources, aligned with curriculum goals and modern pedagogy.",
@@ -57,6 +58,7 @@ export const facilities: Facility[] = [
     slug: 'classrooms',
     name: 'Classrooms',
     category: 'Academic',
+    badge: 'Interactive Learning',
     blurb: 'Spacious, well-lit rooms with audio systems and a presentation dais in every class.',
     body: [
       'Our classrooms comfortably accommodate up to 100 students and are equipped with microphones for clear communication.',
@@ -79,6 +81,7 @@ export const facilities: Facility[] = [
     slug: 'ict-lab',
     name: 'ICT Lab',
     category: 'Labs',
+    badge: '16 Workstations',
     blurb: 'An organised computer lab with 16 systems, projector and printing — the hub for digital skills.',
     body: [
       'The ICT Lab houses 16 computers (including four SSD systems), a scanner and two printers for study and office work, and a projector for presentations and teaching.',
@@ -90,6 +93,7 @@ export const facilities: Facility[] = [
     slug: 'bio-lab',
     name: 'Biology Lab',
     category: 'Labs',
+    badge: 'Hands-on Learning',
     blurb: 'A well-equipped biology lab with microscopes, models, specimens and space for 30 students.',
     body: [
       'The GCE Biology Lab is well equipped for practical learning, with a whiteboard, charts and biology models used to teach concepts.',
@@ -113,6 +117,7 @@ export const facilities: Facility[] = [
     slug: 'physics-lab',
     name: 'Physics Lab',
     category: 'Labs',
+    badge: 'Practical Experiments',
     blurb: 'A well-organised physics lab with mechanical, electrical and optical instruments for 30–35 students.',
     body: [
       'The Physics Lab is well organised and equipped with mechanical, electrical and optical instruments for experiments and activities, along with a whiteboard for explanations.',
@@ -124,6 +129,7 @@ export const facilities: Facility[] = [
     slug: 'science-education-centre',
     name: 'Science Education Centre',
     category: 'Labs',
+    badge: 'Advanced Equipment',
     blurb: 'A science facility equipped with higher-level machinery for advanced practical work.',
     body: [
       'The Science Education Centre is equipped with higher-level machinery to support advanced scientific practical work at the college.',
@@ -134,6 +140,7 @@ export const facilities: Facility[] = [
     slug: 'podcast-studio',
     name: 'Podcast Studio',
     category: 'Labs',
+    badge: 'Content Creation',
     blurb: 'A well-equipped studio for recording podcasts and educational videos.',
     body: [
       'GCE has a well-equipped podcast studio inside the college for recording podcasts and other videos in a peaceful, comfortable environment.',
@@ -157,6 +164,7 @@ export const facilities: Facility[] = [
     slug: 'girls-common-room',
     name: "Girls' Common Room",
     category: 'Student Support',
+    badge: 'Dedicated Facility',
     blurb: 'A dedicated common room for girls, with a prayer room, sick room and attached washroom.',
     body: [
       'The Girls\' Common Room is dedicated to Prof. Nishat Sumbul, who served as the Discipline Committee In-charge and looked after girls\' issues with great dedication. The room was officially dedicated to her name in 2020 in recognition of her services.',
@@ -168,6 +176,7 @@ export const facilities: Facility[] = [
     slug: 'first-aid',
     name: 'First-Aid Facility',
     category: 'Student Support',
+    badge: 'Health & Safety',
     blurb: 'A stocked first-aid kit for quick help — so students and staff always feel safe.',
     body: [
       'GCE maintains a first-aid facility for students and staff, stocked with basic pain-relief medicine, bandages, and items for both bleeding injuries and muscle or bone pain.',
@@ -178,6 +187,7 @@ export const facilities: Facility[] = [
     slug: 'fire-safety',
     name: 'Fire Safety',
     category: 'Student Support',
+    badge: 'Campus Safety',
     blurb: 'Fire extinguishers, blankets, buckets and alarms placed throughout the campus.',
     body: [
       'Fire-safety equipment is available across the college — fire extinguishers, fire blankets, fire buckets and fire alarms are placed in classrooms, corridors, labs and near the main entrance.',
@@ -212,6 +222,7 @@ export const facilities: Facility[] = [
     slug: 'lawns',
     name: 'Lawns',
     category: 'Grounds & Amenities',
+    badge: 'Green Campus',
     blurb: 'Green, shaded lawns across the campus — spaces to relax, study and take a breath.',
     body: [
       'The college has three to four well-maintained lawns spread across the campus. One large, open lawn faces the sports ground; another has a shady tree with seating beneath it; and one more sits near the photocopy shop.',
@@ -223,6 +234,7 @@ export const facilities: Facility[] = [
     slug: 'sports',
     name: 'Sports Facilities',
     category: 'Grounds & Amenities',
+    badge: 'Indoor & Outdoor',
     blurb: 'An open sports ground, an outdoor area and an indoor arena for a full range of games.',
     body: [
       'GCE\'s sports ground is a large open space with green grass, basketball and football nets, shaded seating for rest and spectators, and sports equipment for student use — ideal for physical-education classes, training and matches.',
@@ -234,6 +246,7 @@ export const facilities: Facility[] = [
     slug: 'parking',
     name: 'Parking Area',
     category: 'Grounds & Amenities',
+    badge: 'On-Campus Parking',
     blurb: 'Covered, organised on-campus parking that keeps vehicles safe from sun and rain.',
     body: [
       'A covered parking area inside the college lets staff and students park safely, with the roof protecting vehicles from sun and rain.',
@@ -244,6 +257,7 @@ export const facilities: Facility[] = [
     slug: 'photocopy-shop',
     name: 'Photocopy Shop',
     category: 'Grounds & Amenities',
+    badge: 'Printing Services',
     blurb: 'An on-campus shop for photocopies, printing, stationery and study materials.',
     body: [
       'A photocopy shop inside the college makes copies, printing and photos quick and easy to get without leaving campus.',
