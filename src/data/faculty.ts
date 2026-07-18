@@ -58,3 +58,16 @@ export const adminStaff: Person[] = [
   { name: 'Mr. Mahmood', folder: 'Mr_Mahmood', title: 'Support Staff', quals: [] },
   { name: 'Iftikhar Masih', folder: 'Iftikhar_Masih', title: 'Support Staff', quals: [] },
 ];
+
+/*
+ * Faculty and staff are displayed in alphabetical order by given name,
+ * ignoring the leading honorifics "Prof.", "Dr.", "Mr.", "Mrs." and "Ms."
+ * (so "Prof. Dr. Ahmed Hussain Kolachi" sorts under "A"). "Syed"/"Syeda" are
+ * part of the name, not honorifics, so they sort under "S".
+ */
+const byName = (a: Person, b: Person) => {
+  const key = (n: string) => n.replace(/^(?:(?:Prof|Dr|Mr|Mrs|Ms)\.\s*)+/i, '');
+  return key(a.name).localeCompare(key(b.name));
+};
+educationDept.sort(byName);
+adminStaff.sort(byName);
