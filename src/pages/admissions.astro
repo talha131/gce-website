@@ -5,7 +5,9 @@ import Section from '@/components/Section.astro';
 import Reveal from '@/components/Reveal.astro';
 import { programs } from '@/data/programs';
 import { site } from '@/data/site';
+import { getSingle } from '@/lib/images';
 
+const hero = getSingle('heroes', 'admissions');
 const steps = [
   'Visit the college and collect your admission form from the admin office, where staff will guide you through the programs and semesters.',
   'A date is set for the entry test or interview.',
@@ -34,6 +36,8 @@ const documents = [
     kicker="Admissions"
     title="Your journey into <span class='accent-italic !text-gold-bright'>teaching</span> starts here"
     lead="An annual intake for all four programs. Simple, guided, and open to aspiring educators."
+    image={hero}
+    imageAlt="Government College of Education entrance"
   />
 
   <!-- Prominent November callout -->

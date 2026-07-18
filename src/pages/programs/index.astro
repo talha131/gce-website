@@ -5,6 +5,9 @@ import Section from '@/components/Section.astro';
 import ProgramCard from '@/components/ProgramCard.astro';
 import { programs } from '@/data/programs';
 import { site } from '@/data/site';
+import { getSingle } from '@/lib/images';
+
+const hero = getSingle('heroes', 'programs');
 ---
 
 <Layout
@@ -15,6 +18,8 @@ import { site } from '@/data/site';
     kicker="Academic Programs"
     title="Degrees that build <span class='accent-italic !text-gold-bright'>confident teachers</span>"
     lead="Professional, University of Karachi–affiliated programs combining subject content, modern pedagogy and real classroom practicum."
+    image={hero}
+    imageAlt="Government College of Education campus"
   />
 
   <Section space="md">

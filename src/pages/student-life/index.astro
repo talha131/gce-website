@@ -4,6 +4,9 @@ import PageHero from '@/components/PageHero.astro';
 import Section from '@/components/Section.astro';
 import EventCard from '@/components/EventCard.astro';
 import { events, eventGroups } from '@/data/events';
+import { getSingle } from '@/lib/images';
+
+const hero = getSingle('heroes', 'student-life');
 ---
 
 <Layout
@@ -14,6 +17,9 @@ import { events, eventGroups } from '@/data/events';
     kicker="Student Life"
     title="More than a <span class='accent-italic !text-gold-bright'>classroom</span>"
     lead="Celebrations, national days, workshops, seminars, competitions and quizzes — GCE's calendar is alive with events that build confidence, character and community."
+    image={hero}
+    imageAlt="GCE students group photo"
+    imagePosition="center 70%"
   />
 
   {eventGroups.map((group, gi) => {

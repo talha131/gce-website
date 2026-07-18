@@ -4,6 +4,9 @@ import PageHero from '@/components/PageHero.astro';
 import Section from '@/components/Section.astro';
 import FacultyCard from '@/components/FacultyCard.astro';
 import { educationDept, adminStaff } from '@/data/faculty';
+import { getSingle } from '@/lib/images';
+
+const hero = getSingle('heroes', 'faculty');
 ---
 
 <Layout
@@ -14,6 +17,9 @@ import { educationDept, adminStaff } from '@/data/faculty';
     kicker="Faculty & Staff"
     title="The people who <span class='accent-italic !text-gold-bright'>shape teachers</span>"
     lead="A dedicated Education Department and administrative team — qualified, experienced, and committed to every student."
+    image={hero}
+    imageAlt="GCE faculty and staff group photo"
+    imagePosition="center 70%"
   />
 
   <Section kicker="Education Department" title="Teaching faculty" space="md">
