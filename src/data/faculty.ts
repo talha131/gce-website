@@ -13,6 +13,15 @@ export interface Person {
   focus?: string;
 }
 
+/**
+ * Faculty & Staff sub-pages, in menu order. Drives SectionNav.
+ * Teaching faculty is the /faculty landing (no overview hub).
+ */
+export const facultyNav = [
+  { label: 'Faculty', href: '/faculty' },
+  { label: 'Administrative Staff', href: '/faculty/administrative-staff' },
+] as const;
+
 /** Teaching faculty, Education Department. */
 export const educationDept: Person[] = [
   { name: 'Prof. Dr. Ahmed Hussain Kolachi', folder: 'Prof_Dr_Ahmed_Hussain_Kolachi', quals: ['Ph.D. (Sindhi)', 'B.Ed.'] },
