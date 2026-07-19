@@ -21,7 +21,11 @@ const { kicker, title, lead, align = 'left', image, imageAlt = '', imagePosition
   {image ? (
     <>
       <Image src={image} alt={imageAlt} widths={[768, 1280, 1920]} sizes="100vw" class="absolute inset-0 h-full w-full object-cover" style={`object-position:${imagePosition}`} loading="eager" />
-      <div class="absolute inset-0 bg-gradient-to-b from-brand-950/85 via-brand-950/70 to-brand-950/85" aria-hidden="true"></div>
+      {/* Vertical scrim: a touch dark at top (keeps the transparent header legible)
+         and bottom, but mostly clear through the middle so the photo reads. */}
+      <div class="absolute inset-0 bg-gradient-to-b from-brand-950/65 via-brand-950/10 to-brand-950/50" aria-hidden="true"></div>
+      {/* Horizontal scrim on the left, where the (always left-aligned) title sits. */}
+      <div class="absolute inset-0 bg-gradient-to-r from-brand-950/65 via-brand-950/15 to-transparent" aria-hidden="true"></div>
     </>
   ) : (
     <>
