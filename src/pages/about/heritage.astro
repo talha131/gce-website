@@ -4,6 +4,7 @@ import PageHero from '@/components/PageHero.astro';
 import SectionNav from '@/components/SectionNav.astro';
 import Section from '@/components/Section.astro';
 import UrduBlock from '@/components/UrduBlock.astro';
+import AudioPlayer from '@/components/AudioPlayer.astro';
 import { aboutNav, anthemAndDua } from '@/data/about';
 
 const { collegeAnthem, dua, nationalAnthem } = anthemAndDua;
@@ -25,8 +26,8 @@ const { collegeAnthem, dua, nationalAnthem } = anthemAndDua;
       <UrduBlock {...dua} />
       <UrduBlock {...nationalAnthem} />
     </div>
-    <div class="mt-8 text-center" data-reveal>
-      <p class="text-white/60 text-sm">The recorded college anthem is available from the college on request.</p>
+    <div class="mt-10" data-reveal>
+      <AudioPlayer src="/media/college-anthem.mp3" title="College Anthem" downloadName="GCE-College-Anthem.mp3" />
     </div>
   </Section>
 </Layout>
