@@ -7,7 +7,6 @@ import Section from '@/components/Section.astro';
 import Reveal from '@/components/Reveal.astro';
 import { aboutNav, principal } from '@/data/about';
 import { getSingle } from '@/lib/images';
-import collage from '@/assets/leadership-collage.jpg';
 
 const principalPhoto = getSingle('principal', 'principal');
 ---
@@ -52,24 +51,5 @@ const principalPhoto = getSingle('principal', 'principal');
         )}
       </Reveal>
     </div>
-  </Section>
-
-  <!-- ============================================ LEADERSHIP THROUGH YEARS -->
-  <Section
-    tone="tint"
-    kicker="Our Principals"
-    title="Leadership Through the Years"
-    lead="Celebrating the distinguished principals whose vision and dedication have shaped the legacy of Government College of Education."
-  >
-    <figure class="card overflow-hidden p-4 md:p-6" data-reveal>
-      <Image
-        src={collage}
-        alt="The principals of Government College of Education from 1952 to the present, with their names and years of service."
-        widths={[640, 960, 1280, 1500]}
-        sizes="(min-width:1024px) 60vw, 100vw"
-        class="mx-auto w-full max-w-3xl h-auto rounded-[var(--radius-sm)]"
-        loading="lazy"
-      />
-    </figure>
   </Section>
 </Layout>
