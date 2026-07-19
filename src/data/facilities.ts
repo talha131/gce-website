@@ -273,4 +273,16 @@ export const facilityCategories = [
   'Grounds & Amenities',
 ] as const;
 
+/**
+ * Campus category sub-pages, in menu order. Drives SectionNav.
+ * Academic is the /campus landing (no overview hub); the rest are static pages
+ * that live alongside the facility-detail [slug] route.
+ */
+export const campusNav = [
+  { label: 'Academic', href: '/campus' },
+  { label: 'Labs', href: '/campus/labs' },
+  { label: 'Student Support', href: '/campus/student-support' },
+  { label: 'Grounds & Amenities', href: '/campus/grounds-amenities' },
+] as const;
+
 export const facilityBySlug = (slug: string) => facilities.find((f) => f.slug === slug);
