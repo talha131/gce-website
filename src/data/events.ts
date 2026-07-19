@@ -445,4 +445,16 @@ export const eventGroups: EventGroup[] = [
   'Competitions & Quizzes',
 ];
 
+/**
+ * Student Life group sub-pages, in menu order. Drives SectionNav.
+ * Celebrations & National Days is the /student-life landing (no overview hub);
+ * the rest are static pages that live alongside the event-detail [slug] route.
+ */
+export const studentLifeNav = [
+  { label: 'Celebrations & National Days', href: '/student-life' },
+  { label: 'Academics & Practicum', href: '/student-life/academics-practicum' },
+  { label: 'Workshops & Seminars', href: '/student-life/workshops-seminars' },
+  { label: 'Competitions & Quizzes', href: '/student-life/competitions-quizzes' },
+] as const;
+
 export const eventBySlug = (slug: string) => events.find((e) => e.slug === slug);
