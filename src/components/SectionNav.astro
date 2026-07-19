@@ -8,7 +8,8 @@ interface Item {
   href: string;
 }
 interface Props {
-  items: Item[];
+  /** readonly so `as const` nav arrays (e.g. aboutNav) pass without a copy. */
+  items: readonly Item[];
   /** Active pathname — pass Astro.url.pathname. */
   current: string;
   /** aria-label for the <nav>. */
