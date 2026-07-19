@@ -1,10 +1,12 @@
 /* About-page content: history, mission/vision, principal, anthem & dua, testimonials. */
 
-/** About section sub-pages, in menu order. Drives SectionNav. */
+/**
+ * About section sub-pages, in menu order. Drives SectionNav.
+ * Mission & Vision is the /about landing (no overview hub).
+ */
 export const aboutNav = [
-  { label: 'Overview', href: '/about' },
+  { label: 'Mission & Vision', href: '/about' },
   { label: 'History', href: '/about/history' },
-  { label: 'Mission & Vision', href: '/about/mission-vision' },
   { label: 'Leadership', href: '/about/leadership' },
   { label: 'Heritage', href: '/about/heritage' },
 ] as const;

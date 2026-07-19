@@ -13,11 +13,11 @@ const { collegeAnthem, dua, nationalAnthem } = anthemAndDua;
   title="Heritage"
   description="The college anthem, dua and national anthem of Government College of Education, Karachi — the poetry that opens every gathering, in Urdu."
 >
-  <PageHero size="compact" kicker="Heritage" title="Heritage" />
+  <PageHero size="compact" kicker="About GCE" title="Heritage" />
   <SectionNav items={aboutNav} current={Astro.url.pathname} label="About" />
 
   <!-- ===================================================== ANTHEM & DUA -->
-  <Section tone="brand" kicker="Heritage" title="Anthem &amp; Dua" center>
+  <Section tone="brand" title="Anthem &amp; Dua" center>
     <div class="grid lg:grid-cols-2 gap-6">
       <div class="lg:col-span-2">
         <UrduBlock {...collegeAnthem} />

@@ -3,43 +3,48 @@ import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
 import SectionNav from '@/components/SectionNav.astro';
 import Section from '@/components/Section.astro';
-import { site } from '@/data/site';
-import { aboutNav, history } from '@/data/about';
+import Reveal from '@/components/Reveal.astro';
+import { aboutNav, mission, vision } from '@/data/about';
 ---
 
 <Layout
-  title="About"
-  description="The history, mission, vision and leadership of Government College of Education, Karachi — training teachers since 1953, affiliated with the University of Karachi."
+  title="Mission & Vision"
+  description="The mission and vision of Government College of Education, Karachi — preparing competent, caring and ethical educators, presented in English and Urdu."
 >
-  <PageHero
-    kicker="About GCE"
-    title="Seven decades of <span class='accent-italic !text-gold-bright'>educating the nation</span>"
-    lead="From a 1953 training programme to a permanent home in Federal B Area, Government College of Education has produced more than 50,000 teachers."
-  />
+  <PageHero size="compact" kicker="About GCE" title="Mission &amp; Vision" />
   <SectionNav items={aboutNav} current={Astro.url.pathname} label="About" />
 
-  <!-- ====================================================== OVERVIEW HUB -->
-  <Section>
-    <div class="max-w-3xl" data-reveal>
-      <p class="text-lg text-ink-soft leading-relaxed">{history.paragraphs[2]}</p>
-      <div class="inline-flex items-center gap-3 mt-5 rounded-full bg-brand-tint px-4 py-2 text-sm font-semibold text-brand">
-        <span class="h-2 w-2 rounded-full bg-gold"></span>
-        Affiliated with the {site.affiliation}
+  <!-- =================================================== MISSION & VISION -->
+  <Section tone="tint">
+    <div class="grid lg:grid-cols-2 gap-6 items-start">
+      <!-- Mission -->
+      <div class="flex flex-col gap-4">
+        <Reveal class="card p-8">
+          <h3 class="!text-2xl">Mission</h3>
+          <p class="mt-4 text-ink-soft leading-relaxed">{mission.en}</p>
+        </Reveal>
+        <Reveal delay={80} class="card p-8">
+          <div lang="ur" dir="rtl">
+            <p class="text-gold-deep text-lg mb-2">مقصد</p>
+            <p class="text-xl text-ink !leading-[2.4]">{mission.ur}</p>
+          </div>
+        </Reveal>
       </div>
-    </div>
-
-    <div class="mt-10 grid gap-6 sm:grid-cols-2">
-      {aboutNav.slice(1).map((item, i) => (
-        <a
-          href={item.href}
-          class="card card-hover p-7 flex items-center justify-between gap-4 group"
-          data-reveal
-          style={`--reveal-delay:${i * 80}ms`}
-        >
-          <span class="font-display text-xl text-brand-deep">{item.label}</span>
-          <span class="text-gold shrink-0 text-2xl transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
-        </a>
-      ))}
+      <!-- Vision -->
+      <div class="flex flex-col gap-4">
+        <Reveal delay={120} class="card p-8">
+          <h3 class="!text-2xl">Vision</h3>
+          <div class="mt-4 space-y-3 text-ink-soft leading-relaxed">
+            {vision.en.map((p) => <p>{p}</p>)}
+          </div>
+        </Reveal>
+        <Reveal delay={200} class="card p-8">
+          <div lang="ur" dir="rtl">
+            <p class="text-gold-deep text-lg mb-2">نقطۂ نظر</p>
+            <p class="text-xl text-ink !leading-[2.4]">{vision.ur}</p>
+          </div>
+        </Reveal>
+      </div>
     </div>
   </Section>
 </Layout>
