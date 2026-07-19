@@ -1,0 +1,71 @@
+---
+/* Accessible audio player: a big Play/Pause button + a big Download button.
+   The file is never fetched until the visitor presses play (preload="none"),
+   so it never blocks or slows the initial page load. Degrades without JS: the
+   native <audio controls> and the download link both work on their own. */
+interface Props {
+  /** Absolute path under /public, e.g. '/media/college-anthem.mp3'. */
+  src: string;
+  /** Accessible label for the track, e.g. 'College Anthem'. */
+  title: string;
+  /** Suggested download filename. */
+  downloadName?: string;
+}
+const { src, title, downloadName = 'college-anthem.mp3' } = Astro.props;
+---
+
+<div class="card p-6 md:p-7 max-w-xl mx-auto" data-audio>
+  <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+    <button
+      type="button"
+      class="btn btn-gold !px-7 !py-4 !text-base flex-1 justify-center"
+      data-audio-toggle
+      aria-label={`Play the ${title}`}
+    >
+      <svg class="icon-play" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="icon-pause hidden" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+      <span class="audio-label">Play the anthem</span>
+    </button>
+
+    <a
+      href={src}
+      download={downloadName}
+      class="btn btn-ghost !px-7 !py-4 !text-base flex-1 justify-center"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"/></svg>
+      Download
+    </a>
+  </div>
+
+  <audio data-audio-el preload="none" controls class="mt-5 w-full">
+    <source src={src} type="audio/mpeg" />
+    Your browser does not support the audio element.
+    <a href={src} download={downloadName}>Download the {title}</a>.
+  </audio>
+</div>
+
+<script>
+  // Wire the big custom button to the native <audio> element. Native controls
+  // stay as the scrubber + a no-JS fallback. No autoplay; the file loads only
+  // on the first play() call (preload="none").
+  document.querySelectorAll<HTMLElement>('[data-audio]').forEach((root) => {
+    const audio = root.querySelector<HTMLAudioElement>('[data-audio-el]');
+    const btn = root.querySelector<HTMLButtonElement>('[data-audio-toggle]');
+    if (!audio || !btn) return;
+    const playIcon = btn.querySelector('.icon-play');
+    const pauseIcon = btn.querySelector('.icon-pause');
+    const label = btn.querySelector('.audio-label');
+    const setPlaying = (playing: boolean) => {
+      playIcon?.classList.toggle('hidden', playing);
+      pauseIcon?.classList.toggle('hidden', !playing);
+      if (label) label.textContent = playing ? 'Pause' : 'Play the anthem';
+      btn.setAttribute('aria-label', playing ? 'Pause the anthem' : 'Play the anthem');
+    };
+    btn.addEventListener('click', () => {
+      if (audio.paused) audio.play(); else audio.pause();
+    });
+    audio.addEventListener('play', () => setPlaying(true));
+    audio.addEventListener('pause', () => setPlaying(false));
+    audio.addEventListener('ended', () => setPlaying(false));
+  });
+</script>
