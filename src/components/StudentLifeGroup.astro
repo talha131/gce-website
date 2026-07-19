@@ -1,0 +1,35 @@
+---
+/* One Student Life group rendered as a sub-page: a compact student-life hero,
+   the group-switcher SectionNav, and the grid of that group's event cards.
+   Shared by the four /student-life group pages (Celebrations & National Days is
+   the /student-life landing — there is deliberately no overview hub). */
+import PageHero from '@/components/PageHero.astro';
+import SectionNav from '@/components/SectionNav.astro';
+import Section from '@/components/Section.astro';
+import EventCard from '@/components/EventCard.astro';
+import { events, studentLifeNav, type EventGroup } from '@/data/events';
+import { getSingle } from '@/lib/images';
+
+interface Props {
+  group: EventGroup;
+}
+const { group } = Astro.props;
+const hero = getSingle('heroes', 'student-life');
+const items = events.filter((e) => e.group === group);
+---
+
+<PageHero
+  size="compact"
+  kicker="Student Life"
+  title={group}
+  image={hero}
+  imageAlt="GCE students group photo"
+  imagePosition="center 70%"
+/>
+<SectionNav items={studentLifeNav} current={Astro.url.pathname} label="Student Life" />
+
+<Section space="md">
+  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    {items.map((e, i) => <EventCard event={e} delay={(i % 3) * 70} />)}
+  </div>
+</Section>
