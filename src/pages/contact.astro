@@ -5,13 +5,11 @@ import Section from '@/components/Section.astro';
 import Reveal from '@/components/Reveal.astro';
 import { site, socials, transportRoutes } from '@/data/site';
 
-// Privacy-friendly OpenStreetMap embed centred on Federal B Area, Block 15.
-const lat = 24.9314;
-const lon = 67.0808;
-const d = 0.012;
-const bbox = `${lon - d}%2C${lat - d}%2C${lon + d}%2C${lat + d}`;
-const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat}%2C${lon}`;
-const mapLink = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=15/${lat}/${lon}`;
+// Google Maps embed for the campus (Block 15, Federal B Area). Coordinates
+// resolved from the college's Google Maps share link. `output=embed` is the
+// keyless embed endpoint; `mapLink` is the canonical share link for "Open in maps".
+const mapSrc = 'https://www.google.com/maps?q=24.9314275,67.0807754&z=16&hl=en&output=embed';
+const mapLink = 'https://maps.app.goo.gl/7eeCaKY1oFRzrdc59';
 ---
 
 <Layout
