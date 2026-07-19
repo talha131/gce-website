@@ -11,6 +11,10 @@ export interface Person {
   quals: string[];
   /** CSS object-position for the card photo, e.g. 'top' or 'center 25%'. Set only where the default centre crop clips the face. */
   focus?: string;
+  /** College email, rendered as a mailto link on the card. */
+  email?: string;
+  /** Personal website without protocol, e.g. 'talhamansoor.com'. */
+  website?: string;
 }
 
 /**
