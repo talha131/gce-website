@@ -1,0 +1,75 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import SectionNav from '@/components/SectionNav.astro';
+import Section from '@/components/Section.astro';
+import Reveal from '@/components/Reveal.astro';
+import { aboutNav, principal } from '@/data/about';
+import { getSingle } from '@/lib/images';
+import collage from '@/assets/leadership-collage.jpg';
+
+const principalPhoto = getSingle('principal', 'principal');
+---
+
+<Layout
+  title="Leadership"
+  description="A message from the Principal of Government College of Education, Karachi, and a tribute to the principals who have led the college since 1952."
+>
+  <PageHero size="compact" kicker="Leadership" title="Leadership" />
+  <SectionNav items={aboutNav} current={Astro.url.pathname} label="About" />
+
+  <!-- ================================================ PRINCIPAL TRIBUTE -->
+  <Section id="principal" kicker="From the Principal's Desk" title="A message from our Principal">
+    <div class="grid lg:grid-cols-[0.75fr_1.25fr] gap-10 lg:gap-14 items-start">
+      <Reveal>
+        <div class="card overflow-hidden">
+          {principalPhoto ? (
+            <Image src={principalPhoto} alt={`${principal.name}, Principal of GCE`} widths={[400, 640]} sizes="(min-width:1024px) 30vw, 80vw" class="w-full object-cover aspect-[4/5]" loading="lazy" />
+          ) : (
+            <div class="aspect-[4/5] bg-brand-tint grid place-items-center text-brand">Portrait</div>
+          )}
+          <div class="p-5 text-center">
+            <p class="font-display text-xl text-brand-deep">{principal.name}</p>
+            <p class="text-sm text-gold-deep font-semibold">{principal.title}</p>
+            <p class="mt-1 text-xs text-ink-soft">{principal.tenure}</p>
+          </div>
+        </div>
+      </Reveal>
+
+      <Reveal delay={120}>
+        <div class="space-y-5 text-lg text-ink leading-relaxed">
+          {principal.message.map((p) => <p>{p}</p>)}
+        </div>
+        <p class="mt-6 font-display text-xl text-brand-deep">— {principal.name}, Principal</p>
+        <p class="mt-8 text-sm text-ink-soft italic border-l-2 border-gold pl-4">
+          {principal.intro}
+        </p>
+        {principal.isFiller && (
+          <p class="mt-4 text-xs text-ink-soft/80">
+            Note: this message is a placeholder draft; the college will supply the final text.
+          </p>
+        )}
+      </Reveal>
+    </div>
+  </Section>
+
+  <!-- ============================================ LEADERSHIP THROUGH YEARS -->
+  <Section
+    tone="tint"
+    kicker="Our Principals"
+    title="Leadership Through the Years"
+    lead="Celebrating the distinguished principals whose vision and dedication have shaped the legacy of Government College of Education."
+  >
+    <figure class="card overflow-hidden p-4 md:p-6" data-reveal>
+      <Image
+        src={collage}
+        alt="The principals of Government College of Education from 1952 to the present, with their names and years of service."
+        widths={[640, 960, 1280, 1500]}
+        sizes="(min-width:1024px) 60vw, 100vw"
+        class="mx-auto w-full max-w-3xl h-auto rounded-[var(--radius-sm)]"
+        loading="lazy"
+      />
+    </figure>
+  </Section>
+</Layout>

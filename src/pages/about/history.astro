@@ -1,0 +1,57 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import SectionNav from '@/components/SectionNav.astro';
+import Section from '@/components/Section.astro';
+import { site } from '@/data/site';
+import { aboutNav, history } from '@/data/about';
+import UokLogo from '@/assets/brand/uok-logo.svg';
+---
+
+<Layout
+  title="History"
+  description="From a 1953 teacher-training programme to a permanent home in Federal B Area — the history of Government College of Education, Karachi, and its affiliation with the University of Karachi."
+>
+  <PageHero size="compact" kicker="Our Story" title="History" />
+  <SectionNav items={aboutNav} current={Astro.url.pathname} label="About" />
+
+  <!-- ========================================================= HISTORY -->
+  <Section kicker="Our Story" title="A history rooted in service">
+    <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-12">
+      <div class="space-y-5 text-lg text-ink-soft leading-relaxed" data-reveal>
+        {history.paragraphs.map((p) => <p>{p}</p>)}
+        <div class="inline-flex items-center gap-3 mt-2 rounded-full bg-brand-tint px-4 py-2 text-sm font-semibold text-brand">
+          <span class="h-2 w-2 rounded-full bg-gold"></span>
+          Affiliated with the {site.affiliation}
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <ol class="relative border-l-2 border-line pl-6 space-y-8">
+        {history.milestones.map((m, i) => (
+          <li class="relative" data-reveal style={`--reveal-delay:${i * 90}ms`}>
+            <span class="absolute -left-[1.95rem] top-1 h-4 w-4 rounded-full bg-gold ring-4 ring-cream"></span>
+            <p class="font-display text-2xl font-semibold text-brand">{m.year}</p>
+            <p class="mt-1 text-ink-soft">{m.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </Section>
+
+  <!-- ======================================================= AFFILIATION -->
+  <Section kicker="Affiliation" title="Affiliated with the University of Karachi">
+    <div class="card p-8 grid gap-8 sm:grid-cols-[auto_1fr] items-center" data-reveal>
+      <a href="https://uok.edu.pk" target="_blank" rel="noopener" class="shrink-0 mx-auto">
+        <UokLogo role="img" aria-label="University of Karachi logo" class="h-28 w-28" />
+      </a>
+      <div>
+        <p class="text-ink-soft leading-relaxed">
+          Government College of Education is officially affiliated with the
+          <a href="https://uok.edu.pk" target="_blank" rel="noopener" class="font-semibold text-brand underline underline-offset-2 hover:text-brand-deep">University of Karachi</a>,
+          and follows its academic standards, curriculum and examination regulations. Our degrees are awarded under the University's charter.
+        </p>
+      </div>
+    </div>
+  </Section>
+</Layout>
