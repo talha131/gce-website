@@ -228,3 +228,20 @@
   }
   [data-reveal] { opacity: 1 !important; transform: none !important; }
 }
+
+/* ------------------------------------------------- vertical rhythm --- */
+/* Tighten the gap between the hero (or its sticky section-nav) and the first
+   content section. Unlayered so it overrides Tailwind `py-*`; sets only the
+   top so section bottoms are intact. `.page-hero + section` handles heroes
+   with no nav (e.g. Contact); when a SectionNav is present it sits between
+   them, so `.section-nav + section` covers those pages instead. */
+.page-hero + section,
+.section-nav + section {
+  padding-top: 2.75rem;
+}
+@media (min-width: 768px) {
+  .page-hero + section,
+  .section-nav + section {
+    padding-top: 3.5rem;
+  }
+}

@@ -19,7 +19,7 @@ interface Props {
 const { kicker, title, lead, align = 'left', size = 'default', image, imageAlt = '', imagePosition = 'center' } = Astro.props;
 ---
 
-<section class="relative overflow-hidden bg-brand-950 text-white">
+<section class="page-hero relative overflow-hidden bg-brand-950 text-white">
   {image ? (
     <>
       <Image src={image} alt={imageAlt} widths={[768, 1280, 1920]} sizes="100vw" class="absolute inset-0 h-full w-full object-cover" style={`object-position:${imagePosition}`} loading="eager" />
