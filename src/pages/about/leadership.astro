@@ -32,6 +32,12 @@ const principalPhoto = getSingle('principal', 'principal');
             <p class="font-display text-xl text-brand-deep">{principal.name}</p>
             <p class="text-sm text-gold-deep font-semibold">{principal.title}</p>
             <p class="mt-1 text-xs text-ink-soft">{principal.tenure}</p>
+            {principal.email && (
+              <a href={`mailto:${principal.email}`} class="mt-2 inline-flex items-center gap-1.5 text-sm text-brand hover:text-brand-deep break-all">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                {principal.email}
+              </a>
+            )}
           </div>
         </div>
       </Reveal>

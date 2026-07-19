@@ -43,6 +43,7 @@ export const principal = {
   name: 'Prof. Zahoor Ahmed',
   title: 'Principal (BPS-20)',
   tenure: 'Over 31 years as teacher, principal and vice principal',
+  email: 'zahoor@gce.edu.pk',
   intro:
     'With his dynamic leadership, Prof. Zahoor Ahmed drives the college towards new heights of excellence in teacher education. He personally established the Micro-Teaching Lab and the Teachers’ Resource Centre.',
   // NOTE: Placeholder draft — the college will supply the final message later.
