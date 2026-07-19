@@ -1,5 +1,14 @@
 /* About-page content: history, mission/vision, principal, anthem & dua, testimonials. */
 
+/** About section sub-pages, in menu order. Drives SectionNav. */
+export const aboutNav = [
+  { label: 'Overview', href: '/about' },
+  { label: 'History', href: '/about/history' },
+  { label: 'Mission & Vision', href: '/about/mission-vision' },
+  { label: 'Leadership', href: '/about/leadership' },
+  { label: 'Heritage', href: '/about/heritage' },
+] as const;
+
 export const history = {
   paragraphs: [
     'In 1953, prompted by the need to empower school teachers, the Directorate of Education, Karachi initiated a training programme that laid the groundwork for a specialised college.',
