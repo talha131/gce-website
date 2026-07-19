@@ -16,9 +16,9 @@ const { title, titleEn, author, authorEn, couplets } = Astro.props;
     <span class="text-xs uppercase tracking-[0.14em] text-gold-deep font-semibold shrink-0">{titleEn}</span>
   </header>
 
-  <div lang="ur" dir="rtl" class="mt-5 flex-1 space-y-5 text-center text-[1.35rem] md:text-2xl text-ink">
+  <div lang="ur" dir="rtl" class="mt-5 flex-1 space-y-5 mx-auto max-w-md text-[1.35rem] md:text-2xl text-ink">
     {couplets.map((lines) => (
-      <p class="leading-[2.4]">
+      <p class="leading-[2.4] text-justify [text-align-last:justify]">
         {lines.map((line, i) => (
           <>
             {line}
