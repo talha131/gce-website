@@ -62,7 +62,7 @@ Detail pages are generated with `getStaticPaths` from the data arrays: `programs
 
 ### SEO
 
-`SEO.astro` (in `Layout`) emits per-page title/description, canonical, OG/Twitter, and site-wide `CollegeOrUniversity` JSON-LD from `site.ts`. `scripts/generate-sitemap.mjs` (run by `make sitemap`, and by `make deploy` after the build) walks the built `dist/` and writes `dist/sitemap.xml`; `astro.config.mjs` `site` is the canonical origin. Developer attribution (Talha Mansoor) is a real visible dofollow footer credit — keep it; no hidden-SEO tricks.
+`SEO.astro` (in `Layout`) emits per-page title/description, canonical, OG/Twitter, and site-wide `CollegeOrUniversity` JSON-LD from `site.ts`. `scripts/generate-sitemap.mjs` runs automatically at the end of **every** `astro build` (wired as an integration in `astro.config.mjs`), walking the built `dist/` to write `dist/sitemap.xml` — so the sitemap ships on every build path, including Netlify's CI build (`netlify.toml` runs `npm run build`), not just `make deploy`. `astro.config.mjs` `site` is the canonical origin. Developer attribution (Talha Mansoor) is a real visible dofollow footer credit — keep it; no hidden-SEO tricks.
 
 ## Conventions
 
