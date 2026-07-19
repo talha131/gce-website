@@ -19,7 +19,8 @@
   /* Accent — gold */
   --gold:         #D4AF37;
   --gold-bright:  #E9C245;
-  --gold-deep:    #A9821F;   /* gold text on light for AA contrast */
+  --gold-deep:    #A9821F;   /* gold text on light (AA at ≥14px bold / large) */
+  --gold-deeper:  #8C6A16;   /* gold text on light for AA at small sizes (≥4.5:1) */
 
   /* Neutrals / surfaces */
   --cream:        #F8F4EC;   /* page background */
