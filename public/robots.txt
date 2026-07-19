@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gce.edu.pk/sitemap-index.xml
+Sitemap: https://gce.edu.pk/sitemap.xml
