@@ -8,6 +8,7 @@ export const aboutNav = [
   { label: 'Mission & Vision', href: '/about' },
   { label: 'History', href: '/about/history' },
   { label: 'Leadership', href: '/about/leadership' },
+  { label: 'Principals', href: '/about/principals' },
   { label: 'Heritage', href: '/about/heritage' },
 ] as const;
 

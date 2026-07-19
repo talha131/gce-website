@@ -1,0 +1,33 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import SectionNav from '@/components/SectionNav.astro';
+import Section from '@/components/Section.astro';
+import { aboutNav } from '@/data/about';
+import collage from '@/assets/leadership-collage.jpg';
+---
+
+<Layout
+  title="Leadership Through the Years"
+  description="A tribute to the distinguished principals who have led Government College of Education, Karachi, since 1952 — their vision and dedication across the decades."
+>
+  <PageHero size="compact" kicker="About GCE" title="Leadership Through the Years" />
+  <SectionNav items={aboutNav} current={Astro.url.pathname} label="About" />
+
+  <Section tone="tint" space="md">
+    <p class="max-w-2xl mx-auto text-center text-lg text-ink-soft" data-reveal>
+      Celebrating the distinguished principals whose vision and dedication have shaped the legacy of Government College of Education.
+    </p>
+    <figure class="card overflow-hidden p-4 md:p-6 mt-10" data-reveal>
+      <Image
+        src={collage}
+        alt="The principals of Government College of Education from 1952 to the present, with their names and years of service."
+        widths={[640, 960, 1280, 1500]}
+        sizes="(min-width:1024px) 60vw, 100vw"
+        class="mx-auto w-full max-w-3xl h-auto rounded-[var(--radius-sm)]"
+        loading="lazy"
+      />
+    </figure>
+  </Section>
+</Layout>
