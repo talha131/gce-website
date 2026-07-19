@@ -1,0 +1,89 @@
+---
+/* Sticky section-level menu: a bar of pill links that wraps (flex-wrap) so every
+   sub-page link stays visible on mobile — no horizontal scroll, no tap to reveal.
+   Active pill is the current page, matched server-side from the pathname; works as
+   plain <a> links with JS disabled. Sits below PageHero and sticks under the header. */
+interface Item {
+  label: string;
+  href: string;
+}
+interface Props {
+  items: Item[];
+  /** Active pathname — pass Astro.url.pathname. */
+  current: string;
+  /** aria-label for the <nav>. */
+  label?: string;
+}
+const { items, current, label = 'Section' } = Astro.props;
+
+// Normalise trailing slashes; exact match so a parent (/about) is not active on /about/history.
+const norm = (s: string) => (s !== '/' ? s.replace(/\/$/, '') : s);
+const isActive = (href: string) => norm(current) === norm(href);
+---
+
+<nav class="section-nav" aria-label={label}>
+  <div class="container-site">
+    <ul>
+      {items.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            class:list={['pill', isActive(item.href) && 'is-active']}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .section-nav {
+    position: sticky;
+    top: var(--header-h);
+    z-index: 40; /* below the header (z-50), above content */
+    background: color-mix(in srgb, var(--cream) 92%, transparent);
+    backdrop-filter: saturate(1.3) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .section-nav > .container-site {
+    padding-block: 0.6rem;
+  }
+  .section-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  }
+  .pill:hover {
+    color: var(--brand);
+    border-color: color-mix(in srgb, var(--brand) 30%, var(--line));
+  }
+  .pill.is-active,
+  .pill[aria-current='page'] {
+    background: var(--brand);
+    color: #fff;
+    border-color: var(--brand);
+  }
+  .pill:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+</style>
