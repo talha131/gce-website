@@ -1,0 +1,12 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import FacultyGroup from '@/components/FacultyGroup.astro';
+import { adminStaff } from '@/data/faculty';
+---
+
+<Layout
+  title="Administrative Staff — Faculty & Staff"
+  description="The administrative and support staff — superintendent, clerks, lab assistants and support team — at Government College of Education, Karachi."
+>
+  <FacultyGroup title="Administrative Staff" people={adminStaff} />
+</Layout>

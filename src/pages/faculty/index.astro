@@ -1,0 +1,12 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import FacultyGroup from '@/components/FacultyGroup.astro';
+import { educationDept } from '@/data/faculty';
+---
+
+<Layout
+  title="Teaching Faculty — Faculty & Staff"
+  description="The teaching faculty of the Education Department at Government College of Education, Karachi — qualified, experienced educators across every subject."
+>
+  <FacultyGroup title="Teaching Faculty" people={educationDept} />
+</Layout>
