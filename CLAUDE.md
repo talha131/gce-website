@@ -22,6 +22,17 @@ Or the `Makefile`: `make dev|build|preview|clean|deploy`. There is no test suite
 
 Pushing to `master` triggers a Netlify build. **Never `git push`** unless the user explicitly says to. Commit locally in small logical units; the owner pushes manually. GPG signing is on — never disable it.
 
+## Releases & tags
+
+Release tags use **Semantic Versioning** (SemVer): `vMAJOR.MINOR.PATCH`, e.g. `v1.0.0`.
+
+- **Tag on major and minor releases only** — `vX.0.0` (major) and `vX.Y.0` (minor). Do **not** tag every patch or every deploy.
+- Tags are **annotated and GPG-signed**: `git tag -s v1.1.0 -m "<summary>"` (matches the signed-commit posture).
+- Keep `package.json` `version` in step with the latest release tag (same number, without the leading `v`).
+- **`make deploy` auto-tags the release.** After a successful deploy it reads `package.json` `version` and, if it's a major/minor (`vX.Y.0`) not already tagged, creates the signed tag and pushes it (patch versions and existing tags are skipped, no error). **Release flow: bump `package.json` `version` → `make deploy`.** ⚠️ This fires **only** on `make deploy` — releasing by pushing to `master` (the Netlify CI build) does **not** tag, so tag those with `make deploy` or by hand.
+- **Otherwise, don't push tags on your own** (same rule as `git push`) — `make deploy` is the one exception the owner opted into. Ad-hoc: one tag `git push origin v1.1.0`; all tags `git push origin --tags`.
+- History: `v1.0.0` is the first SemVer tag. `v0-archive` and `pre-phase-1-review-fixes` are pre-SemVer historical markers — leave them as-is.
+
 ## Architecture
 
 ### Content lives in typed data files, not in pages
