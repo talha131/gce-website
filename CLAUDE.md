@@ -29,8 +29,9 @@ Release tags use **Semantic Versioning** (SemVer): `vMAJOR.MINOR.PATCH`, e.g. `v
 - **Tag on major and minor releases only** — `vX.0.0` (major) and `vX.Y.0` (minor). Do **not** tag every patch or every deploy.
 - Tags are **annotated and GPG-signed**: `git tag -s v1.1.0 -m "<summary>"` (matches the signed-commit posture).
 - Keep `package.json` `version` in step with the latest release tag (same number, without the leading `v`).
-- **`make deploy` auto-tags the release.** After a successful deploy it reads `package.json` `version` and, if it's a major/minor (`vX.Y.0`) not already tagged, creates the signed tag and pushes it (patch versions and existing tags are skipped, no error). **Release flow: bump `package.json` `version` → `make deploy`.** ⚠️ This fires **only** on `make deploy` — releasing by pushing to `master` (the Netlify CI build) does **not** tag, so tag those with `make deploy` or by hand.
-- **Otherwise, don't push tags on your own** (same rule as `git push`) — `make deploy` is the one exception the owner opted into. Ad-hoc: one tag `git push origin v1.1.0`; all tags `git push origin --tags`.
+- **Claude owns versioning and release tags.** When work is ready to ship, Claude judges the SemVer level from the changes, bumps `package.json` `version`, commits it, and creates + pushes the signed tag at release time — no per-release prompting needed.
+- **`make deploy` auto-tags** as a convenience: after a successful deploy it tags `vX.Y.0` from `package.json` if not already tagged (patches and existing tags skipped). Deploying by **pushing to `master`** (Netlify CI) does **not** auto-tag — for those, Claude creates and pushes the tag by hand (`git tag -s vX.Y.0 -m "..."; git push origin vX.Y.0`).
+- **Push boundary:** Claude may create and push **tags** for releases without asking; Claude must **not** push commits or advance `master` without explicit say-so — deploying stays the owner's trigger.
 - History: `v1.0.0` is the first SemVer tag. `v0-archive` and `pre-phase-1-review-fixes` are pre-SemVer historical markers — leave them as-is.
 
 ## Architecture
