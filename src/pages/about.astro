@@ -8,7 +8,7 @@ import UrduBlock from '@/components/UrduBlock.astro';
 import { site } from '@/data/site';
 import { history, mission, vision, principal, anthemAndDua } from '@/data/about';
 import { getSingle } from '@/lib/images';
-import uokLogo from '@/assets/brand/uok-logo.png';
+import UokLogo from '@/assets/brand/uok-logo.svg';
 import collage from '@/assets/leadership-collage.jpg';
 
 const principalPhoto = getSingle('principal', 'principal');
@@ -53,7 +53,7 @@ const { collegeAnthem, dua, nationalAnthem } = anthemAndDua;
   <Section kicker="Affiliation" title="Affiliated with the University of Karachi">
     <div class="card p-8 grid gap-8 sm:grid-cols-[auto_1fr] items-center" data-reveal>
       <a href="https://uok.edu.pk" target="_blank" rel="noopener" class="shrink-0 mx-auto">
-        <Image src={uokLogo} alt="University of Karachi logo" width={140} height={140} class="h-28 w-28 object-contain" />
+        <UokLogo role="img" aria-label="University of Karachi logo" class="h-28 w-28" />
       </a>
       <div>
         <p class="text-ink-soft leading-relaxed">
