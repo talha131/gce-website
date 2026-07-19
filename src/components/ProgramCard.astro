@@ -16,10 +16,7 @@ const facts = [
 ---
 
 <article
-  class:list={[
-    'card card-hover p-6 md:p-7 flex flex-col h-full',
-    isEvening && 'bg-brand-tint ring-1 ring-brand/15',
-  ]}
+  class="card card-hover p-6 md:p-7 flex flex-col h-full"
   data-reveal
   style={delay ? `--reveal-delay:${delay}ms` : undefined}
 >
@@ -27,7 +24,10 @@ const facts = [
     <h3 class="!text-xl !leading-snug">
       <a href={href} class="hover:text-brand transition-colors">{program.name}</a>
     </h3>
-    <span class="shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full bg-brand-tint text-brand">{program.shift}</span>
+    <span class:list={[
+      'shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full',
+      isEvening ? 'bg-gold/20 text-gold-deep' : 'bg-brand-tint text-brand',
+    ]}>{program.shift}</span>
   </div>
 
   <p class="mt-3 text-sm text-ink-soft leading-relaxed flex-1">{program.tagline}</p>
