@@ -2,6 +2,7 @@
 import type { GetStaticPaths } from 'astro';
 import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
+import SectionNav from '@/components/SectionNav.astro';
 import Section from '@/components/Section.astro';
 import Gallery from '@/components/Gallery.astro';
 import { facilities, facilityBySlug } from '@/data/facilities';
@@ -13,6 +14,10 @@ export const getStaticPaths = (() =>
 const { slug } = Astro.params;
 const facility = facilityBySlug(slug!)!;
 const images = getGallery('facilities', facility.slug);
+// Sibling jumper: facilities in the same category, current one included (active pill).
+const siblings = facilities
+  .filter((f) => f.category === facility.category)
+  .map((f) => ({ label: f.name, href: `/campus/${f.slug}` }));
 const related = facilities.filter((f) => f.category === facility.category && f.slug !== facility.slug).slice(0, 3);
 ---
 
@@ -25,6 +30,7 @@ const related = facilities.filter((f) => f.category === facility.category && f.s
       <span class="mt-6 inline-block text-sm font-semibold px-3 py-1.5 rounded-full bg-gold text-brand-950">{facility.badge}</span>
     )}
   </PageHero>
+  {siblings.length > 1 && <SectionNav items={siblings} current={Astro.url.pathname} label={facility.category} />}
 
   <Section space="md">
     <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-12">
