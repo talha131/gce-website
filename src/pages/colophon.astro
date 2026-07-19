@@ -19,29 +19,35 @@ import { getSingle } from '@/lib/images';
     lead="This website was built by students and faculty of Government College of Education. Here's who made it happen."
   />
 
-  <!-- Student contributors -->
+  <!-- Student contributors — orbiting cards (pauses on hover) -->
   <Section kicker="Student Contributors" title="The student team">
-    <div class="flex flex-wrap justify-center gap-6">
-      {contributors.map((c, i) => {
-        const photo = getSingle('contributors', c.folder);
-        return (
-          <article class="card card-hover p-6 w-40 sm:w-48 md:w-56 flex flex-col items-center text-center" data-reveal style={`--reveal-delay:${i * 70}ms`}>
-            <div class="h-32 w-32 sm:h-40 sm:w-40 md:h-44 md:w-44 rounded-full overflow-hidden bg-brand-tint">
-              {photo ? (
-                <Image src={photo} alt={`Portrait of ${c.name}`} widths={[224, 352]} sizes="176px" class="h-full w-full object-cover" loading="lazy" />
-              ) : (
-                <Monogram name={c.name} class="h-full w-full text-3xl" />
-              )}
+    <div class="orbit-stage" data-reveal>
+      <div class="orbit">
+        {contributors.map((c, i) => {
+          const photo = getSingle('contributors', c.folder);
+          return (
+            <div class="slot" style={`--a:${i * (360 / contributors.length)}deg`}>
+              <div class="spinner">
+                <a href={c.linktree} target="_blank" rel="noopener" class="cc">
+                  {photo ? (
+                    <Image class="cc__img" src={photo} widths={[420, 620]} sizes="480px" alt={`Portrait of ${c.name}`} loading="lazy" />
+                  ) : (
+                    <Monogram name={c.name} class="absolute inset-0 h-full w-full text-3xl" />
+                  )}
+                  <div class="cc__scrim"></div>
+                  <div class="cc__meta">
+                    <h3 class="cc__name">{c.name}</h3>
+                    <p class="cc__batch">{c.batch}</p>
+                    <span class="cc__link">LinkTree ↗</span>
+                  </div>
+                </a>
+              </div>
             </div>
-            <h3 class="mt-4 !text-base !leading-snug">{c.name}</h3>
-            <p class="mt-1 text-xs text-ink-soft">Batch Year: {c.batch}</p>
-            <a href={c.linktree} target="_blank" rel="noopener" class="mt-3 text-sm font-semibold text-brand hover:text-brand-deep">
-              LinkTree ↗
-            </a>
-          </article>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
+    <p class="mt-4 text-center text-sm text-ink-soft" data-reveal>Hover a card to pause and take a closer look.</p>
   </Section>
 
   <!-- Developer -->
@@ -77,3 +83,113 @@ import { getSingle } from '@/lib/images';
     </div>
   </Section>
 </Layout>
+
+<style>
+  /* Orbit — cards circle continuously and pause on hover/focus */
+  .orbit-stage { display: flex; justify-content: center; padding: 1rem 0 2.5rem; }
+  .orbit {
+    position: relative;
+    width: min(600px, 90vw);
+    aspect-ratio: 1;
+    animation: orbit-spin 40s linear infinite;
+  }
+  .orbit:hover, .orbit:focus-within { animation-play-state: paused; }
+
+  .slot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 178px;
+    height: 236px;
+    margin: -118px 0 0 -89px;
+    --r: clamp(132px, 32vw, 208px);
+    transform: rotate(var(--a)) translate(var(--r)) rotate(calc(var(--a) * -1));
+  }
+  .slot:hover, .slot:focus-within { z-index: 10; }
+
+  .spinner {
+    width: 100%;
+    height: 100%;
+    animation: orbit-spin 40s linear infinite reverse;
+  }
+  .orbit:hover .spinner, .orbit:focus-within .spinner { animation-play-state: paused; }
+
+  @keyframes orbit-spin { to { transform: rotate(360deg); } }
+
+  /* Full-bleed card */
+  .cc {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: #0b0322;
+    box-shadow: var(--shadow-lift);
+    transition: transform .35s ease, box-shadow .35s ease;
+  }
+  .cc:hover, .cc:focus-visible { transform: translateY(-7px); }
+  .cc:focus-visible { outline: 3px solid var(--gold-bright); outline-offset: 2px; }
+
+  .cc :global(img.cc__img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(2.72);
+    transform-origin: center 46%;
+    transition: transform .5s ease;
+  }
+  .cc:hover :global(img.cc__img) { transform: scale(2.84); }
+
+  .cc__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      #0b0322 3%,
+      color-mix(in srgb, #0b0322 55%, transparent) 30%,
+      transparent 56%
+    );
+  }
+  .cc__meta { position: absolute; left: 0; right: 0; bottom: 0; padding: .85rem; }
+  .cc__name { font-family: var(--font-display); font-weight: 600; font-size: .9rem; line-height: 1.15; color: #fff; }
+  .cc__batch { margin-top: .12rem; font-size: .7rem; color: rgba(255,255,255,.66); }
+  .cc__link {
+    margin-top: .45rem;
+    display: inline-flex; align-items: center; gap: .25rem;
+    font-size: .8rem; font-weight: 600;
+    color: var(--gold-bright);
+    opacity: .85; transition: opacity .3s ease;
+  }
+  .cc:hover .cc__link { opacity: 1; }
+
+  /* Mobile: no orbit — a centered, tappable grid of the same cards */
+  @media (max-width: 767px) {
+    .orbit {
+      width: 100%;
+      aspect-ratio: auto;
+      animation: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .slot {
+      position: static;
+      transform: none;
+      margin: 0;
+      width: calc(50% - 0.5rem);
+      height: auto;
+      aspect-ratio: 3 / 4;
+    }
+    .spinner { animation: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orbit, .spinner { animation: none; }
+    .cc, .cc :global(img.cc__img), .cc__link { transition: none; }
+  }
+</style>
