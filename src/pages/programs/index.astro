@@ -23,6 +23,7 @@ const hero = getSingle('heroes', 'programs');
   />
 
   <Section space="md">
+    <h2 class="sr-only">Our programs</h2>
     <div class="grid gap-6 md:grid-cols-2">
       {programs.map((p, i) => <ProgramCard program={p} delay={(i % 2) * 80} />)}
     </div>

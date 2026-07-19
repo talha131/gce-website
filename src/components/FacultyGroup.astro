@@ -28,6 +28,7 @@ const hero = getSingle('heroes', 'faculty');
 <SectionNav items={facultyNav} current={Astro.url.pathname} label="Faculty & Staff" />
 
 <Section space="md">
+  <h2 class="sr-only">{title}</h2>
   <div class="grid gap-6 grid-cols-2 lg:grid-cols-4">
     {people.map((p) => <FacultyCard person={p} />)}
   </div>
