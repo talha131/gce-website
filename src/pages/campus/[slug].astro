@@ -5,7 +5,7 @@ import PageHero from '@/components/PageHero.astro';
 import SectionNav from '@/components/SectionNav.astro';
 import Section from '@/components/Section.astro';
 import Gallery from '@/components/Gallery.astro';
-import { facilities, facilityBySlug } from '@/data/facilities';
+import { facilities, facilityBySlug, campusNav } from '@/data/facilities';
 import { getGallery } from '@/lib/images';
 
 export const getStaticPaths = (() =>
@@ -19,6 +19,8 @@ const siblings = facilities
   .filter((f) => f.category === facility.category)
   .map((f) => ({ label: f.name, href: `/campus/${f.slug}` }));
 const related = facilities.filter((f) => f.category === facility.category && f.slug !== facility.slug).slice(0, 3);
+// Back-link goes to this facility's own category page (not the /campus landing).
+const backHref = campusNav.find((n) => n.label === facility.category)?.href ?? '/campus';
 ---
 
 <Layout
@@ -47,7 +49,7 @@ const related = facilities.filter((f) => f.category === facility.category && f.s
           <p class="mt-1 text-sm text-ink-soft">{facility.category}</p>
           {facility.note && <p class="mt-4 pt-4 border-t border-line text-sm text-ink-soft">{facility.note}</p>}
         </div>
-        <a href="/campus" class="mt-4 btn btn-ghost w-full">← All facilities</a>
+        <a href={backHref} class="mt-4 btn btn-ghost w-full">← Back to {facility.category}</a>
       </aside>
     </div>
 

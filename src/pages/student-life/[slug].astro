@@ -5,7 +5,7 @@ import PageHero from '@/components/PageHero.astro';
 import SectionNav from '@/components/SectionNav.astro';
 import Section from '@/components/Section.astro';
 import Gallery from '@/components/Gallery.astro';
-import { events, eventBySlug } from '@/data/events';
+import { events, eventBySlug, studentLifeNav } from '@/data/events';
 import { getGallery, getSingle } from '@/lib/images';
 
 export const getStaticPaths = (() =>
@@ -20,6 +20,8 @@ const siblings = events
   .filter((e) => e.group === event.group)
   .map((e) => ({ label: e.name, href: `/student-life/${e.slug}` }));
 const related = events.filter((e) => e.group === event.group && e.slug !== event.slug).slice(0, 4);
+// Back-link goes to this event's own group page (not the /student-life landing).
+const backHref = studentLifeNav.find((n) => n.label === event.group)?.href ?? '/student-life';
 ---
 
 <Layout title={event.name} description={event.blurb}>
@@ -44,7 +46,7 @@ const related = events.filter((e) => e.group === event.group && e.slug !== event
     )}
 
     <div class="mt-12" data-reveal>
-      <a href="/student-life" class="btn btn-ghost">← All student life</a>
+      <a href={backHref} class="btn btn-ghost">← Back to {event.group}</a>
     </div>
   </Section>
 
