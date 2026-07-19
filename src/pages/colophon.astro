@@ -30,7 +30,7 @@ import { getSingle } from '@/lib/images';
               <div class="spinner">
                 <a href={c.linktree} target="_blank" rel="noopener" class="cc">
                   {photo ? (
-                    <Image class="cc__img" src={photo} widths={[420, 620]} sizes="480px" alt={`Portrait of ${c.name}`} loading="lazy" />
+                    <Image class="cc__img" src={photo} widths={[480, 720]} sizes="560px" alt={`Portrait of ${c.name}`} loading="lazy" />
                   ) : (
                     <Monogram name={c.name} class="absolute inset-0 h-full w-full text-3xl" />
                   )}
@@ -47,7 +47,6 @@ import { getSingle } from '@/lib/images';
         })}
       </div>
     </div>
-    <p class="mt-4 text-center text-sm text-ink-soft" data-reveal>Hover a card to pause and take a closer look.</p>
   </Section>
 
   <!-- Developer -->
@@ -89,7 +88,7 @@ import { getSingle } from '@/lib/images';
   .orbit-stage { display: flex; justify-content: center; padding: 1rem 0 2.5rem; }
   .orbit {
     position: relative;
-    width: min(600px, 90vw);
+    width: min(680px, 92vw);
     aspect-ratio: 1;
     animation: orbit-spin 40s linear infinite;
   }
@@ -99,10 +98,10 @@ import { getSingle } from '@/lib/images';
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 178px;
-    height: 236px;
-    margin: -118px 0 0 -89px;
-    --r: clamp(132px, 32vw, 208px);
+    width: 206px;
+    height: 274px;
+    margin: -137px 0 0 -103px;
+    --r: clamp(150px, 34vw, 236px);
     transform: rotate(var(--a)) translate(var(--r)) rotate(calc(var(--a) * -1));
   }
   .slot:hover, .slot:focus-within { z-index: 10; }
@@ -154,17 +153,31 @@ import { getSingle } from '@/lib/images';
       transparent 56%
     );
   }
-  .cc__meta { position: absolute; left: 0; right: 0; bottom: 0; padding: .85rem; }
-  .cc__name { font-family: var(--font-display); font-weight: 600; font-size: .9rem; line-height: 1.15; color: #fff; }
-  .cc__batch { margin-top: .12rem; font-size: .7rem; color: rgba(255,255,255,.66); }
-  .cc__link {
-    margin-top: .45rem;
-    display: inline-flex; align-items: center; gap: .25rem;
-    font-size: .8rem; font-weight: 600;
-    color: var(--gold-bright);
-    opacity: .85; transition: opacity .3s ease;
+  .cc__meta {
+    position: absolute; left: 0; right: 0; bottom: 0; padding: 1rem;
+    transition: transform .35s ease;
   }
-  .cc:hover .cc__link { opacity: 1; }
+  .cc:hover .cc__meta, .cc:focus-visible .cc__meta { transform: translateY(-3px); }
+
+  .cc__name { font-family: var(--font-display); font-weight: 600; font-size: 1.02rem; line-height: 1.15; color: #fff; transition: color .3s ease; }
+  .cc__batch { margin-top: .14rem; font-size: .74rem; color: rgba(255,255,255,.66); transition: color .3s ease; }
+  .cc__link {
+    margin-top: .55rem;
+    display: inline-flex; align-items: center; gap: .3rem;
+    font-size: .84rem; font-weight: 700;
+    color: var(--gold-bright);
+    opacity: .82; transition: opacity .3s ease, color .3s ease, text-shadow .3s ease;
+  }
+  /* brighten the metadata on hover/focus */
+  .cc:hover .cc__name, .cc:focus-visible .cc__name { color: var(--gold-bright); }
+  .cc:hover .cc__batch, .cc:focus-visible .cc__batch { color: #fff; }
+  .cc:hover .cc__link, .cc:focus-visible .cc__link {
+    opacity: 1;
+    color: #ffd766;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-shadow: 0 0 18px rgba(233, 194, 69, .55);
+  }
 
   /* Mobile: no orbit — a centered, tappable grid of the same cards */
   @media (max-width: 767px) {
