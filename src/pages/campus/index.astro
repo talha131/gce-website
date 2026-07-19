@@ -1,34 +1,11 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import PageHero from '@/components/PageHero.astro';
-import Section from '@/components/Section.astro';
-import FacilityCard from '@/components/FacilityCard.astro';
-import { facilities, facilityCategories } from '@/data/facilities';
-import { getSingle } from '@/lib/images';
-
-const hero = getSingle('heroes', 'campus');
+import CampusCategory from '@/components/CampusCategory.astro';
 ---
 
 <Layout
-  title="Campus & Facilities"
-  description="Explore the GCE campus: labs, a 10,000-book library, a 300-seat IT Zone, Sindh's first college counselling centre, sports grounds, gardens and more."
+  title="Academic — Campus & Facilities"
+  description="Academic facilities at Government College of Education, Karachi — the library, micro-teaching lab, teachers' resource centre, classrooms and CPD hall."
 >
-  <PageHero
-    kicker="Campus & Facilities"
-    title="A campus built for <span class='accent-italic !text-gold-bright'>learning &amp; life</span>"
-    lead="Over twenty facilities — from science labs and a well-stocked library to a podcast studio, memorial garden and sports grounds."
-    image={hero}
-    imageAlt="Government College of Education campus building"
-  />
-
-  {facilityCategories.map((cat, ci) => {
-    const items = facilities.filter((f) => f.category === cat);
-    return (
-      <Section tone={ci % 2 === 0 ? 'cream' : 'tint'} kicker={cat} title={cat} space="md">
-        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {items.map((f, i) => <FacilityCard facility={f} delay={(i % 3) * 70} />)}
-        </div>
-      </Section>
-    );
-  })}
+  <CampusCategory category="Academic" />
 </Layout>
