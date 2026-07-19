@@ -1,0 +1,5 @@
+# 301 the removed Overview-hub URLs to their landing pages (Netlify edge redirects).
+# These pages were merged away (see git history); redirecting preserves any
+# inbound links. Not HTML pages, so they never enter the generated sitemap.
+/achievements/honours   /achievements   301
+/about/mission-vision   /about          301
