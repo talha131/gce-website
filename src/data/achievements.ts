@@ -1,9 +1,11 @@
 /* Achievements, alumni success, sports honours and the ICEEC 2025 conference. */
 
-/** Achievements section sub-pages, in menu order. Drives SectionNav. */
+/**
+ * Achievements section sub-pages, in menu order. Drives SectionNav.
+ * Honours is the /achievements landing (no overview hub).
+ */
 export const achievementsNav = [
-  { label: 'Overview', href: '/achievements' },
-  { label: 'Honours', href: '/achievements/honours' },
+  { label: 'Honours', href: '/achievements' },
   { label: 'Conference', href: '/achievements/conference' },
   { label: 'Research', href: '/achievements/research' },
   { label: 'Alumni', href: '/achievements/alumni' },
