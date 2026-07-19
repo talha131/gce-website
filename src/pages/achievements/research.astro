@@ -1,0 +1,33 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import SectionNav from '@/components/SectionNav.astro';
+import Section from '@/components/Section.astro';
+import { achievementsNav, actionResearch } from '@/data/achievements';
+---
+
+<Layout
+  title="Student Research"
+  description="Action-research projects completed by B.Ed. students at Government College of Education, Karachi — classroom management, cooperative learning, teaching aids and more."
+>
+  <PageHero size="compact" kicker="Student Research" title="Research" />
+  <SectionNav items={achievementsNav} current={Astro.url.pathname} label="Achievements" />
+
+  <!-- Student research -->
+  <Section kicker="Student Research" title="Action-research by our students" space="md">
+    <p class="max-w-2xl text-ink-soft -mt-6 mb-10" data-reveal>
+      A selection of action-research projects completed by GCE B.Ed. students in the Education Department.
+    </p>
+    <ol class="space-y-4">
+      {actionResearch.map((r, i) => (
+        <li class="card p-6 flex flex-col sm:flex-row sm:items-center gap-4" data-reveal style={`--reveal-delay:${(i % 3) * 60}ms`}>
+          <span class="font-display text-2xl font-semibold text-brand/40 shrink-0">{String(i + 1).padStart(2, '0')}</span>
+          <div>
+            <p class="font-medium text-ink leading-snug">{r.title}</p>
+            <p class="mt-1 text-sm text-ink-soft">{r.student} · supervised by {r.supervisor}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </Section>
+</Layout>

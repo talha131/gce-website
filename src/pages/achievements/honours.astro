@@ -1,0 +1,38 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import SectionNav from '@/components/SectionNav.astro';
+import Section from '@/components/Section.astro';
+import CoverImage from '@/components/CoverImage.astro';
+import { achievementsNav, honours } from '@/data/achievements';
+import { getCover } from '@/lib/images';
+---
+
+<Layout
+  title="Honours"
+  description="Individual and team honours won by Government College of Education students — international conference wins, the Pakistan Day Quiz, and sports championships."
+>
+  <PageHero size="compact" kicker="Recognition" title="Honours" />
+  <SectionNav items={achievementsNav} current={Astro.url.pathname} label="Achievements" />
+
+  <!-- Honours -->
+  <Section tone="tint" kicker="Honours" title="Individual &amp; team achievements" space="md">
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {honours.map((h, i) => {
+        const cover = h.slug ? getCover('achievements', h.slug) : undefined;
+        return (
+          <article class="card card-hover overflow-hidden flex flex-col" data-reveal style={`--reveal-delay:${(i % 3) * 70}ms`}>
+            <div class="aspect-[16/10] overflow-hidden bg-brand-tint">
+              <CoverImage image={cover} alt={h.title} class="h-full w-full object-cover" sizes="(min-width:1024px) 30vw, 90vw" />
+            </div>
+            <div class="p-6 flex-1 flex flex-col">
+              {h.rank && <span class="self-start text-xs font-semibold px-2.5 py-1 rounded-full bg-gold text-brand-950">{h.rank}</span>}
+              <h3 class="mt-3 !text-lg !leading-snug">{h.title}</h3>
+              <p class="mt-2 text-sm text-ink-soft leading-relaxed flex-1">{h.detail}</p>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </Section>
+</Layout>
