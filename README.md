@@ -159,8 +159,9 @@ Admissions copy is evergreen ("open every November", no hardcoded year).
 - All motion is gated behind `prefers-reduced-motion`.
 - Full keyboard navigation, visible focus rings, semantic landmarks, alt text.
 - Per-page titles/descriptions, canonical URLs, Open Graph + Twitter cards,
-  `EducationalOrganization` / `CollegeOrUniversity` JSON-LD, `robots.txt` and an
-  auto-generated `sitemap-index.xml`.
+  `EducationalOrganization` / `CollegeOrUniversity` JSON-LD, `robots.txt` and a
+  `sitemap.xml` generated from the built pages by `scripts/generate-sitemap.mjs`
+  (wired to `make sitemap`, and to `make deploy` after the build).
 
 ---
 
