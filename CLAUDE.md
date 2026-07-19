@@ -67,5 +67,5 @@ Detail pages are generated with `getStaticPaths` from the data arrays: `programs
 ## Conventions
 
 - **Urdu**: any Urdu block needs `lang="ur" dir="rtl"`; `global.css` then applies Nastaliq + RTL + generous line-height automatically. Poetry is stored as arrays of couplets (arrays of lines) in `about.ts` and rendered by `UrduBlock.astro`.
-- **Filler content**: placeholder copy written where the source was empty is flagged `isFiller: true` in the data and surfaced with a small in-page note. The full list of placeholders to replace is in `README.md` → "Content to replace". Keep that list in sync when adding/removing filler.
+- **Filler content**: placeholder copy written where the source was empty is flagged `isFiller: true` in the data as an internal tracking flag (no visible in-page note). The full list of placeholders to replace is in `README.md` → "Content to replace". Keep that list in sync when adding/removing filler.
 - **Admissions copy** is evergreen ("open every November") — never hardcode a year. **Affiliation** is settled ("University of Karachi", no documents/accreditation section).

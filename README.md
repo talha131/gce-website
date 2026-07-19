@@ -127,10 +127,9 @@ folder `Project - GCE Website/` is kept untouched for reference.
 
 Some source material was empty, so tasteful **filler content** was written to make
 the site look complete. Replace the following when the college supplies final copy
-and photos (each is also flagged in-page and in the data files):
+and photos (each is flagged with `isFiller: true` in the data files):
 
 - **Principal's message** (`about.ts` → `principal.message`) — a placeholder draft.
-  Marked pending final text on the About page.
 - **Testimonials** (`about.ts` → `testimonials`) — 3 filler quotes attributed to
   generic roles ("B.Ed (Hons) Graduate", "Parent", "Alumnus & Schoolteacher"),
   shown on the homepage.

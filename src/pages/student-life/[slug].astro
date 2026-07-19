@@ -33,9 +33,6 @@ const backHref = studentLifeNav.find((n) => n.label === event.group)?.href ?? '/
   <Section space="md">
     <div class="max-w-3xl space-y-5 text-lg text-ink leading-relaxed" data-reveal>
       {event.body.map((p) => <p>{p}</p>)}
-      {event.isFiller && (
-        <p class="text-xs text-ink-soft/80 pt-2">Note: placeholder description pending final content from the college.</p>
-      )}
     </div>
 
     {images.length > 0 && (
