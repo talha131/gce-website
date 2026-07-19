@@ -2,6 +2,7 @@
 import type { GetStaticPaths } from 'astro';
 import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
+import SectionNav from '@/components/SectionNav.astro';
 import Section from '@/components/Section.astro';
 import Gallery from '@/components/Gallery.astro';
 import { events, eventBySlug } from '@/data/events';
@@ -14,6 +15,10 @@ const { slug } = Astro.params;
 const event = eventBySlug(slug!)!;
 const images = getGallery('events', event.slug);
 const hero = getSingle('heroes', event.slug);
+// Sibling jumper: events in the same group, current one included (active pill).
+const siblings = events
+  .filter((e) => e.group === event.group)
+  .map((e) => ({ label: e.name, href: `/student-life/${e.slug}` }));
 const related = events.filter((e) => e.group === event.group && e.slug !== event.slug).slice(0, 4);
 ---
 
@@ -21,6 +26,7 @@ const related = events.filter((e) => e.group === event.group && e.slug !== event
   <PageHero kicker={event.group} title={event.name} lead={event.blurb} image={hero} imageAlt={event.name}>
     {event.date && <span class="mt-6 inline-block text-sm font-semibold px-3 py-1.5 rounded-full bg-white/10 text-gold-bright">{event.date}</span>}
   </PageHero>
+  {siblings.length > 1 && <SectionNav items={siblings} current={Astro.url.pathname} label={event.group} />}
 
   <Section space="md">
     <div class="max-w-3xl space-y-5 text-lg text-ink leading-relaxed" data-reveal>
