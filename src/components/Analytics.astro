@@ -1,7 +1,14 @@
 ---
 /*
  * Google Analytics 4. Loads only in production builds AND only when a
- * measurement id is present, so dev sessions never pollute analytics.
+ * measurement id is present AND, at runtime, only when the page is actually
+ * served from the canonical production host — so `npm run dev`, `npm run
+ * preview` on localhost, and Netlify deploy-preview URLs never load GA or
+ * report to the property.
+ *
+ * The host guard is a RUNTIME check because `make deploy` ships the same
+ * locally-built dist/ that we also preview on localhost; only the live URL
+ * differs. `gaHost` comes from astro.config `site` (e.g. gce.edu.pk).
  *
  * The id is read from the PUBLIC_GA_ID env var (Astro exposes PUBLIC_*-prefixed
  * vars to the client). Because we deploy a locally-built dist/ via the Netlify
@@ -10,16 +17,24 @@
  */
 const gaId = import.meta.env.PUBLIC_GA_ID;
 const enabled = import.meta.env.PROD && !!gaId;
+const gaHost = Astro.site ? new URL(Astro.site).hostname : '';
 ---
 
 {enabled && (
-  <>
-    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
-    <script is:inline define:vars={{ gaId }}>
+  <script is:inline define:vars={{ gaId, gaHost }}>
+    (function () {
+      // Only report from the real site (apex or a subdomain like www.),
+      // never from localhost or *.netlify.app previews.
+      var h = location.hostname;
+      if (!gaHost || (h !== gaHost && !h.endsWith('.' + gaHost))) return;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+      document.head.appendChild(s);
       window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
+      window.gtag = function () { dataLayer.push(arguments); };
       gtag('js', new Date());
       gtag('config', gaId);
-    </script>
-  </>
+    })();
+  </script>
 )}
