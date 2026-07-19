@@ -16,11 +16,15 @@ import { getSingle } from '@/lib/images';
   <PageHero
     kicker="Colophon"
     title="Made with <span class='accent-italic !text-gold-bright'>care</span>, by our community"
-    lead="This website was built by students and faculty of Government College of Education. Here's who made it happen."
+    lead="Built by the students of Government College of Education, with faculty. Here's who made it happen."
   />
 
   <!-- Student contributors — orbiting cards (pauses on hover) -->
-  <Section kicker="Student Contributors" title="The student team">
+  <Section kicker="The Team" title="The students behind this site">
+    <p class="mx-auto max-w-2xl text-center text-lg text-ink-soft leading-relaxed" data-reveal>
+      This site is the students' own — it exists because of their work. It stays in their hands,
+      too: for any correction or update, reach out to them directly.
+    </p>
     <div class="orbit-stage" data-reveal>
       <div class="orbit">
         {contributors.map((c, i) => {
