@@ -32,6 +32,8 @@ export const nav = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Programs', href: '/programs' },
+  { label: 'Academics & Practicum', href: '/academics-practicum' },
+  { label: 'Course Outlines', href: '/course-outlines' },
   { label: 'Admissions', href: '/admissions' },
   { label: 'Faculty', href: '/faculty' },
   { label: 'Campus', href: '/campus' },
