@@ -6,6 +6,7 @@ import SectionNav from '@/components/SectionNav.astro';
 import Section from '@/components/Section.astro';
 import Reveal from '@/components/Reveal.astro';
 import { programs, programBySlug, programsNav } from '@/data/programs';
+import { outlineSets } from '@/data/outlines';
 import { site } from '@/data/site';
 
 export const getStaticPaths = (() =>
@@ -21,6 +22,9 @@ const facts = [
   { label: 'Entry requirement', value: program.entry },
 ];
 const others = programs.filter((p) => p.slug !== program.slug);
+
+// Outline sets published for this programme (the two 4-year sets share one program).
+const sets = outlineSets.filter((s) => s.programSlug === program.slug);
 ---
 
 <Layout title={program.name} description={program.tagline}>
@@ -70,6 +74,34 @@ const others = programs.filter((p) => p.slug !== program.slug);
       </Reveal>
     </div>
   </Section>
+
+  <!-- Course outlines for this programme -->
+  {sets.length > 0 && (
+    <Section tone="surface" kicker="Course Outlines" title="What each semester covers" space="md">
+      <div class="grid gap-4 md:grid-cols-2">
+        {sets.map((set, i) => {
+          const courses = set.semesters.reduce((n, s) => n + s.courses.length, 0);
+          return (
+            <a
+              href={`/programs/course-outlines#${set.slug}`}
+              class="card card-hover p-6 block"
+              data-reveal
+              style={`--reveal-delay:${i * 70}ms`}
+            >
+              <p class="font-display font-semibold text-brand-deep">{set.shortName}</p>
+              <p class="mt-1 text-sm text-ink-soft">
+                {set.semesters.length} {set.semesters.length === 1 ? 'semester' : 'semesters'} · {courses} course outlines
+              </p>
+              <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand">
+                View outlines
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+          );
+        })}
+      </div>
+    </Section>
+  )}
 
   <!-- Other programs -->
   <Section tone="tint" kicker="Keep exploring" title="Other programs" space="md">
