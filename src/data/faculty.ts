@@ -65,7 +65,6 @@ export const adminStaff: Person[] = [
   { name: 'Saba Zehra', folder: 'Saba_Zehra', title: 'Senior Clerk', quals: ['B.Com.'] },
   { name: 'Imran Khan', folder: 'Imran_Khan', title: 'Junior Clerk', quals: ['Intermediate'] },
   { name: 'Shagufta Azmat', folder: 'Shagufta_Azmat', title: 'Assistant', quals: ['Matric'] },
-  { name: 'Mr. Muhammad Sohail Khan', folder: 'Mr_Muhammad_Sohail_Khan', title: 'Senior Lab Assistant', quals: ['B.A., M.Ed.'] },
   { name: 'Qazi Adnan Raza', folder: 'Qazi_Adnan_Raza', title: 'Senior Lab Assistant', quals: ['M.C.S.'] },
   { name: 'Syed Muhammad Zeeshan', folder: 'Syed_Muhammad_Zeeshan', title: 'Senior Lab Assistant', quals: ['B.Com.'] },
   { name: 'Nasir Khan', folder: 'Nasir_Khan', title: 'Senior Lab Assistant', quals: ['B.A.'] },
