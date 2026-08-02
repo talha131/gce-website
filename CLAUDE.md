@@ -68,9 +68,9 @@ Add `data-reveal` (optionally `style="--reveal-delay:Nms"`) to any element for s
 
 `src/layouts/Layout.astro` is the shell for every page (SEO head, skip link, sticky `Header`, `Footer`, motion script). Pass `title`/`description` (and `isHome` on the homepage). `Header.astro` is transparent over the dark hero at page top and switches to a solid light state on scroll — its foreground colors are driven by CSS vars (`--hdr-fg` etc.) that flip on the `.header-solid` class; every page therefore starts with a dark hero (`PageHero.astro` or the home hero) so the transparent nav stays legible.
 
-Detail pages are generated with `getStaticPaths` from the data arrays: `programs/[slug]`, `campus/[slug]` (facilities), `student-life/[slug]` and `academics-practicum/[slug]` (events). Adding an item to the data array + a matching image folder automatically creates its detail page and gallery.
+Detail pages are generated with `getStaticPaths` from the data arrays: `programs/[slug]`, `campus/[slug]` (facilities), `student-life/[slug]` and `academics/[slug]` (events). Adding an item to the data array + a matching image folder automatically creates its detail page and gallery.
 
-Events are one array but two sections: the `Academics & Practicum` group is a **top-level** section (`/academics-practicum`), everything else lives under Student Life. `eventHref()` in `events.ts` is the single source of truth for which prefix an event hangs off — never hardcode `/student-life/<slug>`. Both `[slug]` routes render the shared `EventDetail.astro`.
+Events are one array but two sections: the `Academics` group is a **top-level** section (`/academics`), everything else lives under Student Life. `eventHref()` in `events.ts` is the single source of truth for which prefix an event hangs off — never hardcode `/student-life/<slug>`. Both `[slug]` routes render the shared `EventDetail.astro`.
 
 ### Analytics
 

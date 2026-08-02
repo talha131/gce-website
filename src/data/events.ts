@@ -6,7 +6,7 @@
 
 export type EventGroup =
   | 'Celebrations & National Days'
-  | 'Academics & Practicum'
+  | 'Academics'
   | 'Workshops & Seminars'
   | 'Competitions & Quizzes';
 
@@ -139,11 +139,11 @@ export const events: CollegeEvent[] = [
     ],
   },
 
-  // ------------------------------------------------- Academics & Practicum ---
+  // ------------------------------------------------------------- Academics ---
   {
     slug: 'teaching-practice',
     name: 'Teaching Practice',
-    group: 'Academics & Practicum',
+    group: 'Academics',
     blurb: 'The heart of teacher training — students teach real classes in schools under supervision.',
     body: [
       'Teaching practice is a central part of teacher education at GCE. Students are placed in government and private schools where they teach real classes and gain practical experience.',
@@ -154,7 +154,7 @@ export const events: CollegeEvent[] = [
   {
     slug: 'internal-exams',
     name: 'Internal Exams',
-    group: 'Academics & Practicum',
+    group: 'Academics',
     blurb: 'End-of-semester assessments that prepare students thoroughly for external examinations.',
     body: [
       "GCE holds internal exams at the end of every semester, with a full schedule planned for each programme and it's semesters and conducted by the whole college staff.",
@@ -165,7 +165,7 @@ export const events: CollegeEvent[] = [
   {
     slug: 'cr-elections',
     name: 'Class Representative Elections',
-    group: 'Academics & Practicum',
+    group: 'Academics',
     blurb: 'A fair, professional election each semester — giving every student a chance to lead.',
     body: [
       'CR elections are held every semester, following a college policy that class representatives change each term so every student has a chance to lead.',
@@ -176,7 +176,7 @@ export const events: CollegeEvent[] = [
   {
     slug: 'magazine',
     name: 'College Magazine — "Mashal-e-Ilm"',
-    group: 'Academics & Practicum',
+    group: 'Academics',
     blurb: 'The college’s own magazine, written and made with students, capturing GCE’s story.',
     body: [
       'GCE publishes its own magazine, "Mashal-e-Ilm", produced with an editor and sub-editors.',
@@ -440,21 +440,21 @@ export const events: CollegeEvent[] = [
 
 export const eventGroups: EventGroup[] = [
   'Celebrations & National Days',
-  'Academics & Practicum',
+  'Academics',
   'Workshops & Seminars',
   'Competitions & Quizzes',
 ];
 
 /**
- * Academics & Practicum is a top-level section of its own (/academics-practicum),
- * not a Student Life sub-page — it is coursework, not extracurricular life. Its
- * events still live in this array; only the URL they hang off differs.
+ * Academics is a top-level section of its own (/academics), not a Student Life
+ * sub-page — it is coursework, not extracurricular life. Its events still live
+ * in this array; only the URL they hang off differs.
  */
-export const ACADEMICS_GROUP = 'Academics & Practicum' satisfies EventGroup;
+export const ACADEMICS_GROUP = 'Academics' satisfies EventGroup;
 
 /** URL prefix the group's event-detail pages hang off. */
 const sectionPrefix = (group: EventGroup) =>
-  group === ACADEMICS_GROUP ? '/academics-practicum' : '/student-life';
+  group === ACADEMICS_GROUP ? '/academics' : '/student-life';
 
 /** Canonical URL of an event's detail page. */
 export const eventHref = (event: Pick<CollegeEvent, 'slug' | 'group'>) =>
@@ -463,7 +463,7 @@ export const eventHref = (event: Pick<CollegeEvent, 'slug' | 'group'>) =>
 /** The landing page listing a group's events (where a detail page links "back" to). */
 export const eventGroupHref = (group: EventGroup) =>
   group === ACADEMICS_GROUP
-    ? '/academics-practicum'
+    ? '/academics'
     : (studentLifeNav.find((n) => n.label === group)?.href ?? '/student-life');
 
 /** Events in a group, in data order. */
@@ -473,7 +473,7 @@ export const eventsInGroup = (group: EventGroup) => events.filter((e) => e.group
  * Student Life group sub-pages, in menu order. Drives SectionNav.
  * Celebrations & National Days is the /student-life landing (no overview hub);
  * the rest are static pages that live alongside the event-detail [slug] route.
- * Academics & Practicum is deliberately absent — it is its own top-level section.
+ * Academics is deliberately absent — it is its own top-level section.
  */
 export const studentLifeNav = [
   { label: 'Celebrations & National Days', href: '/student-life' },

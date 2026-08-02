@@ -106,7 +106,7 @@ Content lives in **`src/data/`** — plain typed TS files, no CMS:
 | `programs.ts` | The four academic programs |
 | `faculty.ts` | Education Department & administrative staff |
 | `facilities.ts` | Campus facilities |
-| `events.ts` | Student-life events, and the Academics & Practicum section |
+| `events.ts` | Student-life events, and the Academics section |
 | `outlines.ts` | Course outlines by programme and semester (PDFs in `public/course-outlines/`) |
 | `achievements.ts` | Alumni honours, ICEEC 2025 conference, action research |
 | `contributors.ts` | Student website contributors (colophon) |

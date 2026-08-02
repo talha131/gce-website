@@ -4,7 +4,7 @@ import Layout from '@/layouts/Layout.astro';
 import EventDetail from '@/components/EventDetail.astro';
 import { events, eventBySlug, ACADEMICS_GROUP } from '@/data/events';
 
-// Academics & Practicum events are served from /academics-practicum/[slug].
+// Academics events are served from /academics/[slug].
 export const getStaticPaths = (() =>
   events
     .filter((e) => e.group !== ACADEMICS_GROUP)

@@ -47,7 +47,7 @@
 
   --container-site: var(--container);
 
-  /* The primary nav carries eleven items; it only fits from here up, so the
+  /* The primary nav carries ten items; it only fits from here up, so the
      header switches to its menu button below this width (not at `xl`). */
   --breakpoint-nav: 84rem;
 }

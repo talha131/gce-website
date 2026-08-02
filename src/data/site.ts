@@ -32,7 +32,7 @@ export const nav = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Programs', href: '/programs' },
-  { label: 'Academics & Practicum', href: '/academics-practicum' },
+  { label: 'Academics', href: '/academics' },
   { label: 'Admissions', href: '/admissions' },
   { label: 'Faculty', href: '/faculty' },
   { label: 'Campus', href: '/campus' },
