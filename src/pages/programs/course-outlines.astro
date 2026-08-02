@@ -5,6 +5,8 @@
 import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
 import Section from '@/components/Section.astro';
+import SectionNav from '@/components/SectionNav.astro';
+import { programsNav } from '@/data/programs';
 import { outlineSets, outlineCourseCount } from '@/data/outlines';
 import { getSingle } from '@/lib/images';
 
@@ -22,11 +24,18 @@ const hero = getSingle('heroes', 'programs');
     image={hero}
     imageAlt="A GCE classroom"
     imagePosition="center 45%"
-  />
+  >
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/programs" class="btn btn-ghost !text-white !border-white/30 hover:!bg-white/10">All programs</a>
+    </div>
+  </PageHero>
+  <SectionNav items={programsNav} current={Astro.url.pathname} label="Programs" />
 
   <!-- Jump nav: anchors rather than pages, so it is built here instead of
-       reusing SectionNav (which matches on pathname). -->
-  <nav class="sticky top-[var(--header-h)] z-30 bg-surface/95 backdrop-blur border-b border-line" aria-label="Outline sets">
+       reusing SectionNav (which matches on pathname). Deliberately NOT sticky —
+       the section-level SectionNav above owns the sticky slot at
+       top-[var(--header-h)], and two bars at the same offset would overlap. -->
+  <nav class="bg-surface border-b border-line" aria-label="Outline sets">
     <div class="container-site">
       <ul class="flex flex-wrap gap-2 py-3">
         {outlineSets.map((set) => (

@@ -98,4 +98,14 @@ export const programs: Program[] = [
   },
 ];
 
+/**
+ * Programs section sub-pages, in menu order. Drives SectionNav.
+ * Full `name` (not `shortName`) is deliberate — the two 2.5-Year programs share
+ * a `shortName` and are only distinguishable by their (Morning)/(Evening) suffix.
+ */
+export const programsNav = [
+  ...programs.map((p) => ({ label: p.name, href: `/programs/${p.slug}` })),
+  { label: 'Course Outlines', href: '/programs/course-outlines' },
+];
+
 export const programBySlug = (slug: string) => programs.find((p) => p.slug === slug);

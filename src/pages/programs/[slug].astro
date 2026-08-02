@@ -5,7 +5,7 @@ import PageHero from '@/components/PageHero.astro';
 import SectionNav from '@/components/SectionNav.astro';
 import Section from '@/components/Section.astro';
 import Reveal from '@/components/Reveal.astro';
-import { programs, programBySlug } from '@/data/programs';
+import { programs, programBySlug, programsNav } from '@/data/programs';
 import { site } from '@/data/site';
 
 export const getStaticPaths = (() =>
@@ -13,10 +13,6 @@ export const getStaticPaths = (() =>
 
 const { slug } = Astro.params;
 const program = programBySlug(slug!)!;
-
-// Sibling jumper: full name (not shortName) so the two 2.5-Year programs,
-// which share a shortName, stay distinguishable by their (Morning)/(Evening) suffix.
-const programNav = programs.map((p) => ({ label: p.name, href: `/programs/${p.slug}` }));
 
 const facts = [
   { label: 'Shift', value: program.shift },
@@ -34,7 +30,7 @@ const others = programs.filter((p) => p.slug !== program.slug);
       <a href="/programs" class="btn btn-ghost !text-white !border-white/30 hover:!bg-white/10">All programs</a>
     </div>
   </PageHero>
-  <SectionNav items={programNav} current={Astro.url.pathname} label="Programs" />
+  <SectionNav items={programsNav} current={Astro.url.pathname} label="Programs" />
 
   <!-- Quick facts -->
   <div class="bg-surface border-b border-line">
