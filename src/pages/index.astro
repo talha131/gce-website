@@ -7,9 +7,11 @@ import Reveal from '@/components/Reveal.astro';
 import StatCounter from '@/components/StatCounter.astro';
 import ProgramCard from '@/components/ProgramCard.astro';
 import FacilityCard from '@/components/FacilityCard.astro';
+import EventCard from '@/components/EventCard.astro';
 import { site } from '@/data/site';
 import { programs } from '@/data/programs';
 import { facilities } from '@/data/facilities';
+import { eventsInGroup, ACADEMICS_GROUP } from '@/data/events';
 import { principal, testimonials } from '@/data/about';
 import { conference } from '@/data/achievements';
 import { getSingle } from '@/lib/images';
@@ -18,6 +20,9 @@ const homeHero = getSingle('heroes', 'home');
 const principalPhoto = getSingle('principal', 'principal');
 const featuredFacilities = ['it-zone', 'library', 'counseling-centre', 'micro-teaching-lab', 'ict-lab', 'sports']
   .map((s) => facilities.find((f) => f.slug === s)!)
+  .filter(Boolean);
+const academicYear = ['teaching-practice', 'internal-exams']
+  .map((s) => eventsInGroup(ACADEMICS_GROUP).find((e) => e.slug === s)!)
   .filter(Boolean);
 ---
 
@@ -105,7 +110,7 @@ const featuredFacilities = ['it-zone', 'library', 'counseling-centre', 'micro-te
     <div class="grid gap-6 md:grid-cols-3">
       {[
         { t: '70+ years of teacher education', d: 'From a 1953 training programme to a permanent home at Federal B Area, GCE has shaped generations of educators.' },
-        { t: 'Practice, not just theory', d: 'A dedicated Micro-Teaching Lab, Teachers’ Resource Centre and real school practicums build confident teachers.' },
+        { t: 'Practice, not just theory', d: 'A dedicated Micro-Teaching Lab and Teachers’ Resource Centre turn method into habit before students ever face a class.' },
         { t: 'Care for the whole student', d: 'Sindh’s first college Psychological Guidance & Counseling Centre supports students beyond the classroom.' },
       ].map((f, i) => (
         <Reveal delay={i * 90} class="card p-7 text-left h-full">
@@ -114,6 +119,20 @@ const featuredFacilities = ['it-zone', 'library', 'counseling-centre', 'micro-te
           <p class="mt-2 text-ink-soft leading-relaxed">{f.d}</p>
         </Reveal>
       ))}
+    </div>
+  </Section>
+
+  <!-- ==================================================== ACADEMIC YEAR -->
+  <Section
+    kicker="Academics"
+    title="Where the degree is <span class='accent-italic'>actually earned</span>"
+    lead="Every student is placed in a real school and teaches real classes under supervision — and internal examinations close every semester."
+  >
+    <div class="grid gap-6 md:grid-cols-2">
+      {academicYear.map((e, i) => <EventCard event={e} delay={i * 80} />)}
+    </div>
+    <div class="mt-10 text-center" data-reveal>
+      <a href="/academics" class="btn btn-primary">See the academic year →</a>
     </div>
   </Section>
 
