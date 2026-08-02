@@ -142,12 +142,16 @@ export const facilities: Facility[] = [
     slug: 'podcast-studio',
     name: 'Podcast Studio',
     category: 'Labs',
-    badge: 'Content Creation',
-    blurb: 'A well-equipped studio for recording podcasts and educational videos.',
+    badge: 'The only college podcast in Karachi',
+    highlight:
+      'GCE is a pioneer here: it is the only college in Karachi running its own official podcast — and, as far as we know, the only government institution in Pakistan to do so.',
+    blurb:
+      'Home of “Teach Forward — The Voice of GCE”, the college’s own official podcast, recorded in a purpose-built studio on campus.',
     body: [
-      'GCE has a well-equipped podcast studio inside the college for recording podcasts and other videos in a peaceful, comfortable environment.',
-      'It features an attractive backdrop suited to professional recording, good-quality microphones, camera stands and tripods, and ring lights and other lighting to keep the video bright. Chairs and tables are arranged to the camera angle.',
-      'A general management team handles the recording process, with a separate backup team on hand for any technical issues.',
+      'The college produces its own official podcast — “Teach Forward: The Voice of GCE” — written, hosted, recorded and published entirely in-house, from a purpose-built studio on campus.',
+      'That makes this more than a facility. It is a platform: students and faculty sit down on camera to talk about teaching, learning, campus life and the ideas behind them, and every episode is produced end to end by the college itself.',
+      'The studio is equipped for professional recording — an attractive purpose-painted backdrop, good-quality microphones, camera stands and tripods, and ring lights and other lighting to keep the video bright, with chairs and tables arranged to the camera angle. It stays a peaceful, comfortable space to record in.',
+      'A general management team handles the recording process, with a separate backup team on hand for any technical issues. Students take part on both sides of the camera, as hosts and guests and as part of the production crew.',
     ],
   },
   {
