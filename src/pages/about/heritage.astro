@@ -21,13 +21,17 @@ const { collegeAnthem, dua, nationalAnthem } = anthemAndDua;
   <Section tone="brand" title="Anthem &amp; Dua" center>
     <div class="grid lg:grid-cols-2 gap-6">
       <div class="lg:col-span-2">
-        <UrduBlock {...collegeAnthem} />
+        <UrduBlock {...collegeAnthem}>
+          <AudioPlayer
+            src="/media/college-anthem.mp3"
+            title="College Anthem"
+            downloadName="GCE-College-Anthem.mp3"
+            variant="inline"
+          />
+        </UrduBlock>
       </div>
       <UrduBlock {...dua} />
       <UrduBlock {...nationalAnthem} />
-    </div>
-    <div class="mt-10" data-reveal>
-      <AudioPlayer src="/media/college-anthem.mp3" title="College Anthem" downloadName="GCE-College-Anthem.mp3" />
     </div>
   </Section>
 </Layout>
