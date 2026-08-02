@@ -18,6 +18,11 @@ const images = getGallery('facilities', facility.slug);
 const siblings = facilities
   .filter((f) => f.category === facility.category)
   .map((f) => ({ label: f.name, href: `/campus/${f.slug}` }));
+// A facility with its own pill in campusNav shows the campus row (with its own
+// pill active) instead of its category siblings — matching what the visitor clicked.
+const promoted = campusNav.some((n) => n.href === `/campus/${facility.slug}`);
+const navItems = promoted ? campusNav : siblings;
+const navLabel = promoted ? 'Campus' : facility.category;
 const related = facilities.filter((f) => f.category === facility.category && f.slug !== facility.slug).slice(0, 3);
 // Back-link goes to this facility's own category page (not the /campus landing).
 const backHref = campusNav.find((n) => n.label === facility.category)?.href ?? '/campus';
@@ -32,7 +37,7 @@ const backHref = campusNav.find((n) => n.label === facility.category)?.href ?? '
       <span class="mt-6 inline-block text-sm font-semibold px-3 py-1.5 rounded-full bg-gold text-brand-950">{facility.badge}</span>
     )}
   </PageHero>
-  {siblings.length > 1 && <SectionNav items={siblings} current={Astro.url.pathname} label={facility.category} />}
+  {navItems.length > 1 && <SectionNav items={navItems} current={Astro.url.pathname} label={navLabel} />}
 
   <Section space="md">
     <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-12">

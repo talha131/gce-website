@@ -287,6 +287,7 @@ export const facilityCategories = [
 export const campusNav = [
   { label: 'Academic', href: '/campus' },
   { label: 'Labs', href: '/campus/labs' },
+  { label: 'Podcast Studio', href: '/campus/podcast-studio' },
   { label: 'Student Support', href: '/campus/student-support' },
   { label: 'Grounds & Amenities', href: '/campus/grounds-amenities' },
 ] as const;
