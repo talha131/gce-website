@@ -51,7 +51,7 @@ const mapLink = 'https://maps.app.goo.gl/7eeCaKY1oFRzrdc59';
           <p class="text-xs uppercase tracking-wider text-ink-soft mb-3">Follow us</p>
           <div class="flex flex-wrap gap-2">
             {socials.map((s) => (
-              <a href={s.href} target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-medium px-3.5 py-2 rounded-full border border-line hover:border-brand hover:bg-brand-tint transition-colors">
+              <a href={s.href} target="_blank" rel="noopener" class="social-pill gap-2 text-sm font-medium px-3.5 py-2" style={`--p:${s.color}`}>
                 <SocialIcon name={s.name} />
                 {s.name}
               </a>
