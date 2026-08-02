@@ -106,7 +106,8 @@ Content lives in **`src/data/`** — plain typed TS files, no CMS:
 | `programs.ts` | The four academic programs |
 | `faculty.ts` | Education Department & administrative staff |
 | `facilities.ts` | Campus facilities |
-| `events.ts` | Student-life events |
+| `events.ts` | Student-life events, and the Academics & Practicum section |
+| `outlines.ts` | Course outlines by programme and semester (PDFs in `public/course-outlines/`) |
 | `achievements.ts` | Alumni honours, ICEEC 2025 conference, action research |
 | `contributors.ts` | Student website contributors (colophon) |
 
@@ -139,9 +140,6 @@ and photos (each is flagged with `isFiller: true` in the data files):
   (`isFiller: true`).
 - **Farewell** and **Eid Milad-un-Nabi** events (`events.ts`) — filler descriptions
   (the source folders had photos but no text; `isFiller: true`).
-- **Podcast Studio** — no photos in the source, so it shows a branded placeholder
-  (logo on an indigo gradient). Add photos to
-  `src/assets/content/facilities/podcast-studio/` to replace it.
 - **Faculty/staff without photos** (several administrative staff) — shown with an
   elegant monogram avatar. Add `src/assets/content/faculty/<Folder_Name>.jpg` to
   replace.
