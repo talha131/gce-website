@@ -15,6 +15,8 @@ export interface Person {
   email?: string;
   /** Personal website without protocol, e.g. 'talhamansoor.com'. */
   website?: string;
+  /** Set where a member has left the college; renders a muted pill + tenure line. */
+  former?: { label: string; years: string };
 }
 
 /**
@@ -34,7 +36,7 @@ export const educationDept: Person[] = [
   { name: 'Prof. Asim Ahmed', folder: 'Prof_Asim_Ahmed', quals: ['Ph.D. (Education) — Thesis Submitted', 'M.Phil. (Education)', 'M.Ed., M.A. (Urdu)'] },
   { name: 'Prof. Sharjeel Ahmed', folder: 'Prof_Sharjeel_Ahmed', quals: ['Ph.D. (Teacher Education) — In Progress', 'M.Phil. (Educational Leadership & Management)', 'M.Ed. / M.A. / Dip-ECED / EYFS (UK)'], email: 'sharjeel@gce.edu.pk' },
   { name: 'Prof. Tabassum Kausar', folder: 'Prof_Tabbasum_Kausar', title: 'Assistant Professor', quals: ['Ph.D. (Teacher Education) — In Progress', 'M.Phil. (Education)', 'M.Ed.'], email: 'tabbasum@gce.edu.pk' },
-  { name: 'Prof. Shagufta', folder: 'Prof_Shagufta', quals: ['Ph.D. (Education) — In Progress', 'M.Phil. (Education)', 'B.Ed. (Hons.)'], email: 'shagufta@gce.edu.pk' },
+  { name: 'Prof. Shagufta', folder: 'Prof_Shagufta', quals: ['Ph.D. (Education) — In Progress', 'M.Phil. (Education)', 'B.Ed. (Hons.)'], former: { label: 'Transferred', years: '2023 – 2026' } },
   { name: 'Prof. Muhammad Akbar', folder: 'Prof_Muhammad_Akbar', quals: ['M.Phil. (Education)', 'M.Ed.'] },
   { name: 'Prof. Rashid Ali', folder: 'Prof_Rashid_Ali', quals: ['M.Phil. (Education)', 'M.Ed.', 'M.A. (Economics)'], email: 'rashidali@gce.edu.pk' },
   { name: 'Prof. Waseem Sajjad', folder: 'Prof_Waseem_Sajjad', quals: ['M.Phil. (Education)', 'M.Ed. / B.Sc.'] },
