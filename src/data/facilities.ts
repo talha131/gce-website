@@ -31,19 +31,6 @@ export const facilities: Facility[] = [
     ],
   },
   {
-    slug: 'micro-teaching-lab',
-    name: 'Micro-Teaching Lab',
-    category: 'Academic',
-    badge: 'Recently established',
-    blurb: 'A dedicated training facility where student-teachers refine their craft through the micro-teaching cycle.',
-    body: [
-      'The Micro-Teaching Lab is a professional training facility designed to strengthen the teaching competencies of prospective teachers through structured, practice-based learning in a controlled, supportive environment.',
-      'It was recently established under the supervision of Principal Prof. Zahoor Ahmed. The In-charge is Prof. Sharjeel Ahmed, an experienced master trainer with active association with international teacher-education organisations.',
-      'The lab operates on the recognised Micro-Teaching Cycle — Plan → Teach → Feedback → Re-plan → Re-teach → Re-feedback — helping teachers develop core skills such as lesson planning, questioning, explanation, reinforcement and classroom management, and bridging the gap between theory and classroom practice.',
-    ],
-    note: 'In-charge: Prof. Sharjeel Ahmed',
-  },
-  {
     slug: 'teachers-resource-centre',
     name: "Teachers' Resource Centre",
     category: 'Academic',
@@ -137,6 +124,19 @@ export const facilities: Facility[] = [
       'The Science Education Centre is equipped with higher-level machinery to support advanced scientific practical work at the college.',
     ],
     isFiller: true,
+  },
+  {
+    slug: 'micro-teaching-lab',
+    name: 'Micro-Teaching Lab',
+    category: 'Labs',
+    badge: 'Recently established',
+    blurb: 'A dedicated training facility where student-teachers refine their craft through the micro-teaching cycle.',
+    body: [
+      'The Micro-Teaching Lab is a professional training facility designed to strengthen the teaching competencies of prospective teachers through structured, practice-based learning in a controlled, supportive environment.',
+      'It was recently established under the supervision of Principal Prof. Zahoor Ahmed. The In-charge is Prof. Sharjeel Ahmed, an experienced master trainer with active association with international teacher-education organisations.',
+      'The lab operates on the recognised Micro-Teaching Cycle — Plan → Teach → Feedback → Re-plan → Re-teach → Re-feedback — helping teachers develop core skills such as lesson planning, questioning, explanation, reinforcement and classroom management, and bridging the gap between theory and classroom practice.',
+    ],
+    note: 'In-charge: Prof. Sharjeel Ahmed',
   },
   {
     slug: 'podcast-studio',
