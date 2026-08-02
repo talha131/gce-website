@@ -106,7 +106,7 @@ export interface Milestone {
 export const milestones: Milestone[] = [
   {
     key: 'podcast',
-    kicker: 'A first in Karachi',
+    kicker: 'A first for College Education Department, Sindh',
     title: 'Teach Forward — The Voice of GCE',
     detail:
       'GCE is the only college in Karachi running its own official podcast — and, as far as we know, the only government institution in Pakistan to do so. Every episode is written, hosted, recorded and published in-house, from a purpose-built studio on campus.',
@@ -124,7 +124,7 @@ export const milestones: Milestone[] = [
   },
   {
     key: 'conference',
-    kicker: 'A first for the college',
+    kicker: 'A first for College Education Department, Sindh',
     title: 'ICEEC 2025 — 1st International Conference',
     detail:
       'GCE hosted its first-ever International Conference on Embracing Educational Change in January 2025, organised by the DG Colleges Sindh in collaboration with the college, focused on integrating emerging technologies into teaching and learning.',

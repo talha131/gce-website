@@ -158,7 +158,7 @@ export const facilities: Facility[] = [
     slug: 'counseling-centre',
     name: 'Psychological Guidance & Counseling Centre',
     category: 'Student Support',
-    badge: 'First of its kind in Sindh',
+    badge: 'A first for College Education Department, Sindh',
     blurb: 'The first college centre of its kind in Sindh, caring for students’ mental and emotional well-being.',
     body: [
       'GCE is the first college in Sindh to establish a dedicated psychological guidance and counselling centre for its students.',
