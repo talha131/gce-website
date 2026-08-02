@@ -10,11 +10,19 @@ interface Props {
   title: string;
   /** Suggested download filename. */
   downloadName?: string;
+  /** 'card' stands alone; 'inline' drops the card chrome for nesting inside one. */
+  variant?: 'card' | 'inline';
 }
-const { src, title, downloadName = 'college-anthem.mp3' } = Astro.props;
+const { src, title, downloadName = 'college-anthem.mp3', variant = 'card' } = Astro.props;
 ---
 
-<div class="card p-6 md:p-7 max-w-xl mx-auto" data-audio>
+<div
+  class:list={[
+    'max-w-xl mx-auto',
+    variant === 'card' ? 'card p-6 md:p-7' : 'rounded-[var(--radius-sm)] bg-brand-tint/60 p-4 md:p-5',
+  ]}
+  data-audio
+>
   <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
     <button
       type="button"
@@ -37,7 +45,7 @@ const { src, title, downloadName = 'college-anthem.mp3' } = Astro.props;
     </a>
   </div>
 
-  <audio data-audio-el preload="none" controls class="mt-5 w-full">
+  <audio data-audio-el preload="none" controls class="mt-4 w-full">
     <source src={src} type="audio/mpeg" />
     Your browser does not support the audio element.
     <a href={src} download={downloadName}>Download the {title}</a>.
