@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import logo from '@/assets/brand/logo.png';
+import SocialIcon from './SocialIcon.astro';
 import { site, socials, nav } from '@/data/site';
 ---
 
@@ -27,8 +28,9 @@ import { site, socials, nav } from '@/data/site';
               href={s.href}
               target="_blank"
               rel="me noopener"
-              class="text-xs font-medium px-3 py-1.5 rounded-full border border-white/20 hover:border-gold hover:text-gold transition-colors"
+              class="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border border-white/20 hover:border-gold hover:text-gold transition-colors"
             >
+              <SocialIcon name={s.name} size={14} />
               {s.name}
             </a>
           ))}
