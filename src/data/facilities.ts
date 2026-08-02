@@ -12,6 +12,8 @@ export interface Facility {
   body: string[];
   note?: string;
   badge?: string;
+  /** One line lifted above the body as a callout, for a genuinely distinctive facility. */
+  highlight?: string;
   isFiller?: boolean;
 }
 

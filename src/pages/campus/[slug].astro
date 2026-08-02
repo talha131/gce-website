@@ -37,6 +37,11 @@ const backHref = campusNav.find((n) => n.label === facility.category)?.href ?? '
   <Section space="md">
     <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-12">
       <div class="space-y-5 text-lg text-ink leading-relaxed" data-reveal>
+        {facility.highlight && (
+          <p class="rounded-[var(--radius-sm)] border-l-4 border-gold bg-gold/10 px-5 py-4 font-medium text-brand-deep">
+            {facility.highlight}
+          </p>
+        )}
         {facility.body.map((p) => <p>{p}</p>)}
       </div>
       <aside class="h-fit" data-reveal>
