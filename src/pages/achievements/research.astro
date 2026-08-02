@@ -8,16 +8,25 @@ import { achievementsNav, actionResearch } from '@/data/achievements';
 
 <Layout
   title="Student Research"
-  description="Action-research projects completed by B.Ed. students at Government College of Education, Karachi — classroom management, cooperative learning, teaching aids and more."
+  description="Action-research is a standing requirement of every B.Ed. degree at Government College of Education, Karachi. Read the published student papers in full."
 >
   <PageHero size="compact" kicker="Achievements" title="Research" />
   <SectionNav items={achievementsNav} current={Astro.url.pathname} label="Achievements" />
 
   <!-- Student research -->
-  <Section kicker="Student Research" title="Action-research by our students" space="md">
-    <p class="max-w-2xl text-ink-soft -mt-6 mb-10" data-reveal>
-      A selection of action-research projects completed by GCE B.Ed. students in the Education Department.
-    </p>
+  <Section kicker="Student Research" title="Action-research is part of how we teach" space="md">
+    <div class="max-w-2xl -mt-6 mb-10 space-y-4 text-ink-soft" data-reveal>
+      <p>
+        Every B.Ed. student at GCE completes and defends an original action-research study before
+        graduating. It is a standing requirement of the degree, not a one-off initiative — each
+        cohort investigates a real problem in a real classroom, under a faculty supervisor, and
+        publishes the result.
+      </p>
+      <p>
+        New papers are added here as each final-semester group completes its work. The reports below
+        are published in full.
+      </p>
+    </div>
     <ol class="space-y-4">
       {actionResearch.map((r, i) => (
         <li class="card card-hover p-6 flex flex-col sm:flex-row sm:items-center gap-4" data-reveal style={`--reveal-delay:${(i % 3) * 60}ms`}>
