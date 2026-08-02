@@ -118,11 +118,14 @@ export const conference = {
   note: 'Conference overview by Prof. Sharjeel Ahmed (Lecturer, GCE). Supervised by Prof. Dr. Navaid Rab Siddiqui (DG Colleges Sindh) and Prof. Dr. Zahoor Ahmed (Principal, GCE).',
 };
 
-/** Student action-research titles (titles only — no downloads). */
+/**
+ * Student action-research papers. `pdf` is the full report under /public/research
+ * — every final-semester cohort adds to this list, so it grows each year.
+ */
 export const actionResearch = [
-  { title: 'Effective Strategies of Classroom Management to Reduce Disruptions in Grade VI', student: 'Hafiz Muhammad Mujtaba Saleem', supervisor: 'Prof. Tabassum Kausar' },
-  { title: 'Breaking Traditional Norms: Implementing Cooperative Learning Strategies in the Social Studies Classroom', student: 'Yumna Mahmood', supervisor: 'Prof. Tabassum Kausar' },
-  { title: 'The Impact of Teaching Aids on Students’ Learning in Science', student: 'Huma Liaquat Ali', supervisor: 'Prof. Tabassum Kausar' },
-  { title: 'Using Discrepant Events in the Science Classroom to Enhance Students’ Engagement at Grade 6', student: 'Bisma Hayat', supervisor: 'Prof. Tabassum Kausar' },
-  { title: 'Encouraging Water Conservation in Schools: The Impact of Awareness Campaigns on Grade 7 Students', student: 'Maleeha Khan', supervisor: 'Prof. Shagufta Khokhar' },
+  { title: 'Effective Strategies of Classroom Management to Reduce Disruptions in Grade VI', student: 'Hafiz Muhammad Mujtaba Saleem', supervisor: 'Prof. Tabassum Kausar', year: '2024', pdf: '/research/classroom-management-grade-6.pdf' },
+  { title: 'Breaking Traditional Norms: Implementing Cooperative Learning Strategies in the Social Studies Classroom', student: 'Yumna Mahmood', supervisor: 'Prof. Tabassum Kausar', year: '2025', pdf: '/research/cooperative-learning-social-studies.pdf' },
+  { title: 'The Impact of Teaching Aids on Students’ Learning in Science', student: 'Huma Liaquat Ali', supervisor: 'Prof. Tabassum Kausar', year: '2025', pdf: '/research/teaching-aids-science.pdf' },
+  { title: 'Using Discrepant Events in the Science Classroom to Enhance Students’ Engagement at Grade 6', student: 'Bisma Hayat', supervisor: 'Prof. Tabassum Kausar', year: '2023', pdf: '/research/discrepant-events-science.pdf' },
+  { title: 'Encouraging Water Conservation in Schools: The Impact of Awareness Campaigns on Grade 7 Students', student: 'Maleeha Khan', supervisor: 'Prof. Shagufta Khokhar', year: '2025', pdf: '/research/water-conservation-grade-7.pdf' },
 ];

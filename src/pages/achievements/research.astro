@@ -20,12 +20,26 @@ import { achievementsNav, actionResearch } from '@/data/achievements';
     </p>
     <ol class="space-y-4">
       {actionResearch.map((r, i) => (
-        <li class="card p-6 flex flex-col sm:flex-row sm:items-center gap-4" data-reveal style={`--reveal-delay:${(i % 3) * 60}ms`}>
+        <li class="card card-hover p-6 flex flex-col sm:flex-row sm:items-center gap-4" data-reveal style={`--reveal-delay:${(i % 3) * 60}ms`}>
           <span class="font-display text-2xl font-semibold text-brand/40 shrink-0">{String(i + 1).padStart(2, '0')}</span>
-          <div>
-            <p class="font-medium text-ink leading-snug">{r.title}</p>
-            <p class="mt-1 text-sm text-ink-soft">{r.student} · supervised by {r.supervisor}</p>
+          <div class="flex-1">
+            <p class="font-medium text-ink leading-snug">
+              <a href={r.pdf} target="_blank" rel="noopener" class="hover:text-brand focus-visible:text-brand">
+                {r.title}
+              </a>
+            </p>
+            <p class="mt-1 text-sm text-ink-soft">{r.student} · supervised by {r.supervisor} · {r.year}</p>
           </div>
+          <a
+            href={r.pdf}
+            target="_blank"
+            rel="noopener"
+            class="btn btn-ghost !py-2.5 !px-5 text-sm shrink-0 self-start sm:self-auto"
+            aria-label={`Read the full paper: ${r.title} (PDF)`}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+            Read paper
+          </a>
         </li>
       ))}
     </ol>
