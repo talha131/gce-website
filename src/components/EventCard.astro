@@ -1,7 +1,7 @@
 ---
 import CoverImage from './CoverImage.astro';
 import { getCover } from '@/lib/images';
-import type { CollegeEvent } from '@/data/events';
+import { eventHref, type CollegeEvent } from '@/data/events';
 
 interface Props {
   event: CollegeEvent;
@@ -9,7 +9,7 @@ interface Props {
 }
 const { event, delay = 0 } = Astro.props;
 const cover = getCover('events', event.slug);
-const href = `/student-life/${event.slug}`;
+const href = eventHref(event);
 ---
 
 <article class="card card-hover overflow-hidden flex flex-col" data-reveal style={delay ? `--reveal-delay:${delay}ms` : undefined}>

@@ -3,3 +3,10 @@
 # inbound links. Not HTML pages, so they never enter the generated sitemap.
 /achievements/honours   /achievements   301
 /about/mission-vision   /about          301
+
+# Academics & Practicum moved out of Student Life to its own top-level section.
+/student-life/academics-practicum   /academics-practicum                    301
+/student-life/teaching-practice     /academics-practicum/teaching-practice  301
+/student-life/internal-exams        /academics-practicum/internal-exams     301
+/student-life/cr-elections          /academics-practicum/cr-elections       301
+/student-life/magazine              /academics-practicum/magazine           301

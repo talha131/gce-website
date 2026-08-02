@@ -1,0 +1,59 @@
+---
+/* One event's detail page: hero, sibling jumper, body, gallery and related
+   cards. Shared by the two event routes — /student-life/[slug] and
+   /academics-practicum/[slug] — so both sections render identically and the
+   only difference is which URL prefix the links hang off. */
+import PageHero from '@/components/PageHero.astro';
+import SectionNav from '@/components/SectionNav.astro';
+import Section from '@/components/Section.astro';
+import Gallery from '@/components/Gallery.astro';
+import { eventGroupHref, eventHref, eventsInGroup, type CollegeEvent } from '@/data/events';
+import { getGallery, getSingle } from '@/lib/images';
+
+interface Props {
+  event: CollegeEvent;
+}
+const { event } = Astro.props;
+
+const images = getGallery('events', event.slug);
+const hero = getSingle('heroes', event.slug);
+// Sibling jumper: events in the same group, current one included (active pill).
+const siblings = eventsInGroup(event.group).map((e) => ({ label: e.name, href: eventHref(e) }));
+const related = eventsInGroup(event.group).filter((e) => e.slug !== event.slug).slice(0, 4);
+const backHref = eventGroupHref(event.group);
+---
+
+<PageHero kicker={event.group} title={event.name} lead={event.blurb} image={hero} imageAlt={event.name}>
+  {event.date && <span class="mt-6 inline-block text-sm font-semibold px-3 py-1.5 rounded-full bg-white/10 text-gold-bright">{event.date}</span>}
+</PageHero>
+{siblings.length > 1 && <SectionNav items={siblings} current={Astro.url.pathname} label={event.group} />}
+
+<Section space="md">
+  <div class="max-w-3xl space-y-5 text-lg text-ink leading-relaxed" data-reveal>
+    {event.body.map((p) => <p>{p}</p>)}
+  </div>
+
+  {images.length > 0 && (
+    <div class="mt-14">
+      <h2 class="!text-2xl mb-6" data-reveal>Gallery</h2>
+      <Gallery images={images} altBase={event.name} columns={3} />
+    </div>
+  )}
+
+  <div class="mt-12" data-reveal>
+    <a href={backHref} class="btn btn-ghost">← Back to {event.group}</a>
+  </div>
+</Section>
+
+{related.length > 0 && (
+  <Section tone="tint" kicker="Related" title={`More in ${event.group}`} space="md">
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {related.map((e, i) => (
+        <a href={eventHref(e)} class="card card-hover p-5 block" data-reveal style={`--reveal-delay:${i * 60}ms`}>
+          <p class="font-display font-semibold text-brand-deep leading-snug">{e.name}</p>
+          {e.date && <p class="mt-1 text-xs text-gold-deep font-semibold">{e.date}</p>}
+        </a>
+      ))}
+    </div>
+  </Section>
+)}

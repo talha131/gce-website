@@ -1,0 +1,40 @@
+---
+/* Academics & Practicum landing. A top-level section in its own right: this is
+   coursework — practicum placements, assessment, the magazine — not the
+   extracurricular life that lives under /student-life. */
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import Section from '@/components/Section.astro';
+import EventCard from '@/components/EventCard.astro';
+import { eventsInGroup, ACADEMICS_GROUP } from '@/data/events';
+import { getCover } from '@/lib/images';
+
+const items = eventsInGroup(ACADEMICS_GROUP);
+const hero = getCover('events', 'teaching-practice');
+---
+
+<Layout
+  title="Academics & Practicum"
+  description="Teaching practice in real schools, end-of-semester internal exams, class-representative elections and the college magazine — the academic year at Government College of Education, Karachi."
+>
+  <PageHero
+    kicker="Academics"
+    title="Academics &amp; <span class='accent-italic !text-gold-bright'>Practicum</span>"
+    lead="Where the degree is actually earned — real classrooms, real assessment, and the work students publish along the way."
+    image={hero}
+    imageAlt="GCE student-teachers on teaching practice in a school classroom"
+    imagePosition="center 40%"
+  />
+
+  <Section space="md">
+    <p class="max-w-2xl -mt-2 mb-10 text-lg text-ink-soft leading-relaxed" data-reveal>
+      Teaching practice is the heart of teacher education at GCE: every student is placed in a
+      school and teaches real classes under supervision. Around it sits the rest of the academic
+      year — internal examinations each semester, class-representative elections, and
+      <em>Mashal-e-Ilm</em>, the college magazine students write and produce themselves.
+    </p>
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {items.map((e, i) => <EventCard event={e} delay={(i % 3) * 70} />)}
+    </div>
+  </Section>
+</Layout>

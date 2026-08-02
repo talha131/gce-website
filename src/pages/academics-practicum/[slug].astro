@@ -2,13 +2,10 @@
 import type { GetStaticPaths } from 'astro';
 import Layout from '@/layouts/Layout.astro';
 import EventDetail from '@/components/EventDetail.astro';
-import { events, eventBySlug, ACADEMICS_GROUP } from '@/data/events';
+import { eventBySlug, eventsInGroup, ACADEMICS_GROUP } from '@/data/events';
 
-// Academics & Practicum events are served from /academics-practicum/[slug].
 export const getStaticPaths = (() =>
-  events
-    .filter((e) => e.group !== ACADEMICS_GROUP)
-    .map((e) => ({ params: { slug: e.slug } }))) satisfies GetStaticPaths;
+  eventsInGroup(ACADEMICS_GROUP).map((e) => ({ params: { slug: e.slug } }))) satisfies GetStaticPaths;
 
 const { slug } = Astro.params;
 const event = eventBySlug(slug!)!;

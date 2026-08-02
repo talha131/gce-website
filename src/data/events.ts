@@ -446,13 +446,37 @@ export const eventGroups: EventGroup[] = [
 ];
 
 /**
+ * Academics & Practicum is a top-level section of its own (/academics-practicum),
+ * not a Student Life sub-page — it is coursework, not extracurricular life. Its
+ * events still live in this array; only the URL they hang off differs.
+ */
+export const ACADEMICS_GROUP = 'Academics & Practicum' satisfies EventGroup;
+
+/** URL prefix the group's event-detail pages hang off. */
+const sectionPrefix = (group: EventGroup) =>
+  group === ACADEMICS_GROUP ? '/academics-practicum' : '/student-life';
+
+/** Canonical URL of an event's detail page. */
+export const eventHref = (event: Pick<CollegeEvent, 'slug' | 'group'>) =>
+  `${sectionPrefix(event.group)}/${event.slug}`;
+
+/** The landing page listing a group's events (where a detail page links "back" to). */
+export const eventGroupHref = (group: EventGroup) =>
+  group === ACADEMICS_GROUP
+    ? '/academics-practicum'
+    : (studentLifeNav.find((n) => n.label === group)?.href ?? '/student-life');
+
+/** Events in a group, in data order. */
+export const eventsInGroup = (group: EventGroup) => events.filter((e) => e.group === group);
+
+/**
  * Student Life group sub-pages, in menu order. Drives SectionNav.
  * Celebrations & National Days is the /student-life landing (no overview hub);
  * the rest are static pages that live alongside the event-detail [slug] route.
+ * Academics & Practicum is deliberately absent — it is its own top-level section.
  */
 export const studentLifeNav = [
   { label: 'Celebrations & National Days', href: '/student-life' },
-  { label: 'Academics & Practicum', href: '/student-life/academics-practicum' },
   { label: 'Workshops & Seminars', href: '/student-life/workshops-seminars' },
   { label: 'Competitions & Quizzes', href: '/student-life/competitions-quizzes' },
 ] as const;
