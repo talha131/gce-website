@@ -17,6 +17,16 @@ const steps = [
   'Attend Orientation Day — an introduction and tour of the college — before regular classes begin.',
 ];
 
+/** Two-page PDF in /public/forms: the admission form plus the attendance undertaking. */
+const admissionForm = '/forms/GCE-Admission-Form.pdf';
+
+const formContents = [
+  'Your program choice — one of the four degrees offered',
+  'Personal details, contact and CNIC / Form-B',
+  'Academic record: SSC, HSC and any bachelor’s degree',
+  'The undertaking on discipline and 75% attendance, signed by you and your parent or guardian',
+];
+
 const documents = [
   '5 passport-size photographs',
   'One copy of your Matric marksheet',
@@ -61,6 +71,47 @@ const documents = [
         </li>
       ))}
     </ol>
+  </Section>
+
+  <!-- Admission form download -->
+  <Section kicker="Before you visit" title="Download the admission form" space="md">
+    <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 items-start">
+      <Reveal>
+        <p class="text-lg text-ink-soft leading-relaxed">
+          The admission form and the attendance undertaking come as a single two-page PDF. Download
+          it, fill it in using block letters, and sign the undertaking before you come to the college.
+        </p>
+        <a
+          href={admissionForm}
+          download="GCE-Admission-Form.pdf"
+          class="btn btn-gold mt-6 !py-4 !px-7"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Download Admission Form
+        </a>
+        <p class="mt-3 text-sm text-ink-soft">PDF · 2 pages · form and undertaking</p>
+
+        <p class="mt-8 rounded-[var(--radius-sm)] border-l-4 border-gold bg-gold/10 px-5 py-4 font-semibold text-brand-deep">
+          Applicants are required to bring a printed copy of the completed admission form at the
+          time of submitting their application.
+        </p>
+      </Reveal>
+
+      <Reveal delay={120} class="card p-7">
+        <h3 class="!text-xl !text-brand-deep">What the form covers</h3>
+        <ul class="mt-4 space-y-2.5 text-ink-soft">
+          {formContents.map((item) => (
+            <li class="flex items-start gap-3">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" class="text-gold-deep mt-1 shrink-0" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-6 text-sm text-ink-soft">
+          Forms are also available from the admin office during the admission window.
+        </p>
+      </Reveal>
+    </div>
   </Section>
 
   <!-- Documents -->
