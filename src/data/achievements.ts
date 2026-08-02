@@ -86,6 +86,53 @@ export const honours: Honour[] = [
   },
 ];
 
+/**
+ * Institutional firsts the college is proudest of. Copy is condensed from the
+ * canonical sources (the podcast studio in facilities.ts, the magazine event in
+ * events.ts, and `conference` below) — no new claims. `cover` feeds
+ * src/lib/images.ts; the conference gallery has no slug subfolder.
+ */
+export interface Milestone {
+  /** Stable key; also lets the homepage pick a subset. */
+  key: 'podcast' | 'magazine' | 'conference';
+  kicker: string;
+  title: string;
+  detail: string;
+  href: string;
+  /** Where the cover photo comes from — see src/lib/images.ts. */
+  cover: { category: string; slug?: string };
+}
+
+export const milestones: Milestone[] = [
+  {
+    key: 'podcast',
+    kicker: 'A first in Karachi',
+    title: 'Teach Forward — The Voice of GCE',
+    detail:
+      'GCE is the only college in Karachi running its own official podcast — and, as far as we know, the only government institution in Pakistan to do so. Every episode is written, hosted, recorded and published in-house, from a purpose-built studio on campus.',
+    href: '/campus/podcast-studio',
+    cover: { category: 'facilities', slug: 'podcast-studio' },
+  },
+  {
+    key: 'magazine',
+    kicker: 'Published in-house',
+    title: 'Mashal-e-Ilm, the college magazine',
+    detail:
+      "The college publishes its own magazine, produced with an editor and sub-editors, carrying GCE's vision, mission and history alongside photographs kept as memories. Students contribute articles, stories and poetry, and selected work is published under their own name.",
+    href: '/academics/magazine',
+    cover: { category: 'events', slug: 'magazine' },
+  },
+  {
+    key: 'conference',
+    kicker: 'A first for the college',
+    title: 'ICEEC 2025 — 1st International Conference',
+    detail:
+      'GCE hosted its first-ever International Conference on Embracing Educational Change in January 2025, organised by the DG Colleges Sindh in collaboration with the college, focused on integrating emerging technologies into teaching and learning.',
+    href: '/achievements/conference',
+    cover: { category: 'conference' },
+  },
+];
+
 /** ICEEC 2025 — GCE's first International Conference. */
 export const conference = {
   name: 'ICEEC 2025',
