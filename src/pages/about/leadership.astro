@@ -31,6 +31,8 @@ const principalPhoto = getSingle('principal', 'principal');
           <div class="p-5 text-center">
             <p class="font-display text-xl text-brand-deep">{principal.name}</p>
             <p class="text-sm text-gold-deep font-semibold">{principal.title}</p>
+            <p class="mt-1 text-sm text-ink">{principal.qualification}</p>
+            <p class="text-sm text-ink-soft">{principal.alsoAt}</p>
             <p class="mt-1 text-xs text-ink-soft">{principal.tenure}</p>
             {principal.email && (
               <a href={`mailto:${principal.email}`} class="mt-2 inline-flex items-center gap-1.5 text-sm text-brand hover:text-brand-deep break-all">
