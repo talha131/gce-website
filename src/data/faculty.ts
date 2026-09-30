@@ -7,7 +7,10 @@
 export interface Person {
   name: string;
   folder: string;
+  /** Designation, e.g. 'Assistant Professor'. */
   title?: string;
+  /** Basic Pay Scale grade, e.g. 'BPS-18'. Shown after the designation. */
+  grade?: string;
   quals: string[];
   /** CSS object-position for the card photo, e.g. 'top' or 'center 25%'. Set only where the default centre crop clips the face. */
   focus?: string;
@@ -30,33 +33,33 @@ export const facultyNav = [
 
 /** Teaching faculty, Education Department. */
 export const educationDept: Person[] = [
-  { name: 'Prof. Dr. Ahmed Hussain Kolachi', folder: 'Prof_Dr_Ahmed_Hussain_Kolachi', quals: ['Ph.D. (Sindhi)', 'B.Ed.'] },
-  { name: 'Prof. Dr. Barkat Ali Dahri', folder: 'Prof_Dr_Barkat_Ali_Dahri', quals: ['Ph.D. (Sindhi)', 'M.A. (Sindhi)', 'LLB', 'B.Ed.'] },
-  { name: 'Prof. Dr. Sohail Ahmed', folder: 'Prof_Dr_Sohail_Ahmed', title: 'Associate Professor', quals: ['Ph.D. (Education)', 'M.A. (Education)'], email: 'drsohail@gce.edu.pk' },
-  { name: 'Prof. Asim Ahmed', folder: 'Prof_Asim_Ahmed', quals: ['Ph.D. (Education) — Thesis Submitted', 'M.Phil. (Education)', 'M.Ed., M.A. (Urdu)'] },
-  { name: 'Prof. Sharjeel Ahmed', folder: 'Prof_Sharjeel_Ahmed', quals: ['Ph.D. (Teacher Education) — In Progress', 'M.Phil. (Educational Leadership & Management)', 'M.Ed. / M.A. / Dip-ECED / EYFS (UK)'], email: 'sharjeel@gce.edu.pk' },
-  { name: 'Prof. Tabassum Kausar', folder: 'Prof_Tabbasum_Kausar', title: 'Assistant Professor', quals: ['Ph.D. (Teacher Education) — In Progress', 'M.Phil. (Education)', 'M.Ed.'], email: 'tabbasum@gce.edu.pk' },
-  { name: 'Prof. Shagufta', folder: 'Prof_Shagufta', quals: ['Ph.D. (Education) — In Progress', 'M.Phil. (Education)', 'B.Ed. (Hons.)'], former: { label: 'Transferred', years: '2023 – 2026' } },
-  { name: 'Prof. Muhammad Akbar', folder: 'Prof_Muhammad_Akbar', quals: ['M.Phil. (Education)', 'M.Ed.'] },
-  { name: 'Prof. Rashid Ali', folder: 'Prof_Rashid_Ali', quals: ['M.Phil. (Education)', 'M.Ed.', 'M.A. (Economics)'], email: 'rashidali@gce.edu.pk' },
+  { name: 'Prof. Dr. Ahmed Hussain Kolachi', folder: 'Prof_Dr_Ahmed_Hussain_Kolachi', title: 'Assistant Professor', grade: 'BPS-18', quals: ['Ph.D. (Sindhi)', 'B.Ed.'] },
+  { name: 'Prof. Dr. Barkat Ali Dahri', folder: 'Prof_Dr_Barkat_Ali_Dahri', title: 'Lecturer', grade: 'BPS-17', quals: ['Ph.D. (Sindhi)', 'M.A. (Sindhi)', 'LLB', 'B.Ed.'] },
+  { name: 'Prof. Dr. Sohail Ahmed', folder: 'Prof_Dr_Sohail_Ahmed', title: 'Associate Professor', grade: 'BPS-19', quals: ['Ph.D. (Education)', 'M.A. (Education)'], email: 'drsohail@gce.edu.pk' },
+  { name: 'Prof. Asim Ahmed', folder: 'Prof_Asim_Ahmed', title: 'Lecturer', grade: 'BPS-17', quals: ['Ph.D. (Education) — Thesis Submitted', 'M.Phil. (Education)', 'M.Ed., M.A. (Urdu)'] },
+  { name: 'Prof. Sharjeel Ahmed', folder: 'Prof_Sharjeel_Ahmed', title: 'Lecturer', grade: 'BPS-17', quals: ['Ph.D. (Teacher Education) — In Progress', 'M.Phil. (Educational Leadership & Management)', 'M.Ed. / M.A. / Dip-ECED / EYFS (UK)'], email: 'sharjeel@gce.edu.pk' },
+  { name: 'Prof. Tabassum Kausar', folder: 'Prof_Tabbasum_Kausar', title: 'Assistant Professor', grade: 'BPS-18', quals: ['Ph.D. (Teacher Education) — In Progress', 'M.Phil. (Education)', 'M.Ed.'], email: 'tabbasum@gce.edu.pk' },
+  { name: 'Prof. Shagufta', folder: 'Prof_Shagufta', title: 'Lecturer', grade: 'BPS-17', quals: ['Ph.D. (Education) — In Progress', 'M.Phil. (Education)', 'B.Ed. (Hons.)'], former: { label: 'Transferred', years: '2023 – 2026' } },
+  { name: 'Prof. Muhammad Akbar', folder: 'Prof_Muhammad_Akbar', title: 'Professor', grade: 'BPS-20', quals: ['M.Phil. (Education)', 'M.Ed.'] },
+  { name: 'Prof. Rashid Ali', folder: 'Prof_Rashid_Ali', title: 'Lecturer', grade: 'BPS-17', quals: ['M.Phil. (Education)', 'M.Ed.', 'M.A. (Economics)'], email: 'rashidali@gce.edu.pk' },
   { name: 'Prof. Waseem Sajjad', folder: 'Prof_Waseem_Sajjad', quals: ['M.Phil. (Education)', 'M.Ed. / B.Sc.'] },
   { name: 'Prof. Syeda Saeed Fatima', folder: 'Prof_Syeda_Saeed_Fatima', quals: ['M.Phil. (Education)', 'M.Ed., M.A.'] },
-  { name: 'Prof. Rabia Essa', folder: 'Prof_Rabia_Essa', quals: ['M.Phil. (Mathematics)', 'M.B.A.', 'M.Ed.'] },
-  { name: 'Prof. Safdar Abbas', folder: 'Prof_Safdar_Abbas', quals: ['M.Phil. (Urdu)', 'M.A. (Urdu) / M.A. (Islamic Studies)', 'M.Ed.', 'M.B.A. (Finance)'], email: 'safdar@gce.edu.pk' },
-  { name: 'Prof. Aoun Ali', folder: 'Prof_Aoun_Ali', quals: ['Ph.D. (Clinical Psychology) — In Progress', 'M.Phil. (Clinical Psychology)'], email: 'aoun.ali@gce.edu.pk' },
-  { name: 'Prof. Syed Mehdi Naqvi', folder: 'Prof_Syed_Mehdi_Naqvi', quals: ['M.Phil. (Clinical Psychology) — In Progress', 'B.S. (Clinical Psychology)'], email: 'mehdi@gce.edu.pk' },
-  { name: 'Prof. Syeda Nasreen Zehra', folder: 'Prof_Syeda_Nasreen_Zehra', quals: ['M.Phil. (English) — In Progress', 'M.A. (English)'] },
-  { name: 'Prof. Talha Mansoor', folder: 'Prof_Talha_Mansoor', quals: ['MS (Computer Science)'], email: 'talha@gce.edu.pk', website: 'talhamansoor.com' },
-  { name: 'Prof. Habib-un-Nabi', folder: 'Prof_Habib_un_Nabi', quals: ['M.Ed.', 'M.A. (Islamic Studies)', 'Certified Islamic Scholar'], email: 'habibunnabi@gce.edu.pk' },
-  { name: 'Prof. Farah Kanwal', folder: 'Prof_Farah_Kanwal', quals: ['M.A. (Islamic History)', 'M.Ed.'] },
-  { name: 'Prof. Ghulam Umar Mirani', folder: 'Prof_Ghulam_Umar_Mirani', quals: ['M.B.A.', 'M.Ed.'] },
-  { name: 'Prof. Rizwan Ahmed', folder: 'Prof_Rizwan_Ahmed', quals: ['M.Sc. (Chemistry)', 'B.Ed.'] },
-  { name: 'Prof. Nadeem Uddin', folder: 'Prof_Nadeem_Uddin', quals: ['M.Sc. (Chemistry)', 'M.Ed.'] },
-  { name: 'Prof. Irfat un Nisa', folder: 'Prof_Irfat_un_Nisa', quals: ['M.Sc. (Physics)'] },
-  { name: 'Prof. Waseem Ahmed Khan', folder: 'Prof_Waseem_Ahmed_Khan', quals: ['M.Sc. (Zoology)'] },
-  { name: 'Prof. Muhammad Rizwan', folder: 'Prof_Muhammad_Rizwan', quals: ['M.A. (Pakistan Studies)'] },
-  { name: 'Prof. Nouman Baqar', folder: 'Prof_Nouman_Baqar', quals: ['M.A. (Urdu)'], email: 'nbnaqvi@gce.edu.pk' },
-  { name: 'Muhammad Mustaqeem', folder: 'Muhammad_Mustaqeem', title: 'Senior Librarian', quals: ['Masters in Library & Information Science'] },
+  { name: 'Prof. Rabia Essa', folder: 'Prof_Rabia_Essa', title: 'Assistant Professor', grade: 'BPS-18', quals: ['M.Phil. (Mathematics)', 'M.B.A.', 'M.Ed.'] },
+  { name: 'Prof. Safdar Abbas', folder: 'Prof_Safdar_Abbas', title: 'Lecturer', grade: 'BPS-17', quals: ['M.Phil. (Urdu)', 'M.A. (Urdu) / M.A. (Islamic Studies)', 'M.Ed.', 'M.B.A. (Finance)'], email: 'safdar@gce.edu.pk' },
+  { name: 'Prof. Aoun Ali', folder: 'Prof_Aoun_Ali', title: 'Lecturer', grade: 'BPS-17', quals: ['Ph.D. (Clinical Psychology) — In Progress', 'M.Phil. (Clinical Psychology)'], email: 'aoun.ali@gce.edu.pk' },
+  { name: 'Prof. Syed Mehdi Naqvi', folder: 'Prof_Syed_Mehdi_Naqvi', title: 'Lecturer', grade: 'BPS-17', quals: ['M.Phil. (Clinical Psychology) — In Progress', 'B.S. (Clinical Psychology)'], email: 'mehdi@gce.edu.pk' },
+  { name: 'Prof. Syeda Nasreen Zehra', folder: 'Prof_Syeda_Nasreen_Zehra', title: 'Associate Professor', grade: 'BPS-19', quals: ['M.Phil. (English) — In Progress', 'M.A. (English)'] },
+  { name: 'Prof. Talha Mansoor', folder: 'Prof_Talha_Mansoor', title: 'Lecturer', grade: 'BPS-17', quals: ['MS (Computer Science)'], email: 'talha@gce.edu.pk', website: 'talhamansoor.com' },
+  { name: 'Prof. Habib-un-Nabi', folder: 'Prof_Habib_un_Nabi', title: 'Associate Professor', grade: 'BPS-19', quals: ['M.Ed.', 'M.A. (Islamic Studies)', 'Certified Islamic Scholar'], email: 'habibunnabi@gce.edu.pk' },
+  { name: 'Prof. Farah Kanwal', folder: 'Prof_Farah_Kanwal', title: 'Assistant Professor', grade: 'BPS-18', quals: ['M.A. (Islamic History)', 'M.Ed.'] },
+  { name: 'Prof. Ghulam Umar Mirani', folder: 'Prof_Ghulam_Umar_Mirani', title: 'Assistant Professor', grade: 'BPS-19', quals: ['M.B.A.', 'M.Ed.'] },
+  { name: 'Prof. Rizwan Ahmed', folder: 'Prof_Rizwan_Ahmed', title: 'Lecturer', grade: 'BPS-17', quals: ['M.Sc. (Chemistry)', 'B.Ed.'] },
+  { name: 'Prof. Nadeem Uddin', folder: 'Prof_Nadeem_Uddin', title: 'Lecturer', grade: 'BPS-17', quals: ['M.Sc. (Chemistry)', 'M.Ed.'] },
+  { name: 'Prof. Irfat un Nisa', folder: 'Prof_Irfat_un_Nisa', title: 'Lecturer', grade: 'BPS-17', quals: ['M.Sc. (Physics)'] },
+  { name: 'Prof. Waseem Ahmed Khan', folder: 'Prof_Waseem_Ahmed_Khan', title: 'Associate Professor', grade: 'BPS-19', quals: ['M.Sc. (Zoology)'] },
+  { name: 'Prof. Muhammad Rizwan', folder: 'Prof_Muhammad_Rizwan', title: 'Lecturer', grade: 'BPS-17', quals: ['M.A. (Pakistan Studies)'] },
+  { name: 'Prof. Nouman Baqar', folder: 'Prof_Nouman_Baqar', title: 'Associate Professor', grade: 'BPS-19', quals: ['M.A. (Urdu)'], email: 'nbnaqvi@gce.edu.pk' },
+  { name: 'Muhammad Mustaqeem', folder: 'Muhammad_Mustaqeem', title: 'Senior Librarian', grade: 'BPS-18', quals: ['Masters in Library & Information Science'] },
 ];
 
 /** Administrative & support staff. */
