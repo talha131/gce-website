@@ -103,9 +103,6 @@ export const programs: Program[] = [
  * Full `name` (not `shortName`) is deliberate — the two 2.5-Year programs share
  * a `shortName` and are only distinguishable by their (Morning)/(Evening) suffix.
  */
-export const programsNav = [
-  ...programs.map((p) => ({ label: p.name, href: `/programs/${p.slug}` })),
-  { label: 'Course Outlines', href: '/course-outlines' },
-];
+export const programsNav = programs.map((p) => ({ label: p.name, href: `/programs/${p.slug}` }));
 
 export const programBySlug = (slug: string) => programs.find((p) => p.slug === slug);
