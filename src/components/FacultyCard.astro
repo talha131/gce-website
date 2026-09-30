@@ -8,7 +8,7 @@ interface Props {
   person: Person;
 }
 const { person } = Astro.props;
-const photo = getSingle('faculty', person.folder);
+const photo = person.photo ? getSingle(person.photo.category, person.photo.name) : getSingle('faculty', person.folder);
 ---
 
 <article class="card card-hover overflow-hidden flex flex-col" data-reveal>

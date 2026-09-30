@@ -27,6 +27,10 @@ export interface Person {
   website?: string;
   /** Set where a member has left the college; renders a muted pill + tenure line. */
   former?: { label: string; years: string };
+  /** Use a portrait kept elsewhere under src/assets/content/ instead of faculty/<folder>. */
+  photo?: { category: string; name: string };
+  /** Listed ahead of the alphabetical order (the Principal). */
+  first?: boolean;
 }
 
 /**
@@ -113,9 +117,11 @@ export const adminStaff: Person[] = [
  * Faculty and staff are displayed in alphabetical order by given name,
  * ignoring the leading honorifics "Prof.", "Dr.", "Mr.", "Mrs." and "Ms."
  * (so "Prof. Dr. Ahmed Hussain Kolachi" sorts under "A"). "Syed"/"Syeda" are
- * part of the name, not honorifics, so they sort under "S".
+ * part of the name, not honorifics, so they sort under "S". A member marked
+ * `first` (the Principal) leads the list regardless.
  */
 const byName = (a: Person, b: Person) => {
+  if (a.first !== b.first) return a.first ? -1 : 1;
   const key = (n: string) => n.replace(/^(?:(?:Prof|Dr|Mr|Mrs|Ms)\.\s*)+/i, '');
   return key(a.name).localeCompare(key(b.name));
 };
