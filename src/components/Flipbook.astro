@@ -1,27 +1,27 @@
 ---
 /* Interactive magazine reader: a page-turning book (StPageFlip) with page
    controls, a thumbnail strip, zoom and full screen. Pages are pre-rendered
-   images (see src/data/magazine.ts), loaded a few at a time around the page
+   images (see src/lib/flipbook.ts), loaded a few at a time around the page
    being read, so opening the magazine never downloads the whole issue.
 
    Zoom swaps the flipbook for a plain, pannable view of the open page(s) at
    1.5–3×: dragging to pan and dragging to turn a page cannot share one
    gesture, so each mode owns its own. Without JS the thumbnail strip is still
    a list of links to every page image. */
-import { magazineIssues, type MagazineIssueKey } from '@/data/magazine';
+import type { FlipbookSource } from '@/lib/flipbook';
 
 interface Props {
-  issue: MagazineIssueKey;
+  book: FlipbookSource;
 }
-const { issue } = Astro.props;
-const mag = magazineIssues[issue];
+const { book: mag } = Astro.props;
 const pad = (n: number) => String(n).padStart(3, '0');
 const pages = Array.from({ length: mag.pageCount }, (_, i) => ({
   n: i + 1,
   src: `${mag.path}/pages/${pad(i + 1)}.webp`,
   thumb: `${mag.path}/thumbs/${pad(i + 1)}.webp`,
 }));
-const label = (n: number) => (n === 1 ? 'Front cover' : n === mag.pageCount ? 'Back cover' : `Page ${n}`);
+const label = (n: number) =>
+  mag.covers && n === 1 ? 'Front cover' : mag.covers && n === mag.pageCount ? 'Back cover' : `Page ${n}`;
 ---
 
 <section
@@ -82,7 +82,7 @@ const label = (n: number) => (n === 1 ? 'Front cover' : n === mag.pageCount ? 'B
   <div class="fb-stage" data-fb-stage>
     <div class="fb-book" data-fb-book>
       {pages.map((p) => (
-        <div class="fb-sheet" data-density={p.n === 1 || p.n === mag.pageCount ? 'hard' : 'soft'}>
+        <div class="fb-sheet" data-density={mag.covers && (p.n === 1 || p.n === mag.pageCount) ? 'hard' : 'soft'}>
           <img data-src={p.src} alt={`${mag.title}, ${label(p.n).toLowerCase()}`} width={mag.pageWidth} height={mag.pageHeight} draggable="false" />
         </div>
       ))}

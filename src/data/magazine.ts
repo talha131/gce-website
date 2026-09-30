@@ -8,17 +8,7 @@
  * themselves are not published: the magazine is read online, not downloaded.
  */
 
-export interface MagazineIssue {
-  title: string;
-  /** Shown under the title, e.g. the year on the cover. */
-  edition: string;
-  /** Public folder holding pages/ and thumbs/. */
-  path: string;
-  pageCount: number;
-  /** Pixel size of the page images; sets the book's aspect ratio. */
-  pageWidth: number;
-  pageHeight: number;
-}
+import type { FlipbookSource } from '@/lib/flipbook';
 
 export const magazineIssues = {
   'mashal-e-ilm-2024': {
@@ -28,7 +18,8 @@ export const magazineIssues = {
     pageCount: 82,
     pageWidth: 1132,
     pageHeight: 1600,
+    covers: true,
   },
-} satisfies Record<string, MagazineIssue>;
+} satisfies Record<string, FlipbookSource>;
 
 export type MagazineIssueKey = keyof typeof magazineIssues;

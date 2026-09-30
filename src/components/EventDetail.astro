@@ -8,6 +8,7 @@ import SectionNav from '@/components/SectionNav.astro';
 import Section from '@/components/Section.astro';
 import Gallery from '@/components/Gallery.astro';
 import Flipbook from '@/components/Flipbook.astro';
+import { magazineIssues } from '@/data/magazine';
 import { eventGroupHref, eventHref, eventsInGroup, type CollegeEvent } from '@/data/events';
 import { getGallery, getSingle } from '@/lib/images';
 
@@ -40,7 +41,7 @@ const backHref = eventGroupHref(event.group);
       <p class="mt-2 mb-6 max-w-2xl text-ink-soft" data-reveal>
         Turn the pages right here — drag a corner or use the arrows, zoom in to read, or go full screen.
       </p>
-      <Flipbook issue={event.flipbook} />
+      <Flipbook book={magazineIssues[event.flipbook]} />
     </div>
   )}
 
