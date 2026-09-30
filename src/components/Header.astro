@@ -42,7 +42,7 @@ const isActive = (href: string) =>
             href={item.href}
             aria-current={isActive(item.href) ? 'page' : undefined}
             class:list={[
-              'whitespace-nowrap px-2.5 py-2 rounded-full text-[0.83rem] font-medium transition-colors',
+              'whitespace-nowrap px-[0.45rem] py-2 rounded-full text-[0.83rem] font-medium transition-colors',
               isActive(item.href)
                 ? 'text-[var(--hdr-active)] bg-[var(--hdr-active-bg)]'
                 : 'text-[var(--hdr-fg-soft)] hover:text-[var(--hdr-fg)] hover:bg-[var(--hdr-hover-bg)]',
