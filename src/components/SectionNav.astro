@@ -1,8 +1,11 @@
 ---
 /* Sticky section-level menu: a bar of pill links that wraps (flex-wrap) so every
-   sub-page link stays visible on mobile — no horizontal scroll, no tap to reveal.
+   sub-page link stays visible — no horizontal scroll, no tap to reveal.
    Active pill is the current page, matched server-side from the pathname; works as
-   plain <a> links with JS disabled. Sits below PageHero and sticks under the header. */
+   plain <a> links with JS disabled. Sits below PageHero and sticks under the header.
+   On phones a long list (e.g. the eleven Workshops & Seminars pages) would wrap
+   into a sticky wall covering the content, so there the list caps its height and
+   scrolls on its own. */
 interface Item {
   label: string;
   href: string;
@@ -60,6 +63,19 @@ const isActive = (href: string) => norm(current) === norm(href);
     padding: 0;
     list-style: none;
   }
+  /* Phones: cap the list at ~2.5 rows so it never buries the page, and let it
+     scroll independently. The half row showing at the bottom signals there is
+     more. overscroll-behavior keeps a flick at the end from scrolling the page. */
+  @media (max-width: 767px) {
+    .section-nav ul {
+      max-height: min(6.9rem, 30vh);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      /* Room for the focus outline, which would otherwise be clipped. */
+      padding: 3px;
+      margin: -3px;
+    }
+  }
   .pill {
     display: inline-flex;
     align-items: center;
@@ -88,3 +104,14 @@ const isActive = (href: string) => norm(current) === norm(href);
     outline-offset: 2px;
   }
 </style>
+
+<script>
+  // With the list capped on phones, the active pill can start out of view
+  // (e.g. the last workshop). Scroll the list — not the page — to reveal it.
+  for (const list of document.querySelectorAll<HTMLElement>('.section-nav ul')) {
+    const active = list.querySelector<HTMLElement>('[aria-current="page"]');
+    if (!active || list.scrollHeight <= list.clientHeight) continue;
+    const top = active.offsetTop - list.offsetTop;
+    if (top + active.offsetHeight > list.clientHeight) list.scrollTop = top - 4;
+  }
+</script>
