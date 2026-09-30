@@ -127,16 +127,20 @@ export const adminStaff: Person[] = [
 ];
 
 /*
- * Faculty and staff are displayed in alphabetical order by given name,
- * ignoring the leading honorifics "Prof.", "Dr.", "Mr.", "Mrs." and "Ms."
- * (so "Prof. Dr. Ahmed Hussain Kolachi" sorts under "A"). "Syed"/"Syeda" are
- * part of the name, not honorifics, so they sort under "S". A member marked
- * `first` (the Principal) leads the list regardless.
+ * Display order: the member marked `first` (the Principal) leads; then by
+ * BPS grade, highest first (20, 19, 18, 17); then, within a grade,
+ * alphabetically by given name, ignoring the leading honorifics "Prof.",
+ * "Dr.", "Mr.", "Mrs." and "Ms." (so "Prof. Dr. Ahmed Hussain Kolachi" sorts
+ * under "A"). "Syed"/"Syeda" are part of the name, not honorifics, so they
+ * sort under "S". Administrative staff carry no grade, so they are simply
+ * alphabetical.
  */
-const byName = (a: Person, b: Person) => {
+const gradeOf = (p: Person) => Number(p.grade?.match(/\d+/)?.[0] ?? 0);
+const byRank = (a: Person, b: Person) => {
   if (a.first !== b.first) return a.first ? -1 : 1;
+  if (gradeOf(a) !== gradeOf(b)) return gradeOf(b) - gradeOf(a);
   const key = (n: string) => n.replace(/^(?:(?:Prof|Dr|Mr|Mrs|Ms)\.\s*)+/i, '');
   return key(a.name).localeCompare(key(b.name));
 };
-educationDept.sort(byName);
-adminStaff.sort(byName);
+educationDept.sort(byRank);
+adminStaff.sort(byRank);
