@@ -50,7 +50,7 @@ export const educationDept: Person[] = [
   { name: 'Prof. Muhammad Akbar', folder: 'Prof_Muhammad_Akbar', title: 'Professor', grade: 'BPS-20', quals: ['M.Phil. (Education)', 'M.Ed.'] },
   { name: 'Prof. Rashid Ali', folder: 'Prof_Rashid_Ali', title: 'Lecturer', grade: 'BPS-17', quals: ['M.Phil. (Education)', 'M.Ed.', 'M.A. (Economics)'], email: 'rashidali@gce.edu.pk' },
   { name: 'Prof. Waseem Sajjad', folder: 'Prof_Waseem_Sajjad', quals: ['M.Phil. (Education)', 'M.Ed. / B.Sc.'] },
-  { name: 'Prof. Syeda Saeed Fatima', folder: 'Prof_Syeda_Saeed_Fatima', quals: ['M.Phil. (Education)', 'M.Ed., M.A.'] },
+  { name: 'Prof. Syeda Saeed Fatima', folder: 'Prof_Syeda_Saeed_Fatima', title: 'Assistant Professor', grade: 'BPS-18', quals: ['M.Phil. (Education)', 'M.Ed., M.A.'] },
   { name: 'Prof. Rabia Essa', folder: 'Prof_Rabia_Essa', title: 'Assistant Professor', grade: 'BPS-18', quals: ['M.Phil. (Mathematics)', 'M.B.A.', 'M.Ed.'], focus: 'top' },
   { name: 'Prof. Safdar Abbas', folder: 'Prof_Safdar_Abbas', title: 'Lecturer', grade: 'BPS-17', quals: ['M.Phil. (Urdu)', 'M.A. (Urdu) / M.A. (Islamic Studies)', 'M.Ed.', 'M.B.A. (Finance)'], email: 'safdar@gce.edu.pk', focus: 'top' },
   { name: 'Prof. Aoun Ali', folder: 'Prof_Aoun_Ali', title: 'Lecturer', grade: 'BPS-17', quals: ['Ph.D. (Clinical Psychology) — In Progress', 'M.Phil. (Clinical Psychology)'], email: 'aoun.ali@gce.edu.pk' },
