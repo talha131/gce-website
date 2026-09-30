@@ -1,6 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import CoverImage from './CoverImage.astro';
-import { getCover } from '@/lib/images';
+import { getCover, getSingle } from '@/lib/images';
 import { eventHref, type CollegeEvent } from '@/data/events';
 
 interface Props {
@@ -8,19 +9,35 @@ interface Props {
   delay?: number;
 }
 const { event, delay = 0 } = Astro.props;
+const logo = event.logoCover && getSingle('logos', event.logoCover.name);
 const cover = getCover('events', event.slug);
 const href = eventHref(event);
 ---
 
 <article class="card card-hover overflow-hidden flex flex-col" data-reveal style={delay ? `--reveal-delay:${delay}ms` : undefined}>
-  <a href={href} class="block overflow-hidden aspect-[16/10]">
-    <CoverImage
-      image={cover}
-      alt={event.name}
-      class="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.05]"
-      sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 90vw"
-    />
-  </a>
+  {logo && event.logoCover ? (
+    /* Same frame as a photo cover, but the logo is shown whole and centred on
+       its own background colour, so it reads as the cover rather than an icon. */
+    <a href={href} class="block overflow-hidden aspect-[16/10] p-4" style={`background:${event.logoCover.bg}`}>
+      <Image
+        src={logo}
+        alt={event.logoCover.alt}
+        widths={[240, 320]}
+        sizes="320px"
+        class="h-full w-full object-contain transition-transform duration-500 hover:scale-[1.05]"
+        loading="lazy"
+      />
+    </a>
+  ) : (
+    <a href={href} class="block overflow-hidden aspect-[16/10]">
+      <CoverImage
+        image={cover}
+        alt={event.name}
+        class="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.05]"
+        sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 90vw"
+      />
+    </a>
+  )}
   <div class="p-5 flex-1 flex flex-col">
     {event.date && <p class="text-xs font-semibold uppercase tracking-wider text-gold-deep">{event.date}</p>}
     <h3 class="mt-1 !text-lg !leading-snug">

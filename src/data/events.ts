@@ -17,6 +17,14 @@ export interface CollegeEvent {
   date?: string;
   blurb: string;
   body: string[];
+  /**
+   * A logo to use as the card cover instead of the first gallery photo — a name
+   * under src/assets/content/logos/, shown whole (never cropped) on `bg`, which
+   * should match the logo's own background.
+   */
+  logoCover?: { name: string; alt: string; bg: string };
+  /** 'contain' where the gallery is app screenshots rather than photos. */
+  galleryFit?: 'cover' | 'contain';
   isFiller?: boolean;
 }
 

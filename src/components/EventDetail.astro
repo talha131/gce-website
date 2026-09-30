@@ -36,7 +36,7 @@ const backHref = eventGroupHref(event.group);
   {images.length > 0 && (
     <div class="mt-14">
       <h2 class="!text-2xl mb-6" data-reveal>Gallery</h2>
-      <Gallery images={images} altBase={event.name} columns={3} />
+      <Gallery images={images} altBase={event.name} columns={event.galleryFit === 'contain' ? 4 : 3} fit={event.galleryFit} />
     </div>
   )}
 
