@@ -11,6 +11,8 @@ export interface Program {
   tagline: string;
   overview: string[];
   practicum: string;
+  /** Heading for the practicum card; defaults to 'Teaching Practicum'. */
+  practicumTitle?: string;
   /** true where the source content is filler pending final copy (see README). */
   isFiller?: boolean;
 }
@@ -52,8 +54,9 @@ export const programs: Program[] = [
       'Students engage with both subject content and modern pedagogy.',
       'Prepares graduates for teaching careers and further study in education.',
     ],
+    practicumTitle: 'Internship',
     practicum:
-      'Students undertake supervised teaching practice in schools during the programme, applying classroom methods learned at the college.',
+      'Students complete an Internship as part of the BS Education program instead of Teaching Practicum. The internship provides students with practical experience and an opportunity to apply their knowledge and skills in a professional educational setting.',
     isFiller: true,
   },
   {
