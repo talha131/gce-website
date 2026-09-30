@@ -38,7 +38,7 @@ Release tags use **Semantic Versioning** (SemVer): `vMAJOR.MINOR.PATCH`, e.g. `v
 
 ### Content lives in typed data files, not in pages
 
-All site content is in `src/data/*.ts` (plain typed TS, no content collections). Pages import these arrays/objects and render them. To change copy, add a program, a faculty member, an event, etc., edit the data file — **not** the `.astro` page. Key files: `site.ts` (identity/nav/socials/transport), `about.ts` (history, mission/vision EN+UR, principal, anthem/dua, testimonials), `programs.ts`, `faculty.ts`, `facilities.ts`, `events.ts`, `outlines.ts`, `achievements.ts`, `contributors.ts`.
+All site content is in `src/data/*.ts` (plain typed TS, no content collections). Pages import these arrays/objects and render them. To change copy, add a program, a faculty member, an event, etc., edit the data file — **not** the `.astro` page. Key files: `site.ts` (identity/nav/socials/transport), `about.ts` (history, mission/vision EN+UR, principal, anthem/dua), `testimonials.ts` (alumni testimonials on the homepage), `programs.ts`, `faculty.ts`, `facilities.ts`, `events.ts`, `outlines.ts`, `achievements.ts`, `contributors.ts`.
 
 Downloadable documents (course-outline PDFs, research papers, the admission form) are **not** in `src/assets` — they live under `public/` and are referenced by absolute path from the data files, so they ship byte-for-byte rather than through the image pipeline.
 

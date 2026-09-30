@@ -1,4 +1,4 @@
-/* About-page content: history, mission/vision, principal, anthem & dua, testimonials. */
+/* About-page content: history, mission/vision, principal, anthem & dua. */
 
 /**
  * About section sub-pages, in menu order. Drives SectionNav.
@@ -102,29 +102,4 @@ export const anthemAndDua = {
       ['سایہءِ خدائے ذوالجلال'],
     ],
   },
-};
-
-/**
- * PLACEHOLDER testimonials — filler quotes attributed to generic roles.
- * Replace with real, attributed testimonials when the college supplies them.
- */
-export const testimonials = {
-  isFiller: true,
-  items: [
-    {
-      quote:
-        'GCE didn’t just teach me how to teach — it gave me the confidence to walk into any classroom and make a difference. The teaching practice was the turning point in my career.',
-      author: 'B.Ed (Hons) Graduate, Class of 2024',
-    },
-    {
-      quote:
-        'As a parent, what reassured me most was the care. From the counselling centre to the way teachers know each student by name, my daughter has been in good hands.',
-      author: 'Parent of a current student',
-    },
-    {
-      quote:
-        'I trained here decades ago and still carry what I learned into my own classroom every day. The legacy is real — GCE shapes teachers for life.',
-      author: 'Alumnus & Schoolteacher',
-    },
-  ],
 };

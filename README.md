@@ -102,7 +102,8 @@ Content lives in **`src/data/`** — plain typed TS files, no CMS:
 | File | Controls |
 |------|----------|
 | `site.ts` | Name, contact, socials, nav, transport routes |
-| `about.ts` | History, mission/vision (EN+UR), principal, anthem & dua, testimonials |
+| `about.ts` | History, mission/vision (EN+UR), principal, anthem & dua |
+| `testimonials.ts` | Alumni testimonials on the homepage (portraits in `src/assets/content/testimonials/`) |
 | `programs.ts` | The four academic programs |
 | `faculty.ts` | Education Department & administrative staff |
 | `facilities.ts` | Campus facilities |
@@ -131,9 +132,6 @@ the site look complete. Replace the following when the college supplies final co
 and photos (each is flagged with `isFiller: true` in the data files):
 
 - **Principal's message** (`about.ts` → `principal.message`) — a placeholder draft.
-- **Testimonials** (`about.ts` → `testimonials`) — 3 filler quotes attributed to
-  generic roles ("B.Ed (Hons) Graduate", "Parent", "Alumnus & Schoolteacher"),
-  shown on the homepage.
 - **BS Education program** (`programs.ts`) — some details are filler pending final
   curriculum copy (`isFiller: true`).
 - **Science Education Centre** (`facilities.ts`) — brief filler description

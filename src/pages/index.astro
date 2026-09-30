@@ -9,11 +9,12 @@ import ProgramCard from '@/components/ProgramCard.astro';
 import FacilityCard from '@/components/FacilityCard.astro';
 import EventCard from '@/components/EventCard.astro';
 import CoverImage from '@/components/CoverImage.astro';
+import Testimonials from '@/components/Testimonials.astro';
 import { site } from '@/data/site';
 import { programs } from '@/data/programs';
 import { facilities } from '@/data/facilities';
 import { eventsInGroup, ACADEMICS_GROUP } from '@/data/events';
-import { principal, testimonials } from '@/data/about';
+import { principal } from '@/data/about';
 import { conference, milestones } from '@/data/achievements';
 import { getGallery, getSingle } from '@/lib/images';
 
@@ -236,16 +237,13 @@ const madeAtGce = milestones.filter((m) => m.key !== 'conference');
   </Section>
 
   <!-- ===================================================== TESTIMONIALS -->
-  <Section kicker="Voices" title="What our community says" center>
-    <div class="grid gap-6 md:grid-cols-3">
-      {testimonials.items.map((t, i) => (
-        <Reveal delay={i * 90} as="figure" class="card p-7 text-left flex flex-col h-full">
-          <svg width="34" height="34" viewBox="0 0 24 24" class="text-gold" fill="currentColor" aria-hidden="true"><path d="M9.5 8C7 8 5 10 5 12.5V18h5v-5H7.8c0-1.6 1-2.7 2.7-2.7V8Zm9 0c-2.5 0-4.5 2-4.5 4.5V18h5v-5h-2.2c0-1.6 1-2.7 2.7-2.7V8Z"/></svg>
-          <blockquote class="mt-4 text-ink leading-relaxed flex-1">&ldquo;{t.quote}&rdquo;</blockquote>
-          <figcaption class="mt-5 text-sm font-semibold text-brand-deep">— {t.author}</figcaption>
-        </Reveal>
-      ))}
-    </div>
+  <Section
+    kicker="Alumni voices"
+    title="What our graduates say"
+    lead="In their own words — GCE alumni on the college, the teachers and where it has taken them."
+    center
+  >
+    <Testimonials />
   </Section>
 
   <!-- =========================================================== CTA -->
