@@ -3,9 +3,6 @@
  * currently teaches to. The PDFs live under /public/course-outlines/<slug>/ and
  * were copied out of the source Drive folder (19_Outlines) — see
  * scripts/import-assets.sh for the wider asset-import convention.
- *
- * `programSlug` links an outline set back to its entry in programs.ts where one
- * exists (the two 4-year sets share a single program).
  */
 
 export interface OutlineCourse {
@@ -27,8 +24,6 @@ export interface OutlineSet {
   name: string;
   /** Short label for the jump nav. */
   shortName: string;
-  /** Which program in programs.ts this belongs to. */
-  programSlug: string;
   /** One line under the heading. */
   blurb: string;
   /** Optional whole-programme document (scheme of subjects, combined outline). */
@@ -41,7 +36,6 @@ export const outlineSets: OutlineSet[] = [
     slug: 'bed-4-year-pre-2026',
     name: 'B.Ed. (Hons.) 4 Years — Outlines before 2026',
     shortName: 'B.Ed. 4 Years (pre-2026)',
-    programSlug: 'bed-hons-4-year',
     blurb:
       'The outlines followed by students who joined before the 2026 revision. Seven semesters of outlines are published; the eighth is practicum.',
     semesters: [
@@ -124,7 +118,6 @@ export const outlineSets: OutlineSet[] = [
     slug: 'bed-4-year-2026',
     name: 'B.Ed. (Hons.) 4 Years — New Outlines 2026',
     shortName: 'B.Ed. 4 Years (2026)',
-    programSlug: 'bed-hons-4-year',
     blurb:
       'The revised scheme in force for the 2026 intake onwards. The full combined outline is below, with the published semesters listed individually.',
     document: {
@@ -169,7 +162,6 @@ export const outlineSets: OutlineSet[] = [
     slug: 'bed-2-5-year-morning',
     name: 'B.Ed. 2.5 Years — Morning',
     shortName: 'B.Ed. 2.5 Years (Morning)',
-    programSlug: 'bed-2-5-year-morning',
     blurb: 'Five semesters, with elective content subjects alongside the core education courses.',
     document: {
       label: 'Scheme of subjects',
@@ -243,7 +235,6 @@ export const outlineSets: OutlineSet[] = [
     slug: 'bed-2-5-year-evening',
     name: 'B.Ed. 2.5 Years — Evening',
     shortName: 'B.Ed. 2.5 Years (Evening)',
-    programSlug: 'bed-2-5-year-evening',
     blurb: 'The same five-semester scheme as the morning shift, taught in the evening.',
     semesters: [
       {
