@@ -49,7 +49,7 @@ export const educationDept: Person[] = [
   { name: 'Prof. Aoun Ali', folder: 'Prof_Aoun_Ali', title: 'Lecturer', grade: 'BPS-17', quals: ['Ph.D. (Clinical Psychology) — In Progress', 'M.Phil. (Clinical Psychology)'], email: 'aoun.ali@gce.edu.pk' },
   { name: 'Prof. Syed Mehdi Naqvi', folder: 'Prof_Syed_Mehdi_Naqvi', title: 'Lecturer', grade: 'BPS-17', quals: ['M.Phil. (Clinical Psychology) — In Progress', 'B.S. (Clinical Psychology)'], email: 'mehdi@gce.edu.pk' },
   { name: 'Prof. Syeda Nasreen Zehra', folder: 'Prof_Syeda_Nasreen_Zehra', title: 'Associate Professor', grade: 'BPS-19', quals: ['M.Phil. (English) — In Progress', 'M.A. (English)'] },
-  { name: 'Prof. Talha Mansoor', folder: 'Prof_Talha_Mansoor', title: 'Lecturer', grade: 'BPS-17', quals: ['MS (Computer Science)'], email: 'talha@gce.edu.pk', website: 'talhamansoor.com' },
+  { name: 'Prof. Talha Mansoor', folder: 'Prof_Talha_Mansoor', title: 'Lecturer', grade: 'BPS-17', quals: ['M.Phil. (Computer Science)', 'B.S. (Computer Science)'], email: 'talha@gce.edu.pk', website: 'talhamansoor.com' },
   { name: 'Prof. Habib-un-Nabi', folder: 'Prof_Habib_un_Nabi', title: 'Associate Professor', grade: 'BPS-19', quals: ['M.Ed.', 'M.A. (Islamic Studies)', 'Certified Islamic Scholar'], email: 'habibunnabi@gce.edu.pk' },
   { name: 'Prof. Farah Kanwal', folder: 'Prof_Farah_Kanwal', title: 'Assistant Professor', grade: 'BPS-18', quals: ['M.A. (Islamic History)', 'M.Ed.'] },
   { name: 'Prof. Ghulam Umar Mirani', folder: 'Prof_Ghulam_Umar_Mirani', title: 'Assistant Professor', grade: 'BPS-19', quals: ['M.B.A.', 'M.Ed.'] },
