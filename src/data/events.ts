@@ -4,6 +4,8 @@
  * `isFiller` marks descriptions written as placeholder copy (see README).
  */
 
+import type { MagazineIssueKey } from './magazine';
+
 export type EventGroup =
   | 'Celebrations & National Days'
   | 'Academics'
@@ -25,6 +27,8 @@ export interface CollegeEvent {
   logoCover?: { name: string; alt: string; bg: string };
   /** 'contain' where the gallery is app screenshots rather than photos. */
   galleryFit?: 'cover' | 'contain';
+  /** A magazine issue (src/data/magazine.ts) to read in a flipbook on the page. */
+  flipbook?: MagazineIssueKey;
   isFiller?: boolean;
 }
 
@@ -191,6 +195,7 @@ export const events: CollegeEvent[] = [
       "It carries full information about the college. It's vision, mission and history — along with photographs of events kept as memories.",
       "Students take part in making the magazine, contributing articles, stories and poetry. Selected work is published under the student's name.",
     ],
+    flipbook: 'mashal-e-ilm-2024',
   },
   {
     slug: 'assembly',

@@ -1,0 +1,410 @@
+---
+/* Interactive magazine reader: a page-turning book (StPageFlip) with page
+   controls, a thumbnail strip, zoom and full screen. Pages are pre-rendered
+   images (see src/data/magazine.ts), loaded a few at a time around the page
+   being read, so opening the magazine never downloads the whole issue.
+
+   Zoom swaps the flipbook for a plain, pannable view of the open page(s) at
+   1.5–3×: dragging to pan and dragging to turn a page cannot share one
+   gesture, so each mode owns its own. Without JS the thumbnail strip is still
+   a list of links to every page image. */
+import { magazineIssues, type MagazineIssueKey } from '@/data/magazine';
+
+interface Props {
+  issue: MagazineIssueKey;
+}
+const { issue } = Astro.props;
+const mag = magazineIssues[issue];
+const pad = (n: number) => String(n).padStart(3, '0');
+const pages = Array.from({ length: mag.pageCount }, (_, i) => ({
+  n: i + 1,
+  src: `${mag.path}/pages/${pad(i + 1)}.webp`,
+  thumb: `${mag.path}/thumbs/${pad(i + 1)}.webp`,
+}));
+const label = (n: number) => (n === 1 ? 'Front cover' : n === mag.pageCount ? 'Back cover' : `Page ${n}`);
+---
+
+<section
+  class="flipbook card overflow-hidden"
+  data-flipbook
+  data-pages={mag.pageCount}
+  data-w={mag.pageWidth}
+  data-h={mag.pageHeight}
+  aria-label={`${mag.title} — ${mag.edition}, magazine reader`}
+  tabindex="-1"
+>
+  <!-- Toolbar -->
+  <div class="fb-bar">
+    <div class="min-w-0">
+      <p class="font-display font-semibold text-brand-deep leading-tight truncate">{mag.title}</p>
+      <p class="text-xs text-ink-soft">{mag.edition} · {mag.pageCount} pages</p>
+    </div>
+
+    <div class="fb-group" role="group" aria-label="Page">
+      <button type="button" class="fb-btn" data-fb="first" aria-label="First page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 17l-5-5 5-5M18 17l-5-5 5-5"/></svg>
+      </button>
+      <button type="button" class="fb-btn" data-fb="prev" aria-label="Previous page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <label class="fb-page">
+        <span class="sr-only">Go to page</span>
+        <input type="number" min="1" max={mag.pageCount} value="1" inputmode="numeric" data-fb-input />
+        <span class="text-ink-soft">/ {mag.pageCount}</span>
+      </label>
+      <button type="button" class="fb-btn" data-fb="next" aria-label="Next page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+      <button type="button" class="fb-btn" data-fb="last" aria-label="Last page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 17l5-5-5-5M6 17l5-5-5-5"/></svg>
+      </button>
+    </div>
+
+    <div class="fb-group" role="group" aria-label="View">
+      <button type="button" class="fb-btn" data-fb="zoom-out" aria-label="Zoom out" disabled>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6"/></svg>
+      </button>
+      <span class="fb-zoom-level" data-fb-zoom aria-live="polite">100%</span>
+      <button type="button" class="fb-btn" data-fb="zoom-in" aria-label="Zoom in">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6M11 8v6"/></svg>
+      </button>
+      <button type="button" class="fb-btn" data-fb="thumbs" aria-label="Show page thumbnails" aria-pressed="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      </button>
+      <button type="button" class="fb-btn" data-fb="fullscreen" aria-label="Full screen" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true" data-fs-enter><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true" data-fs-exit hidden><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Stage: the book, or (zoomed) a pannable view of the open pages -->
+  <div class="fb-stage" data-fb-stage>
+    <div class="fb-book" data-fb-book>
+      {pages.map((p) => (
+        <div class="fb-sheet" data-density={p.n === 1 || p.n === mag.pageCount ? 'hard' : 'soft'}>
+          <img data-src={p.src} alt={`${mag.title}, ${label(p.n).toLowerCase()}`} width={mag.pageWidth} height={mag.pageHeight} draggable="false" />
+        </div>
+      ))}
+    </div>
+    <div class="fb-zoomview" data-fb-zoomview hidden></div>
+    <p class="fb-hint" data-fb-hint>Drag a page corner, swipe, or use the arrows to turn pages.</p>
+  </div>
+
+  <!-- Thumbnails (plain links to each page without JS) -->
+  <nav class="fb-thumbs" data-fb-thumbs aria-label="Pages">
+    <ol>
+      {pages.map((p) => (
+        <li>
+          <a href={p.src} data-fb-goto={p.n - 1} aria-label={`Go to ${label(p.n).toLowerCase()}`}>
+            <img src={p.thumb} alt="" width="127" height="180" loading="lazy" decoding="async" />
+            <span>{p.n}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+</section>
+
+<style>
+  .flipbook { --fb-bg: color-mix(in srgb, var(--brand-tint) 55%, var(--surface)); background: var(--surface); }
+  .flipbook:focus { outline: none; }
+
+  .fb-bar {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 0.75rem 1.25rem; padding: 0.85rem 1.1rem;
+    border-bottom: 1px solid var(--line); background: var(--surface);
+  }
+  .fb-group { display: flex; align-items: center; gap: 0.25rem; }
+  .fb-btn {
+    display: inline-grid; place-items: center; width: 2.4rem; height: 2.4rem;
+    border-radius: 999px; color: var(--brand-deep); transition: background-color .2s ease, color .2s ease;
+  }
+  .fb-btn:hover:not(:disabled) { background: var(--brand-tint); color: var(--brand); }
+  .fb-btn:disabled { opacity: .35; cursor: default; }
+  .fb-btn[aria-pressed='true'] { background: var(--brand-tint); color: var(--brand); }
+  .fb-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
+  .fb-btn svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .fb-page { display: inline-flex; align-items: center; gap: 0.35rem; margin-inline: 0.25rem; font-size: .9rem; font-variant-numeric: tabular-nums; }
+  .fb-page input {
+    width: 3.4rem; padding: .3rem .4rem; text-align: center; border: 1px solid var(--line);
+    border-radius: var(--radius-sm); background: var(--surface); color: var(--ink);
+    -moz-appearance: textfield;
+  }
+  .fb-page input::-webkit-inner-spin-button, .fb-page input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+  .fb-zoom-level { min-width: 3.2rem; text-align: center; font-size: .85rem; font-variant-numeric: tabular-nums; color: var(--ink-soft); }
+
+  .fb-stage {
+    position: relative; display: grid; place-items: center;
+    height: clamp(20rem, 64vh, 50rem); padding: 1.25rem;
+    background: var(--fb-bg); overflow: hidden;
+  }
+  .fb-book { margin-inline: auto; }
+  .fb-sheet { background: #fff; }
+  .fb-sheet img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
+  .fb-sheet img:not([src]) { visibility: hidden; }
+  .fb-sheet { background-image: linear-gradient(110deg, #f4f1ea 30%, #fbf9f4 50%, #f4f1ea 70%); }
+
+  .fb-zoomview {
+    position: absolute; inset: 0; overflow: auto; cursor: grab; overscroll-behavior: contain;
+    background: var(--fb-bg);
+  }
+  .fb-zoomview.is-panning { cursor: grabbing; }
+  .fb-zoomview > :global(div) { display: flex; margin: 1.25rem auto; width: max-content; box-shadow: var(--shadow-lift); }
+  .fb-zoomview :global(img) { display: block; background: #fff; user-select: none; -webkit-user-drag: none; }
+
+  .fb-hint {
+    position: absolute; bottom: .45rem; left: 0; right: 0; text-align: center;
+    font-size: .75rem; color: var(--ink-soft); pointer-events: none; transition: opacity .6s ease;
+  }
+  .fb-hint.is-hidden { opacity: 0; }
+
+  .fb-thumbs { border-top: 1px solid var(--line); background: var(--surface); }
+  .fb-thumbs[hidden] { display: none; }
+  .fb-thumbs ol { display: flex; gap: .6rem; margin: 0; padding: .8rem 1rem; list-style: none; overflow-x: auto; scrollbar-width: thin; }
+  .fb-thumbs a { display: block; width: 4.25rem; text-align: center; border-radius: 6px; padding: 3px; }
+  .fb-thumbs img { display: block; width: 100%; height: auto; aspect-ratio: 127 / 180; object-fit: cover; border-radius: 3px; border: 1px solid var(--line); background: #f4f1ea; }
+  .fb-thumbs span { display: block; margin-top: .2rem; font-size: .7rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+  .fb-thumbs a:hover img { border-color: color-mix(in srgb, var(--brand) 40%, var(--line)); }
+  .fb-thumbs a[aria-current='true'] { background: var(--brand-tint); }
+  .fb-thumbs a[aria-current='true'] img { border-color: var(--brand); }
+  .fb-thumbs a[aria-current='true'] span { color: var(--brand); font-weight: 600; }
+  .fb-thumbs a:focus-visible { outline: 2px solid var(--gold); }
+
+  /* Full screen: the stage takes every pixel the bar and strip leave. */
+  .flipbook:fullscreen { display: flex; flex-direction: column; border-radius: 0; width: 100vw; height: 100vh; }
+  .flipbook:fullscreen .fb-stage { flex: 1; height: auto; }
+
+  @media (max-width: 639px) {
+    .fb-bar { padding: .7rem .8rem; }
+    .fb-bar > div:first-child { flex-basis: 100%; }
+    .fb-group { gap: 0; }
+    .fb-btn { width: 2.2rem; height: 2.2rem; }
+    .fb-stage { height: clamp(18rem, 68vh, 40rem); padding: .75rem; }
+  }
+</style>
+
+<script>
+  import { PageFlip } from 'page-flip';
+
+  const ZOOMS = [1, 1.5, 2, 3];
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  for (const root of document.querySelectorAll<HTMLElement>('[data-flipbook]')) {
+    const count = Number(root.dataset.pages);
+    const pageW = Number(root.dataset.w);
+    const pageH = Number(root.dataset.h);
+    const stage = root.querySelector<HTMLElement>('[data-fb-stage]')!;
+    const bookEl = root.querySelector<HTMLElement>('[data-fb-book]')!;
+    const sheets = [...bookEl.querySelectorAll<HTMLElement>('.fb-sheet')];
+    const zoomView = root.querySelector<HTMLElement>('[data-fb-zoomview]')!;
+    const input = root.querySelector<HTMLInputElement>('[data-fb-input]')!;
+    const zoomLabel = root.querySelector<HTMLElement>('[data-fb-zoom]')!;
+    const thumbs = root.querySelector<HTMLElement>('[data-fb-thumbs]')!;
+    const thumbList = thumbs.querySelector('ol')!;
+    const thumbLinks = [...thumbs.querySelectorAll<HTMLAnchorElement>('[data-fb-goto]')];
+    const hint = root.querySelector<HTMLElement>('[data-fb-hint]')!;
+    const btn = (name: string) => root.querySelector<HTMLButtonElement>(`[data-fb="${name}"]`)!;
+
+    let zoom = 1;
+
+    // Load page images a few either side of the open page; the rest wait.
+    const load = (i: number) => {
+      for (let j = Math.max(0, i - 2); j <= Math.min(count - 1, i + 3); j++) {
+        const img = sheets[j].querySelector('img')!;
+        if (!img.src && img.dataset.src) img.src = img.dataset.src;
+      }
+    };
+
+    // Size the book to fit the stage: two pages side by side when each can be
+    // at least MIN_PAGE wide, otherwise one. PageFlip makes the same call from
+    // the width we give it (portrait below 2 × minWidth), so the two agree.
+    const MIN_PAGE = 250;
+    const fit = () => {
+      const cs = getComputedStyle(stage);
+      const w = stage.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      const h = stage.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - 14;
+      const ratio = pageW / pageH;
+      const spreadWidth = Math.floor(Math.min(w, h * ratio * 2));
+      const spread = spreadWidth >= 2 * MIN_PAGE;
+      const width = spread ? spreadWidth : Math.floor(Math.min(w, h * ratio));
+      bookEl.style.width = `${width}px`;
+      return { width, spread };
+    };
+
+    fit();
+    load(0);
+    const flip = new PageFlip(bookEl, {
+      width: pageW,
+      height: pageH,
+      size: 'stretch',
+      minWidth: MIN_PAGE,
+      maxWidth: 3000,
+      minHeight: 180,
+      maxHeight: 4200,
+      showCover: true,
+      usePortrait: true,
+      drawShadow: true,
+      maxShadowOpacity: 0.45,
+      flippingTime: reduce ? 250 : 800,
+      mobileScrollSupport: true,
+    });
+    flip.loadFromHTML(sheets);
+
+    // PageFlip picks portrait/landscape from its own width; nudge it to match fit().
+    const relayout = () => {
+      fit();
+      flip.update();
+      if (zoom > 1) renderZoom(false);
+    };
+    new ResizeObserver(() => relayout()).observe(stage);
+
+    const current = () => flip.getCurrentPageIndex();
+    // Pages open right now: one in portrait or on a cover, else the spread.
+    const openPages = () => {
+      const i = current();
+      if (flip.getOrientation() === 'portrait' || i === 0 || i === count - 1) return [i];
+      const left = i % 2 === 1 ? i : i - 1;
+      return [left, left + 1].filter((p) => p < count);
+    };
+
+    const sync = () => {
+      const i = current();
+      load(i);
+      const open = openPages();
+      input.value = String(open[0] + 1);
+      btn('first').disabled = btn('prev').disabled = i === 0;
+      btn('last').disabled = btn('next').disabled = open[open.length - 1] >= count - 1;
+      thumbLinks.forEach((a, n) => a.setAttribute('aria-current', String(open.includes(n))));
+      const active = thumbLinks[open[0]];
+      if (active && !thumbs.hidden) {
+        const left = active.offsetLeft - thumbList.clientWidth / 2 + active.offsetWidth / 2;
+        thumbList.scrollTo({ left, behavior: reduce ? 'auto' : 'smooth' });
+      }
+      if (zoom > 1) renderZoom(false);
+    };
+    flip.on('flip', sync);
+    flip.on('changeOrientation', sync);
+    flip.on('changeState', (e) => {
+      if (e.data === 'user_fold' || e.data === 'flipping') hint.classList.add('is-hidden');
+    });
+    sync();
+
+    const go = (i: number) => {
+      const target = Math.min(count - 1, Math.max(0, i));
+      load(target);
+      if (zoom > 1 || reduce) flip.turnToPage(target);
+      else flip.flip(target);
+      sync();
+    };
+    btn('first').addEventListener('click', () => go(0));
+    btn('last').addEventListener('click', () => go(count - 1));
+    btn('prev').addEventListener('click', () => (zoom > 1 ? go(openPages()[0] - 1) : flip.flipPrev()));
+    btn('next').addEventListener('click', () => (zoom > 1 ? go(openPages().at(-1)! + 1) : flip.flipNext()));
+    input.addEventListener('change', () => {
+      const n = parseInt(input.value, 10);
+      if (Number.isFinite(n)) go(n - 1);
+      else sync();
+    });
+    thumbLinks.forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        go(Number(a.dataset.fbGoto));
+      }),
+    );
+
+    // Keyboard: arrows turn pages while the reader has focus.
+    root.addEventListener('keydown', (e) => {
+      if ((e.target as HTMLElement).tagName === 'INPUT') return;
+      if (e.key === 'ArrowRight') { e.preventDefault(); btn('next').click(); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); btn('prev').click(); }
+      if (e.key === 'Home') { e.preventDefault(); go(0); }
+      if (e.key === 'End') { e.preventDefault(); go(count - 1); }
+    });
+    stage.addEventListener('pointerdown', () => root.focus({ preventScroll: true }));
+
+    // ---- Zoom: a pannable view of the open pages at 1.5–3× the fitted size.
+    function renderZoom(recentre: boolean) {
+      const { width, spread } = fit();
+      const open = openPages();
+      const perPage = (spread ? width / 2 : width) * zoom;
+      const inner = document.createElement('div');
+      for (const p of open) {
+        const img = document.createElement('img');
+        img.src = sheets[p].querySelector('img')!.dataset.src!;
+        img.alt = sheets[p].querySelector('img')!.alt;
+        img.width = Math.round(perPage);
+        img.height = Math.round((perPage * pageH) / pageW);
+        img.draggable = false;
+        inner.append(img);
+      }
+      const { scrollLeft, scrollTop, scrollWidth, scrollHeight } = zoomView;
+      const fx = scrollWidth ? (scrollLeft + zoomView.clientWidth / 2) / scrollWidth : 0.5;
+      const fy = scrollHeight ? (scrollTop + zoomView.clientHeight / 2) / scrollHeight : 0;
+      zoomView.replaceChildren(inner);
+      if (recentre) {
+        zoomView.scrollLeft = zoomView.scrollWidth * fx - zoomView.clientWidth / 2;
+        zoomView.scrollTop = Math.max(0, zoomView.scrollHeight * fy - zoomView.clientHeight / 2);
+      }
+    }
+    const setZoom = (z: number) => {
+      const wasZoomed = zoom > 1;
+      zoom = z;
+      zoomLabel.textContent = `${Math.round(z * 100)}%`;
+      btn('zoom-out').disabled = z === ZOOMS[0];
+      btn('zoom-in').disabled = z === ZOOMS.at(-1);
+      zoomView.hidden = z === 1;
+      bookEl.style.visibility = z === 1 ? '' : 'hidden';
+      if (z > 1) {
+        if (!wasZoomed) zoomView.scrollTo(0, 0);
+        renderZoom(wasZoomed);
+        if (!wasZoomed) zoomView.scrollLeft = (zoomView.scrollWidth - zoomView.clientWidth) / 2;
+      } else {
+        zoomView.replaceChildren();
+        flip.update();
+      }
+    };
+    btn('zoom-in').addEventListener('click', () => setZoom(ZOOMS[Math.min(ZOOMS.length - 1, ZOOMS.indexOf(zoom) + 1)]));
+    btn('zoom-out').addEventListener('click', () => setZoom(ZOOMS[Math.max(0, ZOOMS.indexOf(zoom) - 1)]));
+
+    // Drag to pan with a mouse; touch scrolls natively.
+    let pan: { x: number; y: number; l: number; t: number } | null = null;
+    zoomView.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      pan = { x: e.clientX, y: e.clientY, l: zoomView.scrollLeft, t: zoomView.scrollTop };
+      zoomView.classList.add('is-panning');
+      zoomView.setPointerCapture(e.pointerId);
+    });
+    zoomView.addEventListener('pointermove', (e) => {
+      if (!pan) return;
+      zoomView.scrollLeft = pan.l - (e.clientX - pan.x);
+      zoomView.scrollTop = pan.t - (e.clientY - pan.y);
+    });
+    const endPan = () => { pan = null; zoomView.classList.remove('is-panning'); };
+    zoomView.addEventListener('pointerup', endPan);
+    zoomView.addEventListener('pointercancel', endPan);
+
+    // ---- Thumbnails toggle.
+    btn('thumbs').addEventListener('click', () => {
+      thumbs.hidden = !thumbs.hidden;
+      btn('thumbs').setAttribute('aria-pressed', String(!thumbs.hidden));
+      if (!thumbs.hidden) sync();
+    });
+
+    // ---- Full screen, where supported (not on iPhone Safari).
+    const fsBtn = btn('fullscreen');
+    if (root.requestFullscreen) {
+      fsBtn.hidden = false;
+      fsBtn.addEventListener('click', () => {
+        if (document.fullscreenElement === root) document.exitFullscreen();
+        else root.requestFullscreen().then(() => root.focus({ preventScroll: true }));
+      });
+      document.addEventListener('fullscreenchange', () => {
+        const on = document.fullscreenElement === root;
+        fsBtn.setAttribute('aria-label', on ? 'Exit full screen' : 'Full screen');
+        fsBtn.querySelector('[data-fs-enter]')!.toggleAttribute('hidden', on);
+        fsBtn.querySelector('[data-fs-exit]')!.toggleAttribute('hidden', !on);
+      });
+    }
+  }
+</script>
