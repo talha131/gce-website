@@ -14,6 +14,10 @@ export interface Facility {
   badge?: string;
   /** One line lifted above the body as a callout, for a genuinely distinctive facility. */
   highlight?: string;
+  /** Logo shown in the page hero — a name under src/assets/content/logos/. */
+  logo?: { name: string; alt: string };
+  /** An external channel the facility publishes to, linked from its page. */
+  channel?: { platform: 'YouTube'; name: string; handle: string; href: string };
   isFiller?: boolean;
 }
 
@@ -145,6 +149,13 @@ export const facilities: Facility[] = [
     badge: 'Karachi’s first Government College of Education podcast',
     highlight:
       'A first for Karachi: GCE is the first-ever Government College of Education in Karachi to host its own podcast — and the first college in Sindh to launch a dedicated educational podcast.',
+    logo: { name: 'teach-forward', alt: 'Teach Forward — The Voice of GCE, podcast logo' },
+    channel: {
+      platform: 'YouTube',
+      name: 'Teach Forward on YouTube',
+      handle: '@gceedupk',
+      href: 'https://youtube.com/@gceedupk',
+    },
     blurb:
       'Home of “Teach Forward — The Voice of GCE”, the college’s own official podcast, recorded in a purpose-built studio on campus.',
     body: [

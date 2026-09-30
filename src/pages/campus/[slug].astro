@@ -5,8 +5,10 @@ import PageHero from '@/components/PageHero.astro';
 import SectionNav from '@/components/SectionNav.astro';
 import Section from '@/components/Section.astro';
 import Gallery from '@/components/Gallery.astro';
+import SocialIcon from '@/components/SocialIcon.astro';
+import { Image } from 'astro:assets';
 import { facilities, facilityBySlug, campusNav } from '@/data/facilities';
-import { getGallery } from '@/lib/images';
+import { getGallery, getSingle } from '@/lib/images';
 
 export const getStaticPaths = (() =>
   facilities.map((f) => ({ params: { slug: f.slug } }))) satisfies GetStaticPaths;
@@ -14,6 +16,8 @@ export const getStaticPaths = (() =>
 const { slug } = Astro.params;
 const facility = facilityBySlug(slug!)!;
 const images = getGallery('facilities', facility.slug);
+const logo = facility.logo && getSingle('logos', facility.logo.name);
+const channel = facility.channel;
 // Sibling jumper: facilities in the same category, current one included (active pill).
 const siblings = facilities
   .filter((f) => f.category === facility.category)
@@ -36,6 +40,23 @@ const backHref = campusNav.find((n) => n.label === facility.category)?.href ?? '
     {facility.badge && (
       <span class="mt-6 inline-block text-sm font-semibold px-3 py-1.5 rounded-full bg-gold text-brand-950">{facility.badge}</span>
     )}
+    {channel && (
+      <div class="mt-6">
+        <a href={channel.href} target="_blank" rel="noopener" class="btn btn-ghost !text-white !border-white/30 hover:!bg-white/10">
+          <SocialIcon name={channel.platform} size={18} class="text-[#FF0000]" />
+          Watch on {channel.platform}
+        </a>
+      </div>
+    )}
+    {logo && facility.logo && (
+      <Fragment slot="aside">
+        {/* The lockup is drawn on white, so it sits on a white plate rather than
+            straight on the indigo band, where its dark tagline would vanish. */}
+        <div class="rounded-[var(--radius-lg)] bg-white p-4 sm:p-5 shadow-lift w-[min(100%,17rem)] lg:w-[24rem]">
+          <Image src={logo} alt={facility.logo.alt} widths={[320, 480, 800]} sizes="(min-width:1024px) 384px, 320px" class="w-full h-auto" loading="eager" />
+        </div>
+      </Fragment>
+    )}
   </PageHero>
   {navItems.length > 1 && <SectionNav items={navItems} current={Astro.url.pathname} label={navLabel} />}
 
@@ -56,6 +77,18 @@ const backHref = campusNav.find((n) => n.label === facility.category)?.href ?? '
           <p class="mt-1 text-sm text-ink-soft">{facility.category}</p>
           {facility.note && <p class="mt-4 pt-4 border-t border-line text-sm text-ink-soft">{facility.note}</p>}
         </div>
+        {channel && (
+          <a href={channel.href} target="_blank" rel="noopener" class="mt-4 card card-hover p-6 flex items-center gap-4">
+            <span class="h-12 w-12 rounded-xl bg-[#FF0000]/10 grid place-items-center shrink-0">
+              <SocialIcon name={channel.platform} size={24} class="text-[#FF0000]" />
+            </span>
+            <span class="min-w-0">
+              <span class="block text-xs uppercase tracking-wider text-ink-soft">Every episode</span>
+              <span class="block font-display text-lg text-brand-deep leading-snug">{channel.name}</span>
+              <span class="block text-sm font-semibold text-brand">{channel.handle} ↗</span>
+            </span>
+          </a>
+        )}
         <a href={backHref} class="mt-4 btn btn-ghost w-full">← Back to {facility.category}</a>
       </aside>
     </div>
