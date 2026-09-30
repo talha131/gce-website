@@ -38,6 +38,7 @@ export const nav = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Programs', href: '/programs' },
+  { label: 'Course Outlines', href: '/course-outlines' },
   { label: 'Academics', href: '/academics' },
   { label: 'Admissions', href: '/admissions' },
   { label: 'Faculty', href: '/faculty' },
