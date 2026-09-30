@@ -109,7 +109,7 @@ export const milestones: Milestone[] = [
     kicker: 'A first for College Education Department, Sindh',
     title: 'Teach Forward — The Voice of GCE',
     detail:
-      'GCE is the only college in Karachi running its own official podcast — and, as far as we know, the only government institution in Pakistan to do so. Every episode is written, hosted, recorded and published in-house, from a purpose-built studio on campus.',
+      'GCE is the first-ever Government College of Education in Karachi to host its own podcast, and the first college in Sindh to launch a dedicated educational podcast. Every episode is written, hosted, recorded and published in-house, from a purpose-built studio on campus.',
     href: '/campus/podcast-studio',
     cover: { category: 'facilities', slug: 'podcast-studio' },
   },
