@@ -60,6 +60,21 @@ export const educationDept: Person[] = [
   { name: 'Prof. Muhammad Rizwan', folder: 'Prof_Muhammad_Rizwan', title: 'Lecturer', grade: 'BPS-17', quals: ['M.A. (Pakistan Studies)'] },
   { name: 'Prof. Nouman Baqar', folder: 'Prof_Nouman_Baqar', title: 'Associate Professor', grade: 'BPS-19', quals: ['M.A. (Urdu)'], email: 'nbnaqvi@gce.edu.pk' },
   { name: 'Muhammad Mustaqeem', folder: 'Muhammad_Mustaqeem', title: 'Senior Librarian', grade: 'BPS-18', quals: ['Masters in Library & Information Science'] },
+  {
+    name: 'Prof. Yusra',
+    folder: 'Prof_Yusra',
+    title: 'Assistant Professor',
+    grade: 'BPS-18',
+    quals: [
+      'M.A. (English Literature)',
+      'M.A. TESOL (Eötvös Loránd University, Hungary)',
+      'M.S. Education, Curriculum & Instruction (UW–Madison, USA)',
+      'B.Ed. (Indus University, Karachi)',
+      'M.Ed. (University of Karachi)',
+      'CELTA, TEFL (Cambridge)',
+    ],
+    focus: 'top',
+  },
 ];
 
 /** Administrative & support staff. */
