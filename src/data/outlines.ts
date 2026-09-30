@@ -298,6 +298,18 @@ export const outlineSets: OutlineSet[] = [
       },
     ],
   },
+  {
+    slug: 'med',
+    name: 'M.Ed. — Master of Education',
+    shortName: 'M.Ed.',
+    blurb:
+      'The University of Karachi course of studies for the Master of Education, 1996 and onwards — every course in one booklet.',
+    document: {
+      label: 'M.Ed. course of studies',
+      pdf: '/course-outlines/med/med-course-of-studies.pdf',
+    },
+    semesters: [],
+  },
 ];
 
 export const outlineCourseCount = outlineSets.reduce(

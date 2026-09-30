@@ -13,12 +13,12 @@ const hero = getSingle('heroes', 'programs');
 
 <Layout
   title="Course Outlines"
-  description="Download the course outline for every semester of the B.Ed. (Hons.) 4-year and B.Ed. 2.5-year programmes at Government College of Education, Karachi."
+  description="Download the course outline for every semester of the B.Ed. (Hons.) 4-year and B.Ed. 2.5-year programmes, and the M.Ed. course of studies, at Government College of Education, Karachi."
 >
   <PageHero
     kicker="Every programme, every semester"
     title="Course <span class='accent-italic !text-gold-bright'>Outlines</span>"
-    lead={`Every published semester outline, free to download — ${outlineCourseCount} course outlines across our four schemes of study.`}
+    lead={`Every published semester outline, free to download — ${outlineCourseCount} course outlines across our ${outlineSets.length} schemes of study.`}
     image={hero}
     imageAlt="A GCE classroom"
     imagePosition="center 45%"
@@ -79,38 +79,40 @@ const hero = getSingle('heroes', 'programs');
             </div>
           </div>
 
-          <!-- Semesters -->
-          <div class="mt-8 grid gap-6 lg:grid-cols-2">
-            {set.semesters.map((sem, i) => (
-              <section class="card overflow-hidden" data-reveal style={`--reveal-delay:${(i % 2) * 70}ms`}>
-                <header class="flex items-baseline justify-between gap-3 bg-brand-tint px-6 py-4 border-b border-line">
-                  <h3 class="!text-lg !text-brand-deep">Semester {sem.n}</h3>
-                  <span class="text-xs font-semibold uppercase tracking-wider text-gold-deeper">
-                    {sem.courses.length} {sem.courses.length === 1 ? 'course' : 'courses'}
-                  </span>
-                </header>
-                <ul class="divide-y divide-line">
-                  {sem.courses.map((course) => (
-                    <li>
-                      <a
-                        href={course.pdf}
-                        target="_blank"
-                        rel="noopener"
-                        class="flex items-center gap-4 px-6 py-3.5 hover:bg-brand-tint/50 focus-visible:bg-brand-tint/50 transition-colors group"
-                      >
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="text-brand/45 shrink-0" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
-                        <span class="flex-1 min-w-0">
-                          <span class="block text-ink font-medium leading-snug group-hover:text-brand transition-colors">{course.title}</span>
-                          {course.code && <span class="block mt-0.5 text-xs font-semibold tracking-wider text-gold-deeper">{course.code}</span>}
-                        </span>
-                        <span class="text-xs font-semibold uppercase tracking-wider text-ink-soft shrink-0">PDF</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            ))}
-          </div>
+          <!-- Semesters (a set published only as a single document has none) -->
+          {set.semesters.length > 0 && (
+            <div class="mt-8 grid gap-6 lg:grid-cols-2">
+              {set.semesters.map((sem, i) => (
+                <section class="card overflow-hidden" data-reveal style={`--reveal-delay:${(i % 2) * 70}ms`}>
+                  <header class="flex items-baseline justify-between gap-3 bg-brand-tint px-6 py-4 border-b border-line">
+                    <h3 class="!text-lg !text-brand-deep">Semester {sem.n}</h3>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-gold-deeper">
+                      {sem.courses.length} {sem.courses.length === 1 ? 'course' : 'courses'}
+                    </span>
+                  </header>
+                  <ul class="divide-y divide-line">
+                    {sem.courses.map((course) => (
+                      <li>
+                        <a
+                          href={course.pdf}
+                          target="_blank"
+                          rel="noopener"
+                          class="flex items-center gap-4 px-6 py-3.5 hover:bg-brand-tint/50 focus-visible:bg-brand-tint/50 transition-colors group"
+                        >
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="text-brand/45 shrink-0" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+                          <span class="flex-1 min-w-0">
+                            <span class="block text-ink font-medium leading-snug group-hover:text-brand transition-colors">{course.title}</span>
+                            {course.code && <span class="block mt-0.5 text-xs font-semibold tracking-wider text-gold-deeper">{course.code}</span>}
+                          </span>
+                          <span class="text-xs font-semibold uppercase tracking-wider text-ink-soft shrink-0">PDF</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ))}
+            </div>
+          )}
         </div>
       ))}
     </div>
