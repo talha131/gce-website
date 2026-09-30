@@ -5,8 +5,6 @@
 import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
 import Section from '@/components/Section.astro';
-import SectionNav from '@/components/SectionNav.astro';
-import { programsNav } from '@/data/programs';
 import { outlineSets, outlineCourseCount } from '@/data/outlines';
 import { getSingle } from '@/lib/images';
 
@@ -18,7 +16,7 @@ const hero = getSingle('heroes', 'programs');
   description="Download the course outline for every semester of the B.Ed. (Hons.) 4-year and B.Ed. 2.5-year programmes at Government College of Education, Karachi."
 >
   <PageHero
-    kicker="Academics"
+    kicker="Every programme, every semester"
     title="Course <span class='accent-italic !text-gold-bright'>Outlines</span>"
     lead={`Every published semester outline, free to download — ${outlineCourseCount} course outlines across our four schemes of study.`}
     image={hero}
@@ -29,12 +27,9 @@ const hero = getSingle('heroes', 'programs');
       <a href="/programs" class="btn btn-ghost !text-white !border-white/30 hover:!bg-white/10">All programs</a>
     </div>
   </PageHero>
-  <SectionNav items={programsNav} current={Astro.url.pathname} label="Programs" />
 
   <!-- Jump nav: anchors rather than pages, so it is built here instead of
-       reusing SectionNav (which matches on pathname). Deliberately NOT sticky —
-       the section-level SectionNav above owns the sticky slot at
-       top-[var(--header-h)], and two bars at the same offset would overlap. -->
+       reusing SectionNav (which matches on pathname). -->
   <nav class="bg-surface border-b border-line" aria-label="Outline sets">
     <div class="container-site">
       <ul class="flex flex-wrap gap-2 py-3">

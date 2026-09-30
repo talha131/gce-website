@@ -105,7 +105,7 @@ export const programs: Program[] = [
  */
 export const programsNav = [
   ...programs.map((p) => ({ label: p.name, href: `/programs/${p.slug}` })),
-  { label: 'Course Outlines', href: '/programs/course-outlines' },
+  { label: 'Course Outlines', href: '/course-outlines' },
 ];
 
 export const programBySlug = (slug: string) => programs.find((p) => p.slug === slug);

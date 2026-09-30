@@ -83,7 +83,7 @@ const sets = outlineSets.filter((s) => s.programSlug === program.slug);
           const courses = set.semesters.reduce((n, s) => n + s.courses.length, 0);
           return (
             <a
-              href={`/programs/course-outlines#${set.slug}`}
+              href={`/course-outlines#${set.slug}`}
               class="card card-hover p-6 block"
               data-reveal
               style={`--reveal-delay:${i * 70}ms`}
