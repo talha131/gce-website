@@ -37,6 +37,7 @@ const photo = person.photo ? getSingle(person.photo.category, person.photo.name)
         {[person.title, person.grade].filter(Boolean).join(' · ')}
       </p>
     )}
+    {person.alsoAt && <p class="mt-0.5 text-sm text-ink-soft">{person.alsoAt}</p>}
     {person.quals.length > 0 && (
       <ul class="mt-3 space-y-1 text-sm text-ink-soft">
         {person.quals.map((q) => (

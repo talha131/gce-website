@@ -31,6 +31,8 @@ export interface Person {
   photo?: { category: string; name: string };
   /** Listed ahead of the alphabetical order (the Principal). */
   first?: boolean;
+  /** Another appointment held alongside this one, shown under the designation. */
+  alsoAt?: string;
 }
 
 /**
@@ -49,8 +51,8 @@ export const educationDept: Person[] = [
     folder: 'Prof_Zahoor_Ahmed',
     title: 'Principal · Professor',
     grade: 'BPS-20',
-    // No qualifications on file yet; the card shows designation, grade and email.
-    quals: [],
+    quals: ['M.S. (Economics)'],
+    alsoAt: 'Visiting Faculty, University of Karachi',
     email: 'zahoor@gce.edu.pk',
     photo: { category: 'principal', name: 'principal' },
     first: true,
