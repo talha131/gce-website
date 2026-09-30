@@ -15,7 +15,7 @@ const hero = getCover('events', 'teaching-practice');
 
 <Layout
   title="Academics"
-  description="Teaching practice in real schools, end-of-semester internal exams, class-representative elections, the college magazine and the daily morning assembly — the academic year at Government College of Education, Karachi."
+  description="Teaching practice in real schools, end-of-semester internal exams, class-representative elections, the college magazine, the daily morning assembly and digital attendance — the academic year at Government College of Education, Karachi."
 >
   <PageHero
     kicker="Coursework &amp; Practicum"
@@ -31,8 +31,8 @@ const hero = getCover('events', 'teaching-practice');
       Teaching practice is the heart of teacher education at GCE: every student is placed in a
       school and teaches real classes under supervision. Around it sits the rest of the academic
       year — internal examinations each semester, class-representative elections,
-      <em>Mashal-e-Ilm</em>, the college magazine students write and produce themselves, and the
-      morning assembly that opens every college day.
+      <em>Mashal-e-Ilm</em>, the college magazine students write and produce themselves, the
+      morning assembly that opens every college day, and digital attendance through the UstadJi app.
     </p>
     <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {items.map((e, i) => <EventCard event={e} delay={(i % 3) * 70} />)}
