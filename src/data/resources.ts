@@ -45,6 +45,8 @@ export interface ResourceSection {
   blurb: string;
   /** Cover images for a single-publication section — names under resources/. */
   covers?: { name: string; alt: string }[];
+  /** A page where the section's book can be read online (see books.ts). */
+  readOnline?: { href: string; label: string };
   groups: ResourceGroup[];
 }
 
@@ -166,6 +168,7 @@ export const resourceSections: ResourceSection[] = [
     shortTitle: 'Prof. Farah Kanwal',
     blurb:
       'A textbook by GCE’s own Prof. Farah Kanwal, written strictly to the University of Karachi syllabus for B.Ed. Elementary and Secondary examinations (2023 and onward). Published in English and in Urdu.',
+    readOnline: { href: '/student-resources/teaching-of-social-studies', label: 'Read the book online' },
     covers: [
       { name: 'teaching-of-social-studies-front', alt: 'Teaching of Social Studies by Professor Farah Kanwal — front cover' },
       { name: 'teaching-of-social-studies-back', alt: 'Teaching of Social Studies — back cover' },
@@ -174,7 +177,7 @@ export const resourceSections: ResourceSection[] = [
       {
         title: 'The book',
         files: [
-          { title: 'Teaching of Social Studies — English edition', pdf: '/student-resources/prof-farah-kanwal/teaching-of-social-studies-english.pdf' },
+          { title: 'Teaching of Social Studies — English edition', pdf: '/books/teaching-of-social-studies/english/teaching-of-social-studies-english.pdf' },
           { title: 'Teaching of Social Studies — Urdu edition', pdf: '/student-resources/prof-farah-kanwal/teaching-of-social-studies-urdu.pdf' },
         ],
       },
