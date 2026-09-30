@@ -75,6 +75,14 @@ export const educationDept: Person[] = [
     ],
     focus: 'top',
   },
+  {
+    name: 'Zubair',
+    folder: 'Zubair',
+    title: 'Librarian',
+    grade: 'BPS-17',
+    quals: ['Masters in Library & Information Science'],
+    former: { label: 'Transferred', years: '2020 – 2025' },
+  },
 ];
 
 /** Administrative & support staff. */
