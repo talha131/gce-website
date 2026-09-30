@@ -1,13 +1,18 @@
 ---
-/* Interactive magazine reader: a page-turning book (StPageFlip) with page
+/* Interactive book reader: a page-turning book (StPageFlip) with page
    controls, a thumbnail strip, zoom and full screen. Pages are pre-rendered
    images (see src/lib/flipbook.ts), loaded a few at a time around the page
-   being read, so opening the magazine never downloads the whole issue.
+   being read, so opening a book never downloads the whole of it.
 
    Zoom swaps the flipbook for a plain, pannable view of the open page(s) at
    1.5–3×: dragging to pan and dragging to turn a page cannot share one
-   gesture, so each mode owns its own. Without JS the thumbnail strip is still
-   a list of links to every page image. */
+   gesture, so each mode owns its own. A right-to-left book (Urdu) is laid out
+   in reverse and opened from its far end, so it turns from left to right like
+   the printed book; page numbers, thumbnails and controls stay in reading
+   order. The reader starts only once it is visible, so a hidden edition (e.g.
+   behind a tab) costs nothing until it is opened. Without JS the thumbnail
+   strip is still a list of links to every page image. */
+import { statSync } from 'node:fs';
 import type { FlipbookSource } from '@/lib/flipbook';
 
 interface Props {
@@ -20,8 +25,12 @@ const pages = Array.from({ length: mag.pageCount }, (_, i) => ({
   src: `${mag.path}/pages/${pad(i + 1)}.webp`,
   thumb: `${mag.path}/thumbs/${pad(i + 1)}.webp`,
 }));
+// The book itself is laid out in reverse for a right-to-left binding.
+const sheets = mag.rtl ? [...pages].reverse() : pages;
 const label = (n: number) =>
   mag.covers && n === 1 ? 'Front cover' : mag.covers && n === mag.pageCount ? 'Back cover' : `Page ${n}`;
+const thumbW = Math.round((mag.pageWidth * 180) / mag.pageHeight);
+const pdfSize = mag.pdf && `${(statSync(`public${mag.pdf.href}`).size / 1e6).toFixed(0)} MB`;
 ---
 
 <section
@@ -30,17 +39,28 @@ const label = (n: number) =>
   data-pages={mag.pageCount}
   data-w={mag.pageWidth}
   data-h={mag.pageHeight}
-  aria-label={`${mag.title} — ${mag.edition}, magazine reader`}
+  data-rtl={mag.rtl ? '' : undefined}
+  aria-label={`${mag.title} — ${mag.edition}, book reader`}
   tabindex="-1"
 >
   <!-- Toolbar -->
   <div class="fb-bar">
     <div class="min-w-0">
       <p class="font-display font-semibold text-brand-deep leading-tight truncate">{mag.title}</p>
-      <p class="text-xs text-ink-soft">{mag.edition} · {mag.pageCount} pages</p>
+      <p class="text-xs text-ink-soft">
+        {mag.edition} · {mag.pageCount} pages
+        {mag.pdf && (
+          <>
+            {' · '}
+            <a href={mag.pdf.href} class="font-semibold text-brand underline underline-offset-2 hover:text-brand-deep" type="application/pdf">
+              {mag.pdf.label} ({pdfSize})
+            </a>
+          </>
+        )}
+      </p>
     </div>
 
-    <div class="fb-group" role="group" aria-label="Page">
+    <div class="fb-group fb-pagegroup" role="group" aria-label="Page">
       <button type="button" class="fb-btn" data-fb="first" aria-label="First page">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 17l-5-5 5-5M18 17l-5-5 5-5"/></svg>
       </button>
@@ -79,25 +99,29 @@ const label = (n: number) =>
   </div>
 
   <!-- Stage: the book, or (zoomed) a pannable view of the open pages -->
-  <div class="fb-stage" data-fb-stage>
+  <div class="fb-stage" data-fb-stage lang={mag.lang}>
     <div class="fb-book" data-fb-book>
-      {pages.map((p) => (
+      {sheets.map((p) => (
         <div class="fb-sheet" data-density={mag.covers && (p.n === 1 || p.n === mag.pageCount) ? 'hard' : 'soft'}>
           <img data-src={p.src} alt={`${mag.title}, ${label(p.n).toLowerCase()}`} width={mag.pageWidth} height={mag.pageHeight} draggable="false" />
         </div>
       ))}
     </div>
     <div class="fb-zoomview" data-fb-zoomview hidden></div>
-    <p class="fb-hint" data-fb-hint>Drag a page corner, swipe, or use the arrows to turn pages.</p>
+    <p class="fb-hint" data-fb-hint>
+      {mag.rtl
+        ? 'This edition reads right to left — drag a page corner, swipe, or use the arrows.'
+        : 'Drag a page corner, swipe, or use the arrows to turn pages.'}
+    </p>
   </div>
 
-  <!-- Thumbnails (plain links to each page without JS) -->
+  <!-- Thumbnails, in reading order (plain links to each page without JS) -->
   <nav class="fb-thumbs" data-fb-thumbs aria-label="Pages">
-    <ol>
+    <ol dir={mag.rtl ? 'rtl' : undefined}>
       {pages.map((p) => (
         <li>
           <a href={p.src} data-fb-goto={p.n - 1} aria-label={`Go to ${label(p.n).toLowerCase()}`}>
-            <img src={p.thumb} alt="" width="127" height="180" loading="lazy" decoding="async" />
+            <img src={p.thumb} alt="" width={thumbW} height="180" loading="lazy" decoding="async" style={`aspect-ratio:${thumbW} / 180`} />
             <span>{p.n}</span>
           </a>
         </li>
@@ -163,13 +187,18 @@ const label = (n: number) =>
   .fb-thumbs[hidden] { display: none; }
   .fb-thumbs ol { display: flex; gap: .6rem; margin: 0; padding: .8rem 1rem; list-style: none; overflow-x: auto; scrollbar-width: thin; }
   .fb-thumbs a { display: block; width: 4.25rem; text-align: center; border-radius: 6px; padding: 3px; }
-  .fb-thumbs img { display: block; width: 100%; height: auto; aspect-ratio: 127 / 180; object-fit: cover; border-radius: 3px; border: 1px solid var(--line); background: #f4f1ea; }
+  .fb-thumbs img { display: block; width: 100%; height: auto; object-fit: cover; border-radius: 3px; border: 1px solid var(--line); background: #f4f1ea; }
   .fb-thumbs span { display: block; margin-top: .2rem; font-size: .7rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
   .fb-thumbs a:hover img { border-color: color-mix(in srgb, var(--brand) 40%, var(--line)); }
   .fb-thumbs a[aria-current='true'] { background: var(--brand-tint); }
   .fb-thumbs a[aria-current='true'] img { border-color: var(--brand); }
   .fb-thumbs a[aria-current='true'] span { color: var(--brand); font-weight: 600; }
   .fb-thumbs a:focus-visible { outline: 2px solid var(--gold); }
+
+  /* Right-to-left book: page controls run the way its pages turn — forward
+     is on the left — so the group reverses and its arrows mirror. */
+  .flipbook[data-rtl] .fb-pagegroup { flex-direction: row-reverse; }
+  .flipbook[data-rtl] .fb-pagegroup svg { transform: scaleX(-1); }
 
   /* Full screen: the stage takes every pixel the bar and strip leave. */
   .flipbook:fullscreen { display: flex; flex-direction: column; border-radius: 0; width: 100vw; height: 100vh; }
@@ -188,12 +217,14 @@ const label = (n: number) =>
   import { PageFlip } from 'page-flip';
 
   const ZOOMS = [1, 1.5, 2, 3];
+  const MIN_PAGE = 250;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  for (const root of document.querySelectorAll<HTMLElement>('[data-flipbook]')) {
+  function setup(root: HTMLElement) {
     const count = Number(root.dataset.pages);
     const pageW = Number(root.dataset.w);
     const pageH = Number(root.dataset.h);
+    const rtl = root.hasAttribute('data-rtl');
     const stage = root.querySelector<HTMLElement>('[data-fb-stage]')!;
     const bookEl = root.querySelector<HTMLElement>('[data-fb-book]')!;
     const sheets = [...bookEl.querySelectorAll<HTMLElement>('.fb-sheet')];
@@ -206,11 +237,17 @@ const label = (n: number) =>
     const hint = root.querySelector<HTMLElement>('[data-fb-hint]')!;
     const btn = (name: string) => root.querySelector<HTMLButtonElement>(`[data-fb="${name}"]`)!;
 
+    // Reading order (page 0 = first page read) vs. the order the sheets sit in
+    // the book element, which is reversed for a right-to-left binding. The
+    // mapping is its own inverse.
+    const toSheet = (page: number) => (rtl ? count - 1 - page : page);
+    const toPage = toSheet;
+
     let zoom = 1;
 
-    // Load page images a few either side of the open page; the rest wait.
-    const load = (i: number) => {
-      for (let j = Math.max(0, i - 2); j <= Math.min(count - 1, i + 3); j++) {
+    // Load page images a few sheets either side of the open one; the rest wait.
+    const load = (sheet: number) => {
+      for (let j = Math.max(0, sheet - 2); j <= Math.min(count - 1, sheet + 3); j++) {
         const img = sheets[j].querySelector('img')!;
         if (!img.src && img.dataset.src) img.src = img.dataset.src;
       }
@@ -219,7 +256,6 @@ const label = (n: number) =>
     // Size the book to fit the stage: two pages side by side when each can be
     // at least MIN_PAGE wide, otherwise one. PageFlip makes the same call from
     // the width we give it (portrait below 2 × minWidth), so the two agree.
-    const MIN_PAGE = 250;
     const fit = () => {
       const cs = getComputedStyle(stage);
       const w = stage.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
@@ -233,7 +269,8 @@ const label = (n: number) =>
     };
 
     fit();
-    load(0);
+    const start = toSheet(0);
+    load(start);
     const flip = new PageFlip(bookEl, {
       width: pageW,
       height: pageH,
@@ -248,38 +285,41 @@ const label = (n: number) =>
       maxShadowOpacity: 0.45,
       flippingTime: reduce ? 250 : 800,
       mobileScrollSupport: true,
+      startPage: start,
     });
     flip.loadFromHTML(sheets);
 
-    // PageFlip picks portrait/landscape from its own width; nudge it to match fit().
-    const relayout = () => {
+    // PageFlip picks portrait/landscape from its own width; keep it in step with fit().
+    new ResizeObserver(() => {
+      if (!stage.clientWidth) return;
       fit();
       flip.update();
       if (zoom > 1) renderZoom(false);
-    };
-    new ResizeObserver(() => relayout()).observe(stage);
+    }).observe(stage);
 
-    const current = () => flip.getCurrentPageIndex();
-    // Pages open right now: one in portrait or on a cover, else the spread.
-    const openPages = () => {
-      const i = current();
+    // Sheets open right now, left to right: one in portrait or on a cover, else the spread.
+    const openSheets = () => {
+      const i = flip.getCurrentPageIndex();
       if (flip.getOrientation() === 'portrait' || i === 0 || i === count - 1) return [i];
       const left = i % 2 === 1 ? i : i - 1;
       return [left, left + 1].filter((p) => p < count);
     };
+    // The same, as reading-order pages, lowest first.
+    const openPages = () => openSheets().map(toPage).sort((a, b) => a - b);
 
     const sync = () => {
-      const i = current();
-      load(i);
+      load(flip.getCurrentPageIndex());
       const open = openPages();
       input.value = String(open[0] + 1);
-      btn('first').disabled = btn('prev').disabled = i === 0;
+      btn('first').disabled = btn('prev').disabled = open[0] === 0;
       btn('last').disabled = btn('next').disabled = open[open.length - 1] >= count - 1;
       thumbLinks.forEach((a, n) => a.setAttribute('aria-current', String(open.includes(n))));
       const active = thumbLinks[open[0]];
       if (active && !thumbs.hidden) {
-        const left = active.offsetLeft - thumbList.clientWidth / 2 + active.offsetWidth / 2;
-        thumbList.scrollTo({ left, behavior: reduce ? 'auto' : 'smooth' });
+        // Centre the active thumbnail; measured on screen so it works in RTL too.
+        const a = active.getBoundingClientRect();
+        const l = thumbList.getBoundingClientRect();
+        thumbList.scrollBy({ left: a.left + a.width / 2 - (l.left + l.width / 2), behavior: reduce ? 'auto' : 'smooth' });
       }
       if (zoom > 1) renderZoom(false);
     };
@@ -290,17 +330,22 @@ const label = (n: number) =>
     });
     sync();
 
-    const go = (i: number) => {
-      const target = Math.min(count - 1, Math.max(0, i));
-      load(target);
-      if (zoom > 1 || reduce) flip.turnToPage(target);
-      else flip.flip(target);
+    // Go to a page in reading order.
+    const go = (page: number) => {
+      const sheet = toSheet(Math.min(count - 1, Math.max(0, page)));
+      load(sheet);
+      if (zoom > 1 || reduce) flip.turnToPage(sheet);
+      else flip.flip(sheet);
       sync();
     };
+    // Forward/back in reading order: a right-to-left book moves forward by
+    // turning the right-hand page… which PageFlip calls "previous".
+    const forward = () => (zoom > 1 ? go(openPages().at(-1)! + 1) : rtl ? flip.flipPrev() : flip.flipNext());
+    const back = () => (zoom > 1 ? go(openPages()[0] - 1) : rtl ? flip.flipNext() : flip.flipPrev());
     btn('first').addEventListener('click', () => go(0));
     btn('last').addEventListener('click', () => go(count - 1));
-    btn('prev').addEventListener('click', () => (zoom > 1 ? go(openPages()[0] - 1) : flip.flipPrev()));
-    btn('next').addEventListener('click', () => (zoom > 1 ? go(openPages().at(-1)! + 1) : flip.flipNext()));
+    btn('prev').addEventListener('click', back);
+    btn('next').addEventListener('click', forward);
     input.addEventListener('change', () => {
       const n = parseInt(input.value, 10);
       if (Number.isFinite(n)) go(n - 1);
@@ -313,11 +358,13 @@ const label = (n: number) =>
       }),
     );
 
-    // Keyboard: arrows turn pages while the reader has focus.
+    // Keyboard: the arrow pointing the way the pages turn moves forward.
     root.addEventListener('keydown', (e) => {
       if ((e.target as HTMLElement).tagName === 'INPUT') return;
-      if (e.key === 'ArrowRight') { e.preventDefault(); btn('next').click(); }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); btn('prev').click(); }
+      const ahead = rtl ? 'ArrowLeft' : 'ArrowRight';
+      const behind = rtl ? 'ArrowRight' : 'ArrowLeft';
+      if (e.key === ahead) { e.preventDefault(); forward(); }
+      if (e.key === behind) { e.preventDefault(); back(); }
       if (e.key === 'Home') { e.preventDefault(); go(0); }
       if (e.key === 'End') { e.preventDefault(); go(count - 1); }
     });
@@ -326,13 +373,13 @@ const label = (n: number) =>
     // ---- Zoom: a pannable view of the open pages at 1.5–3× the fitted size.
     function renderZoom(recentre: boolean) {
       const { width, spread } = fit();
-      const open = openPages();
       const perPage = (spread ? width / 2 : width) * zoom;
       const inner = document.createElement('div');
-      for (const p of open) {
+      for (const s of openSheets()) {
+        const source = sheets[s].querySelector('img')!;
         const img = document.createElement('img');
-        img.src = sheets[p].querySelector('img')!.dataset.src!;
-        img.alt = sheets[p].querySelector('img')!.alt;
+        img.src = source.dataset.src!;
+        img.alt = source.alt;
         img.width = Math.round(perPage);
         img.height = Math.round((perPage * pageH) / pageW);
         img.draggable = false;
@@ -406,5 +453,17 @@ const label = (n: number) =>
         fsBtn.querySelector('[data-fs-exit]')!.toggleAttribute('hidden', !on);
       });
     }
+  }
+
+  // Start each reader once it has a size — immediately if visible, otherwise
+  // the first time it is shown (a tab switch unhides it).
+  for (const root of document.querySelectorAll<HTMLElement>('[data-flipbook]')) {
+    const stage = root.querySelector<HTMLElement>('[data-fb-stage]')!;
+    const watch = new ResizeObserver(() => {
+      if (!stage.clientWidth) return;
+      watch.disconnect();
+      setup(root);
+    });
+    watch.observe(stage);
   }
 </script>
