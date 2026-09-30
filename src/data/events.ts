@@ -184,6 +184,17 @@ export const events: CollegeEvent[] = [
       "Students take part in making the magazine, contributing articles, stories and poetry. Selected work is published under the student's name.",
     ],
   },
+  {
+    slug: 'assembly',
+    name: 'Assembly',
+    group: 'Academics',
+    blurb: 'A compulsory daily assembly that brings every program, the faculty and the Principal together each morning.',
+    body: [
+      'GCE conducts a morning assembly every day as a regular part of the college routine. It is a compulsory daily activity, attended by students from all programs and semesters along with the faculty members and the Principal.',
+      'Students from every program and semester take part on a rotational basis, so different groups get the opportunity to take part and lead the activities. The assembly includes the recitation of the Holy Quran (Qirat), Naat, quotations, Dua, the College Anthem and the National Anthem.',
+      'It gives students an opportunity to participate confidently, express themselves and develop public-speaking and presentation skills, and it promotes discipline, unity, confidence and a sense of responsibility. Bringing students, teachers and the Principal together every morning, the assembly creates a strong sense of community and belonging within the college.',
+    ],
+  },
 
   // ------------------------------------------------- Workshops & Seminars ---
   {
