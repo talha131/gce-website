@@ -44,6 +44,17 @@ export const facultyNav = [
 
 /** Teaching faculty, Education Department. */
 export const educationDept: Person[] = [
+  {
+    name: 'Prof. Zahoor Ahmed',
+    folder: 'Prof_Zahoor_Ahmed',
+    title: 'Principal · Professor',
+    grade: 'BPS-20',
+    // No qualifications on file yet; the card shows designation, grade and email.
+    quals: [],
+    email: 'zahoor@gce.edu.pk',
+    photo: { category: 'principal', name: 'principal' },
+    first: true,
+  },
   { name: 'Prof. Dr. Ahmed Hussain Kolachi', folder: 'Prof_Dr_Ahmed_Hussain_Kolachi', title: 'Assistant Professor', grade: 'BPS-18', quals: ['Ph.D. (Sindhi)', 'B.Ed.'] },
   { name: 'Prof. Dr. Barkat Ali Dahri', folder: 'Prof_Dr_Barkat_Ali_Dahri', title: 'Assistant Professor', grade: 'BPS-18', quals: ['Ph.D. (Sindhi)', 'M.A. (Sindhi)', 'LLB', 'B.Ed.'] },
   { name: 'Prof. Dr. Sohail Ahmed', folder: 'Prof_Dr_Sohail_Ahmed', title: 'Associate Professor', grade: 'BPS-19', quals: ['Ph.D. (Education)', 'M.A. (Education)'], email: 'drsohail@gce.edu.pk' },
