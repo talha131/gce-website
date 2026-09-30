@@ -42,6 +42,8 @@ export const vision = {
 export const principal = {
   name: 'Prof. Zahoor Ahmed',
   title: 'Principal (BPS-20)',
+  qualification: 'M.S. (Economics)',
+  alsoAt: 'Visiting Faculty, University of Karachi',
   tenure: 'Over 33 years as a teacher',
   email: 'zahoor@gce.edu.pk',
   intro:
