@@ -12,7 +12,7 @@ const photo = getSingle('faculty', person.folder);
 ---
 
 <article class="card card-hover overflow-hidden flex flex-col" data-reveal>
-  <div class="aspect-[4/5] bg-brand-tint overflow-hidden">
+  <div class="aspect-[4/5] bg-brand-tint overflow-hidden" style={person.nudge ? `background:${person.nudge.bg}` : undefined}>
     {photo ? (
       <Image
         src={photo}
@@ -20,7 +20,10 @@ const photo = getSingle('faculty', person.folder);
         widths={[240, 380]}
         sizes="(min-width:1024px) 22vw, (min-width:640px) 45vw, 90vw"
         class="h-full w-full object-cover"
-        style={person.focus ? `object-position:${person.focus}` : undefined}
+        style={[
+          person.focus && `object-position:${person.focus}`,
+          person.nudge && `transform:translateY(${person.nudge.y})`,
+        ].filter(Boolean).join(';') || undefined}
         loading="lazy"
       />
     ) : (

@@ -14,6 +14,13 @@ export interface Person {
   quals: string[];
   /** CSS object-position for the card photo, e.g. 'top' or 'center 25%'. Set only where the default centre crop clips the face. */
   focus?: string;
+  /**
+   * Lower the photo inside its frame by `y` (a translateY, e.g. '5%') without
+   * cropping or zooming — for a photo whose head already touches its own top
+   * edge, so `focus` has no headroom to reveal. `bg` fills the strip this opens
+   * at the top and should match the photo's backdrop.
+   */
+  nudge?: { y: string; bg: string };
   /** College email, rendered as a mailto link on the card. */
   email?: string;
   /** Personal website without protocol, e.g. 'talhamansoor.com'. */
@@ -55,11 +62,11 @@ export const educationDept: Person[] = [
   { name: 'Prof. Ghulam Umar Mirani', folder: 'Prof_Ghulam_Umar_Mirani', title: 'Assistant Professor', grade: 'BPS-19', quals: ['M.B.A.', 'M.Ed.'] },
   { name: 'Prof. Rizwan Ahmed', folder: 'Prof_Rizwan_Ahmed', title: 'Lecturer', grade: 'BPS-17', quals: ['M.Sc. (Chemistry)', 'B.Ed.'], focus: 'top' },
   { name: 'Prof. Nadeem Uddin', folder: 'Prof_Nadeem_Uddin', title: 'Lecturer', grade: 'BPS-17', quals: ['M.Sc. (Chemistry)', 'M.Ed.'] },
-  { name: 'Prof. Irfat un Nisa', folder: 'Prof_Irfat_un_Nisa', title: 'Lecturer', grade: 'BPS-17', quals: ['M.Sc. (Physics)'] },
+  { name: 'Prof. Irfat un Nisa', folder: 'Prof_Irfat_un_Nisa', title: 'Lecturer', grade: 'BPS-17', quals: ['M.Sc. (Physics)'], nudge: { y: '5%', bg: '#cdbbaf' } },
   { name: 'Prof. Waseem Ahmed Khan', folder: 'Prof_Waseem_Ahmed_Khan', title: 'Associate Professor', grade: 'BPS-19', quals: ['M.Sc. (Zoology)'] },
   { name: 'Prof. Muhammad Rizwan', folder: 'Prof_Muhammad_Rizwan', title: 'Lecturer', grade: 'BPS-17', quals: ['M.A. (Pakistan Studies)'] },
   { name: 'Prof. Nouman Baqar', folder: 'Prof_Nouman_Baqar', title: 'Associate Professor', grade: 'BPS-19', quals: ['M.A. (Urdu)'], email: 'nbnaqvi@gce.edu.pk', focus: 'top' },
-  { name: 'Muhammad Mustaqeem', folder: 'Muhammad_Mustaqeem', title: 'Senior Librarian', grade: 'BPS-18', quals: ['Masters in Library & Information Science'] },
+  { name: 'Muhammad Mustaqeem', folder: 'Muhammad_Mustaqeem', title: 'Senior Librarian', grade: 'BPS-18', quals: ['Masters in Library & Information Science'], focus: 'center 33%' },
   {
     name: 'Prof. Yusra',
     folder: 'Prof_Yusra',
