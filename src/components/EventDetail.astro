@@ -7,6 +7,8 @@ import PageHero from '@/components/PageHero.astro';
 import SectionNav from '@/components/SectionNav.astro';
 import Section from '@/components/Section.astro';
 import Gallery from '@/components/Gallery.astro';
+import Flipbook from '@/components/Flipbook.astro';
+import { magazineIssues } from '@/data/magazine';
 import { eventGroupHref, eventHref, eventsInGroup, type CollegeEvent } from '@/data/events';
 import { getGallery, getSingle } from '@/lib/images';
 
@@ -33,10 +35,20 @@ const backHref = eventGroupHref(event.group);
     {event.body.map((p) => <p>{p}</p>)}
   </div>
 
+  {event.flipbook && (
+    <div class="mt-14">
+      <h2 class="!text-2xl" data-reveal>Read the magazine</h2>
+      <p class="mt-2 mb-6 max-w-2xl text-ink-soft" data-reveal>
+        Turn the pages right here — drag a corner or use the arrows, zoom in to read, or go full screen.
+      </p>
+      <Flipbook book={magazineIssues[event.flipbook]} />
+    </div>
+  )}
+
   {images.length > 0 && (
     <div class="mt-14">
       <h2 class="!text-2xl mb-6" data-reveal>Gallery</h2>
-      <Gallery images={images} altBase={event.name} columns={3} />
+      <Gallery images={images} altBase={event.name} columns={event.galleryFit === 'contain' ? 4 : 3} fit={event.galleryFit} />
     </div>
   )}
 

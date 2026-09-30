@@ -102,12 +102,16 @@ Content lives in **`src/data/`** — plain typed TS files, no CMS:
 | File | Controls |
 |------|----------|
 | `site.ts` | Name, contact, socials, nav, transport routes |
-| `about.ts` | History, mission/vision (EN+UR), principal, anthem & dua, testimonials |
+| `about.ts` | History, mission/vision (EN+UR), principal, anthem & dua |
+| `testimonials.ts` | Alumni testimonials on the homepage (portraits in `src/assets/content/testimonials/`) |
 | `programs.ts` | The four academic programs |
 | `faculty.ts` | Education Department & administrative staff |
 | `facilities.ts` | Campus facilities |
 | `events.ts` | Student-life events, and the Academics section |
 | `outlines.ts` | Course outlines by programme and semester (PDFs in `public/course-outlines/`) |
+| `resources.ts` | Student Resources Center — notes, past papers, faculty publications, recommended books (PDFs in `public/student-resources/`; shrink new scanned papers with `scripts/shrink-scanned-pdf.py`) |
+| `magazine.ts` | Magazine issues read in the flipbook on /academics/magazine (page images in `public/magazine/`, rendered from the print PDFs by `scripts/render-magazine.py`; `scripts/pages-to-pdf.py` binds them into the merged download) |
+| `books.ts` | Books by GCE faculty, each with a page at /student-resources/<slug> crediting the author and a page-turning reader per edition (pages in `public/books/`, rendered by `scripts/render-book.py`) |
 | `achievements.ts` | Alumni honours, ICEEC 2025 conference, action research |
 | `contributors.ts` | Student website contributors (colophon) |
 
@@ -131,9 +135,6 @@ the site look complete. Replace the following when the college supplies final co
 and photos (each is flagged with `isFiller: true` in the data files):
 
 - **Principal's message** (`about.ts` → `principal.message`) — a placeholder draft.
-- **Testimonials** (`about.ts` → `testimonials`) — 3 filler quotes attributed to
-  generic roles ("B.Ed (Hons) Graduate", "Parent", "Alumnus & Schoolteacher"),
-  shown on the homepage.
 - **BS Education program** (`programs.ts`) — some details are filler pending final
   curriculum copy (`isFiller: true`).
 - **Science Education Centre** (`facilities.ts`) — brief filler description

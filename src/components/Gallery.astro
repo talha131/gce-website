@@ -7,9 +7,14 @@ interface Props {
   /** Base alt text; each image gets "<altBase> — photo N". */
   altBase: string;
   columns?: 2 | 3 | 4;
+  /**
+   * 'cover' (default) crops photos to fill the 4:3 tile. 'contain' shows each
+   * image whole in a taller tile — for app screenshots, which a crop would cut.
+   */
+  fit?: 'cover' | 'contain';
 }
 
-const { images, altBase, columns = 3 } = Astro.props;
+const { images, altBase, columns = 3, fit = 'cover' } = Astro.props;
 
 // Pre-compute an optimized large version of each image for the lightbox.
 const large = await Promise.all(
@@ -30,7 +35,10 @@ const colClass = {
         <li data-reveal style={`--reveal-delay:${Math.min(i, 6) * 60}ms`}>
           <button
             type="button"
-            class="group block w-full overflow-hidden rounded-[var(--radius)] border border-line bg-surface shadow-card focus-visible:outline-offset-4 aspect-[4/3]"
+            class:list={[
+              'group block w-full overflow-hidden rounded-[var(--radius)] border border-line shadow-card focus-visible:outline-offset-4',
+              fit === 'contain' ? 'aspect-[3/4] bg-brand-tint p-4' : 'aspect-[4/3] bg-surface',
+            ]}
             data-full={large[i].src}
             data-alt={`${altBase} — photo ${i + 1}`}
             aria-label={`View ${altBase} — photo ${i + 1} full size`}
@@ -40,7 +48,10 @@ const colClass = {
               alt={`${altBase} — photo ${i + 1}`}
               widths={[300, 500, 700]}
               sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 90vw"
-              class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+              class:list={[
+                'h-full w-full transition-transform duration-500',
+                fit === 'contain' ? 'object-contain group-hover:scale-[1.03]' : 'object-cover group-hover:scale-[1.06]',
+              ]}
               loading="lazy"
             />
           </button>

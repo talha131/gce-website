@@ -33,7 +33,7 @@ const isActive = (href: string) =>
         </span>
       </a>
 
-      <!-- Desktop nav. Ten items is a lot, so the pills are tight and the
+      <!-- Desktop nav. It carries a lot of items, so the pills are tight and the
            bar only appears above the `nav` breakpoint (84rem, defined in
            global.css); below that it is the menu button. -->
       <nav class="hidden nav:flex items-center gap-0.5" aria-label="Primary">
@@ -42,7 +42,7 @@ const isActive = (href: string) =>
             href={item.href}
             aria-current={isActive(item.href) ? 'page' : undefined}
             class:list={[
-              'whitespace-nowrap px-2.5 py-2 rounded-full text-[0.83rem] font-medium transition-colors',
+              'whitespace-nowrap px-[0.45rem] py-2 rounded-full text-[0.83rem] font-medium transition-colors',
               isActive(item.href)
                 ? 'text-[var(--hdr-active)] bg-[var(--hdr-active-bg)]'
                 : 'text-[var(--hdr-fg-soft)] hover:text-[var(--hdr-fg)] hover:bg-[var(--hdr-hover-bg)]',
@@ -128,7 +128,7 @@ const isActive = (href: string) =>
 </script>
 
 <style>
-  /* The nav bar runs wider than the 76rem content column — ten top-level
+  /* The nav bar runs wider than the 76rem content column — the top-level
      items need the room, and a full-width header band is a normal shape. */
   .header-bar {
     --container-site: 94rem;

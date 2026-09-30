@@ -1,7 +1,7 @@
 {
   "name": "gce-website",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "Government College of Education (GCE), Karachi — official website.",
   "scripts": {
@@ -18,6 +18,7 @@
     "@fontsource/noto-nastaliq-urdu": "^5.1.0",
     "@tailwindcss/vite": "^4.0.0",
     "astro": "^5.1.0",
+    "page-flip": "^2.0.7",
     "sharp": "^0.33.5",
     "tailwindcss": "^4.0.0"
   }

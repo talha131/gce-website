@@ -4,6 +4,8 @@
  * `isFiller` marks descriptions written as placeholder copy (see README).
  */
 
+import type { MagazineIssueKey } from './magazine';
+
 export type EventGroup =
   | 'Celebrations & National Days'
   | 'Academics'
@@ -17,6 +19,16 @@ export interface CollegeEvent {
   date?: string;
   blurb: string;
   body: string[];
+  /**
+   * A logo to use as the card cover instead of the first gallery photo — a name
+   * under src/assets/content/logos/, shown whole (never cropped) on `bg`, which
+   * should match the logo's own background.
+   */
+  logoCover?: { name: string; alt: string; bg: string };
+  /** 'contain' where the gallery is app screenshots rather than photos. */
+  galleryFit?: 'cover' | 'contain';
+  /** A magazine issue (src/data/magazine.ts) to read in a flipbook on the page. */
+  flipbook?: MagazineIssueKey;
   isFiller?: boolean;
 }
 
@@ -183,6 +195,31 @@ export const events: CollegeEvent[] = [
       "It carries full information about the college. It's vision, mission and history — along with photographs of events kept as memories.",
       "Students take part in making the magazine, contributing articles, stories and poetry. Selected work is published under the student's name.",
     ],
+    flipbook: 'mashal-e-ilm-2024',
+  },
+  {
+    slug: 'assembly',
+    name: 'Assembly',
+    group: 'Academics',
+    blurb: 'A compulsory daily assembly that brings every program, the faculty and the Principal together each morning.',
+    body: [
+      'GCE conducts a morning assembly every day as a regular part of the college routine. It is a compulsory daily activity, attended by students from all programs and semesters along with the faculty members and the Principal.',
+      'Students from every program and semester take part on a rotational basis, so different groups get the opportunity to take part and lead the activities. The assembly includes the recitation of the Holy Quran (Qirat), Naat, quotations, Dua, the College Anthem and the National Anthem.',
+      'It gives students an opportunity to participate confidently, express themselves and develop public-speaking and presentation skills, and it promotes discipline, unity, confidence and a sense of responsibility. Bringing students, teachers and the Principal together every morning, the assembly creates a strong sense of community and belonging within the college.',
+    ],
+  },
+  {
+    slug: 'digital-attendance',
+    name: 'Digital Attendance',
+    group: 'Academics',
+    blurb: 'Attendance, leave requests and the class timetable — all in the UstadJi app, for teachers and students alike.',
+    body: [
+      'Attendance at GCE has now shifted to a digital system, managed through the UstadJi app, making the attendance process more convenient and organized. Teachers use the app to record students’ attendance digitally for their respective classes and courses.',
+      'Students use the same app to view their attendance record for each course, check their attendance percentage and keep track of it throughout the semester. They can submit leave requests online, making the leave process easier, and the class timetable is available in the app too, so students can easily check their scheduled classes. Used by both teachers and students, UstadJi brings useful academic information together in one place.',
+      'Digital attendance reduces paperwork, makes attendance records easier to manage and gives students quick access to their attendance status. The system improves accuracy, transparency and efficiency in attendance management — a step toward making academic processes at GCE more organized, accessible and technology-friendly.',
+    ],
+    logoCover: { name: 'ustadji', alt: 'UstadJi app logo', bg: '#3c3c3c' },
+    galleryFit: 'contain',
   },
 
   // ------------------------------------------------- Workshops & Seminars ---

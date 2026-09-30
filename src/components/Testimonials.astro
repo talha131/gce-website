@@ -1,0 +1,113 @@
+---
+/* Alumni testimonials: a grid of cards (portrait, name, batch, current role and
+   a pull-quote), each opening its full story in a modal <dialog>. The dialogs
+   need JS to open; the cards themselves — name, role and quote — are complete
+   without it. Data: src/data/testimonials.ts. */
+import { Image } from 'astro:assets';
+import Monogram from './Monogram.astro';
+import { testimonials } from '@/data/testimonials';
+import { getSingle } from '@/lib/images';
+
+const items = testimonials.map((t) => ({ ...t, photo: getSingle('testimonials', t.folder), id: `story-${t.folder.toLowerCase()}` }));
+---
+
+<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4" data-testimonials>
+  {items.map((t, i) => (
+    <figure class="card p-6 text-left flex flex-col h-full" data-reveal style={`--reveal-delay:${(i % 4) * 70}ms`}>
+      <figcaption class="flex items-center gap-4">
+        <span class="h-16 w-16 shrink-0 overflow-hidden rounded-full ring-2 ring-gold/60 ring-offset-2 ring-offset-surface bg-brand-tint">
+          {t.photo ? (
+            <Image src={t.photo} alt={`Portrait of ${t.name}`} widths={[64, 128]} sizes="64px" class="h-full w-full object-cover" loading="lazy" />
+          ) : (
+            <Monogram name={t.name} class="h-full w-full text-lg" />
+          )}
+        </span>
+        <span class="min-w-0">
+          <span class="block font-display font-semibold text-brand-deep leading-snug">{t.name}</span>
+          <span class="block text-xs font-semibold uppercase tracking-wider text-gold-deeper">{t.batch}</span>
+        </span>
+      </figcaption>
+      <p class="mt-3 text-sm text-ink-soft leading-snug">{t.role}</p>
+      <svg width="28" height="28" viewBox="0 0 24 24" class="mt-4 text-gold" fill="currentColor" aria-hidden="true"><path d="M9.5 8C7 8 5 10 5 12.5V18h5v-5H7.8c0-1.6 1-2.7 2.7-2.7V8Zm9 0c-2.5 0-4.5 2-4.5 4.5V18h5v-5h-2.2c0-1.6 1-2.7 2.7-2.7V8Z"/></svg>
+      <blockquote class="mt-2 text-ink leading-relaxed flex-1">{t.quote}</blockquote>
+      <button
+        type="button"
+        class="mt-5 self-start inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:gap-2.5 transition-all"
+        data-story-open={t.id}
+        aria-haspopup="dialog"
+      >
+        Read {t.name.split(' ')[0]}’s story
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </figure>
+  ))}
+</div>
+
+{items.map((t) => (
+  <dialog
+    id={t.id}
+    class="story m-auto w-[min(44rem,calc(100vw-2rem))] max-h-[calc(100dvh-2rem)] rounded-[var(--radius-lg)] bg-surface p-0 text-left shadow-lift backdrop:bg-brand-950/70"
+    aria-labelledby={`${t.id}-title`}
+  >
+    <div class="flex items-start gap-5 bg-brand-950 px-6 py-6 md:px-8 text-white">
+      <span class="h-20 w-20 shrink-0 overflow-hidden rounded-full ring-2 ring-gold ring-offset-2 ring-offset-brand-950 bg-brand">
+        {t.photo ? (
+          <Image src={t.photo} alt="" widths={[80, 160]} sizes="80px" class="h-full w-full object-cover" loading="lazy" />
+        ) : (
+          <Monogram name={t.name} class="h-full w-full text-xl" />
+        )}
+      </span>
+      <div class="min-w-0 flex-1">
+        <p class="text-xs font-semibold uppercase tracking-wider text-gold-bright">{t.batch}</p>
+        <h3 id={`${t.id}-title`} class="mt-1 !text-2xl text-white">{t.name}</h3>
+        <p class="mt-1 text-sm text-white/75">{t.role}</p>
+      </div>
+      <button type="button" class="shrink-0 -mr-2 -mt-2 grid h-10 w-10 place-items-center rounded-full text-white/80 hover:bg-white/10 hover:text-white" data-story-close aria-label="Close">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="px-6 py-6 md:px-8 md:py-7 space-y-4 text-ink leading-relaxed">
+      <p class="text-xs font-semibold uppercase tracking-wider text-ink-soft">My experience at GCE</p>
+      {t.story.map((block) =>
+        typeof block === 'string' ? (
+          <p>{block}</p>
+        ) : Array.isArray(block) ? (
+          <ul class="space-y-2">
+            {block.map((line) => (
+              <li class="flex gap-3">
+                <span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" aria-hidden="true"></span>
+                <span>{line}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <h4 class="!text-lg text-brand-deep pt-2">{block.heading}</h4>
+        ),
+      )}
+    </div>
+  </dialog>
+))}
+
+<style>
+  .story { overflow-y: auto; overscroll-behavior: contain; }
+  .story[open] { animation: story-in 0.25s cubic-bezier(.2,.7,.2,1); }
+  @keyframes story-in { from { opacity: 0; transform: translateY(12px); } }
+  @media (prefers-reduced-motion: reduce) {
+    .story[open] { animation: none; }
+  }
+</style>
+
+<script>
+  for (const btn of document.querySelectorAll<HTMLButtonElement>('[data-story-open]')) {
+    const dialog = document.getElementById(btn.dataset.storyOpen!) as HTMLDialogElement | null;
+    if (!dialog) continue;
+    btn.addEventListener('click', () => dialog.showModal());
+    dialog.querySelector('[data-story-close]')?.addEventListener('click', () => dialog.close());
+    // A click on the backdrop (the dialog element itself, outside its content) closes it.
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+    // Return focus to the card's button, not the top of the page.
+    dialog.addEventListener('close', () => btn.focus());
+  }
+</script>

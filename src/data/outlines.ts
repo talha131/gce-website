@@ -3,9 +3,6 @@
  * currently teaches to. The PDFs live under /public/course-outlines/<slug>/ and
  * were copied out of the source Drive folder (19_Outlines) — see
  * scripts/import-assets.sh for the wider asset-import convention.
- *
- * `programSlug` links an outline set back to its entry in programs.ts where one
- * exists (the two 4-year sets share a single program).
  */
 
 export interface OutlineCourse {
@@ -27,8 +24,6 @@ export interface OutlineSet {
   name: string;
   /** Short label for the jump nav. */
   shortName: string;
-  /** Which program in programs.ts this belongs to. */
-  programSlug: string;
   /** One line under the heading. */
   blurb: string;
   /** Optional whole-programme document (scheme of subjects, combined outline). */
@@ -41,7 +36,6 @@ export const outlineSets: OutlineSet[] = [
     slug: 'bed-4-year-pre-2026',
     name: 'B.Ed. (Hons.) 4 Years — Outlines before 2026',
     shortName: 'B.Ed. 4 Years (pre-2026)',
-    programSlug: 'bed-hons-4-year',
     blurb:
       'The outlines followed by students who joined before the 2026 revision. Seven semesters of outlines are published; the eighth is practicum.',
     semesters: [
@@ -124,7 +118,6 @@ export const outlineSets: OutlineSet[] = [
     slug: 'bed-4-year-2026',
     name: 'B.Ed. (Hons.) 4 Years — New Outlines 2026',
     shortName: 'B.Ed. 4 Years (2026)',
-    programSlug: 'bed-hons-4-year',
     blurb:
       'The revised scheme in force for the 2026 intake onwards. The full combined outline is below, with the published semesters listed individually.',
     document: {
@@ -169,7 +162,6 @@ export const outlineSets: OutlineSet[] = [
     slug: 'bed-2-5-year-morning',
     name: 'B.Ed. 2.5 Years — Morning',
     shortName: 'B.Ed. 2.5 Years (Morning)',
-    programSlug: 'bed-2-5-year-morning',
     blurb: 'Five semesters, with elective content subjects alongside the core education courses.',
     document: {
       label: 'Scheme of subjects',
@@ -211,6 +203,7 @@ export const outlineSets: OutlineSet[] = [
           { title: 'Biology II', pdf: '/course-outlines/bed-2-5-year-morning/semester-3/biology-ii.pdf' },
           { title: 'Chemistry II', pdf: '/course-outlines/bed-2-5-year-morning/semester-3/chemistry-ii.pdf' },
           { title: 'Economics II', pdf: '/course-outlines/bed-2-5-year-morning/semester-3/economics-ii.pdf' },
+          { title: 'Islamic Studies II', pdf: '/course-outlines/bed-2-5-year-morning/semester-3/islamic-studies-ii.pdf' },
           { title: 'Mathematics II', pdf: '/course-outlines/bed-2-5-year-morning/semester-3/mathematics-ii.pdf' },
         ],
       },
@@ -224,6 +217,7 @@ export const outlineSets: OutlineSet[] = [
           { title: 'Biology III', pdf: '/course-outlines/bed-2-5-year-morning/semester-4/biology-iii.pdf' },
           { title: 'Chemistry III', pdf: '/course-outlines/bed-2-5-year-morning/semester-4/chemistry-iii.pdf' },
           { title: 'Economics III', pdf: '/course-outlines/bed-2-5-year-morning/semester-4/economics-iii.pdf' },
+          { title: 'Islamic Studies III', pdf: '/course-outlines/bed-2-5-year-morning/semester-4/islamic-studies-iii.pdf' },
           { title: 'Mathematics III', pdf: '/course-outlines/bed-2-5-year-morning/semester-4/mathematics-iii.pdf' },
         ],
       },
@@ -233,6 +227,7 @@ export const outlineSets: OutlineSet[] = [
           { title: 'Research Project', code: 'DTE-612', pdf: '/course-outlines/bed-2-5-year-morning/semester-5/research-project-dte-612.pdf' },
           { title: 'Educational Leadership and Organizational Behaviour', code: 'DTE-622', pdf: '/course-outlines/bed-2-5-year-morning/semester-5/educational-leadership-and-organizational-behaviour-dte-622.pdf' },
           { title: 'Practicum (Long Term)', code: 'DTE-652', pdf: '/course-outlines/bed-2-5-year-morning/semester-5/practicumlong-term-dte-652.pdf' },
+          { title: 'Teaching of Islamic Studies (Pedagogy)', pdf: '/course-outlines/bed-2-5-year-morning/semester-5/teaching-of-islamic-studies-pedagogy.pdf' },
           { title: 'Teaching of Mathematics (Pedagogy)', pdf: '/course-outlines/bed-2-5-year-morning/semester-5/teaching-of-mathematics-pedagogy.pdf' },
           { title: 'Teaching of Science (Pedagogy)', pdf: '/course-outlines/bed-2-5-year-morning/semester-5/teaching-of-science-pedagogy.pdf' },
         ],
@@ -243,7 +238,6 @@ export const outlineSets: OutlineSet[] = [
     slug: 'bed-2-5-year-evening',
     name: 'B.Ed. 2.5 Years — Evening',
     shortName: 'B.Ed. 2.5 Years (Evening)',
-    programSlug: 'bed-2-5-year-evening',
     blurb: 'The same five-semester scheme as the morning shift, taught in the evening.',
     semesters: [
       {
@@ -276,6 +270,7 @@ export const outlineSets: OutlineSet[] = [
           { title: 'Inclusive Education', code: 'DTE-542', pdf: '/course-outlines/bed-2-5-year-evening/semester-3/inclusive-education-dte-542.pdf' },
           { title: 'Perspectives on Teacher Education', code: 'DTE-522', pdf: '/course-outlines/bed-2-5-year-evening/semester-3/perspective-on-teacher-education-dte-522.pdf' },
           { title: 'Biology II', pdf: '/course-outlines/bed-2-5-year-evening/semester-3/biology-ii.pdf' },
+          { title: 'Islamic Studies II', pdf: '/course-outlines/bed-2-5-year-evening/semester-3/islamic-studies-ii.pdf' },
           { title: 'Mathematics II', pdf: '/course-outlines/bed-2-5-year-evening/semester-3/mathematics-ii.pdf' },
         ],
       },
@@ -288,6 +283,7 @@ export const outlineSets: OutlineSet[] = [
           { title: 'Education Policy and Planning', code: 'DTE-641', pdf: '/course-outlines/bed-2-5-year-evening/semester-4/education-policy-and-planning-dte-641.pdf' },
           { title: 'Biology III', pdf: '/course-outlines/bed-2-5-year-evening/semester-4/biology-iii.pdf' },
           { title: 'Chemistry III', pdf: '/course-outlines/bed-2-5-year-evening/semester-4/chemistry-iii.pdf' },
+          { title: 'Islamic Studies III', pdf: '/course-outlines/bed-2-5-year-evening/semester-4/islamic-studies-iii.pdf' },
           { title: 'Mathematics III', pdf: '/course-outlines/bed-2-5-year-evening/semester-4/mathematics-iii.pdf' },
         ],
       },
@@ -297,9 +293,22 @@ export const outlineSets: OutlineSet[] = [
           { title: 'Research Project', code: 'DTE-612', pdf: '/course-outlines/bed-2-5-year-evening/semester-5/research-project-dte-612.pdf' },
           { title: 'Educational Leadership and Organizational Behaviour', code: 'DTE-622', pdf: '/course-outlines/bed-2-5-year-evening/semester-5/educational-leadership-and-organizational-behaviour-dte-622.pdf' },
           { title: 'Practicum (Long Term)', code: 'DTE-652', pdf: '/course-outlines/bed-2-5-year-evening/semester-5/practicumlong-term-dte-652.pdf' },
+          { title: 'Teaching of Islamic Studies (Pedagogy)', pdf: '/course-outlines/bed-2-5-year-evening/semester-5/teaching-of-islamic-studies-pedagogy.pdf' },
         ],
       },
     ],
+  },
+  {
+    slug: 'med',
+    name: 'M.Ed. — Master of Education',
+    shortName: 'M.Ed.',
+    blurb:
+      'The University of Karachi course of studies for the Master of Education, 1996 and onwards — every course in one booklet.',
+    document: {
+      label: 'M.Ed. course of studies',
+      pdf: '/course-outlines/med/med-course-of-studies.pdf',
+    },
+    semesters: [],
   },
 ];
 
