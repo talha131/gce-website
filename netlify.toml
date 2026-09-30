@@ -26,3 +26,24 @@
   from = "/programs/course-outlines"
   to = "/course-outlines"
   status = 301
+
+# Academics left Student Life for its own section; old links still arrive.
+[[redirects]]
+  from = "/student-life/teaching-practice"
+  to = "/academics/teaching-practice"
+  status = 301
+
+[[redirects]]
+  from = "/student-life/internal-exams"
+  to = "/academics/internal-exams"
+  status = 301
+
+[[redirects]]
+  from = "/student-life/cr-elections"
+  to = "/academics/cr-elections"
+  status = 301
+
+[[redirects]]
+  from = "/student-life/magazine"
+  to = "/academics/magazine"
+  status = 301
