@@ -109,6 +109,7 @@ Content lives in **`src/data/`** — plain typed TS files, no CMS:
 | `facilities.ts` | Campus facilities |
 | `events.ts` | Student-life events, and the Academics section |
 | `outlines.ts` | Course outlines by programme and semester (PDFs in `public/course-outlines/`) |
+| `resources.ts` | Student Resources Center — notes, past papers, faculty publications, recommended books (PDFs in `public/student-resources/`; shrink new scanned papers with `scripts/shrink-scanned-pdf.py`) |
 | `achievements.ts` | Alumni honours, ICEEC 2025 conference, action research |
 | `contributors.ts` | Student website contributors (colophon) |
 
