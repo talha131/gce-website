@@ -39,7 +39,7 @@ export const educationDept: Person[] = [
   { name: 'Prof. Asim Ahmed', folder: 'Prof_Asim_Ahmed', title: 'Lecturer', grade: 'BPS-17', quals: ['Ph.D. (Education) — Thesis Submitted', 'M.Phil. (Education)', 'M.Ed., M.A. (Urdu)'] },
   { name: 'Prof. Sharjeel Ahmed', folder: 'Prof_Sharjeel_Ahmed', title: 'Lecturer', grade: 'BPS-17', quals: ['Ph.D. (Teacher Education) — In Progress', 'M.Phil. (Educational Leadership & Management)', 'M.Ed. / M.A. / Dip-ECED / EYFS (UK)'], email: 'sharjeel@gce.edu.pk' },
   { name: 'Prof. Tabassum Kausar', folder: 'Prof_Tabbasum_Kausar', title: 'Assistant Professor', grade: 'BPS-18', quals: ['Ph.D. (Teacher Education) — In Progress', 'M.Phil. (Education)', 'M.Ed.'], email: 'tabbasum@gce.edu.pk' },
-  { name: 'Prof. Shagufta', folder: 'Prof_Shagufta', title: 'Lecturer', grade: 'BPS-17', quals: ['Ph.D. (Education) — In Progress', 'M.Phil. (Education)', 'B.Ed. (Hons.)'], former: { label: 'Transferred', years: '2023 – 2026' } },
+  { name: 'Prof. Shagufta', folder: 'Prof_Shagufta', title: 'Lecturer', grade: 'BPS-17', quals: ['Ph.D. (Education) — In Progress', 'M.Phil. (Education)', 'B.Ed. (Hons.)'] },
   { name: 'Prof. Muhammad Akbar', folder: 'Prof_Muhammad_Akbar', title: 'Professor', grade: 'BPS-20', quals: ['M.Phil. (Education)', 'M.Ed.'] },
   { name: 'Prof. Rashid Ali', folder: 'Prof_Rashid_Ali', title: 'Lecturer', grade: 'BPS-17', quals: ['M.Phil. (Education)', 'M.Ed.', 'M.A. (Economics)'], email: 'rashidali@gce.edu.pk' },
   { name: 'Prof. Waseem Sajjad', folder: 'Prof_Waseem_Sajjad', quals: ['M.Phil. (Education)', 'M.Ed. / B.Sc.'] },
