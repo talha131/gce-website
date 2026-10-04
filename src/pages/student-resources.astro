@@ -15,7 +15,8 @@ const hero = getSingle('heroes', 'student-resources') ?? getSingle('heroes', 'pr
 // File size under each download, so students on mobile data know what they are opening.
 const sizeOf = (pdf: string) => {
   const bytes = statSync(`public${pdf}`).size;
-  return bytes >= 1e6 ? `${(bytes / 1e6).toFixed(1)} MB` : `${Math.max(1, Math.round(bytes / 1e3))} KB`;
+  // MB from 999.5 KB, which would otherwise round to "1000 KB".
+  return bytes >= 999_500 ? `${(bytes / 1e6).toFixed(1)} MB` : `${Math.max(1, Math.round(bytes / 1e3))} KB`;
 };
 
 // Each PDF is listed once (see resources.ts), so the count is the number of entries.
