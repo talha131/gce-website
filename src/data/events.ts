@@ -224,9 +224,14 @@ export const events: CollegeEvent[] = [
       'Attendance at GCE has now shifted to a digital system, managed through the UstadJi app, making the attendance process more convenient and organized. Teachers use the app to record students’ attendance digitally for their respective classes and courses.',
       'Students use the same app to view their attendance record for each course, check their attendance percentage and keep track of it throughout the semester. They can submit leave requests online, making the leave process easier, and the class timetable is available in the app too, so students can easily check their scheduled classes. Used by both teachers and students, UstadJi brings useful academic information together in one place.',
       'Digital attendance reduces paperwork, makes attendance records easier to manage and gives students quick access to their attendance status. The system improves accuracy, transparency and efficiency in attendance management — a step toward making academic processes at GCE more organized, accessible and technology-friendly.',
+      'The screenshots below show both sides of UstadJi: the student app, then the teacher app — the teacher’s home screen, a class’s attendance register and the timetable.',
     ],
     logoCover: { name: 'ustadji', alt: 'UstadJi app logo', bg: '#3c3c3c' },
     galleryFit: 'contain',
+    galleries: [
+      { title: 'Student app', folder: 'student' },
+      { title: 'Teacher app', folder: 'teacher' },
+    ],
   },
 
   // ------------------------------------------------- Workshops & Seminars ---
