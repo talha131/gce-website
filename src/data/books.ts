@@ -10,6 +10,10 @@
  */
 import type { FlipbookSource } from '@/lib/flipbook';
 
+// Prof. Habib-un-Nabi's handouts are offered for download from where the
+// Student Resources page lists them, not copied under /books.
+const habibUnNabi = (file: string) => `/student-resources/prof-habib-un-nabi/${file}.pdf`;
+
 export interface FacultyBook {
   slug: string;
   title: string;
@@ -105,6 +109,78 @@ export const facultyBooks: FacultyBook[] = [
           rtl: true,
           lang: 'ur',
           pdf: { href: '/student-resources/prof-farah-kanwal/teaching-of-social-studies-urdu.pdf', label: 'Download PDF' },
+        },
+      },
+    ],
+  },
+  {
+    // Lecture slides, exported to PDF; the details are taken from the slides.
+    slug: 'lecture-handouts-prof-habib-un-nabi',
+    title: 'Lecture Handouts',
+    kind: 'three lecture handouts',
+    readLead: 'read each one online, slide by slide, with pages that turn like a printed copy.',
+    readLabel: 'Read the handouts',
+    tabsLabel: 'Handout',
+    description:
+      'Three lecture handouts by Prof. Habib-un-Nabi of Government College of Education, Karachi — Basics of Lecture Method, Working with Group and Individuals, and Hadith and Its Types (in Urdu). Read them online or download the PDFs.',
+    authorFolder: 'Prof_Habib_un_Nabi',
+    credits: [{ role: 'Prepared by', name: 'Prof. Habib-un-Nabi' }],
+    about: [
+      'Three sets of lecture slides by Prof. Habib-un-Nabi for B.Ed. students — two in English on methods of teaching, and one in Urdu on the science of Hadith.',
+      'Basics of Lecture Method introduces the most commonly used method of teaching: planning a lecture around four questions — who the audience is, why, how long and on what — what a good lecturer takes care of, from time and subject matter to posture, voice, vocabulary and audio-visual aids, how to organise and evaluate a lecture, and its advantages and disadvantages.',
+      'Working with Group and Individuals, a lecture for the General Method of Teaching course, weighs individual work against pair and group work: what each helps students learn, and why a teacher varies the grouping to suit the goals of an activity.',
+      'Hadith and Its Types, compiled in Urdu, explains what hadith is and how it is classified — by its nature, by where its chain of narration ends, by the number of its narrators, by the continuity of its chain and by whether it can be relied on — and closes with the six canonical collections, the Sihah Sittah, and their compilers.',
+    ],
+    details: [
+      { label: 'Format', value: 'Lecture slides, three handouts' },
+      { label: 'Languages', value: 'Two in English, one in Urdu' },
+      { label: 'Working with Group and Individuals', value: 'General Method of Teaching (DTE-550/361), Unit 2 — B.Ed. 2.5 and 4 Year' },
+    ],
+    editions: [
+      {
+        key: 'basics-of-lecture-method',
+        label: 'Basics of Lecture Method',
+        book: {
+          title: 'Basics of Lecture Method',
+          edition: 'Lecture slides',
+          path: '/books/lecture-handouts-prof-habib-un-nabi/basics-of-lecture-method',
+          pageCount: 37,
+          pageWidth: 2133,
+          pageHeight: 1600,
+          covers: false,
+          lang: 'en',
+          pdf: { href: habibUnNabi('basics-of-lecture-method'), label: 'Download PDF' },
+        },
+      },
+      {
+        key: 'working-with-group-and-individuals',
+        label: 'Working with Group and Individuals',
+        book: {
+          title: 'Working with Group and Individuals',
+          edition: 'Lecture slides',
+          path: '/books/lecture-handouts-prof-habib-un-nabi/working-with-group-and-individuals',
+          pageCount: 11,
+          pageWidth: 2133,
+          pageHeight: 1600,
+          covers: false,
+          lang: 'en',
+          pdf: { href: habibUnNabi('working-with-group-and-individuals'), label: 'Download PDF' },
+        },
+      },
+      {
+        key: 'hadith-and-its-types',
+        label: 'Hadith and Its Types',
+        book: {
+          title: 'Hadith and Its Types',
+          edition: 'Lecture slides, in Urdu',
+          path: '/books/lecture-handouts-prof-habib-un-nabi/hadith-and-its-types',
+          pageCount: 37,
+          pageWidth: 2133,
+          pageHeight: 1600,
+          covers: false,
+          rtl: true,
+          lang: 'ur',
+          pdf: { href: habibUnNabi('hadith-and-its-types'), label: 'Download PDF' },
         },
       },
     ],

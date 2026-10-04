@@ -50,30 +50,27 @@ const pp = (sem: number, file: string) => `/student-resources/past-papers/bed-4-
 const notes = (file: string) => `/student-resources/notes/bed-hons-4-year/${file}.pdf`;
 const habibUnNabi = (file: string) => `/student-resources/prof-habib-un-nabi/${file}.pdf`;
 
-// Authors as the PDFs name them (cover, running footer or closing slide). The
-// students' notes name no one, so they carry no author.
+// Authors as the PDFs name them (cover or running footer). The students'
+// notes name no one, so they carry no author.
 const HABIB_AHMED = 'Prof. Dr. Habib Ahmed';
-const HABIB_UN_NABI = 'Prof. Habib-un-Nabi';
 
 export const resourceSections: ResourceSection[] = [
   {
     slug: 'notes',
     title: 'Notes',
     shortTitle: 'Notes',
-    blurb: 'Course notes and handouts shared by GCE faculty and students, free to read and download.',
+    blurb: 'Course notes shared by GCE faculty and students, free to read and download.',
     groups: [
       {
         title: 'B.Ed. notes',
         // Alphabetical by title.
         files: [
-          { title: 'Basics of Lecture Method', pdf: habibUnNabi('basics-of-lecture-method'), author: HABIB_UN_NABI },
           { title: 'Comparative Education', pdf: notes('comparative-education') },
           { title: 'Contemporary Issues and Trends in Education', pdf: notes('contemporary-issues-and-trends-in-education') },
           { title: 'Curriculum Development', pdf: notes('curriculum-development') },
           { title: 'Elementary Education', pdf: notes('elementary-education') },
           { title: 'English III (Technical Writing and Presentation Skills)', pdf: notes('english-iii-technical-writing-and-presentation-skills') },
           { title: 'Foundation of Education', pdf: notes('foundation-of-education') },
-          { title: 'Hadith and Its Types', pdf: habibUnNabi('hadith-and-its-types'), author: HABIB_UN_NABI },
           { title: 'Introduction to Guidance and Counselling', pdf: notes('introduction-to-guidance-and-counselling') },
           { title: 'School, Community and Teacher', pdf: notes('school-community-and-teacher') },
           { title: 'Teaching Literacy — Short Question Answers (B.Ed. 4 Year)', pdf: '/student-resources/notes/prof-habib-ahmed/short-question-answers-teaching-literacy-4-year.pdf', author: HABIB_AHMED },
@@ -81,7 +78,6 @@ export const resourceSections: ResourceSection[] = [
           { title: 'Teaching of English', pdf: notes('teaching-of-english') },
           { title: 'Teaching of Islamic Studies', pdf: notes('teaching-of-islamic-studies') },
           { title: 'Teaching of Maths', pdf: notes('teaching-of-maths') },
-          { title: 'Working with Group and Individuals', pdf: habibUnNabi('working-with-group-and-individuals'), author: HABIB_UN_NABI },
         ],
       },
     ],
@@ -185,6 +181,24 @@ export const resourceSections: ResourceSection[] = [
         files: [
           { title: 'Teaching of Social Studies — English edition', pdf: '/books/teaching-of-social-studies/english/teaching-of-social-studies-english.pdf' },
           { title: 'Teaching of Social Studies — Urdu edition', pdf: '/student-resources/prof-farah-kanwal/teaching-of-social-studies-urdu.pdf' },
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'prof-habib-un-nabi',
+    title: 'Lecture Handouts — by Prof. Habib-un-Nabi',
+    shortTitle: 'Prof. Habib-un-Nabi',
+    blurb:
+      'Lecture slides by GCE’s Prof. Habib-un-Nabi: two in English on methods of teaching — the lecture method, and working with groups and individuals — and one in Urdu on Hadith and its types.',
+    readOnline: { href: '/student-resources/lecture-handouts-prof-habib-un-nabi', label: 'Read the handouts online' },
+    groups: [
+      {
+        title: 'The handouts',
+        files: [
+          { title: 'Basics of Lecture Method', pdf: habibUnNabi('basics-of-lecture-method') },
+          { title: 'Working with Group and Individuals', pdf: habibUnNabi('working-with-group-and-individuals') },
+          { title: 'Hadith and Its Types (in Urdu)', pdf: habibUnNabi('hadith-and-its-types') },
         ],
       },
     ],
