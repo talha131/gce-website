@@ -68,7 +68,14 @@ export const resourceSections: ResourceSection[] = [
           { title: 'Teaching of Maths', pdf: notes('teaching-of-maths') },
         ],
       },
-      { title: 'Prof. Habib Ahmed’s notes' },
+      {
+        title: 'Prof. Habib Ahmed’s notes',
+        files: [
+          { title: 'Teaching Literacy — Short Question Answers (B.Ed. 4 Year)', pdf: '/student-resources/notes/prof-habib-ahmed/short-question-answers-teaching-literacy-4-year.pdf' },
+          // Byte-identical to the students' copy above — his Drive folder holds it too, so link the same file.
+          { title: 'Teaching Literacy Skills', pdf: notes('teaching-literacy-skills') },
+        ],
+      },
     ],
   },
   {

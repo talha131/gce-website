@@ -19,10 +19,8 @@ const sizeOf = (pdf: string) => {
   return bytes >= 1e6 ? `${(bytes / 1e6).toFixed(1)} MB` : `${Math.max(1, Math.round(bytes / 1e3))} KB`;
 };
 
-const fileCount = resourceSections.reduce(
-  (n, s) => n + s.groups.reduce((m, g) => m + (g.files?.length ?? 0), 0),
-  0,
-);
+// Distinct documents — a file listed in two folders (as on the Drive) counts once.
+const fileCount = new Set(resourceSections.flatMap((s) => s.groups.flatMap((g) => g.files ?? []).map((f) => f.pdf))).size;
 
 // Resolve cover images once, with a large version to open full size.
 const resolve = async (name: string) => {
