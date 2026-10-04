@@ -1,7 +1,6 @@
 ---
-/* Student Resources Center — notes, past papers and faculty publications,
-   organised exactly as the college's Drive folder is:
-   one coloured heading box per top-level folder, then a card per subfolder.
+/* Student Resources Center — notes, past papers and faculty publications:
+   one coloured heading box per section, then a card per group of files.
    Sections and their order come from src/data/resources.ts. */
 import { statSync } from 'node:fs';
 import { Image, getImage } from 'astro:assets';
@@ -19,8 +18,8 @@ const sizeOf = (pdf: string) => {
   return bytes >= 1e6 ? `${(bytes / 1e6).toFixed(1)} MB` : `${Math.max(1, Math.round(bytes / 1e3))} KB`;
 };
 
-// Distinct documents — a file listed in two folders (as on the Drive) counts once.
-const fileCount = new Set(resourceSections.flatMap((s) => s.groups.flatMap((g) => g.files ?? []).map((f) => f.pdf))).size;
+// Each PDF is listed once (see resources.ts), so the count is the number of entries.
+const fileCount = resourceSections.flatMap((s) => s.groups.flatMap((g) => g.files ?? [])).length;
 
 // Resolve cover images once, with a large version to open full size.
 const resolve = async (name: string) => {
@@ -52,7 +51,7 @@ const sections = await Promise.all(
     imagePosition="center 45%"
   />
 
-  <!-- Jump nav: one pill per top-level Drive folder. Anchors, not pages, so it
+  <!-- Jump nav: one pill per section. Anchors, not pages, so it
        is built here rather than with SectionNav (which matches on pathname). -->
   <nav class="bg-surface border-b border-line" aria-label="Resource sections">
     <div class="container-site">
@@ -112,9 +111,13 @@ const sections = await Promise.all(
 
             {s.groups.map((g, gi) => {
               const empty = !g.files?.length;
+              // A section's only card (no covers beside it) takes the full width,
+              // its list split into two columns that read top to bottom.
+              const wide = s.groups.length === 1 && s.coverImages.length === 0;
+              const rows = Math.ceil((g.files?.length ?? 0) / 2);
               return (
                 <section
-                  class="card overflow-hidden"
+                  class:list={['card overflow-hidden', wide && 'lg:col-span-2']}
                   data-reveal
                   style={`--reveal-delay:${(gi % 2) * 70}ms`}
                 >
@@ -134,19 +137,26 @@ const sections = await Promise.all(
                   )}
 
                   {g.files && g.files.length > 0 && (
-                    <ul class="divide-y divide-line">
-                      {g.files.map((f) => (
-                        <li>
+                    <!-- Rows carry their own bottom rule (clipped on the last row by
+                         -mb-px + the card's overflow-hidden), so it stays right in
+                         the two-column layout too. -->
+                    <ul
+                      class:list={['-mb-px', wide && 'lg:grid lg:grid-flow-col lg:grid-cols-2']}
+                      style={wide ? `grid-template-rows: repeat(${rows}, auto)` : undefined}
+                    >
+                      {g.files.map((f, fi) => (
+                        <li class:list={['border-b border-line', wide && fi < rows && 'lg:border-r']}>
                           <a
                             href={f.pdf}
                             target="_blank"
                             rel="noopener"
-                            class="flex items-center gap-4 px-6 py-3.5 hover:bg-brand-tint/50 focus-visible:bg-brand-tint/50 transition-colors group"
+                            class="flex h-full items-center gap-4 px-6 py-3.5 hover:bg-brand-tint/50 focus-visible:bg-brand-tint/50 transition-colors group"
                           >
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="text-brand/45 shrink-0" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
                             <span class="flex-1 min-w-0">
                               <span class="block text-ink font-medium leading-snug group-hover:text-brand transition-colors">{f.title}</span>
                               {f.code && <span class="block mt-0.5 text-xs font-semibold tracking-wider text-gold-deeper">{f.code}</span>}
+                              {f.author && <span class="block mt-0.5 text-sm text-ink-soft">By {f.author}</span>}
                             </span>
                             <span class="text-xs font-semibold uppercase tracking-wider text-ink-soft shrink-0">PDF · {sizeOf(f.pdf)}</span>
                           </a>

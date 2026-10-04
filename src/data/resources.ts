@@ -1,7 +1,10 @@
 /*
  * Student Resources Center — study material students can read and download,
- * mirroring the college's 19_Student_Resource_Center Drive folder section for
- * section and subfolder for subfolder.
+ * drawn from the college's 19_Student_Resource_Center Drive folder. Past
+ * Papers and faculty publications follow its folders; Notes is one
+ * alphabetical list gathered from its student and faculty notes folders, with
+ * each file credited to its author where the PDF or its source folder names
+ * one. List each PDF once, even if the Drive holds it in two folders.
  *
  * PDFs live under /public/student-resources/ (served byte-for-byte). Scanned
  * past papers were re-encoded as JPEG at their native scan resolution on
@@ -19,6 +22,8 @@ export interface ResourceFile {
   code?: string;
   /** Absolute path under /public. */
   pdf: string;
+  /** Who wrote or compiled it, shown under the title — only when known. */
+  author?: string;
 }
 
 export interface ResourceGroup {
@@ -43,37 +48,40 @@ export interface ResourceSection {
 
 const pp = (sem: number, file: string) => `/student-resources/past-papers/bed-4-year/semester-${sem}/${file}.pdf`;
 const notes = (file: string) => `/student-resources/notes/bed-hons-4-year/${file}.pdf`;
+const habibUnNabi = (file: string) => `/student-resources/prof-habib-un-nabi/${file}.pdf`;
+
+// Authors as the PDFs name them (cover, running footer or closing slide). The
+// students' notes name no one, so they carry no author.
+const HABIB_AHMED = 'Prof. Dr. Habib Ahmed';
+const HABIB_UN_NABI = 'Prof. Habib-un-Nabi';
 
 export const resourceSections: ResourceSection[] = [
   {
     slug: 'notes',
     title: 'Notes',
     shortTitle: 'Notes',
-    blurb: 'Course notes written up by students, shared for everyone who takes the course after them.',
+    blurb: 'Course notes and handouts shared by GCE faculty and students, free to read and download.',
     groups: [
       {
-        title: 'Notes by students — B.Ed. (Hons.) 4 Year',
+        title: 'B.Ed. notes',
+        // Alphabetical by title.
         files: [
+          { title: 'Basics of Lecture Method', pdf: habibUnNabi('basics-of-lecture-method'), author: HABIB_UN_NABI },
           { title: 'Comparative Education', pdf: notes('comparative-education') },
           { title: 'Contemporary Issues and Trends in Education', pdf: notes('contemporary-issues-and-trends-in-education') },
           { title: 'Curriculum Development', pdf: notes('curriculum-development') },
           { title: 'Elementary Education', pdf: notes('elementary-education') },
           { title: 'English III (Technical Writing and Presentation Skills)', pdf: notes('english-iii-technical-writing-and-presentation-skills') },
           { title: 'Foundation of Education', pdf: notes('foundation-of-education') },
+          { title: 'Hadith and Its Types', pdf: habibUnNabi('hadith-and-its-types'), author: HABIB_UN_NABI },
           { title: 'Introduction to Guidance and Counselling', pdf: notes('introduction-to-guidance-and-counselling') },
           { title: 'School, Community and Teacher', pdf: notes('school-community-and-teacher') },
-          { title: 'Teaching Literacy Skills', pdf: notes('teaching-literacy-skills') },
+          { title: 'Teaching Literacy — Short Question Answers (B.Ed. 4 Year)', pdf: '/student-resources/notes/prof-habib-ahmed/short-question-answers-teaching-literacy-4-year.pdf', author: HABIB_AHMED },
+          { title: 'Teaching Literacy Skills', pdf: notes('teaching-literacy-skills'), author: HABIB_AHMED },
           { title: 'Teaching of English', pdf: notes('teaching-of-english') },
           { title: 'Teaching of Islamic Studies', pdf: notes('teaching-of-islamic-studies') },
           { title: 'Teaching of Maths', pdf: notes('teaching-of-maths') },
-        ],
-      },
-      {
-        title: 'Prof. Habib Ahmed’s notes',
-        files: [
-          { title: 'Teaching Literacy — Short Question Answers (B.Ed. 4 Year)', pdf: '/student-resources/notes/prof-habib-ahmed/short-question-answers-teaching-literacy-4-year.pdf' },
-          // Byte-identical to the students' copy above — his Drive folder holds it too, so link the same file.
-          { title: 'Teaching Literacy Skills', pdf: notes('teaching-literacy-skills') },
+          { title: 'Working with Group and Individuals', pdf: habibUnNabi('working-with-group-and-individuals'), author: HABIB_UN_NABI },
         ],
       },
     ],
@@ -177,22 +185,6 @@ export const resourceSections: ResourceSection[] = [
         files: [
           { title: 'Teaching of Social Studies — English edition', pdf: '/books/teaching-of-social-studies/english/teaching-of-social-studies-english.pdf' },
           { title: 'Teaching of Social Studies — Urdu edition', pdf: '/student-resources/prof-farah-kanwal/teaching-of-social-studies-urdu.pdf' },
-        ],
-      },
-    ],
-  },
-  {
-    slug: 'prof-habib-un-nabi',
-    title: 'Lecture notes — by Prof. Habib-un-Nabi',
-    shortTitle: 'Prof. Habib-un-Nabi',
-    blurb: 'Handouts from Prof. Habib-un-Nabi’s classes, free to read and download.',
-    groups: [
-      {
-        title: 'Handouts',
-        files: [
-          { title: 'Basics of Lecture Method', pdf: '/student-resources/prof-habib-un-nabi/basics-of-lecture-method.pdf' },
-          { title: 'Hadith and Its Types', pdf: '/student-resources/prof-habib-un-nabi/hadith-and-its-types.pdf' },
-          { title: 'Working with Group and Individuals', pdf: '/student-resources/prof-habib-un-nabi/working-with-group-and-individuals.pdf' },
         ],
       },
     ],
