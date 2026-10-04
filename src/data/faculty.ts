@@ -100,6 +100,22 @@ export const educationDept: Person[] = [
     focus: 'top',
   },
   {
+    name: 'Prof. Habib Ahmed',
+    folder: 'Prof_Habib_Ahmed',
+    title: 'Assistant Professor',
+    grade: 'BPS-18',
+    quals: [
+      'Ph.D. (Education)',
+      'M.Phil. (Education)',
+      'M.Ed.',
+      'B.Ed.',
+      'M.A. (Economics, Political Science, Islamic Culture, Sociology)',
+      'LLB',
+      'Post-Graduate Diploma (Quality Assurance in Higher Education)',
+    ],
+    former: { label: 'Retired', years: '2019 – 2025' },
+  },
+  {
     name: 'Zubair',
     folder: 'Zubair',
     title: 'Librarian',
