@@ -27,6 +27,13 @@ export interface CollegeEvent {
   logoCover?: { name: string; alt: string; bg: string };
   /** 'contain' where the gallery is app screenshots rather than photos. */
   galleryFit?: 'cover' | 'contain';
+  /**
+   * Several titled galleries instead of one, in this order — each `folder` a
+   * subfolder of src/assets/content/events/<slug>/. When set, images sitting
+   * directly in the event folder are not shown, and the card needs a
+   * `logoCover` (getCover reads only that top level).
+   */
+  galleries?: { title: string; folder: string }[];
   /** A magazine issue (src/data/magazine.ts) to read in a flipbook on the page. */
   flipbook?: MagazineIssueKey;
   isFiller?: boolean;

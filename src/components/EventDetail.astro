@@ -18,6 +18,11 @@ interface Props {
 const { event } = Astro.props;
 
 const images = getGallery('events', event.slug);
+// Titled galleries (subfolders of the event folder), when the event declares them.
+const galleries = (event.galleries ?? [])
+  .map((g) => ({ title: g.title, images: getGallery('events', `${event.slug}/${g.folder}`) }))
+  .filter((g) => g.images.length > 0);
+const galleryColumns = event.galleryFit === 'contain' ? 4 : 3;
 const hero = getSingle('heroes', event.slug);
 // Sibling jumper: events in the same group, current one included (active pill).
 const siblings = eventsInGroup(event.group).map((e) => ({ label: e.name, href: eventHref(e) }));
@@ -45,11 +50,27 @@ const backHref = eventGroupHref(event.group);
     </div>
   )}
 
-  {images.length > 0 && (
-    <div class="mt-14">
-      <h2 class="!text-2xl mb-6" data-reveal>Gallery</h2>
-      <Gallery images={images} altBase={event.name} columns={event.galleryFit === 'contain' ? 4 : 3} fit={event.galleryFit} />
-    </div>
+  {event.galleries ? (
+    galleries.length > 0 && (
+      <div class="mt-14">
+        <h2 class="!text-2xl mb-6" data-reveal>Gallery</h2>
+        <div class="space-y-10">
+          {galleries.map((g) => (
+            <div>
+              <h3 class="!text-xl mb-4" data-reveal>{g.title}</h3>
+              <Gallery images={g.images} altBase={`${event.name} — ${g.title}`} columns={galleryColumns} fit={event.galleryFit} />
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  ) : (
+    images.length > 0 && (
+      <div class="mt-14">
+        <h2 class="!text-2xl mb-6" data-reveal>Gallery</h2>
+        <Gallery images={images} altBase={event.name} columns={galleryColumns} fit={event.galleryFit} />
+      </div>
+    )
   )}
 
   <div class="mt-12" data-reveal>
