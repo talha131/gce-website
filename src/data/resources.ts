@@ -6,11 +6,11 @@
  * PDFs live under /public/student-resources/ (served byte-for-byte). Scanned
  * past papers were re-encoded as JPEG at their native scan resolution on
  * import — they were stored losslessly at 3–6 MB a page — which cut them from
- * ~613 MB to a fraction of that with no visible loss. Images (book covers and
- * title pages) live under src/assets/content/resources/.
+ * ~613 MB to a fraction of that with no visible loss. Book cover images live
+ * under src/assets/content/resources/.
  *
- * A group with no `files` (and no `books`) is a Drive subfolder the college
- * has created but not filled yet; the page lists it as "being added".
+ * A group with no `files` is a Drive subfolder the college has created but
+ * not filled yet; the page lists it as "being added".
  */
 
 export interface ResourceFile {
@@ -21,20 +21,11 @@ export interface ResourceFile {
   pdf: string;
 }
 
-export interface RecommendedBook {
-  subject: string;
-  /** Title page photo — a name under src/assets/content/resources/. */
-  image?: string;
-  title?: string;
-  author?: string;
-}
-
 export interface ResourceGroup {
   title: string;
   /** Optional one-liner under the group heading. */
   note?: string;
   files?: ResourceFile[];
-  books?: RecommendedBook[];
 }
 
 export interface ResourceSection {
@@ -181,35 +172,6 @@ export const resourceSections: ResourceSection[] = [
           { title: 'Teaching of Social Studies — Urdu edition', pdf: '/student-resources/prof-farah-kanwal/teaching-of-social-studies-urdu.pdf' },
         ],
       },
-    ],
-  },
-  {
-    slug: 'reference-books',
-    title: 'Reference Academic Books',
-    shortTitle: 'Reference Books',
-    blurb: 'The books the faculty recommend for each course. Tap a title page to see it full size, or find the book in the college library.',
-    groups: [
-      {
-        title: 'B.Ed. 4 Year',
-        books: [
-          { subject: 'Child Development' },
-          { subject: 'Classroom Management' },
-          { subject: 'Functional English' },
-          { subject: 'General Method of Teaching' },
-          { subject: 'ICT in Education' },
-          { subject: 'Islamic Studies', image: 'book-islamic-studies', title: 'Islamic Studies (Mutala-e-Islam)', author: 'Prof. Nilofar Sultana' },
-          { subject: 'Pakistan Studies' },
-          { subject: 'School, Community and Teacher' },
-          { subject: 'Teaching of Mathematics', image: 'book-teaching-of-mathematics', title: 'The Teaching of Mathematics', author: 'Kulbir Singh Sidhu' },
-          { subject: 'Teaching Literacy', image: 'book-teaching-literacy', title: 'Teaching Literacy', author: 'Masood Tanveer' },
-          { subject: 'Teaching of English', image: 'book-teaching-of-english', title: 'Modern Approaches to Teaching of English as a Second Language', author: 'Prof. Mohammad Sharif Thair' },
-          { subject: 'Teaching of Islamic Studies' },
-          { subject: 'Teaching of Science' },
-          { subject: 'Teaching of Social Studies' },
-          { subject: 'Teaching of Urdu' },
-        ],
-      },
-      { title: 'B.Ed. 2.5 Year' },
     ],
   },
   {
