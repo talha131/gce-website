@@ -100,7 +100,7 @@ export const educationDept: Person[] = [
     focus: 'top',
   },
   {
-    name: 'Prof. Habib Ahmed',
+    name: 'Prof. Dr. Habib Ahmed',
     folder: 'Prof_Habib_Ahmed',
     title: 'Assistant Professor',
     grade: 'BPS-18',
