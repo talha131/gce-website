@@ -30,7 +30,10 @@ const sheets = mag.rtl ? [...pages].reverse() : pages;
 const label = (n: number) =>
   mag.covers && n === 1 ? 'Front cover' : mag.covers && n === mag.pageCount ? 'Back cover' : `Page ${n}`;
 const thumbW = Math.round((mag.pageWidth * 180) / mag.pageHeight);
-const pdfSize = mag.pdf && `${(statSync(`public${mag.pdf.href}`).size / 1e6).toFixed(0)} MB`;
+// Whole megabytes, or kilobytes for a PDF under one (a short handout).
+const pdfBytes = mag.pdf && statSync(`public${mag.pdf.href}`).size;
+const pdfSize =
+  pdfBytes && (pdfBytes >= 999_500 ? `${(pdfBytes / 1e6).toFixed(0)} MB` : `${Math.max(1, Math.round(pdfBytes / 1e3))} KB`);
 ---
 
 <section
