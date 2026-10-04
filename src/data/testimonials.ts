@@ -43,7 +43,7 @@ export const testimonials: Testimonial[] = [
   {
     name: 'Hafsa Fatima',
     folder: 'Hafsa_Fatima',
-    batch: 'Class of 2024',
+    batch: 'Batch 2021–2024',
     role: 'Counsellor',
     quote:
       'These four years have given me not only academic knowledge but also confidence, leadership skills, friendships, beautiful memories, and countless valuable life lessons.',
@@ -64,7 +64,7 @@ export const testimonials: Testimonial[] = [
   {
     name: 'Hina Rafiq Siddiqui',
     folder: 'Hina_Rafiq_Siddiqui',
-    batch: 'Class of 2025',
+    batch: 'Batch 2022–2025',
     role: 'Elementary Class Teacher',
     quote:
       'GCE gave me more than an education; it gave me confidence, practical skills, and the motivation to become a better teacher.',
@@ -92,7 +92,7 @@ export const testimonials: Testimonial[] = [
   {
     name: 'Maham Allauddin',
     folder: 'Maham_Allauddin',
-    batch: 'Class of 2022',
+    batch: 'Batch 2019–2022',
     role: 'EST (BPS-16)',
     quote: 'By studying at GCE you don’t just leave with a degree… you leave as a different, stronger version of you.',
     story: [
@@ -116,7 +116,7 @@ export const testimonials: Testimonial[] = [
   {
     name: 'Maleeha Khan',
     folder: 'Maleeha_Khan',
-    batch: 'Class of 2025',
+    batch: 'Batch 2022–2025',
     role: 'Cooperative Teacher & English Lecturer, Government College of Education',
     quote:
       'What makes GCE truly special is its welcoming academic culture, strong sense of collaboration, and commitment to excellence.',
@@ -178,7 +178,7 @@ export const testimonials: Testimonial[] = [
   {
     name: 'Zain Riaz',
     folder: 'Zain_Riaz',
-    batch: 'Class of 2022',
+    batch: 'Batch 2019–2022',
     role: 'Admin Executive',
     quote:
       'GCE gave me much more than an education, it gave me lifelong friendships, wonderful memories, and experiences that helped shape who I am today.',

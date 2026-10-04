@@ -1,6 +1,6 @@
 ---
-/* Student Resources Center — notes, past papers, faculty publications and
-   recommended books, organised exactly as the college's Drive folder is:
+/* Student Resources Center — notes, past papers and faculty publications,
+   organised exactly as the college's Drive folder is:
    one coloured heading box per top-level folder, then a card per subfolder.
    Sections and their order come from src/data/resources.ts. */
 import { statSync } from 'node:fs';
@@ -19,12 +19,10 @@ const sizeOf = (pdf: string) => {
   return bytes >= 1e6 ? `${(bytes / 1e6).toFixed(1)} MB` : `${Math.max(1, Math.round(bytes / 1e3))} KB`;
 };
 
-const fileCount = resourceSections.reduce(
-  (n, s) => n + s.groups.reduce((m, g) => m + (g.files?.length ?? 0), 0),
-  0,
-);
+// Distinct documents — a file listed in two folders (as on the Drive) counts once.
+const fileCount = new Set(resourceSections.flatMap((s) => s.groups.flatMap((g) => g.files ?? []).map((f) => f.pdf))).size;
 
-// Resolve images (covers, book title pages) once, with a large version to open full size.
+// Resolve cover images once, with a large version to open full size.
 const resolve = async (name: string) => {
   const image = getSingle('resources', name);
   if (!image) return undefined;
@@ -37,26 +35,18 @@ const sections = await Promise.all(
     coverImages: s.covers
       ? await Promise.all(s.covers.map(async (c) => ({ ...c, ...(await resolve(c.name)) })))
       : [],
-    groups: await Promise.all(
-      s.groups.map(async (g) => ({
-        ...g,
-        books: g.books
-          ? await Promise.all(g.books.map(async (b) => ({ ...b, resolved: b.image ? await resolve(b.image) : undefined })))
-          : undefined,
-      })),
-    ),
   })),
 );
 ---
 
 <Layout
   title="Student Resources Center"
-  description="Notes, past examination papers, faculty publications and recommended books for B.Ed. students at Government College of Education, Karachi — free to read and download."
+  description="Notes, past examination papers and faculty publications for B.Ed. students at Government College of Education, Karachi — free to read and download."
 >
   <PageHero
     kicker="Study material"
     title="Student Resources <span class='accent-italic !text-gold-bright'>Center</span>"
-    lead={`Notes, past papers, faculty publications and recommended books — ${fileCount} documents, free to read and download.`}
+    lead={`Notes, past papers and faculty publications — ${fileCount} documents, free to read and download.`}
     image={hero}
     imageAlt="A GCE classroom"
     imagePosition="center 45%"
@@ -121,10 +111,10 @@ const sections = await Promise.all(
             )}
 
             {s.groups.map((g, gi) => {
-              const empty = !g.files?.length && !g.books?.length;
+              const empty = !g.files?.length;
               return (
                 <section
-                  class:list={['card overflow-hidden', g.books && 'lg:col-span-2']}
+                  class="card overflow-hidden"
                   data-reveal
                   style={`--reveal-delay:${(gi % 2) * 70}ms`}
                 >
@@ -164,43 +154,6 @@ const sections = await Promise.all(
                       ))}
                     </ul>
                   )}
-
-                  {g.books && (() => {
-                    // Subjects with a recommendation get a tile; the rest — Drive
-                    // subfolders the faculty have not filled yet — are listed together.
-                    const ready = g.books.filter((b) => b.resolved && b.title);
-                    const pending = g.books.filter((b) => !(b.resolved && b.title));
-                    return (
-                      <div class="p-5">
-                        {ready.length > 0 && (
-                          <ul class="grid gap-4 sm:grid-cols-2">
-                            {ready.map((b) => (
-                              <li class="flex gap-4 rounded-[var(--radius-sm)] border border-line bg-surface p-3">
-                                <a href={b.resolved!.full} target="_blank" rel="noopener" class="block w-20 shrink-0 overflow-hidden rounded border border-line" aria-label={`${b.title} — title page, full size`}>
-                                  <Image src={b.resolved!.image} alt={`Title page of ${b.title}`} widths={[80, 160]} sizes="80px" class="aspect-[3/4] h-auto w-full object-cover object-top" loading="lazy" />
-                                </a>
-                                <span class="min-w-0">
-                                  <span class="block text-xs font-semibold uppercase tracking-wider text-gold-deeper">{b.subject}</span>
-                                  <span class="mt-1 block font-medium text-ink leading-snug">{b.title}</span>
-                                  {b.author && <span class="mt-0.5 block text-sm text-ink-soft">{b.author}</span>}
-                                </span>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                        {pending.length > 0 && (
-                          <div class:list={[ready.length > 0 && 'mt-5 pt-5 border-t border-line']}>
-                            <p class="text-sm text-ink-soft">Recommendations still being added for:</p>
-                            <ul class="mt-3 flex flex-wrap gap-2">
-                              {pending.map((b) => (
-                                <li class="rounded-full border border-dashed border-line px-3 py-1 text-sm text-ink-soft">{b.subject}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })()}
                 </section>
               );
             })}
