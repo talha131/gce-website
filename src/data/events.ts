@@ -27,6 +27,13 @@ export interface CollegeEvent {
   logoCover?: { name: string; alt: string; bg: string };
   /** 'contain' where the gallery is app screenshots rather than photos. */
   galleryFit?: 'cover' | 'contain';
+  /**
+   * Several titled galleries instead of one, in this order — each `folder` a
+   * subfolder of src/assets/content/events/<slug>/. When set, images sitting
+   * directly in the event folder are not shown, and the card needs a
+   * `logoCover` (getCover reads only that top level).
+   */
+  galleries?: { title: string; folder: string }[];
   /** A magazine issue (src/data/magazine.ts) to read in a flipbook on the page. */
   flipbook?: MagazineIssueKey;
   isFiller?: boolean;
@@ -217,9 +224,14 @@ export const events: CollegeEvent[] = [
       'Attendance at GCE has now shifted to a digital system, managed through the UstadJi app, making the attendance process more convenient and organized. Teachers use the app to record students’ attendance digitally for their respective classes and courses.',
       'Students use the same app to view their attendance record for each course, check their attendance percentage and keep track of it throughout the semester. They can submit leave requests online, making the leave process easier, and the class timetable is available in the app too, so students can easily check their scheduled classes. Used by both teachers and students, UstadJi brings useful academic information together in one place.',
       'Digital attendance reduces paperwork, makes attendance records easier to manage and gives students quick access to their attendance status. The system improves accuracy, transparency and efficiency in attendance management — a step toward making academic processes at GCE more organized, accessible and technology-friendly.',
+      'The screenshots below show both sides of UstadJi: the student app, then the teacher app — the teacher’s home screen, a class’s attendance register and the timetable.',
     ],
     logoCover: { name: 'ustadji', alt: 'UstadJi app logo', bg: '#3c3c3c' },
     galleryFit: 'contain',
+    galleries: [
+      { title: 'Student app', folder: 'student' },
+      { title: 'Teacher app', folder: 'teacher' },
+    ],
   },
 
   // ------------------------------------------------- Workshops & Seminars ---
@@ -264,7 +276,7 @@ export const events: CollegeEvent[] = [
     date: '20 January 2025',
     blurb: 'Preparing students to solve real classroom problems through research.',
     body: [
-      'The Action Research Workshop was held on 20 January 2025, organised for students and conducted by Prof. Sharjeel, Prof. Habib Ahmed and Prof. Asim.',
+      'The Action Research Workshop was held on 20 January 2025, organised for students and conducted by Prof. Sharjeel, Prof. Dr. Habib Ahmed and Prof. Asim.',
       'Students learned how to use action research in teaching practice — solving classroom problems through structured research, and planning, observing and improving lessons — with real classroom examples.',
       'The interactive, easy-to-follow session helped students prepare for their upcoming teaching practicums.',
     ],

@@ -30,7 +30,12 @@ const sheets = mag.rtl ? [...pages].reverse() : pages;
 const label = (n: number) =>
   mag.covers && n === 1 ? 'Front cover' : mag.covers && n === mag.pageCount ? 'Back cover' : `Page ${n}`;
 const thumbW = Math.round((mag.pageWidth * 180) / mag.pageHeight);
-const pdfSize = mag.pdf && `${(statSync(`public${mag.pdf.href}`).size / 1e6).toFixed(0)} MB`;
+// Pages wider than tall (lecture slides): on a phone the stage fits itself to them.
+const landscape = mag.pageWidth > mag.pageHeight;
+// Whole megabytes, or kilobytes for a PDF under one (a short handout).
+const pdfBytes = mag.pdf && statSync(`public${mag.pdf.href}`).size;
+const pdfSize =
+  pdfBytes && (pdfBytes >= 999_500 ? `${(pdfBytes / 1e6).toFixed(0)} MB` : `${Math.max(1, Math.round(pdfBytes / 1e3))} KB`);
 ---
 
 <section
@@ -40,6 +45,8 @@ const pdfSize = mag.pdf && `${(statSync(`public${mag.pdf.href}`).size / 1e6).toF
   data-w={mag.pageWidth}
   data-h={mag.pageHeight}
   data-rtl={mag.rtl ? '' : undefined}
+  data-landscape={landscape ? '' : undefined}
+  style={landscape ? `--fb-ratio:${(mag.pageHeight / mag.pageWidth).toFixed(4)}` : undefined}
   aria-label={`${mag.title} — ${mag.edition}, book reader`}
   tabindex="-1"
 >
@@ -210,6 +217,11 @@ const pdfSize = mag.pdf && `${(statSync(`public${mag.pdf.href}`).size / 1e6).toF
     .fb-group { gap: 0; }
     .fb-btn { width: 2.2rem; height: 2.2rem; }
     .fb-stage { height: clamp(18rem, 68vh, 40rem); padding: .75rem; }
+    /* A phone shows one landscape page at a time, far shorter than the stage:
+       size the stage to the page (plus padding and the hint) instead of
+       leaving it in a tall, mostly empty box. */
+    .flipbook[data-landscape] { container-type: inline-size; }
+    .flipbook[data-landscape]:not(:fullscreen) .fb-stage { height: calc((100cqw - 1.5rem) * var(--fb-ratio) + 1.5rem + 2.25rem); }
   }
 </style>
 
