@@ -13,6 +13,7 @@ import Monogram from '@/components/Monogram.astro';
 import { facultyBooks, bookBySlug } from '@/data/books';
 import { educationDept } from '@/data/faculty';
 import { getSingle } from '@/lib/images';
+import { shareImage } from '@/lib/og';
 
 export const getStaticPaths = (() => facultyBooks.map((b) => ({ params: { slug: b.slug } }))) satisfies GetStaticPaths;
 
@@ -20,6 +21,10 @@ const book = bookBySlug(Astro.params.slug!)!;
 const author = educationDept.find((p) => p.folder === book.authorFolder)!;
 const portrait = getSingle('faculty', author.folder);
 const cover = book.cover ? getSingle('resources', book.cover) : undefined;
+// Shared links show the author: their portrait whole, else the book's cover.
+const share = portrait
+  ? shareImage(portrait, author.name, { fit: 'card' })
+  : shareImage(cover, `${book.title} — front cover`, { fit: 'card' });
 const designation = [author.title, author.grade].filter(Boolean).join(' · ');
 // An author who has left the college was, not is, on the faculty.
 const lead = `${book.kind[0].toUpperCase()}${book.kind.slice(1)} by ${author.name}, ${author.former ? 'formerly ' : ''}${author.title ?? 'faculty member'} at GCE — ${book.readLead}`;
@@ -31,6 +36,7 @@ const description =
 <Layout
   title={`${book.title} — by ${author.name}`}
   description={description}
+  image={share}
 >
   <PageHero
     kicker="Student Resources Center · Faculty publication"

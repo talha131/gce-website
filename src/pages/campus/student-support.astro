@@ -1,11 +1,17 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import CampusCategory from '@/components/CampusCategory.astro';
+import { facilities } from '@/data/facilities';
+import { facilityShareImage } from '@/lib/share';
+
+// The category's first facility — the first card on the page.
+const share = facilityShareImage(facilities.find((f) => f.category === 'Student Support')!);
 ---
 
 <Layout
   title="Student Support — Campus & Facilities"
   description="Sindh's first college psychological counselling centre, the girls' common room, and first-aid and fire-safety facilities at Government College of Education, Karachi."
+  image={share}
 >
   <CampusCategory category="Student Support" />
 </Layout>

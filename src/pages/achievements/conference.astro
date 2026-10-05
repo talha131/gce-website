@@ -6,13 +6,17 @@ import Gallery from '@/components/Gallery.astro';
 import StatCounter from '@/components/StatCounter.astro';
 import { achievementsNav, conference } from '@/data/achievements';
 import { getGallery } from '@/lib/images';
+import { shareImage } from '@/lib/og';
 
 const conferenceImages = getGallery('conference');
+
+const share = shareImage(conferenceImages[0], 'ICEEC 2025 conference at Government College of Education');
 ---
 
 <Layout
   title="ICEEC 2025 Conference"
   description="ICEEC 2025 — the first International Conference on Embracing Educational Change, hosted by Government College of Education, Karachi, on integrating emerging technologies into teaching."
+  image={share}
 >
   <PageHero size="compact" kicker="Achievements" title="Conference" />
   <SectionNav items={achievementsNav} current={Astro.url.pathname} label="Achievements" />

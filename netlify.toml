@@ -21,6 +21,15 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# Link-preview images (scripts/share-images.mjs). Their names carry a hash of
+# the source photo, so a new photo gets a new URL; cached for a week rather than
+# forever in case the drawing changes without a RECIPE bump in src/lib/og.ts.
+# Netlify serves them as image/jpeg from the extension; nothing blocks crawlers.
+[[headers]]
+  for = "/og/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
 # Pages that moved. 301s keep old links and search results working.
 [[redirects]]
   from = "/programs/course-outlines"

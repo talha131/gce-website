@@ -5,11 +5,16 @@ import SectionNav from '@/components/SectionNav.astro';
 import Section from '@/components/Section.astro';
 import Reveal from '@/components/Reveal.astro';
 import { aboutNav, mission, vision } from '@/data/about';
+import { getSingle } from '@/lib/images';
+import { shareImage } from '@/lib/og';
+
+const share = shareImage(getSingle('heroes', 'campus'), 'Government College of Education campus');
 ---
 
 <Layout
   title="Mission & Vision"
   description="The mission and vision of Government College of Education, Karachi — preparing competent, caring and ethical educators, presented in English and Urdu."
+  image={share}
 >
   <PageHero size="compact" kicker="About GCE" title="Mission &amp; Vision" />
   <SectionNav items={aboutNav} current={Astro.url.pathname} label="About" />

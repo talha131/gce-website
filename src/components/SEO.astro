@@ -1,23 +1,25 @@
 ---
 import { site, socials } from '@/data/site';
+import { defaultShareImage, type ShareImage } from '@/lib/og';
 
 interface Props {
   title: string;
   description: string;
-  /** Path to an OG image in /public, or omit for the default. */
-  image?: string;
+  /** The link-preview image (see src/lib/og.ts), or omit for the site default. */
+  image?: ShareImage;
   /** Set true on the homepage to use the site name as the full title. */
   isHome?: boolean;
 }
 
-const { title, description, image = '/og-default.png', isHome = false } = Astro.props;
+const { title, description, image = defaultShareImage, isHome = false } = Astro.props;
 
 const fullTitle = isHome
   ? `${site.name} — ${site.shortName}, Karachi`
   : `${title} · ${site.shortName}`;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
-const ogImage = new URL(image, Astro.site).href;
+const ogImage = new URL(image.url, Astro.site).href;
+const ogImageAlt = image.alt ?? fullTitle;
 
 // EducationalOrganization structured data (site-wide).
 const jsonLd = {
@@ -52,15 +54,16 @@ const jsonLd = {
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
 <meta property="og:image" content={ogImage} />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content={fullTitle} />
+<meta property="og:image:type" content={image.type} />
+<meta property="og:image:width" content={String(image.width)} />
+<meta property="og:image:height" content={String(image.height)} />
+<meta property="og:image:alt" content={ogImageAlt} />
 <meta property="og:locale" content="en_PK" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />
-<meta name="twitter:image:alt" content={fullTitle} />
+<meta name="twitter:image:alt" content={ogImageAlt} />
 
 <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />

@@ -6,11 +6,16 @@ import Section from '@/components/Section.astro';
 import CoverImage from '@/components/CoverImage.astro';
 import { achievementsNav, honours, milestones } from '@/data/achievements';
 import { getCover, getGallery } from '@/lib/images';
+import { shareImage } from '@/lib/og';
+
+// The first honour's photo — the top of the page's own list.
+const share = shareImage(getCover('achievements', honours[0].slug!), honours[0].title);
 ---
 
 <Layout
   title="Honours"
   description="Individual and team honours won by Government College of Education students — international conference wins, the Pakistan Day Quiz, and sports championships."
+  image={share}
 >
   <PageHero size="compact" kicker="Achievements" title="Honours" />
   <SectionNav items={achievementsNav} current={Astro.url.pathname} label="Achievements" />

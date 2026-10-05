@@ -8,14 +8,18 @@ import Section from '@/components/Section.astro';
 import EventCard from '@/components/EventCard.astro';
 import { eventsInGroup, ACADEMICS_GROUP } from '@/data/events';
 import { getCover } from '@/lib/images';
+import { shareImage } from '@/lib/og';
 
 const items = eventsInGroup(ACADEMICS_GROUP);
 const hero = getCover('events', 'teaching-practice');
+
+const share = shareImage(hero, 'GCE student-teachers on teaching practice in a school classroom');
 ---
 
 <Layout
   title="Academics"
   description="Teaching practice in real schools, end-of-semester internal exams, class-representative elections, the college magazine, the daily morning assembly and digital attendance — the academic year at Government College of Education, Karachi."
+  image={share}
 >
   <PageHero
     kicker="Coursework &amp; Practicum"

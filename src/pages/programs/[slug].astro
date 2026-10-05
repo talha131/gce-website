@@ -7,6 +7,8 @@ import Section from '@/components/Section.astro';
 import Reveal from '@/components/Reveal.astro';
 import { programs, programBySlug, programsNav } from '@/data/programs';
 import { site } from '@/data/site';
+import { getSingle } from '@/lib/images';
+import { shareImage } from '@/lib/og';
 
 export const getStaticPaths = (() =>
   programs.map((p) => ({ params: { slug: p.slug } }))) satisfies GetStaticPaths;
@@ -23,7 +25,11 @@ const facts = [
 const others = programs.filter((p) => p.slug !== program.slug);
 ---
 
-<Layout title={program.name} description={program.tagline}>
+<Layout
+  title={program.name}
+  description={program.tagline}
+  image={shareImage(getSingle('heroes', 'programs'), 'Government College of Education campus')}
+>
   <PageHero kicker="Program" title={program.name} lead={program.tagline}>
     <div class="mt-8 flex flex-wrap gap-3">
       <a href="/admissions" class="btn btn-gold">Admissions (November)</a>

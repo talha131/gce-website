@@ -6,13 +6,18 @@ import Section from '@/components/Section.astro';
 import UrduBlock from '@/components/UrduBlock.astro';
 import AudioPlayer from '@/components/AudioPlayer.astro';
 import { aboutNav, anthemAndDua } from '@/data/about';
+import { getSingle } from '@/lib/images';
+import { shareImage } from '@/lib/og';
 
 const { collegeAnthem, dua, nationalAnthem } = anthemAndDua;
+
+const share = shareImage(getSingle('heroes', 'campus'), 'Government College of Education campus');
 ---
 
 <Layout
   title="Heritage"
   description="The college anthem, dua and national anthem of Government College of Education, Karachi — the poetry that opens every gathering, in Urdu."
+  image={share}
 >
   <PageHero size="compact" kicker="About GCE" title="Heritage" />
   <SectionNav items={aboutNav} current={Astro.url.pathname} label="About" />

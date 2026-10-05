@@ -17,6 +17,7 @@ import { eventsInGroup, ACADEMICS_GROUP } from '@/data/events';
 import { principal } from '@/data/about';
 import { conference, milestones } from '@/data/achievements';
 import { getGallery, getSingle } from '@/lib/images';
+import { shareImage } from '@/lib/og';
 
 const homeHero = getSingle('heroes', 'home');
 const principalPhoto = getSingle('principal', 'principal');
@@ -28,12 +29,15 @@ const academicYear = ['teaching-practice', 'internal-exams']
   .filter(Boolean);
 // The conference already owns the band below, so it is dropped here.
 const madeAtGce = milestones.filter((m) => m.key !== 'conference');
+
+const share = shareImage(homeHero, 'Government College of Education campus');
 ---
 
 <Layout
   title="Home"
   isHome
   description={site.description}
+  image={share}
 >
   <!-- ============================================================ HERO -->
   <section class="relative overflow-hidden bg-brand-950 text-white">

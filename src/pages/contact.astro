@@ -6,6 +6,7 @@ import Reveal from '@/components/Reveal.astro';
 import SocialIcon from '@/components/SocialIcon.astro';
 import { site, socials, transportRoutes } from '@/data/site';
 import { getSingle } from '@/lib/images';
+import { shareImage } from '@/lib/og';
 
 const hero = getSingle('heroes', 'contact');
 
@@ -14,11 +15,14 @@ const hero = getSingle('heroes', 'contact');
 // keyless embed endpoint; `mapLink` is the canonical share link for "Open in maps".
 const mapSrc = 'https://www.google.com/maps?q=24.9314275,67.0807754&z=16&hl=en&output=embed';
 const mapLink = 'https://maps.app.goo.gl/7eeCaKY1oFRzrdc59';
+
+const share = shareImage(hero, 'Students boarding the college bus at the GCE gate');
 ---
 
 <Layout
   title="Contact"
   description="Get in touch with Government College of Education — Block 15, Federal B Area, Karachi. Address, email, phone, public transport routes and social links."
+  image={share}
 >
   <PageHero
     kicker="Contact"

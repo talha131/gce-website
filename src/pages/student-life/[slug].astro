@@ -2,6 +2,7 @@
 import type { GetStaticPaths } from 'astro';
 import Layout from '@/layouts/Layout.astro';
 import EventDetail from '@/components/EventDetail.astro';
+import { eventShareImage } from '@/lib/share';
 import { events, eventBySlug, ACADEMICS_GROUP } from '@/data/events';
 
 // Academics events are served from /academics/[slug].
@@ -14,6 +15,6 @@ const { slug } = Astro.params;
 const event = eventBySlug(slug!)!;
 ---
 
-<Layout title={event.name} description={event.blurb}>
+<Layout title={event.name} description={event.blurb} image={eventShareImage(event)}>
   <EventDetail event={event} />
 </Layout>

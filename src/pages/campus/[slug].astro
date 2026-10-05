@@ -9,6 +9,7 @@ import SocialIcon from '@/components/SocialIcon.astro';
 import { Image } from 'astro:assets';
 import { facilities, facilityBySlug, campusNav } from '@/data/facilities';
 import { getGallery, getSingle } from '@/lib/images';
+import { facilityShareImage } from '@/lib/share';
 
 export const getStaticPaths = (() =>
   facilities.map((f) => ({ params: { slug: f.slug } }))) satisfies GetStaticPaths;
@@ -35,6 +36,7 @@ const backHref = campusNav.find((n) => n.label === facility.category)?.href ?? '
 <Layout
   title={facility.name}
   description={facility.blurb}
+  image={facilityShareImage(facility)}
 >
   <PageHero kicker={facility.category} title={facility.name} lead={facility.blurb}>
     {facility.badge && (

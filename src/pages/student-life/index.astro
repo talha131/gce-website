@@ -1,11 +1,16 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import StudentLifeGroup from '@/components/StudentLifeGroup.astro';
+import { getSingle } from '@/lib/images';
+import { shareImage } from '@/lib/og';
+
+const share = shareImage(getSingle('heroes', 'student-life'), 'GCE students group photo', { fit: 'cover', focusY: 70 });
 ---
 
 <Layout
   title="Celebrations & National Days — Student Life"
   description="Orientation and farewells, Teachers' Day, Independence and Defence Day, Iqbal Day and more — the celebrations and national days at Government College of Education, Karachi."
+  image={share}
 >
   <StudentLifeGroup group="Celebrations & National Days" />
 </Layout>
