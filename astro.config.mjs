@@ -26,6 +26,7 @@ const sitemapIntegration = {
 // scripts/share-images.mjs and src/lib/og.ts). Also on every build path, and
 // served on the fly in `astro dev` so previews can be checked locally.
 let projectRoot = fileURLToPath(new URL('.', import.meta.url));
+/** @type {import('astro').AstroIntegration} */
 const shareImagesIntegration = {
   name: 'gce-share-images',
   hooks: {
