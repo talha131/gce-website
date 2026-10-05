@@ -49,22 +49,31 @@ for (const [path, mod] of Object.entries(assets)) {
 }
 
 /**
- * The image's built URL (content-hashed in a build), read through Astro's
- * untracked `clone` so it does not mark the original as used — see above.
+ * The image's metadata — its built URL (content-hashed in a build) and size —
+ * read through Astro's untracked `clone`, so it does not mark the original as
+ * used (see above).
  */
-function builtSrc(image: ImageMetadata): string {
-  return ((image as ImageMetadata & { clone?: ImageMetadata }).clone ?? image).src;
+function untracked(image: ImageMetadata): ImageMetadata {
+  return (image as ImageMetadata & { clone?: ImageMetadata }).clone ?? image;
 }
 
 /**
  * How to fit the picture into 1200×630:
- * - `cover` (default): a photo, cropped to fill the frame. `focusY` (0–100,
- *   default 50) moves the crop up or down, like PageHero's `imagePosition`.
- * - `card`: shown whole — portraits, book covers, logos — on a brand-indigo
- *   card with the college crest. `panel` (#rrggbb, default white) fills any
- *   transparent areas.
+ * - `cover`: a photo, cropped to fill the frame. `focusY` (0–100, default 50)
+ *   moves the crop up or down, like PageHero's `imagePosition`.
+ * - `card`: shown whole — portraits, book covers, posters, logos — on a
+ *   brand-indigo card with the college crest. `panel` (#rrggbb, default
+ *   white) fills any transparent areas.
+ * - `auto` (default): `cover` for a landscape picture, `card` for a square or
+ *   upright one, which a 1.91:1 crop would gut (a poster, a standing group).
  */
-export type ShareLayout = { fit?: 'cover'; focusY?: number } | { fit: 'card'; panel?: string };
+export type ShareLayout =
+  | { fit?: 'auto' }
+  | { fit: 'cover'; focusY?: number }
+  | { fit: 'card'; panel?: string };
+
+/** Wider than this (width ÷ height) and `auto` crops; otherwise it shows the picture whole. */
+const AUTO_COVER_RATIO = 1.2;
 
 /** 32-bit FNV-1a as 8 hex digits: a cache-buster, not a security hash. */
 function hash(text: string): string {
@@ -94,8 +103,14 @@ export function shareImage(
     source = 'public' + picture.replace(/\.[^./]+$/, '');
   } else {
     const found = sourceByImage.get(picture);
-    if (!found) throw new Error(`shareImage: ${builtSrc(picture)} is not an image under src/assets`);
+    if (!found) throw new Error(`shareImage: ${untracked(picture).src} is not an image under src/assets`);
     source = found;
+  }
+
+  if (!layout.fit || layout.fit === 'auto') {
+    if (typeof picture === 'string') throw new Error(`shareImage: say whether "${picture}" is a cover or a card`);
+    const { width, height } = untracked(picture);
+    layout = width / height > AUTO_COVER_RATIO ? { fit: 'cover' } : { fit: 'card' };
   }
 
   let name: string;
@@ -104,10 +119,10 @@ export function shareImage(
     if (!/^#[0-9a-f]{6}$/.test(panel)) throw new Error(`shareImage: panel "${layout.panel}" is not #rrggbb`);
     name = panel === '#ffffff' ? 'card' : `card-${panel.slice(1)}`;
   } else {
-    const focusY = Math.round(layout.focusY ?? 50);
+    const focusY = Math.round(('focusY' in layout ? layout.focusY : undefined) ?? 50);
     name = focusY === 50 ? 'cover' : `cover-y${Math.min(100, Math.max(0, focusY))}`;
   }
 
-  const version = hash(`${typeof picture === 'string' ? picture : builtSrc(picture)}|${name}|${RECIPE}`);
+  const version = hash(`${typeof picture === 'string' ? picture : untracked(picture).src}|${name}|${RECIPE}`);
   return { url: `/og/${name}/${source}.${version}.jpg`, width: WIDTH, height: HEIGHT, type: 'image/jpeg', alt };
 }
