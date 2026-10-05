@@ -21,7 +21,8 @@ const author = educationDept.find((p) => p.folder === book.authorFolder)!;
 const portrait = getSingle('faculty', author.folder);
 const cover = book.cover ? getSingle('resources', book.cover) : undefined;
 const designation = [author.title, author.grade].filter(Boolean).join(' · ');
-const lead = `${book.kind[0].toUpperCase()}${book.kind.slice(1)} by ${author.name}, ${author.title ?? 'faculty member'} at GCE — ${book.readLead}`;
+// An author who has left the college was, not is, on the faculty.
+const lead = `${book.kind[0].toUpperCase()}${book.kind.slice(1)} by ${author.name}, ${author.former ? 'formerly ' : ''}${author.title ?? 'faculty member'} at GCE — ${book.readLead}`;
 const description =
   book.description ??
   `${book.title}, ${book.kind} by ${author.name} of Government College of Education, Karachi. Read the ${book.editions.map((e) => e.label.toLowerCase()).join(' and ')} online.`;
@@ -74,6 +75,14 @@ const description =
             <p class="mt-4 pt-3 border-t border-line text-sm text-ink-soft">
               {book.authorNote.text}
               {book.authorNote.link && <a href={book.authorNote.link.href} class="text-brand underline underline-offset-2">{book.authorNote.link.label}</a>}
+            </p>
+          )}
+          {/* An author who has left the college (faculty.ts `former`) — retired,
+              transferred — reads so here too, as on the faculty card. */}
+          {author.former && (
+            <p class="mt-4 pt-3 border-t border-line flex flex-wrap items-center gap-x-2.5 gap-y-1">
+              <span class="rounded-full bg-ink/10 px-2.5 py-1 text-xs font-semibold text-ink">{author.former.label}</span>
+              <span class="text-sm font-medium text-ink-soft">At GCE {author.former.years}</span>
             </p>
           )}
         </div>
