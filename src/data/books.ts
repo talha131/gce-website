@@ -194,7 +194,7 @@ export const facultyBooks: FacultyBook[] = [
     title: 'Teaching Literacy Notes',
     kind: 'two sets of self-study notes',
     readLead:
-      'compiled for the Teaching Literacy course of the B.Ed. (Hons) 4 Year programme, 3rd semester. Read each one online, with pages that turn like a printed copy.',
+      'compiled for the Teaching Literacy course (DTE-411) of the B.Ed. (Hons) 4 Year programme, 3rd semester. Read each one online, with pages that turn like a printed copy.',
     readLabel: 'Read the notes',
     tabsLabel: 'Notes',
     description:
@@ -208,7 +208,7 @@ export const facultyBooks: FacultyBook[] = [
     ],
     details: [
       { label: 'Format', value: 'Self-study notes, two sets' },
-      { label: 'Course', value: 'Teaching Literacy — B.Ed. (Hons) 4 Year, 3rd semester' },
+      { label: 'Course', value: 'Teaching Literacy (DTE-411) — B.Ed. (Hons) 4 Year, 3rd semester' },
       { label: 'Language', value: 'English' },
     ],
     editions: [
