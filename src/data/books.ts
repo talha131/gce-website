@@ -1,5 +1,5 @@
 /*
- * Publications by GCE faculty — a book, or a set of lecture handouts — each
+ * Publications by GCE faculty — a book, lecture handouts, course notes — each
  * with a page of its own under /student-resources/<slug> that credits the
  * author and carries a page-turning reader per edition or handout. Page
  * images are rendered by scripts/render-book.py into
@@ -181,6 +181,68 @@ export const facultyBooks: FacultyBook[] = [
           rtl: true,
           lang: 'ur',
           pdf: { href: habibUnNabi('hadith-and-its-types'), label: 'Download PDF' },
+        },
+      },
+    ],
+  },
+  {
+    // Course notes for self-study; the details are taken from their title
+    // pages and running footers ("compiled by Prof. Habib Ahmed"). Like
+    // Prof. Habib-un-Nabi's, they are downloaded from where the Student
+    // Resources page lists them.
+    slug: 'teaching-literacy-notes-prof-habib-ahmed',
+    title: 'Teaching Literacy Notes',
+    kind: 'two sets of self-study notes',
+    readLead:
+      'compiled for the Teaching Literacy course of the B.Ed. (Hons) 4 Year programme, 3rd semester. Read each one online, with pages that turn like a printed copy.',
+    readLabel: 'Read the notes',
+    tabsLabel: 'Notes',
+    description:
+      'Teaching Literacy notes compiled by Prof. Dr. Habib Ahmed of Government College of Education, Karachi, for B.Ed. (Hons) 4 Year, 3rd semester — Teaching Literacy Skills, and 200 short question answers. Read them online or download the PDFs.',
+    authorFolder: 'Prof_Habib_Ahmed',
+    credits: [{ role: 'Compiled by', name: 'Prof. Dr. Habib Ahmed' }],
+    about: [
+      'Two sets of notes compiled by Prof. Dr. Habib Ahmed for self-study in the Teaching Literacy course, taken by B.Ed. (Hons) 4 Year students in their 3rd semester. Both follow the course’s three units: what reading and writing are; growing up to read and write, in the early years; and becoming readers and writers in classes 1 to 3.',
+      'Teaching Literacy Skills opens with the course outcomes and works through each unit in prose — literacy, skilled reading and skilled writing; the components of reading and the sub-systems of language; learning to read and write in a multilingual context, the home–school connection, and the stages of second-language acquisition and of reading, spelling and writing development; phonological awareness, the alphabetic principle, word recognition and the literacy-rich, print-rich classroom; and strategies for fluency, vocabulary and comprehension, matching texts to students, guided reading, and writing as a window into reading.',
+      'Short Question Answers goes over the same ground as 200 short questions, each with a brief answer, for revision — from “What is reading?” to how teachers can bring writing into reading instruction.',
+    ],
+    details: [
+      { label: 'Format', value: 'Self-study notes, two sets' },
+      { label: 'Course', value: 'Teaching Literacy — B.Ed. (Hons) 4 Year, 3rd semester' },
+      { label: 'Language', value: 'English' },
+    ],
+    editions: [
+      {
+        key: 'teaching-literacy-skills',
+        label: 'Teaching Literacy Skills',
+        book: {
+          title: 'Teaching Literacy Skills',
+          edition: 'Self-study notes',
+          path: '/books/teaching-literacy-notes-prof-habib-ahmed/teaching-literacy-skills',
+          pageCount: 20,
+          pageWidth: 1236,
+          pageHeight: 1600,
+          covers: false,
+          lang: 'en',
+          pdf: { href: '/student-resources/notes/bed-hons-4-year/teaching-literacy-skills.pdf', label: 'Download PDF' },
+        },
+      },
+      {
+        key: 'short-question-answers',
+        label: 'Short Question Answers',
+        book: {
+          title: 'Short Question Answers',
+          edition: 'Teaching Literacy, for self-study',
+          path: '/books/teaching-literacy-notes-prof-habib-ahmed/short-question-answers',
+          pageCount: 22,
+          pageWidth: 1236,
+          pageHeight: 1600,
+          covers: false,
+          lang: 'en',
+          pdf: {
+            href: '/student-resources/notes/prof-habib-ahmed/short-question-answers-teaching-literacy-4-year.pdf',
+            label: 'Download PDF',
+          },
         },
       },
     ],

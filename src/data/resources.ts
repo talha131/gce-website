@@ -2,9 +2,10 @@
  * Student Resources Center — study material students can read and download,
  * drawn from the college's 19_Student_Resource_Center Drive folder. Past
  * Papers and faculty publications follow its folders; Notes is one
- * alphabetical list gathered from its student and faculty notes folders, with
- * each file credited to its author where the PDF or its source folder names
- * one. List each PDF once, even if the Drive holds it in two folders.
+ * alphabetical list gathered from its notes folders. Notes by a member of the
+ * faculty get a section of their own instead, with a page to read them online
+ * (see books.ts). List each PDF once, even if the Drive holds it in two
+ * folders.
  *
  * PDFs live under /public/student-resources/ (served byte-for-byte). Scanned
  * past papers were re-encoded as JPEG at their native scan resolution on
@@ -50,16 +51,12 @@ const pp = (sem: number, file: string) => `/student-resources/past-papers/bed-4-
 const notes = (file: string) => `/student-resources/notes/bed-hons-4-year/${file}.pdf`;
 const habibUnNabi = (file: string) => `/student-resources/prof-habib-un-nabi/${file}.pdf`;
 
-// Authors as the PDFs name them (cover or running footer). The students'
-// notes name no one, so they carry no author.
-const HABIB_AHMED = 'Prof. Dr. Habib Ahmed';
-
 export const resourceSections: ResourceSection[] = [
   {
     slug: 'notes',
     title: 'Notes',
     shortTitle: 'Notes',
-    blurb: 'Course notes shared by GCE faculty and students, free to read and download.',
+    blurb: 'Course notes shared by GCE students, free to read and download.',
     groups: [
       {
         title: 'B.Ed. notes',
@@ -73,8 +70,6 @@ export const resourceSections: ResourceSection[] = [
           { title: 'Foundation of Education', pdf: notes('foundation-of-education') },
           { title: 'Introduction to Guidance and Counselling', pdf: notes('introduction-to-guidance-and-counselling') },
           { title: 'School, Community and Teacher', pdf: notes('school-community-and-teacher') },
-          { title: 'Teaching Literacy — Short Question Answers (B.Ed. 4 Year)', pdf: '/student-resources/notes/prof-habib-ahmed/short-question-answers-teaching-literacy-4-year.pdf', author: HABIB_AHMED },
-          { title: 'Teaching Literacy Skills', pdf: notes('teaching-literacy-skills'), author: HABIB_AHMED },
           { title: 'Teaching of English', pdf: notes('teaching-of-english') },
           { title: 'Teaching of Islamic Studies', pdf: notes('teaching-of-islamic-studies') },
           { title: 'Teaching of Maths', pdf: notes('teaching-of-maths') },
@@ -199,6 +194,23 @@ export const resourceSections: ResourceSection[] = [
           { title: 'Basics of Lecture Method', pdf: habibUnNabi('basics-of-lecture-method') },
           { title: 'Working with Group and Individuals', pdf: habibUnNabi('working-with-group-and-individuals') },
           { title: 'Hadith and Its Types (in Urdu)', pdf: habibUnNabi('hadith-and-its-types') },
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'prof-habib-ahmed',
+    title: 'Teaching Literacy Notes — by Prof. Dr. Habib Ahmed',
+    shortTitle: 'Prof. Dr. Habib Ahmed',
+    blurb:
+      'Self-study notes compiled by Prof. Dr. Habib Ahmed, who taught at GCE until his retirement in 2025, for the Teaching Literacy course of B.Ed. (Hons) 4 Year, 3rd semester: notes on all three units of the course, and 200 short question answers for revision.',
+    readOnline: { href: '/student-resources/teaching-literacy-notes-prof-habib-ahmed', label: 'Read the notes online' },
+    groups: [
+      {
+        title: 'The notes',
+        files: [
+          { title: 'Teaching Literacy Skills', pdf: notes('teaching-literacy-skills') },
+          { title: 'Teaching Literacy — Short Question Answers', pdf: '/student-resources/notes/prof-habib-ahmed/short-question-answers-teaching-literacy-4-year.pdf' },
         ],
       },
     ],
