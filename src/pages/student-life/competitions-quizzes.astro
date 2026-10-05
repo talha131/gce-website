@@ -1,11 +1,17 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import StudentLifeGroup from '@/components/StudentLifeGroup.astro';
+import { eventsInGroup } from '@/data/events';
+import { eventShareImage } from '@/lib/share';
+
+// The group's first event — the first card on the page.
+const share = eventShareImage(eventsInGroup('Competitions & Quizzes')[0]);
 ---
 
 <Layout
   title="Competitions & Quizzes — Student Life"
   description="Art and flower exhibitions, essay, speech and poster competitions, Sports Week and a series of quizzes at Government College of Education, Karachi."
+  image={share}
 >
   <StudentLifeGroup group="Competitions & Quizzes" />
 </Layout>

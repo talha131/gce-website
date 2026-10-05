@@ -7,13 +7,17 @@ import PageHero from '@/components/PageHero.astro';
 import Section from '@/components/Section.astro';
 import { outlineSets, outlineCourseCount } from '@/data/outlines';
 import { getSingle } from '@/lib/images';
+import { shareImage } from '@/lib/og';
 
 const hero = getSingle('heroes', 'programs');
+
+const share = shareImage(hero, 'Government College of Education campus');
 ---
 
 <Layout
   title="Course Outlines"
   description="Download the course outline for every semester of the B.Ed. (Hons.) 4-year and B.Ed. 2.5-year programmes, and the M.Ed. course of studies, at Government College of Education, Karachi."
+  image={share}
 >
   <PageHero
     kicker="Every programme, every semester"

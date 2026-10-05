@@ -6,11 +6,16 @@ import Section from '@/components/Section.astro';
 import { site } from '@/data/site';
 import { aboutNav, history } from '@/data/about';
 import UokLogo from '@/assets/brand/uok-logo.svg';
+import { getSingle } from '@/lib/images';
+import { shareImage } from '@/lib/og';
+
+const share = shareImage(getSingle('heroes', 'campus'), 'Government College of Education campus');
 ---
 
 <Layout
   title="History"
   description="From a 1953 teacher-training programme to a permanent home in Federal B Area — the history of Government College of Education, Karachi, and its affiliation with the University of Karachi."
+  image={share}
 >
   <PageHero size="compact" kicker="About GCE" title="History" />
   <SectionNav items={aboutNav} current={Astro.url.pathname} label="About" />

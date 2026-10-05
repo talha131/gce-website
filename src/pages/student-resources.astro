@@ -9,6 +9,7 @@ import PageHero from '@/components/PageHero.astro';
 import Section from '@/components/Section.astro';
 import { resourceSections } from '@/data/resources';
 import { getSingle } from '@/lib/images';
+import { shareImage } from '@/lib/og';
 
 const hero = getSingle('heroes', 'student-resources') ?? getSingle('heroes', 'programs');
 
@@ -37,11 +38,14 @@ const sections = await Promise.all(
       : [],
   })),
 );
+
+const share = shareImage(hero, 'Government College of Education campus');
 ---
 
 <Layout
   title="Student Resources Center"
   description="Notes, past examination papers and faculty publications for B.Ed. students at Government College of Education, Karachi — free to read and download."
+  image={share}
 >
   <PageHero
     kicker="Study material"

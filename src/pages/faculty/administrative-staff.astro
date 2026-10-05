@@ -2,11 +2,16 @@
 import Layout from '@/layouts/Layout.astro';
 import FacultyGroup from '@/components/FacultyGroup.astro';
 import { adminStaff } from '@/data/faculty';
+import { getSingle } from '@/lib/images';
+import { shareImage } from '@/lib/og';
+
+const share = shareImage(getSingle('heroes', 'faculty'), 'GCE faculty and staff group photo', { fit: 'cover', focusY: 70 });
 ---
 
 <Layout
   title="Administrative Staff — Faculty & Staff"
   description="The administrative and support staff — superintendent, clerks, lab assistants and support team — at Government College of Education, Karachi."
+  image={share}
 >
   <FacultyGroup title="Administrative Staff" people={adminStaff} />
 </Layout>

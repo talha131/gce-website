@@ -6,13 +6,17 @@ import ProgramCard from '@/components/ProgramCard.astro';
 import { programs } from '@/data/programs';
 import { site } from '@/data/site';
 import { getSingle } from '@/lib/images';
+import { shareImage } from '@/lib/og';
 
 const hero = getSingle('heroes', 'programs');
+
+const share = shareImage(hero, 'Government College of Education campus');
 ---
 
 <Layout
   title="Programs"
   description="Four teacher-education degrees at GCE: B.Ed (Hons) 4-Year, B.Ed 2.5-Year (Morning & Evening) and BS Education — affiliated with the University of Karachi."
+  image={share}
 >
   <PageHero
     kicker="Academic Programs"
