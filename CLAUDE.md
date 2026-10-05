@@ -33,6 +33,7 @@ Release tags use **Semantic Versioning** (SemVer): `vMAJOR.MINOR.PATCH`, e.g. `v
 - **`make deploy` auto-tags** as a convenience: after a successful deploy it tags `vX.Y.0` from `package.json` if not already tagged (patches and existing tags skipped). Deploying by **pushing to `master`** (Netlify CI) does **not** auto-tag — for those, Claude creates and pushes the tag by hand (`git tag -s vX.Y.0 -m "..."; git push origin vX.Y.0`).
 - **Push boundary:** Claude may create and push **tags** for releases without asking; Claude must **not** push commits or advance `master` without explicit say-so — deploying stays the owner's trigger.
 - History: `v1.0.0` is the first SemVer tag. `v0-archive` and `pre-phase-1-review-fixes` are pre-SemVer historical markers — leave them as-is.
+- The footer's bottom bar shows `v<package.json version>`, read at build time (`src/components/Footer.astro`) — keeping `package.json` in step with tags keeps the footer right too.
 
 ## Architecture
 

@@ -3,6 +3,16 @@ import { Image } from 'astro:assets';
 import logo from '@/assets/brand/logo.png';
 import SocialIcon from './SocialIcon.astro';
 import { site, socials, nav } from '@/data/site';
+import pkg from '../../package.json';
+
+const version = pkg.version;
+// Releases & tags (CLAUDE.md): only X.Y.0 minor/major versions are tagged on
+// GitHub. For an untagged patch release, link to the tags list instead so
+// this never 404s.
+const isTaggedRelease = version.endsWith('.0');
+const releaseHref = isTaggedRelease
+  ? `https://github.com/talha131/gce-website/releases/tag/v${version}`
+  : 'https://github.com/talha131/gce-website/tags';
 ---
 
 <footer class="bg-brand-950 text-white/85 mt-24">
@@ -71,6 +81,13 @@ import { site, socials, nav } from '@/data/site';
       <p>
         Designed &amp; developed by
         <a href="https://talhamansoor.com" class="text-white/85 hover:text-gold font-medium underline decoration-white/25 underline-offset-2">Talha Mansoor</a>.
+        <a
+          href={releaseHref}
+          target="_blank"
+          rel="noopener"
+          aria-label={`Website version ${version} — release notes on GitHub`}
+          class="ml-1 text-white/40 hover:text-gold underline decoration-white/15 underline-offset-2"
+        >v{version}</a>
       </p>
     </div>
   </div>
