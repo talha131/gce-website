@@ -111,7 +111,7 @@ Content lives in **`src/data/`** — plain typed TS files, no CMS:
 | `outlines.ts` | Course outlines by programme and semester (PDFs in `public/course-outlines/`) |
 | `resources.ts` | Student Resources Center — notes, past papers, faculty publications (PDFs in `public/student-resources/`; shrink new scanned papers with `scripts/shrink-scanned-pdf.py`) |
 | `magazine.ts` | Magazine issues read in the flipbook on /academics/magazine (page images in `public/magazine/`, rendered from the print PDFs by `scripts/render-magazine.py`; `scripts/pages-to-pdf.py` binds them into the merged download) |
-| `books.ts` | Faculty publications — Prof. Farah Kanwal's textbook, Prof. Habib-un-Nabi's lecture handouts — each with a page at /student-resources/<slug> crediting the author and a page-turning reader per edition or handout (pages in `public/books/`, rendered by `scripts/render-book.py`); the page's wording, cover, quote and author note come from the entry |
+| `books.ts` | Faculty publications — Prof. Farah Kanwal's textbook, Prof. Habib-un-Nabi's lecture handouts — each with a page at /student-resources/<slug> crediting the author and a page-turning reader per edition or handout (pages in `public/books/`, rendered by `scripts/render-book.py`); the page's wording, cover, quote and author note come from the entry, and an author who has left the college (faculty.ts `former`) is shown as retired or transferred |
 | `achievements.ts` | Alumni honours, ICEEC 2025 conference, action research |
 | `contributors.ts` | Student website contributors (colophon) |
 

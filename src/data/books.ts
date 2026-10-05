@@ -31,7 +31,7 @@ export interface FacultyBook {
   description?: string;
   /** Front-cover image for the hero — a name under src/assets/content/resources/. */
   cover?: string;
-  /** faculty.ts `folder` of the author — for the portrait, designation and qualifications. */
+  /** faculty.ts `folder` of the author — for the portrait, designation and qualifications, and `former` (retired, transferred) if they have left. */
   authorFolder: string;
   /** A line under the author's qualifications, e.g. a role in the college, ending in an optional link. */
   authorNote?: { text: string; link?: { href: string; label: string } };
