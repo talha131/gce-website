@@ -203,14 +203,14 @@ export const resourceSections: ResourceSection[] = [
     title: 'Teaching Literacy Notes — by Prof. Dr. Habib Ahmed',
     shortTitle: 'Prof. Dr. Habib Ahmed',
     blurb:
-      'Self-study notes compiled by Prof. Dr. Habib Ahmed, who taught at GCE until his retirement in 2025, for the Teaching Literacy course of B.Ed. (Hons) 4 Year, 3rd semester: notes on all three units of the course, and 200 short question answers for revision.',
+      'Self-study notes compiled by Prof. Dr. Habib Ahmed, who taught at GCE until his retirement in 2025, for the Teaching Literacy course (DTE-411) of B.Ed. (Hons) 4 Year, 3rd semester: notes on all three units of the course, and 200 short question answers for revision.',
     readOnline: { href: '/student-resources/teaching-literacy-notes-prof-habib-ahmed', label: 'Read the notes online' },
     groups: [
       {
         title: 'The notes',
         files: [
-          { title: 'Teaching Literacy Skills', pdf: notes('teaching-literacy-skills') },
-          { title: 'Teaching Literacy — Short Question Answers', pdf: '/student-resources/notes/prof-habib-ahmed/short-question-answers-teaching-literacy-4-year.pdf' },
+          { title: 'Teaching Literacy Skills', code: 'DTE-411', pdf: notes('teaching-literacy-skills') },
+          { title: 'Teaching Literacy — Short Question Answers', code: 'DTE-411', pdf: '/student-resources/notes/prof-habib-ahmed/short-question-answers-teaching-literacy-4-year.pdf' },
         ],
       },
     ],
