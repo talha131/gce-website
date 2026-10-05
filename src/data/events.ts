@@ -276,7 +276,7 @@ export const events: CollegeEvent[] = [
     date: '20 January 2025',
     blurb: 'Preparing students to solve real classroom problems through research.',
     body: [
-      'The Action Research Workshop was held on 20 January 2025, organised for students and conducted by Prof. Sharjeel, Prof. Dr. Habib Ahmed and Prof. Asim.',
+      'The Action Research Workshop was held on 20 January 2025, organised for students and conducted by Prof. Sharjeel, Prof. Dr. Habib Ahmed and Prof. Dr. Asim.',
       'Students learned how to use action research in teaching practice — solving classroom problems through structured research, and planning, observing and improving lessons — with real classroom examples.',
       'The interactive, easy-to-follow session helped students prepare for their upcoming teaching practicums.',
     ],
