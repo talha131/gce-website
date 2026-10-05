@@ -60,7 +60,7 @@ export const educationDept: Person[] = [
   { name: 'Prof. Dr. Ahmed Hussain Kolachi', folder: 'Prof_Dr_Ahmed_Hussain_Kolachi', title: 'Assistant Professor', grade: 'BPS-18', quals: ['Ph.D. (Sindhi)', 'B.Ed.'] },
   { name: 'Prof. Dr. Barkat Ali Dahri', folder: 'Prof_Dr_Barkat_Ali_Dahri', title: 'Assistant Professor', grade: 'BPS-18', quals: ['Ph.D. (Sindhi)', 'M.A. (Sindhi)', 'LLB', 'B.Ed.'] },
   { name: 'Prof. Dr. Sohail Ahmed', folder: 'Prof_Dr_Sohail_Ahmed', title: 'Associate Professor', grade: 'BPS-19', quals: ['Ph.D. (Education)', 'M.A. (Education)'], email: 'drsohail@gce.edu.pk' },
-  { name: 'Prof. Asim Ahmed', folder: 'Prof_Asim_Ahmed', title: 'Assistant Professor', grade: 'BPS-18', quals: ['Ph.D. (Education) — Thesis Submitted', 'M.Phil. (Education)', 'M.Ed., M.A. (Urdu)'] },
+  { name: 'Prof. Dr. Asim Ahmed', folder: 'Prof_Asim_Ahmed', title: 'Assistant Professor', grade: 'BPS-18', quals: ['Ph.D. (Education)', 'M.Phil. (Education)', 'M.Ed., M.A. (Urdu)'] },
   { name: 'Prof. Sharjeel Ahmed', folder: 'Prof_Sharjeel_Ahmed', title: 'Lecturer', grade: 'BPS-17', quals: ['Ph.D. (Teacher Education) — In Progress', 'M.Phil. (Educational Leadership & Management)', 'M.Ed. / M.A. / Dip-ECED / EYFS (UK)'], email: 'sharjeel@gce.edu.pk' },
   { name: 'Prof. Tabassum Kausar', folder: 'Prof_Tabbasum_Kausar', title: 'Assistant Professor', grade: 'BPS-18', quals: ['Ph.D. (Teacher Education) — In Progress', 'M.Phil. (Education)', 'M.Ed.'], email: 'tabbasum@gce.edu.pk' },
   { name: 'Prof. Shagufta', folder: 'Prof_Shagufta', title: 'Lecturer', grade: 'BPS-17', quals: ['Ph.D. (Education) — In Progress', 'M.Phil. (Education)', 'B.Ed. (Hons.)'] },
